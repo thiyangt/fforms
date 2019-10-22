@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.7.18)  22 OCT 2019 12:15
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.7.18)  22 OCT 2019 12:24
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1453,11 +1453,11 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 291.
 ### semi simple group (level 1) entered at line 178 (\begingroup)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 30664 strings out of 494553
- 535305 string characters out of 6175442
+ 30671 strings out of 494553
+ 535365 string characters out of 6175442
  974469 words of memory out of 5000000
  34016 multiletter control sequences out of 15000+600000
- 566991 words of font info for 84 fonts, out of 8000000 for 9000
+ 567387 words of font info for 89 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  41i,11n,63p,1195b,6758s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/font
@@ -1465,7 +1465,7 @@ s/enc/dvips/base/8r.enc}</Users/thiyangashaminitalagala/Library/TinyTeX/texmf-d
 ist/fonts/type1/public/bera/fvsb8a.pfb></Users/thiyangashaminitalagala/Library/
 TinyTeX/texmf-dist/fonts/type1/public/bera/fvsr8a.pfb></Users/thiyangashaminita
 lagala/Library/TinyTeX/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb>
-Output written on fforms.pdf (1 page, 27782 bytes).
+Output written on fforms.pdf (1 page, 26173 bytes).
 PDF statistics:
  26 PDF objects out of 1000 (max. 8388607)
  19 compressed objects within 1 object stream
