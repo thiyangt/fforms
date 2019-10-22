@@ -1,0 +1,48 @@
+---
+title: "FFORMS: Feature-based FORecast Model Selection"
+author:
+  - familyname: Talagala
+    othernames: Thiyanga S
+    address: Department of Econometrics and Business Statistics, \newline Monash University, VIC 3800, Australia.
+    email : thiyanga.talagala@monash.edu
+    correspondingauthor: true
+  - familyname: Hyndman
+    othernames: Rob J
+    address: Department of Econometrics and Business Statistics, \newline Monash University, VIC 3800, Australia.
+    email : rob.hyndman@monash.edu
+  - familyname: Athanasopoulos
+    othernames: George
+    address: Department of Econometrics and Business Statistics, \newline Monash University, VIC 3145, Australia.
+    email : george.athanasopoulos@monash.edu
+abstract: "Features of time series are useful in identifying suitable models for forecasting. Talagala, Hyndman & Athanasopoulos (2018) proposed a classification framework, labelled FFORMS (Feature-based FORecast Model Selection), which selects forecast models based on features calculated from the time series. The FFORMS framework builds a mapping that relates the features of a time series to the “best” forecast model using a random forest. In this paper we explore what is happening under the hood of the FFORMS framework. This is accomplished using model-agnostic machine learning interpretability approaches. The analysis provides a valuable insight into how different features and their interactions affect the choice of forecast model."
+keywords: "Algorithm selection problem, Time series, Random forest, Machine learning interpretability"
+wpnumber: no/yr
+jelcodes: C10,C14,C22
+blind: true
+cover: true
+toc: false
+bibliography: references.bib
+biblio-style: authoryear-comp
+output:
+  MonashEBSTemplates::workingpaper:
+    fig_caption: yes
+    fig_height: 5
+    fig_width: 8
+    includes:
+      in_header: preamble.tex
+    keep_tex: yes
+    number_sections: yes
+    citation_package: biblatex
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, cache=TRUE, messages=FALSE, warning=FALSE)
+# Make sure you have the latest version of rmarkdown and bookdown
+#devtools::install_github("rstudio/rmarkdown")
+#devtools::install_github("rstudio/bookdown")
+library(ggplot2)
+```
+
+
+# Introduction
+
