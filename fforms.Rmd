@@ -153,3 +153,87 @@ The set of features introduced by @wang2009rule was later used by @widodomodel t
 
 More recently, @kuck2016meta proposed a meta-learning framework based on neural networks for forecast-model selection. Here, $P = 78$ time series from the NN3 competition were used to build the meta-learner. They introduced a new set of features based on forecasting errors. The average symmetric mean absolute percentage error was used to identify the best forecast-models for each series. They classify their forecast-models in the algorithm space $A$, comprising single, seasonal, seasonal-trend and trend exponential smoothing. The mapping $S$ was learned  using a feed-forward neural network. Further, they evaluated the performance of different sets of features for forecast-model selection.
 
+# Appendix A: Definition of features {-}
+
+### Length of time series {-}
+
+The appropriate forecast method for a time series depends on how many observations are available. For example, shorter series tend to need simple models such as a random walk. On the other hand, for longer time series, we have enough information to be able to estimate a number of parameters. For even longer series (over 200 observations), models with time-varying parameters give good forecasts as they help to capture the changes of the model over time.
+
+### Features based on an STL-decomposition {-}
+
+The strength of trend, strength of seasonality, linearity, curvature, spikiness and first autocorrelation coefficient of the remainder series, are calculated based on a decomposition of the time series. Suppose we denote our time series as $y_1, y_2, \dots,y_T$. First, an automated Box-Cox transformation [@Guerrero1993] is applied to the time series in order to stabilize the variance and to make the seasonal effect additive. The transformed series is denoted by $y_{t}^*$. For quarterly and monthly data, this is decomposed using STL [@cleveland1990stl] to give $y_t^*=T_t+S_t+R_t$, where $T_t$ denotes the trend, $S_t$ denotes the seasonal component, and $R_t$ is the remainder component. For non-seasonal data, Friedman's super smoother [@supsmu] is used to decompose $y_t^*=T_t+R_t$, and $S_t=0$ for all $t$. The de-trended series is $y_t^*-T_t=S_t+R_t$, the deseasonalized series is $y_t^*-S_t = T_t+R_t$..
+
+The strength of trend is measured by comparing the variance of the deseasonalized series and the remainder series [@wang2009rule]:
+$$
+	\text{Trend} = \text{max}\left[0, 1 - \var(R_{t})/\var(T_t+R_t)\right].
+$$
+Similarly, the strength of seasonality is computed as
+\[
+	\text{Seasonality} = \text{max}\left[0, 1- \var(R_{t})/ \var(S_t+R_t)\right].
+\]
+
+
+The linearity and curvature features are based on the coefficients of an orthogonal quadratic regression
+\[
+  T_t=\beta_0+\beta_1 \phi_1(t) + \beta_2\phi_2(t) + \varepsilon_t,
+\]
+where $t=1, 2, \dots,T$, and $\phi_1$ and $\phi_2$ are orthogonal polynomials of orders 1 and 2. The estimated value of $\beta_1$ is used as a measure of linearity while the estimated value of $\beta_2$ is considered as a measure of curvature. These features were used by @hyndman2015large. The linearity and curvature depend on the the scale of the time series. Therefore, the time series are scaled to mean zero and variance one before these two features are computed.
+
+The spikiness feature is useful when a time series is affected by occasional outliers. @hyndman2015large introduced an index to measure spikiness, computed as the variance of the leave-one-out variances of $r_t$.
+
+We compute the first autocorrelation coefficient of the remainder series, $r_t$.
+
+### Stability and lumpiness {-}
+
+The features "stability" and "lumpiness" are calculated based on tiled windows (i.e., they do not overlap). For each window, the sample mean and variance are calculated.  The stability feature is calculated as the variance of the means, while lumpiness is the variance of the variances. These were first used by @hyndman2015large.
+
+### Spectral entropy of a time series {-}
+
+Spectral entropy is based on information theory, and can be used as a measure of the forecastability of a time series. Series that are easy to forecast should have a small spectral entropy value, while very noisy series will have a large spectral entropy. We use the measure introduced by @goerg2013forecastable to estimate the spectral entropy. It estimates the Shannon entropy of the spectral density of the  normalized spectral density, given by
+\[
+  H_{s}(y_t):=-\int_{-\pi}^{\pi}\hat f_y(\lambda)\log \hat f_y({\lambda})d\lambda,
+\]
+where $\hat{f}_y$ denotes the estimate of the spectral density introduced by @nuttall1982spectral. The R package ForeCA [@Foreca] was used to compute this measure.
+
+### Hurst exponent {-}
+
+The Hurst exponent measures the long-term memory of a time series. The Hurst exponent is given by $H=d+0.5$, where $d$ is the fractal dimension obtained by estimating a ARFIMA($0, d, 0$) model. We compute this using the maximum likelihood method [@haslett1989space] as implemented in the fracdiff package [@fracdiff]. This measure was also used in @wang2009rule.
+
+### Nonlinearity {-}
+
+To measure the degree of nonlinearity of the time series, we use statistic computed in Terasvirta's neural network test for nonlinearity [@nonlintest], also used in @wang2009rule. This takes large values when the series is nonlinear, and values around 0 when the series is linear.
+
+### Parameter estimates of an ETS model {-}
+
+The ETS(A,A,N) model [@expsmooth08] produces equivalent forecasts to Holt's linear trend method, and can be expressed as follows:
+\begin{align*}
+  y_t    & = \ell_{t-1}+b_{t-1}+\varepsilon_t\\
+  \ell_t & = \ell_{t-1}+b_{t-1}+\alpha \varepsilon_t\\
+  b_t    & = b_{t-1}+\beta \varepsilon_t,
+\end{align*}
+where $\alpha$ is the smoothing parameter for the level, and $\beta$ is the smoothing parameter for the trend. We include the parameter estimates of both $\alpha$ and $\beta$ in our feature set for yearly time series. These indicate the variability in the level and slope of the time series.
+
+The ETS(A,A,A) model [@expsmooth08] produces equivalent forecasts to Holt-Winters' additive method, and can be expressed as follows:
+\begin{align*}
+  y_t    & = \ell_{t-1}+b_{t-1}+s_{t-m}+\varepsilon_t\\
+  \ell_t & = \ell_{t-1}+b_{t-1}+s_{t-m}+\alpha \varepsilon_t\\
+  b_t    & = b_{t-1}+\beta \varepsilon_t,\\
+  s_t &= s_{t-m} + \gamma\varepsilon_t,
+\end{align*}
+where $\gamma$ is the smoothing parameter for the seasonal component, and the other parameters are as above.  We include the parameter estimates of $\alpha$,  $\beta$ and $\gamma$ in our feature set for monthly and quarterly time series. The value of $\gamma$ provides a measure for the variability of the seasonality of a time series.
+
+### Unit root test statistics {-}
+
+The Phillips-Perron test is based on the regression $y_t= c + \alpha y_{t-1}+ \varepsilon_t$. The test statistic we use as a feature is the usual "Z-alpha" statistic with the Bartlett window parameter set to the integer value of $4(T/100)^{0.25}$ [@Pfaff2008]. This is the default value returned from the `ur.pp()` function in the `urca` package [@pfaff2016package].
+
+The KPSS test is based on the regression $y_t=c+\delta t+\alpha y_{t-1}+\varepsilon_t$. The test statistic we use as a feature is the usual KPSS statistic with the Bartlett window parameter set to the integer value of $4(T/100)^{0.25}$ [@Pfaff2008]. This is the default value returned from the `ur.kpss()` function in the `urca` package [@pfaff2016package].
+
+
+### Autocorrelation coefficient based features {-}
+
+We calculate the first-order autocorrelation coefficient and the sum of squares of the first five autocorrelation coefficients of the original series, the first-differenced series, the second-differenced series, and the seasonally differenced series (for seasonal data).
+
+A linear trend model is fitted to the time series, and the first-order autocorrelation coefficient of the residual series is calculated.
+
+We calculate the sum of squares of the first five partial autocorrelation coefficients of the original series, the first-differenced series and the second-differenced series.
+
