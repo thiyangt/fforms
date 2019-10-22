@@ -2,3 +2,6 @@
 .Rhistory
 .RData
 .Ruserdata
+figures/
+fforms_cache/
+figures

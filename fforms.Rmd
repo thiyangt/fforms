@@ -1,0 +1,155 @@
+---
+title: "FFORMS: Feature-based FORecast Model Selection"
+author:
+  - familyname: Talagala
+    othernames: Thiyanga S
+    address: Department of Econometrics and Business Statistics, \newline Monash University, VIC 3800, Australia.
+    email : thiyanga.talagala@monash.edu
+    correspondingauthor: true
+  - familyname: Hyndman
+    othernames: Rob J
+    address: Department of Econometrics and Business Statistics, \newline Monash University, VIC 3800, Australia.
+    email : rob.hyndman@monash.edu
+  - familyname: Athanasopoulos
+    othernames: George
+    address: Department of Econometrics and Business Statistics, \newline Monash University, VIC 3145, Australia.
+    email : george.athanasopoulos@monash.edu
+abstract: "Features of time series are useful in identifying suitable models for forecasting. We present a general framework, labelled FFORMS (Feature-based FORecast Model Selection), which selects forecast models based on features calculated from the time series. The FFORMS framework builds a mapping that relates the features of a time series to the “best” forecast model using a random forest. The framework is evaluated using time series from the M1 and M3 competitions and is shown to yield accurate forecasts comparable to several benchmarks and other commonly used automated approaches of time series forecasting. Furthermore, we explore what is happening under the hood of the FFORMS framework. This is accomplished using model-agnostic machine learning interpretability approaches. The analysis provides a valuable insight into how different features and their interactions affect the choice of forecast model."
+keywords: "Algorithm selection problem, Time series, Random forest, Machine learning interpretability"
+wpnumber: no/yr
+jelcodes: C10,C14,C22
+blind: true
+cover: true
+toc: false
+bibliography: references.bib
+biblio-style: authoryear-comp
+output:
+  MonashEBSTemplates::workingpaper:
+    fig_caption: yes
+    fig_height: 5
+    fig_width: 8
+    includes:
+      in_header: preamble.tex
+    keep_tex: yes
+    number_sections: yes
+    citation_package: biblatex
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, cache=TRUE, messages=FALSE, warning=FALSE)
+library(knitr)
+opts_chunk$set(
+  warning = FALSE,
+  message = FALSE,
+  echo = FALSE,
+  fig.path = "figure/",
+  cache.path = "cache/",
+  fig.align = "center",
+  fig.show = "hold",
+  cache = TRUE,
+  external = TRUE,
+  dev = "pdf",
+  fig.height = 5,
+  fig.width = 8,
+  out.width = "\\textwidth"
+)
+library(Mcomp)
+library(ggplot2)
+library(grid)
+library(gridExtra)
+library(ggrepel)
+library(png)
+library(tsfeatures)
+library(tidyverse)
+library(ggpubr)
+```
+
+
+# Introduction
+
+
+
+# Literature review {#litreview}
+
+## Time series features
+
+Rather than work with the time series directly at the level of individual observations, we propose analysing time series via an associated "feature space". A time series feature is any measurable characteristic of a time series. For example, \autoref{fig:fig1} shows the time-domain representation of six time series taken from the M3 competition [@makridakis2000m3] while \autoref{fig:fig2} shows a feature-based representation of the same time series. Here only two features are considered: the strength of seasonality and the strength of trend, calculated based on the measures introduced by @wang2009rule. Time series in the lower right quadrant of \autoref{fig:fig2} are non-seasonal but trended, while there is only one series with both high trend and high seasonality. We also see how the degree of seasonality and trend varies between series. Other examples of time series features include autocorrelation, spectral entropy and measures of self-similarity and nonlinearity. @fulcher2014highly identified 9000 operations to extract features from time series.
+
+
+```{r fig1, fig.cap="Time-domain representation of time series", fig.width=10, fig.height=6}
+# Extract required series
+series_id <- c("N0001", "N0633", "N0625", "N0645","N1912", "N2012")
+six_series <- lapply(M3[series_id], function(u){u$x})
+p <- lapply(six_series,
+  function(u) {autoplot(u) + xlab("") + ylab("")}
+)
+for (i in seq_along(six_series))
+  p[[i]] <- p[[i]] + ggtitle(series_id[i])
+grid.arrange(grobs = p, ncol = 3, nrow = 2)
+```
+
+```{r fig2, fig.cap="Feature-based representation of time series", out.width="70%"}
+df <- tsfeatures(six_series, c("stl_features")) %>%
+  select(trend, seasonal_strength) %>%
+  rename(seasonality = seasonal_strength) %>%
+  replace_na(list(seasonality = 0))
+df$id <- names(six_series)
+ggplot(df, aes(x = trend, y = seasonality)) +
+  geom_point() +
+  xlim(0, 1) + ylim(0, 1) +
+  coord_fixed() +
+  geom_text_repel(
+    aes(label = id),
+    colour = "black",
+    size = 3,
+    box.padding = unit(0.5, "lines")
+  ) +
+  theme(legend.position = "none")
+```
+
+
+The choice of the most appropriate set of features depends on both the nature of the time series being analysed, and the purpose of the analysis. In \autoref{Mcomp}, we study the time series from the M1 and M3 competitions [@makridakis1982accuracy;@makridakis2000m3], and we select features for the purpose of forecast-model selection. The M1 and M3 competitions involve time series of differing length, scale and other properties. We include length as one of our features, but the remaining features are independent of scale and asymptotically independent of the length of the time series (i.e., they are ergodic). As our main focus is forecasting, we select features which have discriminatory power in selecting a good model for forecasting.
+
+## What makes features useful for forecast-model selection?
+
+@reid1972comparison points out that the performance of forecasting methods changes according to the nature of the data. Exploring the reasons for these variations may be useful in selecting the most appropriate model. In response to the results of the M3 competition [@makridakis2000m3], similar ideas have been put forward by others. @hyndman2001s, @lawrence2001s and @armstrong2001s argue that the characteristics of a time series may provide useful insights into which methods are most appropriate for forecasting.
+
+Many time series forecasting techniques have been developed to capture specific characteristics of time series that are common in a particular discipline. For example, GARCH models were introduced to account for time-varying volatility in financial time series, and ETS models were introduced to handle the trend and seasonal patterns which are typical in quarterly and monthly sales data. An appropriate set of features should reveal the characteristics of the time series that are useful in determining the best forecasting method.
+
+Several researchers have introduced rules for forecasting based on features [@collopy1992rule;@adya2001automatic;@wang2009rule]. Most recently @kang2017visualising applied principal component analysis to project a large collection of time series into a two dimensional feature space in order to visualize what makes a particular forecasting method perform well or not. The features they considered were spectral entropy, first-order auto-correlation coefficient, strength of trend, strength of seasonality, seasonal period and the optimal Box-Cox transformation parameter. They also proposed a method for generating new time series based on specified features.
+
+## Meta-learning for algorithm selection
+
+John Rice was an early and strong proponent of the idea of meta-learning, which he called the algorithm selection problem (ASP) [@rice1976]. The term *meta-learning* started to appear with the emergence of the machine-learning literature. Rice's framework for algorithm selection is shown in \autoref{fig:rice} and comprises four main components. The problem space, $P$, represents the data sets used in the study. The feature space, $F$, is the range of measures that characterize the problem space $P$. The algorithm space, $A$, is a list of suitable candidate algorithms which can be used to find solutions to the problems in $P$. The performance metric, $Y$, is a measure of algorithm performance such as accuracy, speed, etc. A formal definition of the algorithm selection problem is given by @smith2009cross, and repeated below.
+
+>**Algorithm selection problem**. For a given problem instance $x \in P$, with features $f(x) \in F$, find the selection mapping $S(f(x))$ into algorithm space $A$, such that the selected algorithm $\alpha \in A$ maximizes the performance mapping $y(\alpha(x)) \in Y$.
+
+```{r rice, fig.cap="Rice's framework for the Algorithm Selection Problem.", out.width="80%"}
+knitr::include_graphics("images/RiceFramework.png")
+```
+
+The main challenge in ASP is to identify the selection mapping $S$ from the feature space to the algorithm space. Even though Rice's framework articulates a conceptually rich framework, it does not specify how to obtain $S$. This gives rise to the meta-learning approach.
+
+
+## Forecast-model selection using meta-learning
+
+Selecting models for forecasting can be framed according to Rice's ASP framework.
+
+>**Forecast-model selection problem**. For a given time series $x \in P$, with features $f(x) \in F$, find the selection mapping $S(f(x))$ into the algorithm space $A$, such that the selected algorithm $\alpha \in A$ minimizes forecast accuracy error metric $y(\alpha(x)) \in Y$ on the test set of the time series.
+
+Existing methods differ with respect to the way they define the problem space ($A$), the features ($F$), the forecasting accuracy measure ($Y$) and the selection mapping ($S$).
+
+@collopy1992rule introduced 99 rules based on 18 features of time series, in order to make forecasts for economic and demographic time series. This work was extended by @armstrong2001s to reduce human intervention.
+
+@shah1997model used the following features to classify time series: the number of observations, the ratio of the number of turning points to the length of the series, the ratio of number of step changes, skewness, kurtosis, the coefficient of variation, autocorrelations at lags 1--4, and partial autocorrelations at lag 2--4. Casting Shah's work in Rice's framework, we can specify: $P=203$ quarterly series from the M1 competition [@makridakis1982accuracy]; $A=3$ forecasting methods, namely simple exponential smoothing, Holt-Winters exponential smoothing with multiplicative seasonality, and a basic structural time series model; $Y=$ mean squared error for a hold-out sample. @shah1997model learned the mapping $S$ using discriminant analysis.
+
+@prudencio2004meta was the first paper to use the term "meta-learning" in the context of time series model selection. They studied the applicability of meta-learning approaches for forecast-model selection based on two case studies. Again using the notation above, we can describe their first case study with: $A$ contained only two forecasting methods, simple exponential smoothing and a time-delay neural network; $Y=$ mean absolute error; $F$ consisted of 14 features, namely length, autocorrelation coefficients, coefficient of variation, skewness, kurtosis, and a test of turning points to measure the randomness of the time series;  $S$ was learned using the C4.5 decision tree algorithm. For their second study, the algorithm space included a random walk, Holt's linear exponential smoothing and AR models; the problem space $P$ contained the yearly series from the M3 competition [@makridakis2000m3]; $F$ included a subset of features from the first study; and $Y$ was a ranking based on error. Beyond the task of forecast-model selection, they used the NOEMON approach to rank the algorithms [@kalousis1999noemon].
+
+@lemke2010meta studied the applicability of different meta-learning approaches for time series forecasting. Their algorithm space $A$ contained ARIMA models, exponential smoothing models and a neural network model. In addition to statistical measures such as the standard deviation of the de-trended series, skewness, kurtosis, length, strength of trend, Durbin-Watson statistics of regression residuals, the number of turning points, step changes, a predictability measure, nonlinearity, the largest Lyapunov exponent, and auto-correlation and partial-autocorrelation coefficients, they also used frequency domain based features. The feed forward neural network, decision tree and support vector machine approaches were considered to learn the mapping $S$.
+
+@wang2009rule used a meta-learning framework to provide recommendations as to which forecast method to use to generate forecasts. In order to evaluate forecast accuracy, they introduced a new measure $Y =$ *simple percentage better (SPB)*, which calculates the forecasting accuracy of a method against the forecasting accuracy error of random walk model. They used a feature set $F$ comprising nine features: strength of trend, strength of seasonality, serial correlation, nonlinearity, skewness, kurtosis, self-similarity, chaos and periodicity. The algorithm space $A$ included eight forecast-models, namely, exponential smoothing, ARIMA, neural networks and random walk model; while the mapping $S$ was learned using the C4.5 algorithm for building decision trees. In addition, they used SOM clustering on the features of the time series in order to understand the nature of time series in a two-dimensional setting.
+
+The set of features introduced by @wang2009rule was later used by @widodomodel to develop a meta-learning framework for forecast-model selection. The authors further reduced the dimensionality of time series by performing principal component analysis on the features.
+
+More recently, @kuck2016meta proposed a meta-learning framework based on neural networks for forecast-model selection. Here, $P = 78$ time series from the NN3 competition were used to build the meta-learner. They introduced a new set of features based on forecasting errors. The average symmetric mean absolute percentage error was used to identify the best forecast-models for each series. They classify their forecast-models in the algorithm space $A$, comprising single, seasonal, seasonal-trend and trend exponential smoothing. The mapping $S$ was learned  using a feed-forward neural network. Further, they evaluated the performance of different sets of features for forecast-model selection.
+
