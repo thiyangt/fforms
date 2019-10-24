@@ -551,11 +551,39 @@ A feature of the proposed FFORMS framework is that its online phase is fast comp
 \hypertarget{output-labels}{%
 \subsection{Output: labels}\label{output-labels}}
 
-The task of the classification algorithm is to identify the ``best'' forecasting method for a given time series. The candidate models considered as labels will depend on the observed time series. For example, if we have only non-seasonal time series, and no chaotic features, we may wish to restrict the models to white noise, random walk, ARIMA and ETS processes.
+The task of the classification algorithm is to identify the ``best'' forecasting method for a given time series. The candidate models considered as labels will depend on the observed time series. For example, if we have only non-seasonal time series, and no chaotic features, we may wish to restrict the models to white noise, random walk, ARIMA and ETS processes. We fit the corresponding models outlined in Table \ref{classlabels} to each series in the reference set.
 
 Each candidate model considered is estimated strictly on the training period of each series in the reference set. Forecasts are then generated for the test period over which the chosen forecast accuracy measure is calculated. The model with the lowest forecast error measure over the test period is deemed ``best''.
 
 This step is the most computationally intensive and time-consuming, as each candidate model has to be applied on each series in the reference set. However, as this task is done during the offline phase of the FFORMS framework, the time involved and computational cost associated are of no real significance and are completely controlled by the user.
+
+\begin{table}[!htp]
+\centering\footnotesize\tabcolsep=0.12cm
+\caption{Class labels}
+\label{classlabels}
+\begin{tabular}{llrrrr}
+Class label & Description & Y & Q/M & W & D/H \\ \hline
+wn & white noise process & \checkmark & \checkmark & \checkmark & \checkmark \\
+ARMA & AR, MA, ARMA processes & \checkmark & \checkmark & \checkmark & -\\
+ARIMA & ARIMA process & \checkmark & \checkmark & \checkmark & - \\
+SARIMA & seasonal ARIMA & - & \checkmark & \checkmark & -\\
+rwd & random walk with drift & \checkmark & \checkmark & \checkmark & \checkmark \\
+rw & random walk & \checkmark & \checkmark & \checkmark & \checkmark  \\
+theta & standard theta method & \checkmark & \checkmark & \checkmark & \checkmark \\
+stlar &  & - & \checkmark & \checkmark & \checkmark \\
+ETS\_NTNS & ETS without trend and seasonal components & \checkmark & \checkmark & - & - \\
+ETS\_T & ETS with trend component and without seasonal component & \checkmark & \checkmark & - & -\\
+ETS\_DT& ETS with damped trend component and without seasonal component  & \checkmark &  \checkmark & - & - \\
+ETS\_TS & ETS with trend and seasonal component & - & \checkmark & - & - \\
+ETS\_DTS & ETS with damped trend and seasonal component & - & \checkmark & - & -\\
+ETS\_S & ETS with seasonal component and without trend component & -  & \checkmark & - & - \\
+snaive & seasonal naive method & - & \checkmark & \checkmark & \checkmark \\
+tbats & TBATS forecasting & - & \checkmark & \checkmark & \checkmark \\
+nn & neural network time series forecasts & \checkmark & \checkmark & \checkmark & \checkmark \\
+mstlets &  & - & - & \checkmark & \checkmark \\
+mstlarima & & - & - & - & \checkmark \\\hline
+\end{tabular}
+\end{table}
 
 \hypertarget{train-a-fforms-meta-learner}{%
 \subsection{Train a FFORMS meta-learner}\label{train-a-fforms-meta-learner}}
@@ -566,6 +594,96 @@ To determine the class label for a new instance, features are calculated and pas
 The random forest (RF) algorithm is highly sensitive to class imbalance \autocite{breiman2001random}, and our reference set is unbalanced: some classes contain significantly more cases than other classes. The degree of class imbalance is reduced to some extent by augmenting the observed sample with the simulated time series. We consider three approaches to address the class imbalance in the data: (1) incorporating class priors into the RF classifier; (2) using the balanced RF algorithm introduced by \textcite{chen2004using}; and (3) re-balancing the reference set with down-sampling. In down-sampling, the size of the reference set is reduced by down-sampling the larger classes so that they match the smallest class in size; this potentially discards some useful information. Comparing the results, the balanced RF algorithm and RF with down-sampling did not yield satisfactory results. We therefore only report the results obtained by the RF built on unbalanced data (RF-unbalanced) and the RF with class priors (RF-class priors). The RF algorithms are implemented by the randomForest R package \autocites{liaw2002randomforest}{rfpkg}. The class priors are introduced through the option \texttt{classwt}. We use the reciprocal of class size as the class priors. The number of trees \texttt{ntree} is set to 1000, and the number of randomly selected features \texttt{f} is set to be one third of the total number of features available.
 
 Our aim is different from most classification problems in that we are not interested in accurately predicting the class, but in finding the best possible forecast model. It is possible that two models produce almost equally accurate forecasts, and therefore it is not important whether the classifier picks one model over the other. Therefore we report the forecast accuracy obtained from the FFORMS framework, rather than the classification accuracy.
+
+\hypertarget{peeking}{%
+\section{Peeking inside FFORMS}\label{peeking}}
+
+The main objective of this paper is to explore the nature of the relationship between features and forecast model selection learned by the FFORMS framework. More specifically, it is to identify which of the features are important for model predictions and how different features and their interactions led to the different choices. First, we explore the global role of features in the choice of different forecast model selection. Global interpretability evaluates the behaviour of a model on an entire data set. The global perspective of model interpretation helps users to understand the overall modelled relationship between features and the FFORMS outcome. In the following subsections, we provide a description of tools we use to explore the global perspective of the FFORMS meta-learners.
+
+\hypertarget{visualise-patterns-learned-by-the-meta-learner}{%
+\subsection{Visualise patterns learned by the meta-learner}\label{visualise-patterns-learned-by-the-meta-learner}}
+
+A useful by-product of random forest model is out-of-bag (OOB) observations. OOB observations are the observations not included in building a given tree. In general, each tree uses only around one third of observations in its construction. Further, each tree is grown based on different bootstrap samples; hence, each tree has a different set of OOB observations. We use a vote matrix calculated based on OOBs to visualise patterns learned by the random forest. The vote matrix (\(N \times P\); \(N\) is the total number of observations; \(P\) is the number of classes) contains the proportion of times each observation was classified to each class based on OOB observations.
+
+\hypertarget{feature-importance}{%
+\subsection{Feature importance}\label{feature-importance}}
+
+Let \(\mathcal{P}=\{(\mathbf{f_i}, z_i)\}_{i=1}^{N}\) be the
+historical data set we use to train a classifier. Consider a
+\(d\)-dimensional feature vector \(\mathbf{F}=(F_1, F_2, ..., F_d)\) and a dependent
+variable, the best forecasting method for each series \(Z\). Let \(\mathcal{G}\) be the unknown relationship between \(\mathbf{F}\) and
+\(Z\). \textcite{Zhao} call this `law of nature'. Inside the FFORMS framework, the random forest algorithm tries to learn this relationship using
+the historical data we provided. We denote the predicted function as
+\(g\).
+
+\textcite{jiang2002} explain variable importance under three different views: i) causality (change in the value of \(Z\) for an increase or decrease in the value of \(F_i\)), ii) contribution of \(F_i\) based on out-of-sample prediction accuracy and iii) face value of \(F_i\) on prediction function \(g\). For example, in linear regression models estimated coefficients of each predictor can be considered a measure of variable importance. See \textcite{jiang2002} for comparable face value interpretation for machine learning models. In this paper we use the first two notions of variable importance. Partial dependency functions and individual conditional expectation curves are used to explore the `causality' notion of variable importance, while mean decrease in Gini coefficient and permutation-based variable importance are used to capture the second notion of variable importance (feature contribution to the predictive accuracy) (\textcite{Zhao}). We introduce each of these variable importance measures below.
+
+\hypertarget{mean-decrease-in-gini-coefficient}{%
+\subsubsection{Mean decrease in Gini coefficient}\label{mean-decrease-in-gini-coefficient}}
+
+Mean decrease in Gini coefficient is a measure of how each feature contributes to the homogeneity of the nodes and leaves in the resulting random forest proposed by \textcite{breiman2001random}.
+
+\hypertarget{permutation-based-variable-importance-measure}{%
+\subsubsection{Permutation-based variable importance measure}\label{permutation-based-variable-importance-measure}}
+
+The permutation-based variable importance introduced by \textcite{breiman2001random} measures the prediction
+strength of each feature. This measure is calculated based on the out-of-bag (OOB) observations. The calculation of variable importance is formalised as follows: Let \(\bar{\mathcal{B}}^{(k)}\) be the OOB sample for a tree \(k\), with \(k\in \{1,...,ntree\}\), where \(ntree\) is the number of trees in the random forest. Then the variable importance of variable \(F_{j}\) in \(k^{th}\) tree is:
+\[VI^{(k)}(F_{j})=\frac{\sum_{i\in \bar{\mathcal{B}}^{(k)}}I(\gamma_{i}=\gamma_{i,\pi_{j}}^{k})}{|\bar{\mathcal{B}}^{(k)}|}-\frac{\sum_{i\in \bar{\mathcal{B}}^{(k)}}I(\gamma_{i}=\gamma_{i}^{k})}{|\bar{\mathcal{B}}^{(k)}|},\]
+where \(\gamma_{i}^{k}\) denotes the predicted class for the \(i^{th}\) observation before permuting the values of \(F_{j}\) and \(\gamma_{i, \pi_{j}}^{k}\) is the predicted class for the \(i^{th}\) observation after permuting the values of \(F_{j}\). The overall variable importance score is calculated as:
+\[VI(F_{j})=\frac{\sum_{k=1}^{ntree}VI^{(k)}(F_{j})}{ntree}.\]
+
+Permutation-based variable importance measures provide a useful starting point for identifying the relative influence of features on the predicted outcome. However, they provide little indication of the nature of the relationship between the features and model outcome. To gain further insights into the role of features inside the FFORMS framework we use the partial dependence plot (PDP) introduced by \textcite{friedman2008predictive}.
+
+\hypertarget{partial-dependence-plot-pdp-and-variable-importance-measure-based-on-pdp}{%
+\subsubsection{Partial dependence plot (PDP) and variable importance measure based on PDP}\label{partial-dependence-plot-pdp-and-variable-importance-measure-based-on-pdp}}
+
+Partial dependence plots can be used to graphically examine how each feature is related to the model prediction while accounting for the average effect of other features in the model. Let \(F_s\) be the subset of features we want to examine for partial dependencies and \(F_c\) be the remaining set of features in \(F\). Then \(g_s\), the partial dependence function on \(F_s\) is defined as
+\[g_s(F_s)=E_{f_c}[g(f_s, F_c)]=\int{g(f_s, f_c)dP(f_c).}\]
+In practice, PDP can be estimated from a training data set as
+\[\bar{g_s}(f_s)=\frac{1}{n}\sum_{i=1}^{n}g(f_s, F_{iC}),\]
+where \(n\) is the number of observations in the training data set. A partial dependency curve can be created by plotting the pairs of \(\{(f_s^k, \bar{g}_s(f_{sk}))\}_{k=1}^{m}\) defined on a grid of points \(\{f_{s1}, f_{s2},\dots, f_{sm}\}\) based on \(F_s\). The FFORMS framework has treated the forecast model selection problem as a classification problem. Hence, in this paper partial dependency functions display the probability of a certain class occurring given different values of the feature \(F_s\).
+
+\textcite{Greenwell2018} introduce a variable importance measure based on the partial dependency curves. The idea is to measure the `flatness' of partial dependence curves for each feature. A feature with a PDP curve that is flat, relative to the other features, does not have much influence on the predicted value. The flatness of the curve is measured using the standard deviation of the values \(\{\bar{g}_{s}(f_{sk})\}_{k=1}^{m}\).
+
+\hypertarget{individual-conditional-expectation-ice-curves-and-variable-importance-measure-based-on-ice-curves}{%
+\subsubsection{Individual conditional expectation (ICE) curves and variable importance measure based on ICE curves}\label{individual-conditional-expectation-ice-curves-and-variable-importance-measure-based-on-ice-curves}}
+
+While partial dependency curves are useful in understanding the estimated relationship between features and the predicted outcome in the presence of substantial interaction between features, they can be misleading. \textcite{goldstein2015peeking} propose individual conditional expectation (ICE) curves to address this issue. Instead of
+averaging \(g(f_s, F_{iC})\) over all observations in the training data, an ICE curve generates the individual response curves by plotting the pairs \(\{(f_s^k, g(f_{sk}, F_{iC}))\}_{k=1}^{m}\) defined on grid of points \(\{f_{s1}, f_{s2},\dots, f_{sm}\}\) based on \(F_s\). In other words, the partial dependency curve is simply the average of all the ICE curves.
+
+This method is similar to the PDP-based variable importance scores above, but is based on measuring the `flatness' of the individual conditional expectation curves. We calculate standard deviations of each ICE curve. We then compute an ICE-based variable importance score, which is simply the average of all the standard deviations. A higher value indicates a higher degree of interactivity with other features.
+
+\hypertarget{ranking-of-features-based-on-feature-importance-measures}{%
+\subsubsection{Ranking of features based on feature importance measures}\label{ranking-of-features-based-on-feature-importance-measures}}
+
+To identify important class-specific features we rank features in three different ways: i) based on permutation-based variable importance, ii) based on partial dependence functions and iii) based on ICE curves. We consider 25 features for yearly data. The feature that shows the highest importance is ranked 25, the second highest is ranked 24, and so on. Finally, for each feature a mean rank is calculated based on the rankings of the three measures. Similarly, the overall feature importance is evaluated based on the permutation-based variable importance measure and the Gini coefficient-based feature importance measure.
+
+\hypertarget{relationship-between-most-important-features-and-the-choice-of-forecast-model-selection}{%
+\subsection{Relationship between most important features and the choice of forecast model selection}\label{relationship-between-most-important-features-and-the-choice-of-forecast-model-selection}}
+
+The partial-dependence curves, along with their confidence intervals, are used to visualise the relationship between top features and the choice of forecast model selection.
+
+\hypertarget{assessment-of-interaction-effect}{%
+\subsection{Assessment of interaction effect}\label{assessment-of-interaction-effect}}
+
+Friedman's H-statistic \autocite{friedman2008predictive} is used to test the presence of interaction between all possible pairs of features. This statistic is computed based on the partial dependence functions. For two-way interaction between two specific variables \(Y_j\) and \(Y_k\), Friedman's H-statistic is defined as follows:
+
+\[H_{jk}^2=\sum_{i=1}^{n}[\bar{g}_{s}(f_{ij}, f_{jk})-\bar{g}_{s}(f_{ij})-\bar{g}_{s}(f_{ik})]^2/\sum_{i=1}^{n}\bar{g}^2_{s}(f_{ij}, f_{jk}).\]
+
+Friedman's H-statistic measures the fraction of variance of two-variable partial dependency, \(\bar{g}_{s}(f_{ij}, f_{jk})\) not captured by the sum of the respective individual partial dependencies, \(\bar{g}_{s}(f_{ij})+\bar{g}_{s}(f_{ik})\). In addition to Friedman's H-statistic, we use the PDP of two variables to visualise the interaction effects. Similarly, Friedman's H-statistic for testing whether a specific feature interacts with any other feature can be estimated by
+
+\[H_{j}^2=\sum_{i=1}^{n}[{g}(\bm{f_{i}})-\bar{g}_{s}(f_{ij})-\bar{g}_{s}(f_{i/j})]^2/\sum_{i=1}^{n}g^2(\bm{f_{i}}).\]
+
+Note that the, PD plots, ICE curves and PD- and ICE-associated measures and Friedman's H-statistic are computationally intensive to compute, especially when there are a large number of observations in the training set. Hence, in our experiments ICE- and PDP-based variable importance measures are computed based on the subset of randomly selected training examples.
+
+\hypertarget{results}{%
+\subsection{Results}\label{results}}
+
+\hypertarget{application-to-m4-competition-data}{%
+\subsection{Application to M4-competition data}\label{application-to-m4-competition-data}}
+
+\hypertarget{what-is-happening-under-the-hood-of-fforms}{%
+\subsection{What is happening under the hood of FFORMS?}\label{what-is-happening-under-the-hood-of-fforms}}
 
 \hypertarget{appendix-a-definition-of-features}{%
 \section*{Appendix A: Definition of features}\label{appendix-a-definition-of-features}}

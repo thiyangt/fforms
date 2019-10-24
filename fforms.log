@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.7.18)  24 OCT 2019 13:46
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.7.18)  24 OCT 2019 16:43
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1786,7 +1786,43 @@ Package biblatex Info: Data encoding 'utf8' specified.
 
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'fforms.bbl' found.
-(./fforms.bbl)
+(./fforms.bbl
+
+Package biblatex Warning: The following entry could not be found
+(biblatex)                in the database:
+(biblatex)                Greenwell2018
+(biblatex)                Please verify the spelling and rerun
+(biblatex)                LaTeX afterwards.
+
+
+Package biblatex Warning: The following entry could not be found
+(biblatex)                in the database:
+(biblatex)                Zhao
+(biblatex)                Please verify the spelling and rerun
+(biblatex)                LaTeX afterwards.
+
+
+Package biblatex Warning: The following entry could not be found
+(biblatex)                in the database:
+(biblatex)                friedman2008predictive
+(biblatex)                Please verify the spelling and rerun
+(biblatex)                LaTeX afterwards.
+
+
+Package biblatex Warning: The following entry could not be found
+(biblatex)                in the database:
+(biblatex)                goldstein2015peeking
+(biblatex)                Please verify the spelling and rerun
+(biblatex)                LaTeX afterwards.
+
+
+Package biblatex Warning: The following entry could not be found
+(biblatex)                in the database:
+(biblatex)                jiang2002
+(biblatex)                Please verify the spelling and rerun
+(biblatex)                LaTeX afterwards.
+
+)
 Package biblatex Info: Reference section=0 on input line 307.
 Package biblatex Info: Reference segment=0 on input line 307.
 Package caption Info: Begin \AtBeginDocument code.
@@ -1916,25 +1952,25 @@ LaTeX Font Info:    Font shape `T1/fvs/b/n' will be
 [2] [3]
 LaTeX Font Info:    Font shape `T1/fvs/b/n' will be
 (Font)              scaled to size 10.79993pt on input line 361.
-<figure/fig1-1.pdf, id=150, 722.7pt x 433.62pt>
+<figure/fig1-1.pdf, id=202, 722.7pt x 433.62pt>
 File: figure/fig1-1.pdf Graphic file (type pdf)
 <use figure/fig1-1.pdf>
 Package pdftex.def Info: figure/fig1-1.pdf  used on input line 367.
 (pdftex.def)             Requested size: 455.24411pt x 273.14896pt.
-<figure/fig2-1.pdf, id=151, 578.16pt x 361.35pt>
+<figure/fig2-1.pdf, id=203, 578.16pt x 361.35pt>
 File: figure/fig2-1.pdf Graphic file (type pdf)
 <use figure/fig2-1.pdf>
 Package pdftex.def Info: figure/fig2-1.pdf  used on input line 376.
 (pdftex.def)             Requested size: 318.66948pt x 199.16766pt.
 [4]
-<images/RiceFramework.png, id=175, 818.30719pt x 401.24907pt>
+<images/RiceFramework.png, id=228, 818.30719pt x 401.24907pt>
 File: images/RiceFramework.png Graphic file (type png)
 <use images/RiceFramework.png>
 Package pdftex.def Info: images/RiceFramework.png  used on input line 394.
 (pdftex.def)             Requested size: 364.19667pt x 178.58281pt.
 [5 <./figure/fig1-1.pdf> <./figure/fig2-1.pdf>] [6 <./images/RiceFramework.png>
 ] [7]
-<images/framework.png, id=223, 1156.32pt x 650.43pt>
+<images/framework.png, id=275, 1156.32pt x 650.43pt>
 File: images/framework.png Graphic file (type png)
 <use images/framework.png>
 Package pdftex.def Info: images/framework.png  used on input line 435.
@@ -1960,40 +1996,40 @@ LaTeX Font Info:    Font shape `U/msb/m/n' will be
 (Font)              scaled to size 7.29405pt on input line 506.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
 (Font)              scaled to size 5.21004pt on input line 506.
-[11] [12]
+[11] [12] [13] [14] [15] [16]
 
 Package hyperref Warning: Difference (2) between bookmark levels is greater 
-(hyperref)                than one, level fixed on input line 576.
+(hyperref)                than one, level fixed on input line 694.
 
 
 Package hyperref Warning: The anchor of a bookmark and its parent's must not
-(hyperref)                be the same. Added a new anchor on input line 576.
+(hyperref)                be the same. Added a new anchor on input line 694.
 
-[13] [14] [15] [16] [17] [18]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 674.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 674.
+[17] [18] [19] [20] [21] [22] [23]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 792.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 792.
 (./fforms.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 674.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 674.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 792.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 792.
 Package rerunfilecheck Info: File `fforms.out' has not changed.
-(rerunfilecheck)             Checksum: 3E811BF49720A0DA0B75B13476938695;4097.
+(rerunfilecheck)             Checksum: FA963E3EB6AE884958D4E88083CDA3AB;8404.
 Package logreq Info: Writing requests to 'fforms.run.xml'.
 \openout1 = `fforms.run.xml'.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 674.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 792.
  )
 (\end occurred inside a group at level 1)
 
 ### semi simple group (level 1) entered at line 178 (\begingroup)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 42944 strings out of 494553
- 797208 string characters out of 6175442
- 1217207 words of memory out of 5000000
- 45687 multiletter control sequences out of 15000+600000
- 625718 words of font info for 294 fonts, out of 8000000 for 9000
+ 43025 strings out of 494553
+ 799082 string characters out of 6175442
+ 1218548 words of memory out of 5000000
+ 45720 multiletter control sequences out of 15000+600000
+ 631579 words of font info for 309 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 62i,15n,92p,1705b,18436s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 62i,15n,92p,1705b,18461s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/font
 s/enc/dvips/base/8r.enc}</Users/thiyangashaminitalagala/Library/TinyTeX/texmf-d
 ist/fonts/type1/public/amsfonts/cm/cmex10.pfb></Users/thiyangashaminitalagala/L
@@ -2001,20 +2037,22 @@ ibrary/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></Users/thi
 yangashaminitalagala/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/
 cmr10.pfb></Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/fonts/type
 1/public/amsfonts/cm/cmsy10.pfb></Users/thiyangashaminitalagala/Library/TinyTeX
-/texmf-dist/fonts/type1/public/mathpazo/fplmri.pfb></Users/thiyangashaminitalag
-ala/Library/TinyTeX/texmf-dist/fonts/type1/public/bera/fvmr8a.pfb></Users/thiya
-ngashaminitalagala/Library/TinyTeX/texmf-dist/fonts/type1/public/bera/fvsb8a.pf
-b></Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/fonts/type1/public
-/bera/fvsr8a.pfb></Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/fon
-ts/type1/public/amsfonts/symbols/msam10.pfb></Users/thiyangashaminitalagala/Lib
-rary/TinyTeX/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></Users/thiyangasha
-minitalagala/Library/TinyTeX/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></U
-sers/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/fonts/type1/urw/palatin
-o/uplri8a.pfb>
-Output written on fforms.pdf (18 pages, 330433 bytes).
+/texmf-dist/fonts/type1/public/mathpazo/fplmr.pfb></Users/thiyangashaminitalaga
+la/Library/TinyTeX/texmf-dist/fonts/type1/public/mathpazo/fplmri.pfb></Users/th
+iyangashaminitalagala/Library/TinyTeX/texmf-dist/fonts/type1/public/bera/fvmr8a
+.pfb></Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/fonts/type1/pub
+lic/bera/fvsb8a.pfb></Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/
+fonts/type1/public/bera/fvsr8a.pfb></Users/thiyangashaminitalagala/Library/Tiny
+TeX/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></Users/thiyangas
+haminitalagala/Library/TinyTeX/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb><
+/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/fonts/type1/urw/palat
+ino/uplbi8a.pfb></Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/font
+s/type1/urw/palatino/uplr8a.pfb></Users/thiyangashaminitalagala/Library/TinyTeX
+/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
+Output written on fforms.pdf (23 pages, 356008 bytes).
 PDF statistics:
- 422 PDF objects out of 1000 (max. 8388607)
- 364 compressed objects within 4 object streams
- 100 named destinations out of 1000 (max. 500000)
- 26913 words of extra memory for PDF output out of 29859 (max. 10000000)
+ 527 PDF objects out of 1000 (max. 8388607)
+ 461 compressed objects within 5 object streams
+ 132 named destinations out of 1000 (max. 500000)
+ 27017 words of extra memory for PDF output out of 29859 (max. 10000000)
 
