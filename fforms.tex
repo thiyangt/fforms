@@ -282,6 +282,14 @@
 \usepackage{todonotes}
 \usepackage{ctable}
 \usepackage{float}
+\usepackage{tikz}
+\usepackage{algorithm}
+\usepackage{multirow}
+\usepackage{lscape}
+\usepackage{rotating}
+\usepackage{bm} 
+\usepackage{threeparttable}
+\floatplacement{figure}{H} 
 
 \def\sectionautorefname{Section}
 \captionsetup[figure]{font=small}
@@ -677,13 +685,78 @@ Friedman's H-statistic measures the fraction of variance of two-variable partial
 Note that the, PD plots, ICE curves and PD- and ICE-associated measures and Friedman's H-statistic are computationally intensive to compute, especially when there are a large number of observations in the training set. Hence, in our experiments ICE- and PDP-based variable importance measures are computed based on the subset of randomly selected training examples.
 
 \hypertarget{results}{%
-\subsection{Results}\label{results}}
+\section{Results}\label{results}}
 
 \hypertarget{application-to-m4-competition-data}{%
 \subsection{Application to M4-competition data}\label{application-to-m4-competition-data}}
 
+\begin{table}[!h]
+\centering\scriptsize\tabcolsep=0.12cm
+\begin{threeparttable}
+\caption{The performance of FFORMS on the M4 competition data based on point forecasts (based on MASE) and prediction intervals (based on MSIS)}
+\label{forecasts}
+\begin{tabular}{l|rrrrrr}
+\hline
+\multicolumn{7}{c}{Point Forecasts (Mean Absolute Scaled Error (MASE))} \\\hline
+ & Yearly & Quarterly & Monthly & Weekly & Daily & Hourly \\\hline
+\bf{FFORMS} & 3.17 &  1.20 &  0.98&  2.31& 3.57 &  0.84\\
+auto.arima & 3.40 &1.17  &0.93  & 2.55 &  -& - \\
+ets & 3.44 &  1.16& 0.95 &  -&-  &  -\\
+theta & 3.37 &1.24  & 0.97 &2.64  & 3.33 & 1.59 \\
+rwd & 3.07 & 1.33 & 1.18  & 2.68  & 3.25 & 11.45 \\
+rw & 3.97 & 1.48 & 1.21  &2.78  & 3.27 & 11.60 \\
+nn & 4.06 & 1.55 &  1.14 &4.04 & 3.90 & 1.09 \\
+stlar & - & 2.02 &  1.33& 3.15 & 4.49 & 1.49 \\
+snaive & - &  1.66& 1.26 &  2.78& 24.46 & 2.86 \\
+tbats & - & 1.19 &  1.05& 2.49 & 3.27 &  1.30\\
+wn & 13.42 &  6.50&  4.11&  49.91& 38.07 & 11.68 \\
+mstlarima & - & - &  - & - & 3.84 &  1.12\\
+mstlets & - &  - &  - &  - & 3.73 &  1.23\\
+combination (mean) & 4.09 & 1.58 &  1.16&6.96  & 7.94 & 3.93 \\\hline
+M4-1st & \bf{2.98} & 1.12 &  \bf{0.88}& 2.36 & 3.45 & 0.89\\
+M4-2nd & 3.06 & \bf{1.11} &  0.89& \bf{2.11} & 3.34 & \bf{0.81}\\
+M4-3rd & 3.13 & 1.12 &  0.91& 2.16 & \bf{2.64} & 0.87\\\hline
+\multicolumn{7}{c}{Prediction Intervals (Mean Scaled Interval Score (MSIS))} \\\hline
+\bf{FFORMS} & 39.79 &  11.24 &  9.82&  \bf{20.84}& 36.36 & 8.0 \\
+M4-1st & \bf{23.89} & \bf{8.55} &  \bf{7.20} & 22.03 & \bf{26.28} & \bf{7.92}\\
+M4-2nd & 27.47 & 9.38 &  8.65& 21.53 & 34.37 & 18.50\\
+M4-3rd & \multicolumn{6}{c}{not submitted}\\
+naive & 56.55 & 14.07 &  12.30 & 26.35 & 32.55 & 71.24\\\hline
+\end{tabular}
+  \begin{tablenotes}
+      \small
+      \item Note: Bold signifies the best performing method.
+    \end{tablenotes}
+  \end{threeparttable}
+\end{table}
+
+\autoref{forecasts} shows the performance of the FFORMS approach on the M4 competition data. The point forecasts and prediction intervals are evaluated based on the test period of each series. The point forecasts are evaluated based on the MASE computed for each forecast horizon, and then by averaging the MASE errors across all series corresponding to each frequency category. Similarly, MSIS is used to evaluate the prediction intervals. The results are compared against several benchmarks and the top three places of the M4 competition. The top-ranking methods of the M4 competition are based on some kind of combination approach. The first ranking method is based on a hybrid approach that produces forecasts based on both ETS and machine learning approaches. The second and third places are based on a combination of nine and seven different forecast models. The second and third approaches are time-consuming because forecasts from all candidate models must be computed. The results of the FFORMS approach are based on individual forecasts. According to the \autoref{forecasts}, we can see the FFORMS approach achieved comparable performance in a much more cost and time-effective way. Based on the FFORMS approach, we provided an entry to the M4 competition. After submission we found a bug in our implementation of hourly data, hence only the hourly data results are different from the published results of the M4 competition. The yearly, quarterly, monthly, weekly and daily result are same as the published results. This completes the evaluation of the FFORMS framework. The main question we have now is: `Can we trust the FFORMS framework if we do not know how it works?' In the next section we present results showing what is happening inside the FFORMS framework.
+
 \hypertarget{what-is-happening-under-the-hood-of-fforms}{%
 \subsection{What is happening under the hood of FFORMS?}\label{what-is-happening-under-the-hood-of-fforms}}
+
+\hypertarget{visualisation-of-meta-learners-understanding-of-similarity-and-dissimilarity-between-forecast-models}{%
+\subsubsection{Visualisation of meta-learner's understanding of similarity and dissimilarity between forecast models}\label{visualisation-of-meta-learners-understanding-of-similarity-and-dissimilarity-between-forecast-models}}
+
+\hypertarget{time-series-without-seasonal-component-yearly}{%
+\subsubsection{Time series without seasonal component: Yearly}\label{time-series-without-seasonal-component-yearly}}
+
+\hypertarget{time-series-with-a-single-seasonal-component-monthly}{%
+\subsubsection{Time series with a single seasonal component: Monthly}\label{time-series-with-a-single-seasonal-component-monthly}}
+
+\hypertarget{time-series-with-multiple-seasonal-components-hourly}{%
+\subsubsection{Time series with multiple seasonal components: Hourly}\label{time-series-with-multiple-seasonal-components-hourly}}
+
+\hypertarget{discussion}{%
+\section{Discussion and conclusions}\label{discussion}}
+
+In this paper we have proposed a novel framework for forecast-model selection using meta-learning based on time series features. Our proposed FFORMS algorithm uses the knowledge of the past performance of candidate forecast models on a collection of time series in order to identify the best forecasting method for a new series. We have shown that the method almost always performs better than common benchmark methods, and in many cases better than the best-performing methods from both the M1 and the M3 forecasting competitions. Although we have illustrated the method using the M1 and M3 competition data, the framework is general and can be applied to any large collection of time series.
+
+A major advantage of the FFORMS framework is that the classifier is trained offline and selecting a forecasting model for a new time series is as fast as calculating a set of features and passing these to the pretrained classifier. Therefore, unlike traditional model selection strategies or cross-validation processes, our proposed framework can be used to accurately forecast very large collections of time series requiring almost instant forecasts.
+
+In addition to our new FFORMS framework, we have also introduced a simple set of time series features that are useful in identifying the ``best'' forecast method for a given time series, and can be computed rapidly. We will leave to a later study an analysis of which of these features are the most useful, and how our feature set could be reduced further without the loss of forecast accuracy.
+
+For real-time forecasting, our framework involves only the calculation of features, the selection of a forecast method based on the FFORMS random forest classifier, and the calculation of the forecasts from the chosen model. None of these steps involve substantial computation, and they can be easily parallelised when forecasting for a large number of new time series. For future work, we will explore the use of other classification algorithms within the FFORMS algorithm, and test our approach on several other large collections of time series.
 
 \hypertarget{appendix-a-definition-of-features}{%
 \section*{Appendix A: Definition of features}\label{appendix-a-definition-of-features}}
@@ -752,7 +825,7 @@ To measure the degree of nonlinearity of the time series, we use statistic compu
 \subsubsection*{Parameter estimates of an ETS model}\label{parameter-estimates-of-an-ets-model}}
 \addcontentsline{toc}{subsubsection}{Parameter estimates of an ETS model}
 
-The ETS(A,A,N) model \autocite{expsmooth08} produces equivalent forecasts to Holt's linear trend method, and can be expressed as follows:
+The ETS (A,A,N) model \autocite{expsmooth08} produces equivalent forecasts to Holt's linear trend method, and can be expressed as follows:
 \begin{align*}
   y_t    & = \ell_{t-1}+b_{t-1}+\varepsilon_t\\
   \ell_t & = \ell_{t-1}+b_{t-1}+\alpha \varepsilon_t\\
