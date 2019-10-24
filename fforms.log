@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.7.18)  22 OCT 2019 21:57
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.7.18)  24 OCT 2019 13:46
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1916,67 +1916,84 @@ LaTeX Font Info:    Font shape `T1/fvs/b/n' will be
 [2] [3]
 LaTeX Font Info:    Font shape `T1/fvs/b/n' will be
 (Font)              scaled to size 10.79993pt on input line 361.
-<figure/fig1-1.pdf, id=130, 722.7pt x 433.62pt>
+<figure/fig1-1.pdf, id=150, 722.7pt x 433.62pt>
 File: figure/fig1-1.pdf Graphic file (type pdf)
 <use figure/fig1-1.pdf>
 Package pdftex.def Info: figure/fig1-1.pdf  used on input line 367.
 (pdftex.def)             Requested size: 455.24411pt x 273.14896pt.
-<figure/fig2-1.pdf, id=131, 578.16pt x 361.35pt>
+<figure/fig2-1.pdf, id=151, 578.16pt x 361.35pt>
 File: figure/fig2-1.pdf Graphic file (type pdf)
 <use figure/fig2-1.pdf>
 Package pdftex.def Info: figure/fig2-1.pdf  used on input line 376.
 (pdftex.def)             Requested size: 318.66948pt x 199.16766pt.
-
-LaTeX Warning: Reference `Mcomp' on page 4 undefined on input line 383.
-
-[4] [5 <./figure/fig1-1.pdf> <./figure/fig2-1.pdf>]
-<images/RiceFramework.png, id=173, 818.30719pt x 401.24907pt>
+[4]
+<images/RiceFramework.png, id=175, 818.30719pt x 401.24907pt>
 File: images/RiceFramework.png Graphic file (type png)
 <use images/RiceFramework.png>
-Package pdftex.def Info: images/RiceFramework.png  used on input line 396.
+Package pdftex.def Info: images/RiceFramework.png  used on input line 394.
 (pdftex.def)             Requested size: 364.19667pt x 178.58281pt.
-[6 <./images/RiceFramework.png>] [7]
+[5 <./figure/fig1-1.pdf> <./figure/fig2-1.pdf>] [6 <./images/RiceFramework.png>
+] [7]
+<images/framework.png, id=223, 1156.32pt x 650.43pt>
+File: images/framework.png Graphic file (type png)
+<use images/framework.png>
+Package pdftex.def Info: images/framework.png  used on input line 435.
+(pdftex.def)             Requested size: 500.77129pt x 281.68425pt.
+
+Overfull \hbox (45.52718pt too wide) in paragraph at lines 435--436
+ [][] 
+ []
+
+[8]
+Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
+put line 446.
+[9 <./images/framework.png>] [10]
+LaTeX Font Info:    Font shape `U/msa/m/n' will be
+(Font)              scaled to size 9.37807pt on input line 506.
+LaTeX Font Info:    Font shape `U/msa/m/n' will be
+(Font)              scaled to size 7.29405pt on input line 506.
+LaTeX Font Info:    Font shape `U/msa/m/n' will be
+(Font)              scaled to size 5.21004pt on input line 506.
+LaTeX Font Info:    Font shape `U/msb/m/n' will be
+(Font)              scaled to size 9.37807pt on input line 506.
+LaTeX Font Info:    Font shape `U/msb/m/n' will be
+(Font)              scaled to size 7.29405pt on input line 506.
+LaTeX Font Info:    Font shape `U/msb/m/n' will be
+(Font)              scaled to size 5.21004pt on input line 506.
+[11] [12]
 
 Package hyperref Warning: Difference (2) between bookmark levels is greater 
-(hyperref)                than one, level fixed on input line 436.
+(hyperref)                than one, level fixed on input line 576.
 
 
 Package hyperref Warning: The anchor of a bookmark and its parent's must not
-(hyperref)                be the same. Added a new anchor on input line 436.
+(hyperref)                be the same. Added a new anchor on input line 576.
 
-[8] [9] [10] [11] [12] [13]
-
-Package caption Warning: Unused \captionsetup[table] on input line 62.
-See the caption package documentation for explanation.
-
-[14]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 534.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 534.
+[13] [14] [15] [16] [17] [18]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 674.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 674.
 (./fforms.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 534.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 534.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 674.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 674.
 Package rerunfilecheck Info: File `fforms.out' has not changed.
-(rerunfilecheck)             Checksum: 8471E483223D5A55F10A67EBDA4388E2;3065.
-
-LaTeX Warning: There were undefined references.
-
+(rerunfilecheck)             Checksum: 3E811BF49720A0DA0B75B13476938695;4097.
 Package logreq Info: Writing requests to 'fforms.run.xml'.
 \openout1 = `fforms.run.xml'.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 534.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 674.
  )
 (\end occurred inside a group at level 1)
 
 ### semi simple group (level 1) entered at line 178 (\begingroup)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 42770 strings out of 494553
- 794257 string characters out of 6175442
- 1201214 words of memory out of 5000000
- 45569 multiletter control sequences out of 15000+600000
- 607276 words of font info for 235 fonts, out of 8000000 for 9000
+ 42944 strings out of 494553
+ 797208 string characters out of 6175442
+ 1217207 words of memory out of 5000000
+ 45687 multiletter control sequences out of 15000+600000
+ 625718 words of font info for 294 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 62i,12n,92p,1705b,18436s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 62i,15n,92p,1705b,18436s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/font
 s/enc/dvips/base/8r.enc}</Users/thiyangashaminitalagala/Library/TinyTeX/texmf-d
 ist/fonts/type1/public/amsfonts/cm/cmex10.pfb></Users/thiyangashaminitalagala/L
@@ -1989,13 +2006,15 @@ ala/Library/TinyTeX/texmf-dist/fonts/type1/public/bera/fvmr8a.pfb></Users/thiya
 ngashaminitalagala/Library/TinyTeX/texmf-dist/fonts/type1/public/bera/fvsb8a.pf
 b></Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/fonts/type1/public
 /bera/fvsr8a.pfb></Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/fon
-ts/type1/urw/palatino/uplb8a.pfb></Users/thiyangashaminitalagala/Library/TinyTe
-X/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></Users/thiyangashaminitalagal
-a/Library/TinyTeX/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on fforms.pdf (14 pages, 190983 bytes).
+ts/type1/public/amsfonts/symbols/msam10.pfb></Users/thiyangashaminitalagala/Lib
+rary/TinyTeX/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></Users/thiyangasha
+minitalagala/Library/TinyTeX/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></U
+sers/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/fonts/type1/urw/palatin
+o/uplri8a.pfb>
+Output written on fforms.pdf (18 pages, 330433 bytes).
 PDF statistics:
- 346 PDF objects out of 1000 (max. 8388607)
- 295 compressed objects within 3 object streams
- 78 named destinations out of 1000 (max. 500000)
- 20724 words of extra memory for PDF output out of 20736 (max. 10000000)
+ 422 PDF objects out of 1000 (max. 8388607)
+ 364 compressed objects within 4 object streams
+ 100 named destinations out of 1000 (max. 500000)
+ 26913 words of extra memory for PDF output out of 29859 (max. 10000000)
 

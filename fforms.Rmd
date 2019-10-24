@@ -131,14 +131,6 @@ ggplot(df, aes(x = trend, y = seasonality)) +
 ```
 
 
-
-
-The choice of the most appropriate set of features depends on both the nature of the time series being analysed, and the purpose of the analysis. In \autoref{Mcomp}, we study the time series from the M1 and M3 competitions [@makridakis1982accuracy;@makridakis2000m3], and we select features for the purpose of forecast-model selection. The M1 and M3 competitions involve time series of differing length, scale and other properties. We include length as one of our features, but the remaining features are independent of scale and asymptotically independent of the length of the time series (i.e., they are ergodic). As our main focus is forecasting, we select features which have discriminatory power in selecting a good model for forecasting.
-
-
-
-
-
 ## Meta-learning for algorithm selection
 
 John Rice was an early and strong proponent of the idea of meta-learning, which he called the algorithm selection problem (ASP) [@rice1976]. The term *meta-learning* started to appear with the emergence of the machine-learning literature. Rice's framework for algorithm selection is shown in \autoref{fig:rice} and comprises four main components. The problem space, $P$, represents the data sets used in the study. The feature space, $F$, is the range of measures that characterize the problem space $P$. The algorithm space, $A$, is a list of suitable candidate algorithms which can be used to find solutions to the problems in $P$. The performance metric, $Y$, is a measure of algorithm performance such as accuracy, speed, etc. A formal definition of the algorithm selection problem is given by @smith2009cross, and repeated below.
@@ -173,6 +165,142 @@ Existing methods differ with respect to the way they define the problem space ($
 The set of features introduced by @wang2009rule was later used by @widodomodel to develop a meta-learning framework for forecast-model selection. The authors further reduced the dimensionality of time series by performing principal component analysis on the features.
 
 More recently, @kuck2016meta proposed a meta-learning framework based on neural networks for forecast-model selection. Here, $P = 78$ time series from the NN3 competition were used to build the meta-learner. They introduced a new set of features based on forecasting errors. The average symmetric mean absolute percentage error was used to identify the best forecast-models for each series. They classify their forecast-models in the algorithm space $A$, comprising single, seasonal, seasonal-trend and trend exponential smoothing. The mapping $S$ was learned  using a feed-forward neural network. Further, they evaluated the performance of different sets of features for forecast-model selection.
+
+# Methodology
+
+Our proposed FFORMS framework, presented in \autoref{fig:framework}, builds on this preceding research. The offline and online phases are shown in blue and red respectively. A classification algorithm (the meta-learner) is trained during the offline phase and is then used to select an appropriate forecast model for a new time series in the online phase. Furthermore, we use machine learning interpretability tools to gain insights into what is happening under the hood of the FFORMS framework. We refer to this process as "peeking inside FFORMS" which is shown in yellow. 
+
+
+```{r framework, fig.cap="FFORMS (Feature-based FORecast-Model Selection) framework. The offline phase is shown in blue, the online phase in red and the peeking inside FFORMS is shown in yellow.", out.width='110%'}
+knitr::include_graphics("images/framework.png")
+```
+
+In order to train our classification algorithm, we need a large collection of time series which are similar to those we will be forecasting. We assume that we have an essentially infinite population of time series, and we take a sample of them in order to train the classification algorithm denoted as the "observed sample". The new time series we wish to forecast can be thought of as additional draws from the same population.  Hence, any conclusions made from the classification framework refer only to the population from which the sample has been selected. We may call this the "target population" of time series. It is important to have a well-defined target population to avoid misapplying the classification rules. In practice, we may wish to augment the set of observed time series by simulating new time series similar to those in the assumed population (we provide details and discussion in Section \ref{simulatingseries} that follows). We denote the total collection of time series used for training the classifier as the "reference set".
+Each time series within the reference set is split into a training period and a test period. From each training period we compute a range of time series features, and fit a selection of candidate models. The calculated features form the input vector to the classification algorithm. Using the fitted models, we generate forecasts and identify the "best" model for each time series based on a forecast error measure (e.g., MASE) calculated over the test period. The models deemed "best" form the output labels for the classification algorithm. The pseudo code for our proposed framework is presented in Algorithm \ref{alg:algo-lab} below. In the following sections, we briefly discuss aspects of the offline phase.
+
+\begin{algorithm}[!ht]
+  \caption{The FFORMS framework - Forecasting based on meta-learning. }
+  \label{alg:algo-lab}
+  \begin{algorithmic}[1]
+    \Statex \textbf{Offline phase - train the classifier}
+    \Statex \text{Given:}
+    \Statex \hspace{1cm}$O=\{x_1, x_2, \dots,x_n\}:$ the collection of $n$ observed time series.
+      \Statex \hspace{1cm}$L:$ the set of class labels (e.g.\ ARIMA, ETS, SNAIVE).
+         \Statex \hspace{1cm}$F:$ the set of functions to calculate time series features.
+         \Statex \hspace{1cm}$nsim:$ number of series to be simulated.
+         \Statex \hspace{1cm}$B:$ number of trees in the random forest.
+         \Statex \hspace{1cm}$k:$ number of features to be selected at each node.
+     \Statex \text{Output:}
+      \Statex \hspace{1cm}\text{FFORMS classifier}
+      \Statex
+     \Statex \textit{Prepare the reference set}
+    \Statex For $i=1$ to $n$:
+            \State Fit ARIMA and ETS models to $x_i$.
+            \State Simulate $nsim$ time series from each model in step 1.
+            \State The time series in $O$ and simulated time series in step 2 form the reference set $R=\{x_1, x_2, \dots,x_n, x_{n+1},\dots,x_N\}$ where $N = n + nsim$.
+    \Statex
+    \Statex \textit{Prepare the meta-data}
+    \Statex For $j=1$ to $N$:
+            \State Split $x_j$ into a training period and test period.
+            \State Calculate features $F$ based on the training period.
+            \State Fit $L$ models to the training period.
+            \State Calculate forecasts for the test period from each model.
+            \State Calculate forecast error measure over the test period for all models in $L$.
+            \State Select the model with the minimum forecast error.
+            \State Meta-data: input features (step 5), output labels (step 9).
+     \Statex
+    \Statex \textit{Train a random forest classifier}
+            \State Train a random forest classifier based on the meta-data.
+            \State {Random forest: the ensemble of trees $\{T_b\}_1^B$}.
+    \Statex
+     \Statex \textbf{Online phase - forecast a new time series}
+    \Statex \text{Given:}
+    \Statex \hspace{1cm}\text{FFORMS classifier from step 12} .
+     \Statex \text{Output:}
+      \Statex \hspace{1cm}\text{class labels for new time series $x_{new}$}.
+  \State For $x_{new}$ calculate features $F$.
+  \State Let $\hat{C_b}(x_{new})$ be the class prediction of the $b^{th}$ random forest tree. Then class label for $x_{new}$ is $\hat{C_{rf}}(x_{new})=majorityvote\{\hat{C_b}(x_{new})\}_1^B$.
+   \end{algorithmic}
+\end{algorithm}
+
+## Augmenting the observed sample with simulated time series {#simulatingseries}
+
+In practice, we may wish to augment the set of observed time series by simulating new time series similar to those in the assumed population. This process may be useful when the number of observed time series is too small to build a reliable classifier. Alternatively, we may wish to add more of some particular types of time series to the reference set in order to get a more balanced sample for the classification. In order to produce simulated series that are similar to those in the population, we consider two classes of data generating processes: exponential smoothing models and ARIMA models. Using the automated `ets` and `auto.arima` algorithms [@forecast] we identify models, based on model selection criteria (such as AICc) and simulate multiple time series from the selected models within each model class. Assuming the models produce data that are similar to the observed time series ensures that the simulated series are similar to those in the population. As this is done in the offline phase of the algorithm the computational time in producing these simulated series is of no real consequence.
+
+## Input: features
+
+Our proposed FFORMS algorithm requires features that enable identification of a suitable forecast model for a given time series. Therefore, the features used should capture the dynamic structure of the time series, such as trend, seasonality, autocorrelation, nonlinearity, heterogeneity, and so on. Furthermore, interpretability, robustness to outliers, scale and length independence should also be considered when selecting features for this classification problem. A comprehensive description of the features used in the experiment is presented in \autoref{feature}.
+
+A feature of the proposed FFORMS framework is that its online phase is fast  compared to the time required for implementing a typical model selection or cross-validation procedure. Therefore, we consider only features that can be computed rapidly, as this computation must be done during the online phase.
+
+
+\begin{table}[!htp]
+\centering\footnotesize\tabcolsep=0.12cm
+\caption{Time series features}
+\label{feature}
+\begin{tabular}{llp{8,8cm}cccc}
+\toprule
+\multicolumn{2}{c}{Feature} & Description & Y & Q/M & W & D/H\\
+\midrule
+1  & T              & length of time series                                                                   & \yes  & \yes & \yes & \yes\\
+2  & trend          & strength of trend                                                                       & \yes  & \yes & \yes & \yes\\
+3  & seasonality\_q    & strength of quarterly seasonality                                                    & -     & \yes & - & -\\
+4  & seasonality\_m    & strength of monthly seasonality                                                      & -     & \yes & - & -\\
+5  & seasonality\_w    & strength of weekly seasonality                                                       & -     & - & \yes & \yes \\
+6  & seasonality\_d    & strength of daily seasonality                                                        & -     & - & - & \yes\\
+7  & seasonality\_y    & strength of yearly seasonality                                                       & -     & - & - & \yes\\
+8  & linearity      & linearity                                                                               & \yes  & \yes & \yes & \yes\\
+9  & curvature      & curvature                                                                               & \yes  & \yes & \yes & \yes\\
+10  & spikiness      & spikiness                                                                               & \yes  & \yes & \yes & \yes\\
+11  & e\_acf1        & first ACF value of remainder series                                                     & \yes  & \yes & \yes & \yes\\
+12  & stability      & stability                                                                               & \yes  & \yes & \yes & \yes\\
+13  & lumpiness      & lumpiness                                                                               & \yes  & \yes & \yes & \yes\\
+14 & entropy        & spectral entropy                                                                        & \yes  & \yes & \yes & \yes\\
+15 & hurst          & Hurst exponent                                                                          & \yes  & \yes & \yes & \yes\\
+16 & nonlinearity   & nonlinearity                                                                            & \yes\ & \yes & \yes & \yes\\
+17 & alpha          & ETS(A,A,N) $\hat\alpha$                                                                 & \yes  & \yes & \yes & -\\
+18 & beta           & ETS(A,A,N) $\hat\beta$                                                                  & \yes  & \yes & \yes & - \\
+19 & hwalpha        & ETS(A,A,A) $\hat\alpha$                                                                 & -     & \yes & - & -\\
+20 & hwbeta         & ETS(A,A,A) $\hat\beta$                                                                  & -     & \yes & - & - \\
+21 & hwgamma        & ETS(A,A,A) $\hat\gamma$                                                                 & -     & \yes & - &-\\
+22 & ur\_pp         & test statistic based on Phillips-Perron test                                            & \yes  & - & - & - \\
+23 & ur\_kpss       & test statistic based on KPSS test                                                       & \yes  & - & - & - \\
+24 & y\_acf1        & first ACF value of the original series                                                  & \yes  & \yes & \yes & \yes\\
+25 & diff1y\_acf1   & first ACF value of the differenced series                                               & \yes  & \yes & \yes & \yes\\
+26 & diff2y\_acf1   & first ACF value of the twice-differenced series                                         & \yes  & \yes & \yes & \yes\\
+27 & y\_acf5        & sum of squares of first 5 ACF values of original series                                 & \yes  & \yes & \yes & \yes\\
+28 & diff1y\_acf5   & sum of squares of first 5 ACF values of differenced series                              & \yes  & \yes & \yes & \yes\\
+29 & diff2y\_acf5   & sum of squares of first 5 ACF values of twice-differenced series                        & \yes  & \yes & \yes & \yes \\
+30 & sediff\_acf1 & ACF value at the first lag of seasonally-differenced series                               & -     & \yes & \yes & \yes\\
+31 & sediff\_seacf1 & ACF value at the first seasonal lag of seasonally-differenced series                    & -     & \yes & \yes & \yes\\
+32 & sediff\_acf5   & sum of squares of first 5 autocorrelation coefficients of seasonally-differenced series & -     & \yes & \yes & \yes\\
+33 & seas\_pacf     & partial autocorrelation coefficient at first seasonal lag & -     & \yes & \yes & \yes\\
+34 & lmres\_acf1    & first ACF value of residual series of linear trend model                                & \yes  & - & - & -\\
+35 & y\_pacf5       & sum of squares of first 5 PACF values of original series                                & \yes  & \yes & \yes & \yes\\
+36 & diff1y\_pacf5  & sum of squares of first 5 PACF values of differenced series                             & \yes  & \yes & \yes & \yes\\
+37 & diff2y\_pacf5  & sum of squares of first 5 PACF values of twice-differenced series                       & \yes  & \yes & \yes & \yes\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+## Output: labels
+
+The task of the classification algorithm is to identify the "best" forecasting method for a given time series. The candidate models considered as labels will depend on the observed time series. For example, if we have only non-seasonal time series, and no chaotic features, we may wish to restrict the models to white noise, random walk, ARIMA and ETS processes. 
+
+Each candidate model considered is estimated strictly on the training period of each series in the reference set. Forecasts are then generated for the test period over which the chosen forecast accuracy measure is calculated. The model with the lowest forecast error measure over the test period is deemed "best".
+
+This step is the most computationally intensive and time-consuming, as each candidate model has to be applied on each series in the reference set. However, as this task is done during the offline phase of the FFORMS framework, the time involved and computational cost associated are of no real significance and are completely controlled by the user. 
+
+## Train a FFORMS meta-learner
+
+A random forest algorithm is used to train the meta-learner. In this work, we have used the randomForest package [@liaw2002randomforest; @rfpkg] which implements the Fortran code for random forest classification by @breiman2004random.
+To determine the class label for a new instance, features are calculated and passed down the trees. Then each tree gives a prediction and the majority vote over all individual trees leads to the final decision. 
+
+The random forest (RF) algorithm is highly sensitive to class imbalance [@breiman2001random], and our reference set is unbalanced: some classes contain significantly more cases than other classes. The degree of class imbalance is reduced to some extent by augmenting the observed sample with the simulated time series. We consider three approaches to address the class imbalance in the data: (1) incorporating class priors into the RF classifier; (2) using the balanced RF algorithm introduced by @chen2004using; and (3) re-balancing the reference set with down-sampling. In down-sampling, the size of the reference set is reduced by down-sampling the larger classes so that they match the smallest class in size; this potentially discards some useful information. Comparing the results, the balanced RF algorithm and RF with down-sampling did not yield satisfactory results. We therefore only report the results obtained by the RF built on unbalanced data (RF-unbalanced) and the RF with class priors (RF-class priors). The RF algorithms are implemented by the randomForest R package [@liaw2002randomforest; @rfpkg]. The class priors are introduced through the option `classwt`. We use the reciprocal of class size as the class priors. The number of trees `ntree` is set to 1000, and the number of randomly selected features `f` is set to be one third of the total number of features available.
+
+Our aim is different from most classification problems in that we are not interested in accurately predicting the class, but in finding the best possible forecast model. It is possible that two models produce almost equally accurate forecasts, and therefore it is not important whether the classifier picks one model over the other. Therefore we report the forecast accuracy obtained from the FFORMS framework, rather than the classification accuracy.
+
 
 # Appendix A: Definition of features {-}
 

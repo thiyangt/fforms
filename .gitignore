@@ -4,4 +4,5 @@
 .Ruserdata
 figures/
 fforms_cache/
-figures
+figures/
+cache/
