@@ -738,6 +738,15 @@ naive & 56.55 & 14.07 &  12.30 & 26.35 & 32.55 & 71.24\\\hline
 \hypertarget{visualisation-of-meta-learners-understanding-of-similarity-and-dissimilarity-between-forecast-models}{%
 \subsubsection{Visualisation of meta-learner's understanding of similarity and dissimilarity between forecast models}\label{visualisation-of-meta-learners-understanding-of-similarity-and-dissimilarity-between-forecast-models}}
 
+\begin{figure}[h]
+
+{\centering \includegraphics[width=\textwidth]{figure/yearlyoob-1} 
+
+}
+
+\caption{Visualisation of the vote matrix based on OOB sample for yearly random forest. Each panel shows the predicted class from the random forest. The X-axis denotes the proportion of times each time series was classified to each class. The colours of boxplots correspond to class label of the best forecast model identified based on MASE and sMAPE. On each row, distribution of correctly classified class dominates, indicating a good classification of the meta-learner.}\label{fig:yearlyoob}
+\end{figure}
+
 \hypertarget{time-series-without-seasonal-component-yearly}{%
 \subsubsection{Time series without seasonal component: Yearly}\label{time-series-without-seasonal-component-yearly}}
 
