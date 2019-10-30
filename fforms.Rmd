@@ -459,8 +459,6 @@ naive & 56.55 & 14.07 &  12.30 & 26.35 & 32.55 & 71.24\\\hline
 \autoref{forecasts} shows the performance of the FFORMS approach on the M4 competition data. The point forecasts and prediction intervals are evaluated based on the test period of each series. The point forecasts are evaluated based on the MASE computed for each forecast horizon, and then by averaging the MASE errors across all series corresponding to each frequency category. Similarly, MSIS is used to evaluate the prediction intervals. The results are compared against several benchmarks and the top three places of the M4 competition. The top-ranking methods of the M4 competition are based on some kind of combination approach. The first ranking method is based on a hybrid approach that produces forecasts based on both ETS and machine learning approaches. The second and third places are based on a combination of nine and seven different forecast models. The second and third approaches are time-consuming because forecasts from all candidate models must be computed. The results of the FFORMS approach are based on individual forecasts. According to the \autoref{forecasts}, we can see the FFORMS approach achieved comparable performance in a much more cost and time-effective way. Based on the FFORMS approach, we provided an entry to the M4 competition. After submission we found a bug in our implementation of hourly data, hence only the hourly data results are different from the published results of the M4 competition. The yearly, quarterly, monthly, weekly and daily result are same as the published results. This completes the evaluation of the FFORMS framework. The main question we have now is: 'Can we trust the FFORMS framework if we do not know how it works?' In the next section we present results showing what is happening inside the FFORMS framework. 
 
 
-
-
 ## What is happening under the hood of FFORMS?
 
 ### Visualisation of meta-learner's understanding of similarity and dissimilarity between forecast models
@@ -468,14 +466,18 @@ naive & 56.55 & 14.07 &  12.30 & 26.35 & 32.55 & 71.24\\\hline
 ```{r yearlyoob, fig.height=10, fig.width=20, fig.cap="Visualisation of the vote matrix based on OOB sample for yearly random forest. Each panel shows the predicted class from the random forest. The X-axis denotes the proportion of times each time series was classified to each class. The colours of boxplots correspond to class label of the best forecast model identified based on MASE and sMAPE. On each row, distribution of correctly classified class dominates, indicating a good classification of the meta-learner.", fig.pos="h", dev='png'}
 ```
 
+```{r oobmonthly, fig.height=40, fig.width=40, dev='png',fig.pos="h", fig.cap="Visualisation of the vote matrix based on OOB sample for monthly random forest. Each panel shows the predicted class from the random forest. The X-axis denotes the proportion of times each time series was classified to each class. The colours of boxplots correspond to class label of the best forecast model identified based on MASE and sMAPE. On each row, distribution of correctly classified class dominates, indicating a good classification of the meta-learner.", dev='png'}
+```
 
-### Time series without seasonal component: Yearly
+```{r oobhourly, fig.height=10, fig.width=20, fig.cap="Visualisation of the vote matrix based on OOB sample for hourly random forest. Each panel shows the predicted class from the random forest. The X-axis denotes the proportion of times each time series was classified to each class. The colours of boxplots correspond to class label of the best forecast model identified based on MASE and sMAPE. The models rwd, tbats and nn have a high chance of being selected.", fig.pos="h", dev='png'}
+```
 
 
-### Time series with a single seasonal component: Monthly
+### Which features are the most important and where are they important?
 
-### Time series with multiple seasonal components: Hourly
 
+
+### How the most important features linked to the prediction outcome? 
 
 
 # Discussion and conclusions {#discussion}

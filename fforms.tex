@@ -747,14 +747,29 @@ naive & 56.55 & 14.07 &  12.30 & 26.35 & 32.55 & 71.24\\\hline
 \caption{Visualisation of the vote matrix based on OOB sample for yearly random forest. Each panel shows the predicted class from the random forest. The X-axis denotes the proportion of times each time series was classified to each class. The colours of boxplots correspond to class label of the best forecast model identified based on MASE and sMAPE. On each row, distribution of correctly classified class dominates, indicating a good classification of the meta-learner.}\label{fig:yearlyoob}
 \end{figure}
 
-\hypertarget{time-series-without-seasonal-component-yearly}{%
-\subsubsection{Time series without seasonal component: Yearly}\label{time-series-without-seasonal-component-yearly}}
+\begin{figure}[h]
 
-\hypertarget{time-series-with-a-single-seasonal-component-monthly}{%
-\subsubsection{Time series with a single seasonal component: Monthly}\label{time-series-with-a-single-seasonal-component-monthly}}
+{\centering \includegraphics[width=\textwidth]{figure/oobmonthly-1} 
 
-\hypertarget{time-series-with-multiple-seasonal-components-hourly}{%
-\subsubsection{Time series with multiple seasonal components: Hourly}\label{time-series-with-multiple-seasonal-components-hourly}}
+}
+
+\caption{Visualisation of the vote matrix based on OOB sample for monthly random forest. Each panel shows the predicted class from the random forest. The X-axis denotes the proportion of times each time series was classified to each class. The colours of boxplots correspond to class label of the best forecast model identified based on MASE and sMAPE. On each row, distribution of correctly classified class dominates, indicating a good classification of the meta-learner.}\label{fig:oobmonthly}
+\end{figure}
+
+\begin{figure}[h]
+
+{\centering \includegraphics[width=\textwidth]{figure/oobhourly-1} 
+
+}
+
+\caption{Visualisation of the vote matrix based on OOB sample for hourly random forest. Each panel shows the predicted class from the random forest. The X-axis denotes the proportion of times each time series was classified to each class. The colours of boxplots correspond to class label of the best forecast model identified based on MASE and sMAPE. The models rwd, tbats and nn have a high chance of being selected.}\label{fig:oobhourly}
+\end{figure}
+
+\hypertarget{which-features-are-the-most-important-and-where-are-they-important}{%
+\subsubsection{Which features are the most important and where are they important?}\label{which-features-are-the-most-important-and-where-are-they-important}}
+
+\hypertarget{how-the-most-important-features-linked-to-the-prediction-outcome}{%
+\subsubsection{How the most important features linked to the prediction outcome?}\label{how-the-most-important-features-linked-to-the-prediction-outcome}}
 
 \hypertarget{discussion}{%
 \section{Discussion and conclusions}\label{discussion}}

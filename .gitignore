@@ -6,3 +6,9 @@ figures/
 fforms_cache/
 figures/
 cache/
+data/rfu_m4yearly.rda
+data/rfu_m4quarterly.rda
+data/rfu_m4monthly.rda
+data/rfu_m4weekly.rda
+data/rfu_m4daily.rda
+data/rfu_m4hourly.rda
