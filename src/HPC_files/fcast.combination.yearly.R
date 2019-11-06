@@ -1,0 +1,14 @@
+## ---- pkg
+library(seer)
+
+## ---- data
+load("fforms/yearlym4_votes.rda")
+data(M4)
+yearly_m4 <- subset(M4, "yearly")
+
+## ---- calculations
+models.weights <- fforms_ensemble(yearlym4_votes, threshold = 0.6)
+fcast.combination.yearlym4 <- fforms_combinationforecast(models.weights, yearly_m4, "M4", 6)
+save(fcast.combination.m4yearly, file="fforms/fcast.combination.m4yearly.rda")
+
+
