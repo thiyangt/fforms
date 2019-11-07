@@ -461,12 +461,10 @@ naive & 56.55 & 14.07 &  12.30 & 26.35 & 32.55 & 71.24\\\hline
 
 ## What is happening under the hood of FFORMS?
 
-### Visualisation of meta-learner's understanding of similarity and dissimilarity between forecast models
+### Visualisation of meta-learner (FFORMS)'s understanding of similarity and dissimilarity between forecast models
 
 ```{r yearlyoob, fig.height=10, fig.width=20, fig.cap="Visualisation of the vote matrix based on OOB sample for yearly random forest. Each panel shows the predicted class from the random forest. The X-axis denotes the proportion of times each time series was classified to each class. The colours of boxplots correspond to class label of the best forecast model identified based on MASE and sMAPE. On each row, distribution of correctly classified class dominates, indicating a good classification of the meta-learner.", fig.pos="h", dev='png'}
 ```
-
-
 
 \clearpage
 
