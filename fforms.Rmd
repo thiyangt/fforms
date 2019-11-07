@@ -468,12 +468,11 @@ naive & 56.55 & 14.07 &  12.30 & 26.35 & 32.55 & 71.24\\\hline
 
 
 
-
 \clearpage
 
 ### Which features are the most important and where are they important?
 
-```{r viplot, fig.height=20, fig.width=20, fig.cap="", fig.pos="h", dev='pdf', fig.cap="Visualisation  of top five features across frequency categories and forecast models. The feature importance is evaluated based on the three measures: i) permutation-based VI, ii) PD-based VI measure, and iii) ICE-based VI measure. FThe features, strength of trend, linearity and strength of seasonality are the most important features."}
+```{r viplot, fig.height=20, fig.width=20, fig.cap="", fig.pos="h", dev='pdf', fig.cap="Visualisation  of top five features across frequency categories and classes. The X-axis denotes the features and Y-axis denotes the forecast model classes. The cell colours denote the frequency group in which the fetures ranked among top five. The feature importance is evaluated based on the three measures: i) permutation-based VI, ii) PD-based VI measure, and iii) ICE-based VI measure. Strength of trend, linearity and strength of seasonality have been selected among top five features across many classes."}
 ```
 
 

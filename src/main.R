@@ -339,12 +339,15 @@ index <- as.numeric(names(sort_rmt))
 featureOrder <- viwide$feature[index]
 vi.fforms$feature <- factor(vi.fforms$feature, levels = featureOrder)
 vi.fforms$ranks <- factor(vi.fforms$ranks, levels = c("ALL", "MH", "YH", "YM", "H", "M", "Y"))
-vi.fforms$class <- factor(vi.fforms$class, levels = c("snaive","rwd", "rw", "ETS.notrendnoseasonal", "ETS.dampedtrend",
-                                                      "ETS.trend", "ETS.dampedtrendseasonal", "ETS.trendseasonal",
-                                                      "ETS.seasonal", "SARIMA", "ARIMA", "ARMA.AR.MA",
-                                                      "stlar", "tbats", "theta", "nn", "mstlarima", "mstlets", "wn"))
+vi.fforms$class <- factor(vi.fforms$class, levels = 
+                            c("wn","rwd", "rw", "nn", "theta", "ARMA.AR.MA","ARIMA",  "ETS.notrendnoseasonal", "ETS.dampedtrend",
+                              "ETS.trend", "ETS.dampedtrendseasonal", "ETS.trendseasonal",
+                              "ETS.seasonal", "SARIMA",  
+                              "stlar", "tbats","snaive","mstlarima", "mstlets"))
 ggplot(vi.fforms, aes(y = feature, x = class, fill= ranks, label = ranks)) + 
-  geom_tile(colour="grey20") +scale_fill_discrete(na.value="white")+ 
+  geom_tile(colour="grey20") +scale_fill_discrete(na.value="white", name = "Frequency \ncombinations")+ 
   geom_text(col = "black", size=8)+
   theme(axis.text.x = element_text(angle = 90, hjust = 1), text = element_text(size=25))
+
+
 
