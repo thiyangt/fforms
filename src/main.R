@@ -99,7 +99,7 @@ votes_oobM$variable <- factor(votes_oobM$variable, levels = c(
 
 oob_boxplot_monthly <- ggplot(votes_oobM, aes(x = classlabel, y = value, fill = classlabel)) +
   geom_boxplot(outlier.size = 0.2, outlier.alpha = 0.4) +
-  ylab("log(Proportion)") +
+  ylab("Proportion") +
   xlab("") +
   theme(legend.position = "none", legend.title = element_blank(), 
         legend.text.align = 0, text = element_text(size = 30), axis.text.x = element_text(angle = 90),

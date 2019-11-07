@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.7.18)  5 NOV 2019 15:14
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.7.18)  6 NOV 2019 15:10
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2064,7 +2064,7 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 891.
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 891.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 891.
 Package rerunfilecheck Info: File `fforms.out' has not changed.
-(rerunfilecheck)             Checksum: 007DCABA3299B06610FE859DE21D26B0;10030.
+(rerunfilecheck)             Checksum: AC54FA31A3FFE0FA903C59F9A2A77788;10053.
 
 Package biblatex Warning: Please rerun LaTeX.
 (biblatex)                Page breaks have changed.
@@ -2080,8 +2080,8 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 891.
 ### bottom level 
 Here is how much of TeX's memory you used:
  43152 strings out of 494553
- 802325 string characters out of 6175442
- 1228468 words of memory out of 5000000
+ 802333 string characters out of 6175442
+ 1228472 words of memory out of 5000000
  45800 multiletter control sequences out of 15000+600000
  642445 words of font info for 343 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
@@ -2105,7 +2105,7 @@ haminitalagala/Library/TinyTeX/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb><
 ino/uplbi8a.pfb></Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/font
 s/type1/urw/palatino/uplr8a.pfb></Users/thiyangashaminitalagala/Library/TinyTeX
 /texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on fforms.pdf (28 pages, 1080301 bytes).
+Output written on fforms.pdf (28 pages, 1080331 bytes).
 PDF statistics:
  587 PDF objects out of 1000 (max. 8388607)
  509 compressed objects within 6 object streams
