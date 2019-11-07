@@ -154,4 +154,35 @@ yearly.monthly.hourly.rank <- yearly.monthly.hourly.rank %>%
                            is.na(yearly.rank) == TRUE & is.na(monthly.rank) == FALSE & is.na(hourly.rank) == FALSE ~ "MH",
                            is.na(yearly.rank) == FALSE & is.na(monthly.rank) == FALSE & is.na(hourly.rank) == FALSE ~ "ALL"))
 
+## Create a matrix to include the above information and colour it
+## compile all names into a one place
+yearly.feature.names.all <- levels(as.factor(meanrank_viy_classes$feature))
+monthly.feature.names.all <- levels(as.factor(meanrank_vim_classes$feature))
+hourly.feature.names.all <- levels(as.factor(meanrank_vih_classes$feature))
+all.features <- unique(c(yearly.feature.names.all, monthly.feature.names.all, hourly.feature.names.all))
 
+
+## compile all model names into a one place
+yearly.models <- levels(as.factor(meanrank_viy_classes$class))
+monthly.models <- levels(as.factor(meanrank_vim_classes$class))
+hourly.models <- levels(as.factor(meanrank_vih_classes$class))
+all.model.names <- unique(c(yearly.models, monthly.models, hourly.models))
+
+matrix.fforms <- matrix(NA, ncol=19, nrow = 35)
+colnames(matrix.fforms) <- c("snaive","rwd", "rw", "ETS.notrendnoseasonal", "ETS.dampedtrend",
+                             "ETS.trend", "ETS.dampedtrendseasonal", "ETS.trendseasonal",
+                             "ETS.seasonal", "SARIMA", "ARIMA", "ARMA.AR.MA",
+                             "stlar", "tbats", "theta", "nn", "mstlarima", "mstlets", "wn")
+rownames(matrix.fforms) <- all.features
+longData <- melt(matrix.fforms)
+longData <- longData %>% rename("feature" = Var1)
+longData <- longData %>% rename("class" = Var2)
+longData <- longData %>% rename("ranks" = value)
+longData$ranks <- as.character(longData$ranks)
+## Merge two data frames
+vi.fforms <- merge(yearly.monthly.hourly.rank[,c("class", "feature", "ranks")] , longData, by.y  = c("class","feature"), by.x=c("class", "feature"), all.x = TRUE, all.y = TRUE)
+vi.fforms  <- vi.fforms[, 1:3] 
+vi.fforms <- vi.fforms %>% rename("ranks" = ranks.x)
+
+ggplot(vi.fforms, aes(y = feature, x = class, fill= ranks)) + 
+  geom_raster() + theme(axis.text.x = element_text(angle = 90, hjust = 1))
