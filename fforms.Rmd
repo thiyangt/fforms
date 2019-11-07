@@ -467,18 +467,14 @@ naive & 56.55 & 14.07 &  12.30 & 26.35 & 32.55 & 71.24\\\hline
 ```
 
 
-```{r oobmonthly, fig.height=40, fig.width=40, dev='png',fig.pos="h", fig.cap="Visualisation of the vote matrix based on OOB sample for monthly random forest. Each panel shows the predicted class from the random forest. The X-axis denotes the proportion of times each time series was classified to each class. The colours of boxplots correspond to class label of the best forecast model identified based on MASE and sMAPE. On each row, distribution of correctly classified class dominates, indicating a good classification of the meta-learner.", dev='png'}
-```
-
-
-```{r oobhourly, fig.height=10, fig.width=20, fig.cap="Visualisation of the vote matrix based on OOB sample for hourly random forest. Each panel shows the predicted class from the random forest. The X-axis denotes the proportion of times each time series was classified to each class. The colours of boxplots correspond to class label of the best forecast model identified based on MASE and sMAPE. The models rwd, tbats and nn have a high chance of being selected.", fig.pos="h", dev='png'}
-```
-
 
 
 \clearpage
 
 ### Which features are the most important and where are they important?
+
+```{r viplot, fig.height=20, fig.width=20, fig.cap="", fig.pos="h", dev='pdf', fig.cap="Visualisation  of top five features across frequency categories and forecast models. The feature importance is evaluated based on the three measures: i) permutation-based VI, ii) PD-based VI measure, and iii) ICE-based VI measure. FThe features, strength of trend, linearity and strength of seasonality are the most important features."}
+```
 
 
 ### When and how are features linked to the prediction outcome?

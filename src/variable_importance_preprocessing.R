@@ -184,5 +184,24 @@ vi.fforms <- merge(yearly.monthly.hourly.rank[,c("class", "feature", "ranks")] ,
 vi.fforms  <- vi.fforms[, 1:3] 
 vi.fforms <- vi.fforms %>% rename("ranks" = ranks.x)
 
+
+
 ggplot(vi.fforms, aes(y = feature, x = class, fill= ranks, label = ranks)) + 
   geom_raster() +geom_text(col = "black", size=2)+ theme(axis.text.x = element_text(angle = 90, hjust = 1))
+
+viwide <- reshape(vi.fforms, idvar = "feature", timevar = "class", direction = "wide")
+rmt <- rowSums(!is.na(viwide))
+#sort_rmt <- sort(rmt, decreasing = TRUE)
+sort_rmt <- sort(rmt)
+index <- as.numeric(names(sort_rmt))
+featureOrder <- viwide$feature[index]
+vi.fforms$feature <- factor(vi.fforms$feature, levels = featureOrder)
+vi.fforms$ranks <- factor(vi.fforms$ranks, levels = c("ALL", "MH", "YH", "YM", "H", "M", "Y"))
+vi.fforms$class <- factor(vi.fforms$class, levels = c("snaive","rwd", "rw", "ETS.notrendnoseasonal", "ETS.dampedtrend",
+                                                      "ETS.trend", "ETS.dampedtrendseasonal", "ETS.trendseasonal",
+                                                      "ETS.seasonal", "SARIMA", "ARIMA", "ARMA.AR.MA",
+                                                      "stlar", "tbats", "theta", "nn", "mstlarima", "mstlets", "wn"))
+ggplot(vi.fforms, aes(y = feature, x = class, fill= ranks, label = ranks)) + 
+  geom_tile(colour="grey20") +scale_fill_discrete(na.value="white")+ 
+  geom_text(col = "black", size=2)+
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))

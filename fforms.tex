@@ -747,28 +747,19 @@ naive & 56.55 & 14.07 &  12.30 & 26.35 & 32.55 & 71.24\\\hline
 \caption{Visualisation of the vote matrix based on OOB sample for yearly random forest. Each panel shows the predicted class from the random forest. The X-axis denotes the proportion of times each time series was classified to each class. The colours of boxplots correspond to class label of the best forecast model identified based on MASE and sMAPE. On each row, distribution of correctly classified class dominates, indicating a good classification of the meta-learner.}\label{fig:yearlyoob}
 \end{figure}
 
-\begin{figure}[h]
-
-{\centering \includegraphics[width=\textwidth]{figure/oobmonthly-1} 
-
-}
-
-\caption{Visualisation of the vote matrix based on OOB sample for monthly random forest. Each panel shows the predicted class from the random forest. The X-axis denotes the proportion of times each time series was classified to each class. The colours of boxplots correspond to class label of the best forecast model identified based on MASE and sMAPE. On each row, distribution of correctly classified class dominates, indicating a good classification of the meta-learner.}\label{fig:oobmonthly}
-\end{figure}
-
-\begin{figure}[h]
-
-{\centering \includegraphics[width=\textwidth]{figure/oobhourly-1} 
-
-}
-
-\caption{Visualisation of the vote matrix based on OOB sample for hourly random forest. Each panel shows the predicted class from the random forest. The X-axis denotes the proportion of times each time series was classified to each class. The colours of boxplots correspond to class label of the best forecast model identified based on MASE and sMAPE. The models rwd, tbats and nn have a high chance of being selected.}\label{fig:oobhourly}
-\end{figure}
-
 \clearpage
 
 \hypertarget{which-features-are-the-most-important-and-where-are-they-important}{%
 \subsubsection{Which features are the most important and where are they important?}\label{which-features-are-the-most-important-and-where-are-they-important}}
+
+\begin{figure}[h]
+
+{\centering \includegraphics[width=\textwidth]{figure/viplot-1} 
+
+}
+
+\caption{Visualisation  of top five features across frequency categories and forecast models. The feature importance is evaluated based on the three measures: i) permutation-based VI, ii) PD-based VI measure, and iii) ICE-based VI measure. FThe features, strength of trend, linearity and strength of seasonality are the most important features.}\label{fig:viplot}
+\end{figure}
 
 \hypertarget{when-and-how-are-features-linked-to-the-prediction-outcome}{%
 \subsubsection{When and how are features linked to the prediction outcome?}\label{when-and-how-are-features-linked-to-the-prediction-outcome}}
