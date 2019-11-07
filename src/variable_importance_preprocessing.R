@@ -184,5 +184,5 @@ vi.fforms <- merge(yearly.monthly.hourly.rank[,c("class", "feature", "ranks")] ,
 vi.fforms  <- vi.fforms[, 1:3] 
 vi.fforms <- vi.fforms %>% rename("ranks" = ranks.x)
 
-ggplot(vi.fforms, aes(y = feature, x = class, fill= ranks)) + 
-  geom_raster() + theme(axis.text.x = element_text(angle = 90, hjust = 1))
+ggplot(vi.fforms, aes(y = feature, x = class, fill= ranks, label = ranks)) + 
+  geom_raster() +geom_text(col = "black", size=2)+ theme(axis.text.x = element_text(angle = 90, hjust = 1))
