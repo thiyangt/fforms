@@ -64,6 +64,8 @@ library(tsfeatures)
 library(tidyverse)
 library(ggpubr)
 library(reshape2)
+#devtools::install_github("thomasp85/patchwork")
+library(patchwork)
 ```
 
 
@@ -461,9 +463,12 @@ naive & 56.55 & 14.07 &  12.30 & 26.35 & 32.55 & 71.24\\\hline
 
 ## What is happening under the hood of FFORMS?
 
+
 ### Visualisation of meta-learner (FFORMS)'s understanding of similarity and dissimilarity between forecast models
 
-```{r yearlyoob, fig.height=10, fig.width=20, fig.cap="Visualisation of the vote matrix based on OOB sample for yearly random forest. Each panel shows the predicted class from the random forest. The X-axis denotes the proportion of times each time series was classified to each class. The colours of boxplots correspond to class label of the best forecast model identified based on MASE and sMAPE. On each row, distribution of correctly classified class dominates, indicating a good classification of the meta-learner.", fig.pos="h", dev='png'}
+The vote-matrix information for the yearly, monthly and hourly data are presented in \autoref{fig:yearlyoob}. \autoref{fig:yearlyoob} indicates three primary patterns: i) the distributions of correctly classified classes dominate, indicating a good classification of the meta-learner, and the associated outliers of the boxplots indicate some series are correctly classified with high probability; ii) irrespective of the class labels, the random walk with drift has a high chance of being selected for all series; and iii) the FFORMS framework successfully learned the similarities and dissimilarities between the classes itself.  For example, within ETS models with a trend component (ETS_T, 3rd panel), disparities between forecast models with trend components and forecast models without trend components (wn, ARMA, ETS_NTNS) are immediately visible. The results for quarterly and weekly data are very similar to the corresponding plots of monthly data and the results for daily data are very similar to the corresponding plots of hourly data. Hence, the results corresponds to quarterly, weekly and daily data are not presented in the subsequent analysis.
+
+```{r yearlyoob, fig.height=28, fig.width=20, fig.cap="Visualisation of the vote matrix for yearly, monthly and hourly series. Each panel shows the predicted class from the random forest. The X-axis denotes the proportion of times each time series was classified to each class. The colours of boxplots correspond to class label of the best forecast model identified based on MASE and sMAPE. On each row, distribution of correctly classified class dominates, indicating a good classification of the meta-learner.", fig.pos="h", dev='png'}
 ```
 
 \clearpage

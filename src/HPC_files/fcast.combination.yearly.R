@@ -5,7 +5,7 @@ library(seer)
 load("fforms/yearlym4_votes.rda")
 library(M4comp2018)
 data(M4)
-yearly_M4 <- Filter(function(l) l$period == "Yearly", M4)
+yearly_m4 <- Filter(function(l) l$period == "Yearly", M4)
 
 
 ## ---- calculations

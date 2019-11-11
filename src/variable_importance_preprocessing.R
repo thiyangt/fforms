@@ -208,6 +208,46 @@ vi.fforms <-
     class == "mstlarima"  ~ 18,
     class == "mstlets" ~ 19))
 
+# vi.fforms <- 
+#   vi.fforms %>%
+#   mutate(featurenew = case_when(
+#     feature == "diff2y_pacf5"  ~ 1,
+#     feature == "hurst"  ~ 2,
+#     feature == "hwbeta"  ~ 3,
+#     feature == "lumpiness" ~ 4,
+#     feature == "nonlinearity"  ~ 5,
+#     feature == "ur_kpss"  ~ 6,
+#     feature == "y_acf5"  ~ 7,
+#     feature == "alpha" ~ 8,
+#     feature == "diff2y_acf5"  ~ 9,
+#     feature == "e_acf1"  ~ 10,
+#     feature == "sediff_acf5"  ~ 11,
+#     feature == "diff1y_acf5" ~ 12,
+#     feature == "diff1y_pacf5"  ~ 13,
+#     feature == "diff2y_acf1"  ~ 14,
+#     feature == "hwalpha" ~ 15,
+#     feature == "seas_pacf"  ~ 16,
+#     feature == "sediff_acf1"  ~ 17,
+#     feature == "spikiness"  ~ 18,
+#     feature == "y_acf1" ~ 19,
+#     feature == "beta"  ~ 20,
+#     feature == "hwgamma"  ~ 21,
+#     feature == "lmres_acf1"  ~ 22,
+#     feature == "seasonal_strength2" ~ 23,
+#     feature == "sediff_seacf1"  ~ 24,
+#     feature == "curvature"  ~ 25,
+#     feature == "entropy"  ~ 26,
+#     feature == "diff1y_acf1" ~ 27,
+#     feature == "stability"  ~ 28,
+#     feature == "ur_pp"  ~ 29,
+#     feature == "y_pacf5"  ~ 30,
+#     feature == "N" ~ 31,
+#     feature == "seasonal_strength1"  ~ 32,
+#     feature == "linearity"  ~ 33,
+#     feature == "trend" ~ 34,
+#     feature == "seasonality"  ~ 35))
+
+
 vi.fforms <- 
   vi.fforms %>%
   mutate(featurenew = case_when(
@@ -218,34 +258,34 @@ vi.fforms <-
     feature == "nonlinearity"  ~ 5,
     feature == "ur_kpss"  ~ 6,
     feature == "y_acf5"  ~ 7,
-    feature == "alpha" ~ 8,
-    feature == "diff2y_acf5"  ~ 9,
-    feature == "e_acf1"  ~ 10,
-    feature == "sediff_acf5"  ~ 11,
-    feature == "diff1y_acf5" ~ 12,
-    feature == "diff1y_pacf5"  ~ 13,
-    feature == "diff2y_acf1"  ~ 14,
-    feature == "hwalpha" ~ 15,
+    feature == "seasonal_strength1"  ~ 8,
+    feature == "seasonal_strength2" ~ 9,  
+    feature == "seasonality"  ~ 10,
+    feature == "hwgamma"  ~ 11,
+    feature == "hwalpha" ~ 12,
+    feature == "lmres_acf1"  ~ 13,
+    feature == "ur_pp"  ~ 14,
+    feature == "sediff_acf5"  ~ 15,
     feature == "seas_pacf"  ~ 16,
     feature == "sediff_acf1"  ~ 17,
-    feature == "spikiness"  ~ 18,
-    feature == "y_acf1" ~ 19,
-    feature == "beta"  ~ 20,
-    feature == "hwgamma"  ~ 21,
-    feature == "lmres_acf1"  ~ 22,
-    feature == "seasonal_strength2" ~ 23,
-    feature == "sediff_seacf1"  ~ 24,
-    feature == "curvature"  ~ 25,
-    feature == "entropy"  ~ 26,
-    feature == "diff1y_acf1" ~ 27,
-    feature == "stability"  ~ 28,
-    feature == "ur_pp"  ~ 29,
-    feature == "y_pacf5"  ~ 30,
-    feature == "N" ~ 31,
-    feature == "seasonal_strength1"  ~ 32,
-    feature == "linearity"  ~ 33,
-    feature == "trend" ~ 34,
-    feature == "seasonality"  ~ 35))
+    feature == "sediff_seacf1"  ~ 18,
+    feature == "alpha" ~ 19,
+    feature == "diff2y_acf5"  ~ 20,
+    feature == "e_acf1"  ~ 21,
+    feature == "diff1y_acf5" ~ 22,
+    feature == "diff1y_pacf5"  ~ 23,
+    feature == "diff2y_acf1"  ~ 24,    
+    feature == "spikiness"  ~ 25,
+    feature == "y_acf1" ~ 26,
+    feature == "beta"  ~ 27,
+    feature == "curvature"  ~ 28,
+    feature == "entropy"  ~ 29,
+    feature == "diff1y_acf1" ~ 30,
+    feature == "stability"  ~ 31,
+    feature == "y_pacf5"  ~ 32,
+    feature == "N" ~ 33,
+    feature == "linearity"  ~ 34,
+    feature == "trend" ~ 35))
 ## Reserve a row for each entry
 vi.fforms <- data.table(vi.fforms)
 vi.fforms <- vi.fforms[, strsplit(as.character(ranks), "/"), by=list(classnew, featurenew)]
@@ -265,13 +305,14 @@ ggplot(vi.fforms, aes(x = classnew,y=featurenew+shift, fill=V1, height=height)) 
                             "ETS.seasonal", "SARIMA",  
                             "stlar", "tbats","snaive","mstlarima", "mstlets"))+
   scale_y_discrete(limit=c(
-    "diff2y_pacf5", "hurst", "hwbeta", "lumpiness", "nonlinearity",
-     "ur_kpss", "y_acf5", "alpha", "diff2y_acf5", "e_acf1", "sediff_acf5",
-    "diff1y_acf5", "diff1y_pacf5", "diff2y_acf1", "hwalpha", "seas_pacf",
-    "sediff_acf1", "spikiness", "y_acf1", "beta", "hwgamma", "lmres_acf1",
-    "seasonal_strength2", "sediff_seacf1", "curvature", "entropy",
-    "diff1y_acf1", "stability", "ur_pp", "y_pacf5", "N", "seasonal_strength1",
-    "linearity", "trend", "seasonality"))+
+    "diff2y_pacf5","hurst","hwbeta","lumpiness",
+    "nonlinearity" , "ur_kpss","y_acf5",
+    "seasonal_strength1","seasonal_strength2","seasonality",
+    "hwgamma", "hwalpha",
+    "lmres_acf1","ur_pp","sediff_acf5", "seas_pacf","sediff_acf1",
+    "sediff_seacf1","alpha","diff2y_acf5","e_acf1",
+    "diff1y_acf5","diff1y_pacf5","diff2y_acf1",  "spikiness",
+    "y_acf1","beta","curvature","entropy","diff1y_acf1","stability","y_pacf5","N","linearity","trend"))+
   theme(axis.text.x = element_text(angle = 90, hjust = 1), text = element_text(size=10))
 
 #https://stackoverflow.com/questions/15921799/draw-lines-around-specific-areas-in-geom-tile

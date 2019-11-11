@@ -1,5 +1,6 @@
 ## ---- packages
 library(Mcomp)
+library(tidyverse)
 
 ## ---- yearlyoob
 load("data/yearly/yearly_training.rda") # random forest training set 
@@ -44,17 +45,16 @@ votes_oob$variable <- factor(votes_oob$variable,
 
 oob_boxplot_yearly <- ggplot(votes_oob, aes(x = classlabel, y = value, fill = classlabel)) +
   geom_boxplot(outlier.size = 0.2, outlier.alpha = 0.4) +
-  ylab("Proportion") +
   xlab("") +
+  ylab("") +
   theme(legend.position = "none", legend.title = element_blank(), 
-        legend.text.align = 0, text = element_text(size = 25), axis.text.x = element_text(angle = 90),
+        legend.text.align = 0, text = element_text(size = 20), axis.text.x = element_text(angle = 90),
         strip.text = element_text(size = 20)) +
   guides(fill = guide_legend(reverse = TRUE)) +
   scale_x_discrete(limits = c("nn", "theta", "wn", "ARMA", "ARIMA", "ETS_NTNS", "ETS_DT", "ETS_T", "rwd", "rw" )) +
-  coord_flip() + facet_wrap(. ~ variable, ncol=5)
-oob_boxplot_yearly
+  coord_flip() + facet_wrap(. ~ variable, ncol=5)+ggtitle("Yearly series")
 
-## ---- oobmonthly
+
 load("data/monthly/trainM_votes.rda") #oob votes from the random forest
 load("data/monthly/trainM_predictions_oob.rda") # based on oob prediction
 load("data/monthly/monthly_training.rda") # random forest training set
@@ -97,24 +97,26 @@ votes_oobM$variable <- factor(votes_oobM$variable, levels = c(
   "ARIMA", "ARMA", "stlar", "tbats", "wn", "theta", "nn"
 ))
 
+#votes_oobM <- votes_oobM[!(votes_oobM$variable %in% c("rw", "ETS_NTNS", "ETS_DT", "ETS_T",
+#                                                      "ARIMA", "ARMA","theta")),]
+
+
 oob_boxplot_monthly <- ggplot(votes_oobM, aes(x = classlabel, y = value, fill = classlabel)) +
   geom_boxplot(outlier.size = 0.2, outlier.alpha = 0.4) +
-  ylab("Proportion") +
+  ylab("")+
   xlab("") +
   theme(legend.position = "none", legend.title = element_blank(), 
-        legend.text.align = 0, text = element_text(size = 30), axis.text.x = element_text(angle = 90),
-        strip.text = element_text(size = 40),
+        legend.text.align = 0, text = element_text(size = 20), axis.text.x = element_text(angle = 90),
+        strip.text = element_text(size = 20),
         strip.background = element_rect(size=4)) +
   guides(fill = guide_legend(reverse = TRUE)) +
   scale_x_discrete(limits = rev(c(
     "snaive", "rwd", "rw", "ETS_NTNS", "ETS_DT", "ETS_T", "ETS_DTS", "ETS_TS", "ETS_S", "SARIMA",
     "ARIMA", "ARMA", "stlar", "tbats", "wn", "theta", "nn"
   ))) +
-  coord_flip() + facet_wrap(. ~ variable, ncol=4)
-oob_boxplot_monthly
+  coord_flip() + facet_wrap(. ~ variable, ncol=5)+ggtitle("Monthly series")
 
 
-## ---- oobhourly
 load("data/hourly/trainH_votes.rda") #oob votes from the random forest
 load("data/hourly/trainH_predictions_oob.rda") # based on oob prediction
 load("data/hourly/hourly_training.rda") # random forest training set
@@ -132,22 +134,26 @@ votes_oobH$variable <- factor(votes_oobH$variable,
 )
 oob_boxplot_hourly <- ggplot(votes_oobH, aes(x = classlabel, y = value, fill = classlabel)) +
   geom_boxplot(outlier.size = 0.2, outlier.alpha = 0.4) +
-  ylab("Proportion") +
+  ylab("Random forest probability score (fraction of trees in the forest that vote for a certain class)") +
   xlab("") +
   theme(legend.position = "none", legend.title = element_blank(), 
-        legend.text.align = 0, text = element_text(size = 25), axis.text.x = element_text(angle = 90),
+        legend.text.align = 0, text = element_text(size = 20), axis.text.x = element_text(angle = 90),
         strip.text = element_text(size = 20)) +
   guides(fill = guide_legend(reverse = TRUE)) +
   scale_x_discrete(limits = rev(c("snaive", "rw", "rwd", "mstlarima", "mstlets", "tbats","stlar",
                                   "theta","nn","wn" ))) +
-  coord_flip() + facet_wrap(. ~ variable, ncol=5)
-oob_boxplot_hourly
+  coord_flip() + facet_wrap(. ~ variable, ncol=5)+ggtitle("Hourly series")
+
+
+
+oob_boxplot_yearly + oob_boxplot_monthly + oob_boxplot_hourly + plot_layout(ncol = 1, heights = c(1.2, 4,1))
 
 
 ## ---- viplot
 library(here)
 library(tidyverse)
 library(reshape2)
+library(data.table)
 
 # pre-processing variable importance plot
 # Yearly series
@@ -295,10 +301,10 @@ yearly.monthly.hourly.rank <- yearly.monthly.hourly.rank %>%
   mutate(ranks = case_when(is.na(yearly.rank) == FALSE & is.na(monthly.rank) == TRUE & is.na(hourly.rank) == TRUE ~ "Y", 
                            is.na(yearly.rank) == TRUE & is.na(monthly.rank) == FALSE & is.na(hourly.rank) == TRUE ~ "M",
                            is.na(yearly.rank) == TRUE & is.na(monthly.rank) == TRUE & is.na(hourly.rank) == FALSE ~ "H",
-                           is.na(yearly.rank) == FALSE & is.na(monthly.rank) == FALSE & is.na(hourly.rank) == TRUE ~ "YM",
-                           is.na(yearly.rank) == FALSE & is.na(monthly.rank) == TRUE & is.na(hourly.rank) == FALSE ~ "YH",
-                           is.na(yearly.rank) == TRUE & is.na(monthly.rank) == FALSE & is.na(hourly.rank) == FALSE ~ "MH",
-                           is.na(yearly.rank) == FALSE & is.na(monthly.rank) == FALSE & is.na(hourly.rank) == FALSE ~ "ALL"))
+                           is.na(yearly.rank) == FALSE & is.na(monthly.rank) == FALSE & is.na(hourly.rank) == TRUE ~ "Y/M",
+                           is.na(yearly.rank) == FALSE & is.na(monthly.rank) == TRUE & is.na(hourly.rank) == FALSE ~ "Y/H",
+                           is.na(yearly.rank) == TRUE & is.na(monthly.rank) == FALSE & is.na(hourly.rank) == FALSE ~ "M/H",
+                           is.na(yearly.rank) == FALSE & is.na(monthly.rank) == FALSE & is.na(hourly.rank) == FALSE ~ "Y/M/H"))
 
 ## Create a matrix to include the above information and colour it
 ## compile all names into a one place
@@ -329,25 +335,134 @@ longData$ranks <- as.character(longData$ranks)
 vi.fforms <- merge(yearly.monthly.hourly.rank[,c("class", "feature", "ranks")] , longData, by.y  = c("class","feature"), by.x=c("class", "feature"), all.x = TRUE, all.y = TRUE)
 vi.fforms  <- vi.fforms[, 1:3] 
 vi.fforms <- vi.fforms %>% rename("ranks" = ranks.x)
+library(dplyr)
+vi.fforms <- 
+  vi.fforms %>%
+  mutate(classnew = case_when(
+    class == "wn"  ~ 1,
+    class == "rwd"  ~ 2,
+    class == "rw"  ~ 3,
+    class == "nn" ~ 4,
+    class == "theta"  ~ 5,
+    class == "ARMA.AR.MA"  ~ 6,
+    class == "ARIMA"  ~ 7,
+    class == "ETS.notrendnoseasonal" ~ 8,
+    class == "ETS.dampedtrend"  ~ 9,
+    class == "ETS.trend"  ~ 10,
+    class == "ETS.dampedtrendseasonal"  ~ 11,
+    class == "ETS.trendseasonal" ~ 12,
+    class == "ETS.seasonal"  ~ 13,
+    class == "SARIMA"  ~ 14,
+    class == "stlar" ~ 15,
+    class == "tbats"  ~ 16,
+    class == "snaive"  ~ 17,
+    class == "mstlarima"  ~ 18,
+    class == "mstlets" ~ 19))
+
+# vi.fforms <- 
+#   vi.fforms %>%
+#   mutate(featurenew = case_when(
+#     feature == "diff2y_pacf5"  ~ 1,
+#     feature == "hurst"  ~ 2,
+#     feature == "hwbeta"  ~ 3,
+#     feature == "lumpiness" ~ 4,
+#     feature == "nonlinearity"  ~ 5,
+#     feature == "ur_kpss"  ~ 6,
+#     feature == "y_acf5"  ~ 7,
+#     feature == "alpha" ~ 8,
+#     feature == "diff2y_acf5"  ~ 9,
+#     feature == "e_acf1"  ~ 10,
+#     feature == "sediff_acf5"  ~ 11,
+#     feature == "diff1y_acf5" ~ 12,
+#     feature == "diff1y_pacf5"  ~ 13,
+#     feature == "diff2y_acf1"  ~ 14,
+#     feature == "hwalpha" ~ 15,
+#     feature == "seas_pacf"  ~ 16,
+#     feature == "sediff_acf1"  ~ 17,
+#     feature == "spikiness"  ~ 18,
+#     feature == "y_acf1" ~ 19,
+#     feature == "beta"  ~ 20,
+#     feature == "hwgamma"  ~ 21,
+#     feature == "lmres_acf1"  ~ 22,
+#     feature == "seasonal_strength2" ~ 23,
+#     feature == "sediff_seacf1"  ~ 24,
+#     feature == "curvature"  ~ 25,
+#     feature == "entropy"  ~ 26,
+#     feature == "diff1y_acf1" ~ 27,
+#     feature == "stability"  ~ 28,
+#     feature == "ur_pp"  ~ 29,
+#     feature == "y_pacf5"  ~ 30,
+#     feature == "N" ~ 31,
+#     feature == "seasonal_strength1"  ~ 32,
+#     feature == "linearity"  ~ 33,
+#     feature == "trend" ~ 34,
+#     feature == "seasonality"  ~ 35))
 
 
-viwide <- reshape(vi.fforms, idvar = "feature", timevar = "class", direction = "wide")
-rmt <- rowSums(!is.na(viwide))
-#sort_rmt <- sort(rmt, decreasing = TRUE)
-sort_rmt <- sort(rmt)
-index <- as.numeric(names(sort_rmt))
-featureOrder <- viwide$feature[index]
-vi.fforms$feature <- factor(vi.fforms$feature, levels = featureOrder)
-vi.fforms$ranks <- factor(vi.fforms$ranks, levels = c("ALL", "MH", "YH", "YM", "H", "M", "Y"))
-vi.fforms$class <- factor(vi.fforms$class, levels = 
-                            c("wn","rwd", "rw", "nn", "theta", "ARMA.AR.MA","ARIMA",  "ETS.notrendnoseasonal", "ETS.dampedtrend",
-                              "ETS.trend", "ETS.dampedtrendseasonal", "ETS.trendseasonal",
-                              "ETS.seasonal", "SARIMA",  
-                              "stlar", "tbats","snaive","mstlarima", "mstlets"))
-ggplot(vi.fforms, aes(y = feature, x = class, fill= ranks, label = ranks)) + 
-  geom_tile(colour="grey20") +scale_fill_discrete(na.value="white", name = "Frequency \ncombinations")+ 
-  geom_text(col = "black", size=8)+
-  theme(axis.text.x = element_text(angle = 90, hjust = 1), text = element_text(size=25))
+vi.fforms <- 
+  vi.fforms %>%
+  mutate(featurenew = case_when(
+    feature == "diff2y_pacf5"  ~ 1,
+    feature == "hurst"  ~ 2,
+    feature == "hwbeta"  ~ 3,
+    feature == "lumpiness" ~ 4,
+    feature == "nonlinearity"  ~ 5,
+    feature == "ur_kpss"  ~ 6,
+    feature == "y_acf5"  ~ 7,
+    feature == "seasonal_strength1"  ~ 8,
+    feature == "seasonal_strength2" ~ 9,  
+    feature == "seasonality"  ~ 10,
+    feature == "hwgamma"  ~ 11,
+    feature == "hwalpha" ~ 12,
+    feature == "lmres_acf1"  ~ 13,
+    feature == "ur_pp"  ~ 14,
+    feature == "sediff_acf5"  ~ 15,
+    feature == "seas_pacf"  ~ 16,
+    feature == "sediff_acf1"  ~ 17,
+    feature == "sediff_seacf1"  ~ 18,
+    feature == "alpha" ~ 19,
+    feature == "diff2y_acf5"  ~ 20,
+    feature == "e_acf1"  ~ 21,
+    feature == "diff1y_acf5" ~ 22,
+    feature == "diff1y_pacf5"  ~ 23,
+    feature == "diff2y_acf1"  ~ 24,    
+    feature == "spikiness"  ~ 25,
+    feature == "y_acf1" ~ 26,
+    feature == "beta"  ~ 27,
+    feature == "curvature"  ~ 28,
+    feature == "entropy"  ~ 29,
+    feature == "diff1y_acf1" ~ 30,
+    feature == "stability"  ~ 31,
+    feature == "y_pacf5"  ~ 32,
+    feature == "N" ~ 33,
+    feature == "linearity"  ~ 34,
+    feature == "trend" ~ 35))
+## Reserve a row for each entry
+vi.fforms <- data.table(vi.fforms)
+vi.fforms <- vi.fforms[, strsplit(as.character(ranks), "/"), by=list(classnew, featurenew)]
+vi.fforms[, shift:=(1:(.N))/.N - 1/(2 * .N) - 1/2, by=list(classnew, featurenew)]
+vi.fforms[, height:=1/.N, by=list(classnew, featurenew)]
+
+#ggplot(vi.fforms, aes(y = feature, x = class, fill= ranks, label = ranks)) + 
+#  geom_raster() +geom_text(col = "black", size=2)+ theme(axis.text.x = element_text(angle = 90, hjust = 1))
 
 
+
+
+ggplot(vi.fforms, aes(x = classnew,y=featurenew+shift, fill=V1, height=height)) + 
+  geom_tile(color="black") + scale_fill_manual(na.value="white", values=c("#1b9e77", "#d95f02", "#7570b3"),  name = "Frequency \ncategory")+
+  scale_x_discrete(limit=c("wn","rwd", "rw", "nn", "theta", "ARMA.AR.MA","ARIMA",  "ETS.notrendnoseasonal", "ETS.dampedtrend",
+                           "ETS.trend", "ETS.dampedtrendseasonal", "ETS.trendseasonal",
+                           "ETS.seasonal", "SARIMA",  
+                           "stlar", "tbats","snaive","mstlarima", "mstlets"))+
+  scale_y_discrete(limit=c(
+    "diff2y_pacf5","hurst","hwbeta","lumpiness",
+    "nonlinearity" , "ur_kpss","y_acf5",
+    "seasonal_strength1","seasonal_strength2","seasonality",
+    "hwgamma", "hwalpha",
+    "lmres_acf1","ur_pp","sediff_acf5", "seas_pacf","sediff_acf1",
+    "sediff_seacf1","alpha","diff2y_acf5","e_acf1",
+    "diff1y_acf5","diff1y_pacf5","diff2y_acf1",  "spikiness",
+    "y_acf1","beta","curvature","entropy","diff1y_acf1","stability","y_pacf5","N","linearity","trend"))+
+  theme(axis.text.x = element_text(angle = 90, hjust = 1), text = element_text(size=30))+xlab("")+ylab("")
 
