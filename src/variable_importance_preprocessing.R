@@ -259,13 +259,35 @@ vi.fforms[, height:=1/.N, by=list(classnew, featurenew)]
 
 
 ggplot(vi.fforms, aes(x = classnew,y=featurenew+shift, fill=V1, height=height)) + 
-  geom_tile(color="grey20") + scale_fill_manual(na.value="white", values=c("#1b9e77", "#d95f02", "#7570b3"),  name = "Frequency \ncombinations")+
+  geom_tile(color="black") + scale_fill_manual(na.value="white", values=c("#1b9e77", "#d95f02", "#7570b3"),  name = "Frequency \ncombinations")+
   scale_x_discrete(limit=c("wn","rwd", "rw", "nn", "theta", "ARMA.AR.MA","ARIMA",  "ETS.notrendnoseasonal", "ETS.dampedtrend",
                             "ETS.trend", "ETS.dampedtrendseasonal", "ETS.trendseasonal",
                             "ETS.seasonal", "SARIMA",  
                             "stlar", "tbats","snaive","mstlarima", "mstlets"))+
+  scale_y_discrete(limit=c(
+    "diff2y_pacf5", "hurst", "hwbeta", "lumpiness", "nonlinearity",
+     "ur_kpss", "y_acf5", "alpha", "diff2y_acf5", "e_acf1", "sediff_acf5",
+    "diff1y_acf5", "diff1y_pacf5", "diff2y_acf1", "hwalpha", "seas_pacf",
+    "sediff_acf1", "spikiness", "y_acf1", "beta", "hwgamma", "lmres_acf1",
+    "seasonal_strength2", "sediff_seacf1", "curvature", "entropy",
+    "diff1y_acf1", "stability", "ur_pp", "y_pacf5", "N", "seasonal_strength1",
+    "linearity", "trend", "seasonality"))+
   theme(axis.text.x = element_text(angle = 90, hjust = 1), text = element_text(size=10))
 
 #https://stackoverflow.com/questions/15921799/draw-lines-around-specific-areas-in-geom-tile
+
+library(tidyverse)
+
+df1 = data.frame(x = c(1,2,1,2), y = c(1,1,2,2), COL = c(0, 2, 4, 5))
+df2 = data.frame(x = c(1,2,1,2), y = c(1,1,2,2), COL = c(6, 5, 8, 12))
+df3 = data.frame(x = c(1,2,1,2), y = c(1,1,2,2), COL = c(2, 2, 4, 5))
+
+bind_rows(df1, df2, df3, .id = "Month") %>% 
+  ggplot(aes(x, y, fill = COL)) + 
+  geom_tile(color="black") +
+  theme_classic() +
+  scale_fill_distiller('pr',palette='Spectral') +
+  facet_wrap(vars(Month), ncol = 4, nrow = 3) +
+  theme(legend.position = "bottom")
 
 

@@ -1,39 +1,48 @@
 ## Packages
-library(seer)
+##install.packages("https://github.com/carlanetto/M4comp2018/releases/download/0.2.0/M4comp2018_0.2.0.tar.gz",
+##                 repos=NULL)
+library(M4comp2018)
 
 ## Data
 data(M4)
 
 ## Yearly
-yearly_m4 <- subset(M4, "yearly")
+yearly_m4 <- Filter(function(l) l$period == "YEARLY", M4)
 length(yearly_m4) # 23000
-features_M4Y<- cal_features(yearly_m4, database="M4", highfreq = FALSE, seasonal = FALSE, m = 1, lagmax = 2L)
+features_M4Y<- seer::cal_features(yearly_m4, database="M4", highfreq = FALSE, seasonal = FALSE, m = 1, lagmax = 2L)
 dim(features_M4Y) # 23000 25
 summary(features_M4Y)
 saveRDS(features_M4Y, file="data/HPCfiles/features_M4Y.rds")
 
 
 ## Quarterly
-quarterly_m4 <- subset(M4, "quarterly")
+quarterly_m4 <- Filter(function(l) l$period == "Quarterly", M4)
+#quarterly_m4 <- subset(M4, "quarterly")
 length(quarterly_m4) # 24000
-features_M4Q<- cal_features(quarterly_m4, seasonal=TRUE, m=4,lagmax=5L, 
+features_M4Q<- seer::cal_features(quarterly_m4, seasonal=TRUE, m=4,lagmax=5L, 
                             database="M4", highfreq = FALSE)
 dim(features_M4Q) # 24000 30
 summary(features_M4Q)
-save(features_M4Q, file="data/HPCfiles/features_M4Q.rda")
+saveRDS(features_M4Q, file="data/HPCfiles/features_M4Q.rds")
 
 
 ## Monthly
-monthly_m4 <- subset(M4, "monthly")
+monthly_m4 <- Filter(function(l) l$period == "Monthly", M4)
+#monthly_m4 <- subset(M4, "monthly")
 length(monthly_m4) # 48000
-features_M4M<- cal_features(monthly_m4, seasonal=TRUE, m=12,lagmax=13L, 
+features_M4M<- seer::cal_features(monthly_m4, seasonal=TRUE, m=12,lagmax=13L, 
                             database="M4", highfreq = FALSE)
 dim(features_M4M) # 48000 30
 summary(features_M4M)
-saveRDS(features_M4M, file="data/HPCfiles/features_M4M.rda")
+saveRDS(features_M4M, file="data/HPCfiles/features_M4M.rds")
 
 ## Weekly
-weekly_m4 <- subset(M4, "weekly")
+weekly_m4 <- Filter(function(l) l$period == "Weekly", M4)
+weekly_m4_freq52 <- lapply(weekly_m4, function(temp){
+  temp$x <- frequency(temp$x, "daily")
+  return(temp)
+})
+#weekly_m4 <- subset(M4, "weekly")
 length(weekly_m4) # 359
 features_M4W <- cal_features(weekly_m4, seasonal=TRUE, m=52, lagmax=53L, database="M4", highfreq = FALSE)
 dim(features_M4W) # 359 30
