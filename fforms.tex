@@ -736,7 +736,7 @@ naive & 56.55 & 14.07 &  12.30 & 26.35 & 32.55 & 71.24\\\hline
 \subsection{What is happening under the hood of FFORMS?}\label{what-is-happening-under-the-hood-of-fforms}}
 
 \hypertarget{visualisation-of-meta-learner-fformss-understanding-of-similarity-and-dissimilarity-between-forecast-models}{%
-\subsubsection{Visualisation of meta-learner (FFORMS)'s understanding of similarity and dissimilarity between forecast models}\label{visualisation-of-meta-learner-fformss-understanding-of-similarity-and-dissimilarity-between-forecast-models}}
+\subsection{Visualisation of meta-learner (FFORMS)'s understanding of similarity and dissimilarity between forecast models}\label{visualisation-of-meta-learner-fformss-understanding-of-similarity-and-dissimilarity-between-forecast-models}}
 
 The vote-matrix information for the yearly, monthly and hourly data are presented in \autoref{fig:yearlyoob}. \autoref{fig:yearlyoob} indicates three primary patterns: i) the distributions of correctly classified classes dominate, indicating a good classification of the meta-learner, and the associated outliers of the boxplots indicate some series are correctly classified with high probability; ii) irrespective of the class labels, the random walk with drift has a high chance of being selected for all series; and iii) the FFORMS framework successfully learned the similarities and dissimilarities between the classes itself. For example, within ETS models with a trend component (ETS\_T, 3rd panel), disparities between forecast models with trend components and forecast models without trend components (wn, ARMA, ETS\_NTNS) are immediately visible. The results for quarterly and weekly data are very similar to the corresponding plots of monthly data and the results for daily data are very similar to the corresponding plots of hourly data. Hence, the results corresponds to quarterly, weekly and daily data are not presented in the subsequent analysis.
 
@@ -746,13 +746,13 @@ The vote-matrix information for the yearly, monthly and hourly data are presente
 
 }
 
-\caption{Visualisation of the vote matrix for yearly, monthly and hourly series. Each panel shows the predicted class from the random forest. The X-axis denotes the proportion of times each time series was classified to each class. The colours of boxplots correspond to class label of the best forecast model identified based on MASE and sMAPE. On each row, distribution of correctly classified class dominates, indicating a good classification of the meta-learner.}\label{fig:yearlyoob}
+\caption{Visualisation of the vote matrix for yearly, monthly and hourly series. Each panel shows the predicted class from the random forest. The X-axis denotes the fraction of trees in the forest that vote for the classlabel in the panel. The colours of boxplots correspond to class label of the best forecast model identified based on MASE and sMAPE. On each row, distribution of correctly classified class dominates, indicating a good classification of the meta-learner.}\label{fig:yearlyoob}
 \end{figure}
 
 \clearpage
 
 \hypertarget{which-features-are-the-most-important-and-where-are-they-important}{%
-\subsubsection{Which features are the most important and where are they important?}\label{which-features-are-the-most-important-and-where-are-they-important}}
+\subsection{Which features are the most important and where are they important?}\label{which-features-are-the-most-important-and-where-are-they-important}}
 
 \begin{figure}[h]
 
@@ -763,8 +763,66 @@ The vote-matrix information for the yearly, monthly and hourly data are presente
 \caption{Visualisation  of top five features across frequency categories and classes. The X-axis denotes the features and Y-axis denotes the forecast model classes. The cell colours denote the frequency group in which the fetures ranked among top five. The feature importance is evaluated based on the three measures: i) permutation-based VI, ii) PD-based VI measure, and iii) ICE-based VI measure. Strength of trend, linearity and strength of seasonality have been selected among top five features across many classes.}\label{fig:viplot}
 \end{figure}
 
+\clearpage
+
 \hypertarget{when-and-how-are-features-linked-to-the-prediction-outcome}{%
-\subsubsection{When and how are features linked to the prediction outcome?}\label{when-and-how-are-features-linked-to-the-prediction-outcome}}
+\subsection{When and how are features linked to the prediction outcome?}\label{when-and-how-are-features-linked-to-the-prediction-outcome}}
+
+\begin{figure}[h]
+
+{\centering \includegraphics[width=\textwidth]{figure/pdpyearlytrend-1} 
+
+}
+
+\caption{Partial dependence plots for trend for yearly and monthly series. The shading shows the 95\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class. Probability of selecting ETS models without a trend component and stationary models (WN and ARMA) decreases for an extremely high value of trend.}\label{fig:pdpyearlytrend}
+\end{figure}
+
+\begin{figure}[h]
+
+{\centering \includegraphics[width=\textwidth]{figure/linearity-1} 
+
+}
+
+\caption{Partial dependence plots for linearity for yearly monthly and hourly series. The shading shows the 95\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class. }\label{fig:linearity}
+\end{figure}
+
+\begin{figure}[h]
+
+{\centering \includegraphics[width=\textwidth]{figure/pdpmonthlyN-1} 
+
+}
+
+\caption{Partial dependence plots for length of time series (T). The shading shows the 95\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class. Probability of selecting rw and rwd decreases as the length > 500.}\label{fig:pdpmonthlyN}
+\end{figure}
+
+\begin{figure}[h]
+
+{\centering \includegraphics[width=\textwidth]{figure/pdpyearlyurpp-1} 
+
+}
+
+\caption{Partial dependence plots for Phillips-Perrorn unit root test statistic. The shading shows the 95\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class. All classes show a turning point in the relationship around zero.}\label{fig:pdpyearlyurpp}
+\end{figure}
+
+\begin{figure}[h]
+
+{\centering \includegraphics[width=\textwidth]{figure/seasonalityhourly-1} 
+
+}
+
+\caption{Partial dependence plots for strength of seasonality for hourly series. The shading shows the 95\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class.}\label{fig:seasonalityhourly}
+\end{figure}
+
+\begin{figure}[h]
+
+{\centering \includegraphics[width=\textwidth]{figure/entropyhourly-1} 
+
+}
+
+\caption{Partial dependence plots for entropy for hourly series. The shading shows the 95\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class.}\label{fig:entropyhourly}
+\end{figure}
+
+\clearpage
 
 \hypertarget{discussion}{%
 \section{Discussion and conclusions}\label{discussion}}

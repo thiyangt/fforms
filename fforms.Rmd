@@ -66,6 +66,7 @@ library(ggpubr)
 library(reshape2)
 #devtools::install_github("thomasp85/patchwork")
 library(patchwork)
+library(Hmisc)
 ```
 
 
@@ -464,26 +465,50 @@ naive & 56.55 & 14.07 &  12.30 & 26.35 & 32.55 & 71.24\\\hline
 ## What is happening under the hood of FFORMS?
 
 
-### Visualisation of meta-learner (FFORMS)'s understanding of similarity and dissimilarity between forecast models
+## Visualisation of meta-learner (FFORMS)'s understanding of similarity and dissimilarity between forecast models
 
 The vote-matrix information for the yearly, monthly and hourly data are presented in \autoref{fig:yearlyoob}. \autoref{fig:yearlyoob} indicates three primary patterns: i) the distributions of correctly classified classes dominate, indicating a good classification of the meta-learner, and the associated outliers of the boxplots indicate some series are correctly classified with high probability; ii) irrespective of the class labels, the random walk with drift has a high chance of being selected for all series; and iii) the FFORMS framework successfully learned the similarities and dissimilarities between the classes itself.  For example, within ETS models with a trend component (ETS_T, 3rd panel), disparities between forecast models with trend components and forecast models without trend components (wn, ARMA, ETS_NTNS) are immediately visible. The results for quarterly and weekly data are very similar to the corresponding plots of monthly data and the results for daily data are very similar to the corresponding plots of hourly data. Hence, the results corresponds to quarterly, weekly and daily data are not presented in the subsequent analysis.
 
-```{r yearlyoob, fig.height=28, fig.width=20, fig.cap="Visualisation of the vote matrix for yearly, monthly and hourly series. Each panel shows the predicted class from the random forest. The X-axis denotes the proportion of times each time series was classified to each class. The colours of boxplots correspond to class label of the best forecast model identified based on MASE and sMAPE. On each row, distribution of correctly classified class dominates, indicating a good classification of the meta-learner.", fig.pos="h", dev='png'}
+```{r yearlyoob, fig.height=28, fig.width=20, fig.cap="Visualisation of the vote matrix for yearly, monthly and hourly series. Each panel shows the predicted class from the random forest. The X-axis denotes the fraction of trees in the forest that vote for the classlabel in the panel. The colours of boxplots correspond to class label of the best forecast model identified based on MASE and sMAPE. On each row, distribution of correctly classified class dominates, indicating a good classification of the meta-learner.", fig.pos="h", dev='png'}
 ```
 
 \clearpage
 
-### Which features are the most important and where are they important?
+## Which features are the most important and where are they important?
 
-```{r viplot, fig.height=20, fig.width=20, fig.cap="", fig.pos="h", dev='pdf', fig.cap="Visualisation  of top five features across frequency categories and classes. The X-axis denotes the features and Y-axis denotes the forecast model classes. The cell colours denote the frequency group in which the fetures ranked among top five. The feature importance is evaluated based on the three measures: i) permutation-based VI, ii) PD-based VI measure, and iii) ICE-based VI measure. Strength of trend, linearity and strength of seasonality have been selected among top five features across many classes."}
+```{r viplot, fig.height=20, fig.width=20, fig.pos="h", dev='pdf', fig.cap="Visualisation  of top five features across frequency categories and classes. The X-axis denotes the features and Y-axis denotes the forecast model classes. The cell colours denote the frequency group in which the fetures ranked among top five. The feature importance is evaluated based on the three measures: i) permutation-based VI, ii) PD-based VI measure, and iii) ICE-based VI measure. Strength of trend, linearity and strength of seasonality have been selected among top five features across many classes."}
+```
+
+\clearpage
+
+## When and how are features linked to the prediction outcome?
+
+
+```{r pdpyearlytrend, fig.height=6, fig.width=15, fig.cap="Partial dependence plots for trend for yearly and monthly series. The shading shows the 95\\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class. Probability of selecting ETS models without a trend component and stationary models (WN and ARMA) decreases for an extremely high value of trend.", fig.pos="h"}
 ```
 
 
-### When and how are features linked to the prediction outcome?
+```{r linearity, fig.height=8, fig.width=15, fig.cap="Partial dependence plots for linearity for yearly monthly and hourly series. The shading shows the 95\\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class. ", fig.pos="h"}
+```
+
+```{r pdpmonthlyN, fig.height=6, fig.width=15, fig.cap="Partial dependence plots for length of time series (T). The shading shows the 95\\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class. Probability of selecting rw and rwd decreases as the length > 500.", fig.pos="h"}
+
+```
+
+```{r pdpyearlyurpp, fig.height=4, fig.width=15, fig.pos="h", dev='pdf', fig.cap="Partial dependence plots for Phillips-Perrorn unit root test statistic. The shading shows the 95\\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class. All classes show a turning point in the relationship around zero."}
+```
 
 
 
+```{r seasonalityhourly, fig.height=5, fig.width=20, fig.cap="Partial dependence plots for strength of seasonality for hourly series. The shading shows the 95\\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class.", fig.pos="h"}
+```
 
+```{r entropyhourly, fig.height=5, fig.width=20, fig.cap="Partial dependence plots for entropy for hourly series. The shading shows the 95\\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class.", fig.pos="h"}
+```
+
+
+
+\clearpage
 
 # Discussion and conclusions {#discussion}
 
