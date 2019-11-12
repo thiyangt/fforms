@@ -483,6 +483,10 @@ The vote-matrix information for the yearly, monthly and hourly data are presente
 
 ## When and how are features linked to the prediction outcome?
 
+```{r pdpyearlyurpp, fig.height=4, fig.width=15, fig.pos="h", dev='pdf', fig.cap="Partial dependence plots for Phillips-Perrorn unit root test statistic. The shading shows the 95\\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class. All classes show a turning point in the relationship around zero."}
+```
+
+
 
 ```{r pdpyearlytrend, fig.height=6, fig.width=15, fig.cap="Partial dependence plots for trend for yearly and monthly series. The shading shows the 95\\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class. Probability of selecting ETS models without a trend component and stationary models (WN and ARMA) decreases for an extremely high value of trend.", fig.pos="h"}
 ```
@@ -499,8 +503,6 @@ The vote-matrix information for the yearly, monthly and hourly data are presente
 
 ```
 
-```{r pdpyearlyurpp, fig.height=4, fig.width=15, fig.pos="h", dev='pdf', fig.cap="Partial dependence plots for Phillips-Perrorn unit root test statistic. The shading shows the 95\\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class. All classes show a turning point in the relationship around zero."}
-```
 
 
 

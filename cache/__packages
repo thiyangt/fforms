@@ -19,3 +19,9 @@ magrittr
 ggpubr
 reshape2
 here
+patchwork
+data.table
+lattice
+survival
+Formula
+Hmisc
