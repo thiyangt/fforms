@@ -671,19 +671,6 @@ To identify important class-specific features we rank features in three differen
 
 The partial-dependence curves, along with their confidence intervals, are used to visualise the relationship between top features and the choice of forecast model selection.
 
-\hypertarget{assessment-of-interaction-effect}{%
-\subsection{Assessment of interaction effect}\label{assessment-of-interaction-effect}}
-
-Friedman's H-statistic \autocite{friedman2008predictive} is used to test the presence of interaction between all possible pairs of features. This statistic is computed based on the partial dependence functions. For two-way interaction between two specific variables \(Y_j\) and \(Y_k\), Friedman's H-statistic is defined as follows:
-
-\[H_{jk}^2=\sum_{i=1}^{n}[\bar{g}_{s}(f_{ij}, f_{jk})-\bar{g}_{s}(f_{ij})-\bar{g}_{s}(f_{ik})]^2/\sum_{i=1}^{n}\bar{g}^2_{s}(f_{ij}, f_{jk}).\]
-
-Friedman's H-statistic measures the fraction of variance of two-variable partial dependency, \(\bar{g}_{s}(f_{ij}, f_{jk})\) not captured by the sum of the respective individual partial dependencies, \(\bar{g}_{s}(f_{ij})+\bar{g}_{s}(f_{ik})\). In addition to Friedman's H-statistic, we use the PDP of two variables to visualise the interaction effects. Similarly, Friedman's H-statistic for testing whether a specific feature interacts with any other feature can be estimated by
-
-\[H_{j}^2=\sum_{i=1}^{n}[{g}(\bm{f_{i}})-\bar{g}_{s}(f_{ij})-\bar{g}_{s}(f_{i/j})]^2/\sum_{i=1}^{n}g^2(\bm{f_{i}}).\]
-
-Note that the, PD plots, ICE curves and PD- and ICE-associated measures and Friedman's H-statistic are computationally intensive to compute, especially when there are a large number of observations in the training set. Hence, in our experiments ICE- and PDP-based variable importance measures are computed based on the subset of randomly selected training examples.
-
 \hypertarget{results}{%
 \section{Results}\label{results}}
 
@@ -770,6 +757,15 @@ The vote-matrix information for the yearly, monthly and hourly data are presente
 
 \begin{figure}[h]
 
+{\centering \includegraphics[width=\textwidth]{figure/pdpyearlyurpp-1} 
+
+}
+
+\caption{Partial dependence plots for Phillips-Perrorn unit root test statistic. The shading shows the 95\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class. All classes show a turning point in the relationship around zero.}\label{fig:pdpyearlyurpp}
+\end{figure}
+
+\begin{figure}[h]
+
 {\centering \includegraphics[width=\textwidth]{figure/pdpyearlytrend-1} 
 
 }
@@ -802,15 +798,6 @@ The vote-matrix information for the yearly, monthly and hourly data are presente
 }
 
 \caption{Partial dependence plots for length of time series (T). The shading shows the 95\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class. Probability of selecting rw and rwd decreases as the length > 500.}\label{fig:pdpmonthlyN}
-\end{figure}
-
-\begin{figure}[h]
-
-{\centering \includegraphics[width=\textwidth]{figure/pdpyearlyurpp-1} 
-
-}
-
-\caption{Partial dependence plots for Phillips-Perrorn unit root test statistic. The shading shows the 95\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class. All classes show a turning point in the relationship around zero.}\label{fig:pdpyearlyurpp}
 \end{figure}
 
 \begin{figure}[h]
