@@ -472,8 +472,26 @@ The vote-matrix information for the yearly, monthly and hourly data are presente
 
 ## When and how are features linked to the prediction outcome?
 
-```{r pdpyearlyurpp, fig.height=4, fig.width=15, fig.pos="h", dev='pdf', fig.cap="Partial dependence plots for Phillips-Perrorn unit root test statistic. The shading shows the 95\\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class. All classes show a turning point in the relationship around zero."}
+```{r pdpyearlyurpp, fig.height=4.5, fig.width=15, fig.pos="h", dev='pdf', fig.cap="Partial dependence plots for Phillips-Perrorn unit root test statistic. The shading shows the 95\\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class. All classes show a turning point in the relationship around zero."}
 ```
+
+```{r pdpmonthlyseasonality, fig.height=6, fig.width=15, fig.cap="Partial dependence plots for strength of seasonality for monthly series. The shading shows the 95\\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class. Probability of selecting forecast models with seasonal components increases as seasonality increases.", fig.pos="h"}
+
+```
+
+```{r pdpmonthlyT, fig.height=4.5, fig.width=15, fig.pos="h", dev='pdf', fig.cap="Partial dependence plots for length of time series (T). The shading shows the 95\\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class. Probability of selecting rw and rwd decreases as the length > 500.", fig.pos="h", cache=FALSE}
+
+```
+
+
+```{r seasonalityhourly, fig.height=5, fig.width=20, fig.cap="Partial dependence plots for strength of seasonality for hourly series. The shading shows the 95\\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class.", fig.pos="h"}
+```
+
+
+```{r entropyhourly, fig.height=5, fig.width=20, fig.cap="Partial dependence plots for entropy for hourly series. The shading shows the 95\\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class.", fig.pos="h"}
+```
+
+
 
 
 
@@ -488,18 +506,8 @@ The vote-matrix information for the yearly, monthly and hourly data are presente
 ```
 
 
-```{r pdpmonthlyN, fig.height=6, fig.width=15, fig.cap="Partial dependence plots for length of time series (T). The shading shows the 95\\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class. Probability of selecting rw and rwd decreases as the length > 500.", fig.pos="h"}
-
-```
 
 
-
-
-```{r seasonalityhourly, fig.height=5, fig.width=20, fig.cap="Partial dependence plots for strength of seasonality for hourly series. The shading shows the 95\\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class.", fig.pos="h"}
-```
-
-```{r entropyhourly, fig.height=5, fig.width=20, fig.cap="Partial dependence plots for entropy for hourly series. The shading shows the 95\\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class.", fig.pos="h"}
-```
 
 
 
