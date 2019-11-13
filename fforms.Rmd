@@ -491,6 +491,8 @@ The vote-matrix information for the yearly, monthly and hourly data are presente
 ```{r entropyhourly, fig.height=5, fig.width=20, fig.cap="Partial dependence plots for entropy for hourly series. The shading shows the 95\\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class.", fig.pos="h"}
 ```
 
+```{r ypacf5, fig.height=4.5, fig.width=15, fig.cap="Partial dependence plots for y\\_pacf5 for yearly monthly and hourly series. The shading shows the 95\\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class. ", fig.pos="h"}
+```
 
 
 
@@ -502,8 +504,6 @@ The vote-matrix information for the yearly, monthly and hourly data are presente
 ```{r linearity, fig.height=8, fig.width=15, fig.cap="Partial dependence plots for linearity for yearly monthly and hourly series. The shading shows the 95\\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class. ", fig.pos="h"}
 ```
 
-```{r ypacf5, fig.height=8, fig.width=15, fig.cap="Partial dependence plots for y\\_pacf5 for yearly monthly and hourly series. The shading shows the 95\\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class. ", fig.pos="h"}
-```
 
 
 

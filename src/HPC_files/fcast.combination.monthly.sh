@@ -1,10 +1,10 @@
 #!/bin/env bash
 #SBATCH --job-name=M4M
-#SBATCH --time=100:00:00
+#SBATCH --time=90:00:00
 #SBATCH --mem=60G
 #SBATCH --ntasks=1
 #SBATCH --array=0-19
-#SBATCH --partition=short,gpu
+#SBATCH --partition=short,gpu,comp
 #SBATCH --mail-type=BEGIN,END,FAIL
 #SBATCH --mail-user=thiyanga.talagala@monash.edu
 #SBATCH --output=m4mcombination-%a.txt

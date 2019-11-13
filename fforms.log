@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.7.18)  13 NOV 2019 12:18
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.7.18)  13 NOV 2019 16:08
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2080,26 +2080,26 @@ Package pdftex.def Info: figure/entropyhourly-1.pdf  used on input line 796.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<figure/pdpyearlytrend-1.pdf, id=411, 1084.05pt x 433.62pt>
+<figure/ypacf5-1.pdf, id=411, 1084.05pt x 325.215pt>
+File: figure/ypacf5-1.pdf Graphic file (type pdf)
+<use figure/ypacf5-1.pdf>
+Package pdftex.def Info: figure/ypacf5-1.pdf  used on input line 805.
+(pdftex.def)             Requested size: 455.24411pt x 136.57448pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<figure/pdpyearlytrend-1.pdf, id=412, 1084.05pt x 433.62pt>
 File: figure/pdpyearlytrend-1.pdf Graphic file (type pdf)
 <use figure/pdpyearlytrend-1.pdf>
-Package pdftex.def Info: figure/pdpyearlytrend-1.pdf  used on input line 805.
+Package pdftex.def Info: figure/pdpyearlytrend-1.pdf  used on input line 814.
 (pdftex.def)             Requested size: 455.24411pt x 182.0993pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<figure/linearity-1.pdf, id=412, 1084.05pt x 578.16pt>
+<figure/linearity-1.pdf, id=413, 1084.05pt x 578.16pt>
 File: figure/linearity-1.pdf Graphic file (type pdf)
 <use figure/linearity-1.pdf>
-Package pdftex.def Info: figure/linearity-1.pdf  used on input line 814.
-(pdftex.def)             Requested size: 455.24411pt x 242.79907pt.
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<figure/ypacf5-1.pdf, id=413, 1084.05pt x 578.16pt>
-File: figure/ypacf5-1.pdf Graphic file (type pdf)
-<use figure/ypacf5-1.pdf>
-Package pdftex.def Info: figure/ypacf5-1.pdf  used on input line 823.
+Package pdftex.def Info: figure/linearity-1.pdf  used on input line 823.
 (pdftex.def)             Requested size: 455.24411pt x 242.79907pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
@@ -2108,8 +2108,8 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 
  <./figure/pdpyearlyurpp-1.pdf> <./figure/pdpmonthlyseasonality-1.pdf>] [22 <./
 figure/pdpmonthlyT-1.pdf> <./figure/seasonalityhourly-1.pdf> <./figure/entropyh
-ourly-1.pdf>] [23 <./figure/pdpyearlytrend-1.pdf> <./figure/linearity-1.pdf>] [
-24 <./figure/ypacf5-1.pdf>]
+ourly-1.pdf> <./figure/ypacf5-1.pdf>] [23 <./figure/pdpyearlytrend-1.pdf> <./fi
+gure/linearity-1.pdf>]
 
 Package hyperref Warning: Difference (2) between bookmark levels is greater 
 (hyperref)                than one, level fixed on input line 849.
@@ -2118,9 +2118,9 @@ Package hyperref Warning: Difference (2) between bookmark levels is greater
 Package hyperref Warning: The anchor of a bookmark and its parent's must not
 (hyperref)                be the same. Added a new anchor on input line 849.
 
-[25
+[24
 
-] [26] [27] [28] [29] [30] [31]
+] [25] [26] [27] [28] [29] [30]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 947.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 947.
 (./fforms.aux)
@@ -2142,8 +2142,8 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 947.
 ### semi simple group (level 1) entered at line 178 (\begingroup)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 43210 strings out of 494553
- 803818 string characters out of 6175442
+ 43209 strings out of 494553
+ 803811 string characters out of 6175442
  1230125 words of memory out of 5000000
  45833 multiletter control sequences out of 15000+600000
  640700 words of font info for 348 fonts, out of 8000000 for 9000
@@ -2167,10 +2167,10 @@ haminitalagala/Library/TinyTeX/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb><
 /Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/fonts/type1/urw/palat
 ino/uplr8a.pfb></Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/fonts
 /type1/urw/palatino/uplri8a.pfb>
-Output written on fforms.pdf (31 pages, 858626 bytes).
+Output written on fforms.pdf (30 pages, 852074 bytes).
 PDF statistics:
- 676 PDF objects out of 1000 (max. 8388607)
- 582 compressed objects within 6 object streams
- 158 named destinations out of 1000 (max. 500000)
+ 671 PDF objects out of 1000 (max. 8388607)
+ 578 compressed objects within 6 object streams
+ 157 named destinations out of 1000 (max. 500000)
  31187 words of extra memory for PDF output out of 35830 (max. 10000000)
 

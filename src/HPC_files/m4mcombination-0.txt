@@ -4,3 +4,9 @@ SLURM_ARRAY_JOB_ID:  4983479
 Error: Failed to retrieve the result of MulticoreFuture (<none>) from the forked worker (on localhost; PID 47013). Post-mortem diagnostic: No process exists with this PID, i.e. the forked localhost worker is no longer alive.
 Execution halted
 slurmstepd: error: Detected 1112 oom-kill event(s) in step 4983480.batch cgroup. Some of your processes may have been killed by the cgroup out-of-memory handler.
+SLURM_JOBID:  4984099
+SLURM_ARRAY_TASK_ID:  0
+SLURM_ARRAY_JOB_ID:  4984097
+Error: Failed to retrieve the result of MulticoreFuture (<none>) from the forked worker (on localhost; PID 542). Post-mortem diagnostic: No process exists with this PID, i.e. the forked localhost worker is no longer alive.
+Execution halted
+slurmstepd: error: Detected 134 oom-kill event(s) in step 4984099.batch cgroup. Some of your processes may have been killed by the cgroup out-of-memory handler.

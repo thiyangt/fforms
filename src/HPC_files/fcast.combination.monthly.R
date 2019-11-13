@@ -20,7 +20,7 @@ dataweights <- models.weights[start:end]
 ## ---- calculations
 name1 <- paste0("M4Mcombination_",args[1])
 name1 <- fforms_combinationforecast(dataweights, datats, "M4", 8, parallel=TRUE)
-name<-paste0("M4forecast/M4monthly","_",args[1],".rds")
+name<-paste0("fforms/M4monthly","_",args[1],".rds")
 saveRDS(name1, file=name)
 
 

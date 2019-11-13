@@ -622,6 +622,90 @@ plot_pdp_hourly_entropy <- ggplot(data = entropy1_long, aes_string(x = entropy1_
   facet_grid(. ~ class)+theme(strip.text.x = element_text(size = 16))+xlab("entropy")+ylab("probability of selecting forecast-models")
 plot_pdp_hourly_entropy
 
+## ---- ypacf5
+load("data/yearly/y_pacf5grid.rda")
+keep.modelnames <- c( "nn", "rw", "rwd", "theta", "wn")
+keepy_pacf5 <- c(keep.modelnames, "y_pacf5")
+y_pacf5grid <- y_pacf5grid[, names(y_pacf5grid) %in% keepy_pacf5]
+y_pacf5grid_long <- gather(y_pacf5grid, class, probability, "nn":"wn", factor_key = TRUE)
+y_pacf5grid_long <- y_pacf5grid_long %>%
+  mutate(class = recode(class, nn="nn",
+                        theta = "theta",
+                        wn = "wn",
+                        "rwd" = "rwd",
+                        "rw" = "rw" ))
+
+y_pacf5grid_long$class <- factor(y_pacf5grid_long$class,
+                                 levels = c("rw", "rwd", "wn", "theta", "nn" ))
+
+load("data/monthly/y_pacf5gridM.rda")
+keep.modelnamesM <- c("nn", "rw",
+                      "rwd","stlar","tbats","theta", "wn")
+keepy_pacf5 <- c(keep.modelnamesM, "y_pacf5")
+y_pacf5gridM <- y_pacf5gridM[, names(y_pacf5gridM) %in% keepy_pacf5]
+y_pacf5gridM_long <- gather(y_pacf5gridM, class, probability, "nn":"wn", factor_key = TRUE)
+
+y_pacf5gridM_long <- y_pacf5gridM_long %>%
+  mutate(class = recode(class, "nn"="nn", "rw"="rw",
+                        "rwd"="rwd", "stlar"="stlar","tbats"="tbats","theta"="theta", "wn"="wn"))
+
+y_pacf5gridM_long$class <- factor(y_pacf5gridM_long$class,
+                                  levels = c("rw", "rwd", "tbats","stlar", "wn", "theta", "nn" ))
+
+load("data/hourly/y_pacf5gridH.rda")
+## Arrange graphs for faceting
+keep.modelnames <- c("rw", "rwd", "mstlarima", "mstlets", "tbats","stlar",
+                     "theta","nn","wn")
+keepy_pacf5 <- c(keep.modelnames, "y_pacf5")
+y_pacf5hourly1 <- y_pacf5gridH[, names(y_pacf5gridH) %in% keepy_pacf5]
+y_pacf5hourly1_long <- gather(y_pacf5hourly1 , class, probability,  "mstlarima":"wn", factor_key = TRUE)
+y_pacf5hourly1_long$class <- factor(y_pacf5hourly1_long$class,
+                                    levels = c("rw", "rwd", "mstlarima", "mstlets", "tbats","stlar",
+                                               "theta","nn","wn"))
+
+y_pacf5y_long_mean <- y_pacf5grid_long%>%
+  group_by(y_pacf5, class) %>%
+  summarise(n=n(), mean=mean(probability), sd=sd(probability)) %>%
+  mutate(sem = sd/sqrt(n-1),
+         CI_lower = mean+qt((1-0.95)/2, n-1)*sem,
+         CI_upper = mean - qt((1-0.95)/2, n-1)*sem)
+y_pacf5m_long_mean <- y_pacf5gridM_long %>%
+  group_by(y_pacf5, class) %>%
+  summarise(n=n(), mean=mean(probability), sd=sd(probability)) %>%
+  mutate(sem = sd/sqrt(n-1),
+         CI_lower = mean+qt((1-0.95)/2, n-1)*sem,
+         CI_upper = mean - qt((1-0.95)/2, n-1)*sem)
+y_pacf5h_long_mean <- y_pacf5hourly1_long %>%
+  group_by(y_pacf5, class) %>%
+  summarise(n=n(), mean=mean(probability), sd=sd(probability)) %>%
+  mutate(sem = sd/sqrt(n-1),
+         CI_lower = mean+qt((1-0.95)/2, n-1)*sem,
+         CI_upper = mean - qt((1-0.95)/2, n-1)*sem)
+
+y_pacf5_YMH <- dplyr::bind_rows(y_pacf5y_long_mean, y_pacf5m_long_mean)
+y_pacf5_YMH <- dplyr::bind_rows(y_pacf5_YMH, y_pacf5h_long_mean)
+y_pacf5_YMH$feature <- c(rep("Yearly", dim(y_pacf5y_long_mean)[1]), 
+                         rep("Monthly", dim(y_pacf5m_long_mean)[1]), 
+                         rep("Hourly", dim(y_pacf5h_long_mean)[1]))
+y_pacf5_YMH$class <- factor(y_pacf5_YMH$class,
+                            levels = c("rw", "rwd", "tbats","stlar","wn", "theta", "nn","mstlarima", "mstlets"))
+
+
+plot_pdp_YMH_y_pacf5 <- ggplot(y_pacf5_YMH, aes(x=y_pacf5, y=mean, color=feature))+
+  geom_line(aes(x=y_pacf5, y=mean, color=feature), size = 1)+
+  geom_ribbon(aes(ymin=CI_lower, ymax=CI_upper, fill=feature),alpha=0.4, colour = NA)+
+  facet_wrap(. ~ class, ncol=9)+
+  theme(axis.text.x = element_text(angle = 90), text = element_text(size=16), axis.title = element_text(size = 14))+
+  theme(strip.text.x = element_text(size = 16))+xlab("y_pacf5")+
+  ylab("probability of selecting forecast-models")+
+  theme(legend.position="bottom", legend.title=element_blank())+
+  scale_colour_manual("",values=c("#1b9e77", "#d95f02","#7570b3"))+
+  scale_fill_manual("",values=c("#1b9e77", "#d95f02","#7570b3"))
+plot_pdp_YMH_y_pacf5
+
+
+
+
 ## ---- pdpyearlytrend
 load("data/yearly/trendgrid.rda")
 keep.modelnames <- c("ARIMA", "ARMA.AR.MA", "ETS.dampedtrend", "ETS.notrendnoseasonal",
@@ -830,100 +914,6 @@ plot_pdp_YMH_linearity <- ggplot(linearity_YMH, aes(x=linearity, y=mean, color=f
   scale_fill_manual("",values=c("#1b9e77", "#d95f02","#7570b3"))
 plot_pdp_YMH_linearity+xlim(-15,15)
 
-## ---- ypacf5
-load("data/yearly/y_pacf5grid.rda")
-keep.modelnames <- c("ARIMA", "ARMA.AR.MA", "ETS.dampedtrend", "ETS.notrendnoseasonal",
-                     "ETS.trend", "nn", "rw", "rwd", "theta", "wn")
-keepy_pacf5 <- c(keep.modelnames, "y_pacf5")
-y_pacf5grid <- y_pacf5grid[, names(y_pacf5grid) %in% keepy_pacf5]
-y_pacf5grid_long <- gather(y_pacf5grid, class, probability, "ARIMA":"wn", factor_key = TRUE)
-y_pacf5grid_long <- y_pacf5grid_long %>%
-  mutate(class = recode(class, nn="nn",
-                        theta = "theta",
-                        wn = "wn",
-                        "ARMA.AR.MA" = "ARMA",
-                        ARIMA = "ARIMA",
-                        "ETS.notrendnoseasonal" = "ETS_NTNS",
-                        "ETS.dampedtrend" = "ETS_DT",
-                        "ETS.trend" = "ETS_T",
-                        "rwd" = "rwd",
-                        "rw" = "rw" ))
-
-y_pacf5grid_long$class <- factor(y_pacf5grid_long$class,
-                                   levels = c("rw", "rwd", "ETS_T", "ETS_DT", "ETS_NTNS",
-                                              "ARIMA", "ARMA", "wn", "theta", "nn" ))
-
-load("data/monthly/y_pacf5gridM.rda")
-keep.modelnamesM <- c("ARIMA", "ARMA.AR.MA", "ETS.dampedtrend", "ETS.dampedtrendseasonal",
-                      "ETS.notrendnoseasonal", "ETS.seasonal", 
-                      "ETS.trend","ETS.trendseasonal"  ,"nn", "rw",
-                      "rwd", "SARIMA","snaive","stlar","tbats","theta", "wn")
-keepy_pacf5 <- c(keep.modelnamesM, "y_pacf5")
-y_pacf5gridM <- y_pacf5gridM[, names(y_pacf5gridM) %in% keepy_pacf5]
-y_pacf5gridM_long <- gather(y_pacf5gridM, class, probability, "ARIMA":"wn", factor_key = TRUE)
-
-y_pacf5gridM_long <- y_pacf5gridM_long %>%
-  mutate(class = recode(class, "ARIMA"="ARIMA", "ARMA.AR.MA"="ARMA", 
-                        "ETS.dampedtrend"="ETS_DT", "ETS.dampedtrendseasonal"="ETS_DTS",
-                        "ETS.notrendnoseasonal"="ETS_NTNS", "ETS.seasonal"="ETS_S", 
-                        "ETS.trend"="ETS_T","ETS.trendseasonal"="ETS_TS"  ,"nn"="nn", "rw"="rw",
-                        "rwd"="rwd", "SARIMA"="SARIMA","snaive"="snaive","stlar"="stlar","tbats"="tbats","theta"="theta", "wn"="wn"))
-
-y_pacf5gridM_long$class <- factor(y_pacf5gridM_long$class,
-                                    levels = c("snaive","rw", "rwd", "ETS_NTNS","ETS_DT", "ETS_T", "ETS_DTS",
-                                               "ETS_TS", "ETS_S","tbats","stlar", "SARIMA",
-                                               "ARIMA", "ARMA", "wn", "theta", "nn" ))
-
-load("data/hourly/y_pacf5gridH.rda")
-## Arrange graphs for faceting
-keep.modelnames <- c("snaive", "rw", "rwd", "mstlarima", "mstlets", "tbats","stlar",
-                     "theta","nn","wn")
-keepy_pacf5 <- c(keep.modelnames, "y_pacf5")
-y_pacf5hourly1 <- y_pacf5gridH[, names(y_pacf5gridH) %in% keepy_pacf5]
-y_pacf5hourly1_long <- gather(y_pacf5hourly1 , class, probability,  "mstlarima":"wn", factor_key = TRUE)
-y_pacf5hourly1_long$class <- factor(y_pacf5hourly1_long$class,
-                                      levels = c("snaive", "rw", "rwd", "mstlarima", "mstlets", "tbats","stlar",
-                                                 "theta","nn","wn"))
-
-y_pacf5y_long_mean <- y_pacf5grid_long%>%
-  group_by(y_pacf5, class) %>%
-  summarise(n=n(), mean=mean(probability), sd=sd(probability)) %>%
-  mutate(sem = sd/sqrt(n-1),
-         CI_lower = mean+qt((1-0.95)/2, n-1)*sem,
-         CI_upper = mean - qt((1-0.95)/2, n-1)*sem)
-y_pacf5m_long_mean <- y_pacf5gridM_long %>%
-  group_by(y_pacf5, class) %>%
-  summarise(n=n(), mean=mean(probability), sd=sd(probability)) %>%
-  mutate(sem = sd/sqrt(n-1),
-         CI_lower = mean+qt((1-0.95)/2, n-1)*sem,
-         CI_upper = mean - qt((1-0.95)/2, n-1)*sem)
-y_pacf5h_long_mean <- y_pacf5hourly1_long %>%
-  group_by(y_pacf5, class) %>%
-  summarise(n=n(), mean=mean(probability), sd=sd(probability)) %>%
-  mutate(sem = sd/sqrt(n-1),
-         CI_lower = mean+qt((1-0.95)/2, n-1)*sem,
-         CI_upper = mean - qt((1-0.95)/2, n-1)*sem)
-
-y_pacf5_YMH <- dplyr::bind_rows(y_pacf5y_long_mean, y_pacf5m_long_mean)
-y_pacf5_YMH <- dplyr::bind_rows(y_pacf5_YMH, y_pacf5h_long_mean)
-y_pacf5_YMH$feature <- c(rep("Yearly", 200), rep("Monthly", 340), rep("Hourly", 200))
-y_pacf5_YMH$class <- factor(y_pacf5_YMH$class,
-                              levels = c("snaive","rw", "rwd", "ETS_NTNS","ETS_DT", "ETS_T", "ETS_DTS",
-                                         "ETS_TS", "ETS_S","tbats","stlar", "SARIMA",
-                                         "ARIMA", "ARMA", "wn", "theta", "nn","mstlarima", "mstlets"))
-
-
-plot_pdp_YMH_y_pacf5 <- ggplot(y_pacf5_YMH, aes(x=y_pacf5, y=mean, color=feature))+
-  geom_line(aes(x=y_pacf5, y=mean, color=feature), size = 1)+
-  geom_ribbon(aes(ymin=CI_lower, ymax=CI_upper, fill=feature),alpha=0.4, colour = NA)+
-  facet_wrap(. ~ class, ncol=7)+
-  theme(axis.text.x = element_text(angle = 90), text = element_text(size=16), axis.title = element_text(size = 14))+
-  theme(strip.text.x = element_text(size = 16))+xlab("y_pacf5")+
-  ylab("probability of selecting forecast-models")+
-  theme(legend.position="bottom", legend.title=element_blank())+
-  scale_colour_manual("",values=c("#1b9e77", "#d95f02","#7570b3"))+
-  scale_fill_manual("",values=c("#1b9e77", "#d95f02","#7570b3"))
-plot_pdp_YMH_y_pacf5
 
 
 
