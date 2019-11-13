@@ -10,7 +10,7 @@ yearly_m4 <- Filter(function(l) l$period == "Yearly", M4)
 
 ## ---- calculations
 models.weights <- fforms_ensemble(yearlym4_votes, threshold = 0.6)
-fcast.combination.yearlym4 <- fforms_combinationforecast(models.weights, yearly_m4, "M4", 6)
+fcast.combination.m4yearly <- fforms_combinationforecast(models.weights, yearly_m4, "M4", 6)
 save(fcast.combination.m4yearly, file="fforms/fcast.combination.m4yearly.rda")
 
 

@@ -466,6 +466,162 @@ ggplot(vi.fforms, aes(x = classnew,y=featurenew+shift, fill=V1, height=height)) 
     "y_acf1","beta","curvature","entropy","diff1y_acf1","stability","y_pacf5","N","linearity","trend"))+
   theme(axis.text.x = element_text(angle = 90, hjust = 1), text = element_text(size=30))+xlab("")+ylab("")
 
+## ---- pdpyearlyurpp
+load("data/yearly/ur_ppgrid_rmout.rda")
+## Arrange graphs for faceting
+keep.modelnames <- c("ARIMA", "ARMA.AR.MA", "ETS.dampedtrend", "ETS.notrendnoseasonal",
+                     "ETS.trend", "nn", "rw", "rwd", "theta", "wn")
+keepur <- c(keep.modelnames, "ur_pp")
+ur_ppgrid_rmout <- ur_ppgrid_rmout[, names(ur_ppgrid_rmout) %in% keepur]
+ur_ppgrid_long <- gather(ur_ppgrid_rmout, class, probability, "ARIMA":"wn", factor_key = TRUE)
+
+ur_ppgrid_long <- ur_ppgrid_long %>%
+  mutate(class = recode(class, nn="nn",
+                        theta = "theta",
+                        wn = "wn",
+                        "ARMA.AR.MA" = "ARMA",
+                        ARIMA = "ARIMA",
+                        "ETS.notrendnoseasonal" = "ETS_NTNS",
+                        "ETS.dampedtrend" = "ETS_DT",
+                        "ETS.trend" = "ETS_T",
+                        "rwd" = "rwd",
+                        "rw" = "rw" ))
+ur_ppgrid_long$class <- factor(ur_ppgrid_long$class,
+                               levels = c("rw", "rwd", "ETS_T", "ETS_DT", "ETS_NTNS",
+                                          "ARIMA", "ARMA", "wn", "theta", "nn" ))
+
+plot_pdp_yearly <- ggplot(data = ur_ppgrid_long, aes_string(x = ur_ppgrid_long$ur_pp, y = "probability")) +
+  stat_summary(fun.y = mean, geom = "line", col = "#7570b3", size = 1) +
+  stat_summary(fun.data = mean_cl_normal,fill="#7570b3", geom = "ribbon", fun.args = list(mult = 1), alpha = 0.3, se=TRUE)+ 
+  theme(axis.text.x = element_text(angle = 90), text = element_text(size=18), axis.title = element_text(size = 16))+
+  facet_grid(. ~ class)+theme(strip.text.x = element_text(size = 10))+xlab("test statistic based on Phillips-Perron unit root test (ur_pp)")+ylab("probability of selecting forecast-models")
+plot_pdp_yearly
+
+## ---- pdpmonthlyseasonality
+load("data/monthly/seasonalitygridM.rda")
+keep.modelnamesm <- c("ARIMA", "ARMA.AR.MA", "ETS.dampedtrend", "ETS.dampedtrendseasonal",
+                      "ETS.notrendnoseasonal", "ETS.seasonal", 
+                      "ETS.trend","ETS.trendseasonal"  ,"nn", "rw",
+                      "rwd", "SARIMA","snaive","stlar","tbats","theta", "wn")
+keepseasonal <- c(keep.modelnamesm, "seasonality")
+seasonalitygridM <- seasonalitygridM[, names(seasonalitygridM) %in% keepseasonal]
+seasonalitygridM_long <- gather(seasonalitygridM, class, probability, "ARIMA":"wn", factor_key = TRUE)
+
+seasonalitygridM_long <- seasonalitygridM_long %>%
+  mutate(class = recode(class, "ARIMA"="ARIMA", "ARMA.AR.MA"="ARMA", 
+                        "ETS.dampedtrend"="ETS_DT", "ETS.dampedtrendseasonal"="ETS_DTS",
+                        "ETS.notrendnoseasonal"="ETS_NTNS", "ETS.seasonal"="ETS_S", 
+                        "ETS.trend"="ETS_T","ETS.trendseasonal"="ETS_TS"  ,"nn"="nn", "rw"="rw",
+                        "rwd"="rwd", "SARIMA"="SARIMA","snaive"="snaive","stlar"="stlar","tbats"="tbats","theta"="theta", "wn"="wn"))
+seasonalitygridM_long <- seasonalitygridM_long %>% rename("seasonality_M"="seasonality")
+
+seasonalitygridM_long$class <- factor(seasonalitygridM_long$class,
+                                      levels = c("snaive","rw", "rwd", "ETS_NTNS","ETS_DT", "ETS_T", "ETS_DTS",
+                                                 "ETS_TS", "ETS_S","tbats","stlar", "SARIMA",
+                                                 "ARIMA", "ARMA", "wn", "theta", "nn" ))
+
+plot_pdp_monthly_seasonal <- ggplot(data = seasonalitygridM_long, aes_string(x = seasonalitygridM_long$"seasonality_M", y = "probability")) +
+  stat_summary(fun.y = mean, geom = "line", col = "#d95f02", size = 1) +
+  stat_summary(fun.data = mean_cl_normal,fill="#d95f02", geom = "ribbon", fun.args = list(mult = 1), alpha = 0.3, se=TRUE)+ 
+  theme(axis.text.x = element_text(angle = 90), text = element_text(size=18), axis.title = element_text(size = 16))+
+  facet_wrap(. ~ class, ncol=9)+theme(strip.text.x = element_text(size = 10))+xlab("strength of seasonality")+ylab("probability of selecting forecast-models")
+plot_pdp_monthly_seasonal
+
+## ---- pdpmonthlyT
+load("data/monthly/NgridM.rda")
+keep.modelnamesM <- c("ARIMA", "ETS.dampedtrendseasonal",
+                      "ETS.notrendnoseasonal", "ETS.seasonal", 
+                      "ETS.trend", "rw",
+                      "rwd", "SARIMA","theta")
+keepN <- c(keep.modelnamesM, "N")
+NgridM <- NgridM[, names(NgridM) %in% keepN]
+NgridM_long <- gather(NgridM, class, probability, "ARIMA":"theta", factor_key = TRUE)
+
+NgridM_long <- NgridM_long %>%
+  mutate(class = recode(class, "ARIMA"="ARIMA", "ETS.dampedtrendseasonal"="ETS_DTS",
+                        "ETS.notrendnoseasonal"="ETS_NTNS", "ETS.seasonal"="ETS_S", 
+                        "ETS.trend"="ETS_T" , "rw"="rw",
+                        "rwd"="rwd", "SARIMA"="SARIMA","theta"="theta"))
+
+NgridM_long$class <- factor(NgridM_long$class,
+                            levels = c("rw", "rwd", "ETS_NTNS", "ETS_T", "ETS_DTS",
+                                        "ETS_S","SARIMA",
+                                       "ARIMA", "wn", "theta"))
+NgridM_long <- NgridM_long %>% rename("T"="N")
+
+plot_pdp_monthlyN <- ggplot(data = NgridM_long, aes_string(x = NgridM_long$"T", y = "probability")) +
+  stat_summary(fun.y = mean, geom = "line", col = "#d95f02", size = 1) +
+  stat_summary(fun.data = mean_cl_normal,fill="#d95f02", geom = "ribbon", fun.args = list(mult = 1), alpha = 0.3)+ 
+  theme(axis.text.x = element_text(angle = 90), text = element_text(size=18), axis.title = element_text(size = 16))+
+  facet_wrap(. ~ class, ncol=9)+theme(strip.text.x = element_text(size = 10))+xlab("length of time series (T)")+ylab("probability of selecting forecast-models")
+plot_pdp_monthlyN
+
+
+
+## ---- seasonalityhourly
+load("data/hourly/seasonality1gridH.rda")
+seasonality1gridH$variable <- rep(1:1000, 20)
+load("data/hourly/seasonality2gridH.rda")
+seasonality2gridH$variable <- rep(1:1000, 20)
+## Arrange graphs for faceting
+keep.modelnames <- c("snaive", "rw", "rwd", "mstlarima", "mstlets", "tbats","stlar",
+                     "theta","nn","wn")
+keeps1 <- c(keep.modelnames, "seasonal_strength1")
+keeps2 <- c(keep.modelnames, "seasonal_strength2")
+seasonal1 <- seasonality1gridH[, names(seasonality1gridH) %in% keeps1]
+seasonal1 <- rename(seasonal1, seasonal = seasonal_strength1) 
+seasonal2 <- seasonality2gridH[, names(seasonality2gridH) %in% keeps2]
+seasonal2 <- rename(seasonal2, seasonal = seasonal_strength2) 
+seasonal1_long <- gather(seasonal1, class, probability, "mstlarima":"wn", factor_key = TRUE)
+seasonal2_long <- gather(seasonal2, class, probability, "mstlarima":"wn", factor_key = TRUE)
+seasonal1_long_mean <- seasonal1_long %>%
+  group_by(seasonal, class) %>%
+  summarise(n=n(), mean=mean(probability), sd=sd(probability)) %>%
+  mutate(sem = sd/sqrt(n-1),
+         CI_lower = mean+qt((1-0.95)/2, n-1)*sem,
+         CI_upper = mean - qt((1-0.95)/2, n-1)*sem)
+seasonal2_long_mean <- seasonal2_long %>%
+  group_by(seasonal, class) %>%
+  summarise(n=n(), mean=mean(probability), sd=sd(probability)) %>%
+  mutate(sem = sd/sqrt(n-1),
+         CI_lower = mean+qt((1-0.95)/2, n-1)*sem,
+         CI_upper = mean - qt((1-0.95)/2, n-1)*sem)
+
+seasonal_DW <- dplyr::bind_rows(seasonal1_long_mean, seasonal2_long_mean)
+seasonal_DW$feature <- c(rep("seasonal_d", 200), rep("seasonal_w", 200))
+seasonal_DW$class <- factor(seasonal_DW$class,
+                            levels = c("snaive", "rw", "rwd", "mstlarima", "mstlets", "tbats","stlar",
+                                       "theta","nn","wn"))
+
+plot_pdp_hourly_seasonal <- ggplot(seasonal_DW, aes(x=seasonal, y=mean, color=feature))+
+  geom_line(aes(x=seasonal, y=mean, color=feature), size = 1)+
+  geom_ribbon(aes(ymin=CI_lower, ymax=CI_upper, fill=feature),alpha=0.4, colour = NA)+
+  facet_grid(. ~ class)+
+  theme(axis.text.x = element_text(angle = 90), text = element_text(size=18), axis.title = element_text(size = 14))+
+  theme(strip.text.x = element_text(size = 18))+xlab("strength of seasonality")+
+  ylab("probability of selecting forecast-models")+
+  theme(legend.position="bottom", legend.title=element_blank())+
+  scale_colour_manual("",values=c("#31a354", "#addd8e"))+
+  scale_fill_manual("",values=c("#31a354", "#addd8e"))
+plot_pdp_hourly_seasonal
+
+## ---- entropyhourly
+load("data/hourly/entropygridH.rda")
+## Arrange graphs for faceting
+keep.modelnames <- c("snaive", "rwd","tbats","stlar","nn","wn")
+keepentropy <- c(keep.modelnames, "entropy")
+entropy1 <- entropygridH[, names(entropygridH) %in% keepentropy]
+entropy1_long <- gather(entropy1, class, probability,  "nn":"wn", factor_key = TRUE)
+entropy1_long$class <- factor(entropy1_long$class,
+                              levels = c("snaive", "rwd","tbats","stlar","nn","wn"))
+
+plot_pdp_hourly_entropy <- ggplot(data = entropy1_long, aes_string(x = entropy1_long$entropy, y = "probability")) +
+  stat_summary(fun.y = mean, geom = "line", col = "#1b9e77", size = 1) +
+  stat_summary(fun.data = mean_cl_normal,fill="#1b9e77", geom = "ribbon", fun.args = list(mult = 1), alpha = 0.3)+ 
+  theme(axis.text.x = element_text(angle = 90), text = element_text(size=16), axis.title = element_text(size = 16))+
+  facet_grid(. ~ class)+theme(strip.text.x = element_text(size = 16))+xlab("entropy")+ylab("probability of selecting forecast-models")
+plot_pdp_hourly_entropy
+
 ## ---- pdpyearlytrend
 load("data/yearly/trendgrid.rda")
 keep.modelnames <- c("ARIMA", "ARMA.AR.MA", "ETS.dampedtrend", "ETS.notrendnoseasonal",
@@ -769,136 +925,10 @@ plot_pdp_YMH_y_pacf5 <- ggplot(y_pacf5_YMH, aes(x=y_pacf5, y=mean, color=feature
   scale_fill_manual("",values=c("#1b9e77", "#d95f02","#7570b3"))
 plot_pdp_YMH_y_pacf5
 
-## ---- pdpmonthlyN
-load("data/monthly/NgridM.rda")
-keep.modelnamesM <- c("ARIMA", "ARMA.AR.MA", "ETS.dampedtrend", "ETS.dampedtrendseasonal",
-                      "ETS.notrendnoseasonal", "ETS.seasonal", 
-                      "ETS.trend","ETS.trendseasonal"  ,"nn", "rw",
-                      "rwd", "SARIMA","snaive","stlar","tbats","theta", "wn")
-keepN <- c(keep.modelnamesM, "N")
-NgridM <- NgridM[, names(NgridM) %in% keepN]
-NgridM_long <- gather(NgridM, class, probability, "ARIMA":"wn", factor_key = TRUE)
-
-NgridM_long <- NgridM_long %>%
-  mutate(class = recode(class, "ARIMA"="ARIMA", "ARMA.AR.MA"="ARMA", 
-                        "ETS.dampedtrend"="ETS_DT", "ETS.dampedtrendseasonal"="ETS_DTS",
-                        "ETS.notrendnoseasonal"="ETS_NTNS", "ETS.seasonal"="ETS_S", 
-                        "ETS.trend"="ETS_T","ETS.trendseasonal"="ETS_TS"  ,"nn"="nn", "rw"="rw",
-                        "rwd"="rwd", "SARIMA"="SARIMA","snaive"="snaive","stlar"="stlar","tbats"="tbats","theta"="theta", "wn"="wn"))
-
-NgridM_long$class <- factor(linearitygridM_long$class,
-                            levels = c("snaive","rw", "rwd", "ETS_NTNS","ETS_DT", "ETS_T", "ETS_DTS",
-                                       "ETS_TS", "ETS_S","tbats","stlar", "SARIMA",
-                                       "ARIMA", "ARMA", "wn", "theta", "nn" ))
-NgridM_long <- NgridM_long %>% rename("T"="N")
-
-plot_pdp_monthlyN <- ggplot(data = NgridM_long, aes_string(x = NgridM_long$"T", y = "probability")) +
-  stat_summary(fun.y = mean, geom = "line", col = "#d95f02", size = 1) +
-  stat_summary(fun.data = mean_cl_normal,fill="#d95f02", geom = "ribbon", fun.args = list(mult = 1), alpha = 0.3)+ 
-  theme(axis.text.x = element_text(angle = 90), text = element_text(size=18), axis.title = element_text(size = 16))+
-  facet_wrap(. ~ class, ncol=9)+theme(strip.text.x = element_text(size = 10))+xlab("length of time series (T)")+ylab("probability of selecting forecast-models")
-plot_pdp_monthlyN
-
-## ---- pdpyearlyurpp
-load("data/yearly/ur_ppgrid_rmout.rda")
-## Arrange graphs for faceting
-keep.modelnames <- c("ARIMA", "ARMA.AR.MA", "ETS.dampedtrend", "ETS.notrendnoseasonal",
-                     "ETS.trend", "nn", "rw", "rwd", "theta", "wn")
-keepur <- c(keep.modelnames, "ur_pp")
-ur_ppgrid_rmout <- ur_ppgrid_rmout[, names(ur_ppgrid_rmout) %in% keepur]
-ur_ppgrid_long <- gather(ur_ppgrid_rmout, class, probability, "ARIMA":"wn", factor_key = TRUE)
-
-ur_ppgrid_long <- ur_ppgrid_long %>%
-  mutate(class = recode(class, nn="nn",
-                        theta = "theta",
-                        wn = "wn",
-                        "ARMA.AR.MA" = "ARMA",
-                        ARIMA = "ARIMA",
-                        "ETS.notrendnoseasonal" = "ETS_NTNS",
-                        "ETS.dampedtrend" = "ETS_DT",
-                        "ETS.trend" = "ETS_T",
-                        "rwd" = "rwd",
-                        "rw" = "rw" ))
-ur_ppgrid_long$class <- factor(ur_ppgrid_long$class,
-                               levels = c("rw", "rwd", "ETS_T", "ETS_DT", "ETS_NTNS",
-                                          "ARIMA", "ARMA", "wn", "theta", "nn" ))
-
-plot_pdp_yearly <- ggplot(data = ur_ppgrid_long, aes_string(x = ur_ppgrid_long$ur_pp, y = "probability")) +
-  stat_summary(fun.y = mean, geom = "line", col = "#d95f02", size = 1) +
-  stat_summary(fun.data = mean_cl_normal,fill="#d95f02", geom = "ribbon", fun.args = list(mult = 1), alpha = 0.3, se=TRUE)+ 
-  theme(axis.text.x = element_text(angle = 90), text = element_text(size=18), axis.title = element_text(size = 16))+
-  facet_grid(. ~ class)+theme(strip.text.x = element_text(size = 10))+xlab("test statistic based on Phillips-Perron unit root test (ur_pp)")+ylab("probability of selecting forecast-models")
-plot_pdp_yearly
 
 
 
 
-
-## ---- seasonalityhourly
-load("data/hourly/seasonality1gridH.rda")
-seasonality1gridH$variable <- rep(1:1000, 20)
-load("data/hourly/seasonality2gridH.rda")
-seasonality2gridH$variable <- rep(1:1000, 20)
-## Arrange graphs for faceting
-keep.modelnames <- c("snaive", "rw", "rwd", "mstlarima", "mstlets", "tbats","stlar",
-                     "theta","nn","wn")
-keeps1 <- c(keep.modelnames, "seasonal_strength1")
-keeps2 <- c(keep.modelnames, "seasonal_strength2")
-seasonal1 <- seasonality1gridH[, names(seasonality1gridH) %in% keeps1]
-seasonal1 <- rename(seasonal1, seasonal = seasonal_strength1) 
-seasonal2 <- seasonality2gridH[, names(seasonality2gridH) %in% keeps2]
-seasonal2 <- rename(seasonal2, seasonal = seasonal_strength2) 
-seasonal1_long <- gather(seasonal1, class, probability, "mstlarima":"wn", factor_key = TRUE)
-seasonal2_long <- gather(seasonal2, class, probability, "mstlarima":"wn", factor_key = TRUE)
-seasonal1_long_mean <- seasonal1_long %>%
-  group_by(seasonal, class) %>%
-  summarise(n=n(), mean=mean(probability), sd=sd(probability)) %>%
-  mutate(sem = sd/sqrt(n-1),
-         CI_lower = mean+qt((1-0.95)/2, n-1)*sem,
-         CI_upper = mean - qt((1-0.95)/2, n-1)*sem)
-seasonal2_long_mean <- seasonal2_long %>%
-  group_by(seasonal, class) %>%
-  summarise(n=n(), mean=mean(probability), sd=sd(probability)) %>%
-  mutate(sem = sd/sqrt(n-1),
-         CI_lower = mean+qt((1-0.95)/2, n-1)*sem,
-         CI_upper = mean - qt((1-0.95)/2, n-1)*sem)
-
-seasonal_DW <- dplyr::bind_rows(seasonal1_long_mean, seasonal2_long_mean)
-seasonal_DW$feature <- c(rep("seasonal_d", 200), rep("seasonal_w", 200))
-seasonal_DW$class <- factor(seasonal_DW$class,
-                            levels = c("snaive", "rw", "rwd", "mstlarima", "mstlets", "tbats","stlar",
-                                       "theta","nn","wn"))
-
-plot_pdp_hourly_seasonal <- ggplot(seasonal_DW, aes(x=seasonal, y=mean, color=feature))+
-  geom_line(aes(x=seasonal, y=mean, color=feature), size = 1)+
-  geom_ribbon(aes(ymin=CI_lower, ymax=CI_upper, fill=feature),alpha=0.4, colour = NA)+
-  facet_grid(. ~ class)+
-  theme(axis.text.x = element_text(angle = 90), text = element_text(size=16), axis.title = element_text(size = 14))+
-  theme(strip.text.x = element_text(size = 16))+xlab("strength of seasonality")+
-  ylab("probability of selecting forecast-models")+
-  theme(legend.position="bottom", legend.title=element_blank())+
-  scale_colour_manual("",values=c("red", "blue"))+
-  scale_fill_manual("",values=c("red", "blue"))
-plot_pdp_hourly_seasonal
-
-## ---- entropyhourly
-load("data/hourly/entropygridH.rda")
-## Arrange graphs for faceting
-keep.modelnames <- c("snaive", "rw", "rwd", "mstlarima", "mstlets", "tbats","stlar",
-                     "theta","nn","wn")
-keepentropy <- c(keep.modelnames, "entropy")
-entropy1 <- entropygridH[, names(entropygridH) %in% keepentropy]
-entropy1_long <- gather(entropy1, class, probability,  "mstlarima":"wn", factor_key = TRUE)
-entropy1_long$class <- factor(entropy1_long$class,
-                              levels = c("snaive", "rw", "rwd", "mstlarima", "mstlets", "tbats","stlar",
-                                         "theta","nn","wn"))
-
-plot_pdp_hourly_entropy <- ggplot(data = entropy1_long, aes_string(x = entropy1_long$entropy, y = "probability")) +
-  stat_summary(fun.y = mean, geom = "line", col = "#1b9e77", size = 1) +
-  stat_summary(fun.data = mean_cl_normal,fill="#1b9e77", geom = "ribbon", fun.args = list(mult = 1), alpha = 0.3)+ 
-  theme(axis.text.x = element_text(angle = 90), text = element_text(size=16), axis.title = element_text(size = 16))+
-  facet_grid(. ~ class)+theme(strip.text.x = element_text(size = 16))+xlab("entropy")+ylab("probability of selecting forecast-models")
-plot_pdp_hourly_entropy
 
 ## ---- linearityhourly
 load("data/hourly/linearitygridH.rda")

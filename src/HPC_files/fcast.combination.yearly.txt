@@ -24,12 +24,13 @@ Type 'q()' to quit R.
 > load("fforms/yearlym4_votes.rda")
 > library(M4comp2018)
 > data(M4)
-> yearly_M4 <- Filter(function(l) l$period == "Yearly", M4)
+> yearly_m4 <- Filter(function(l) l$period == "Yearly", M4)
 > 
 > 
 > ## ---- calculations
 > models.weights <- fforms_ensemble(yearlym4_votes, threshold = 0.6)
 > fcast.combination.yearlym4 <- fforms_combinationforecast(models.weights, yearly_m4, "M4", 6)
-Error in lapply(tslist, function(temp) { : object 'yearly_m4' not found
-Calls: fforms_combinationforecast -> lapply
+> save(fcast.combination.m4yearly, file="fforms/fcast.combination.m4yearly.rda")
+Error in save(fcast.combination.m4yearly, file = "fforms/fcast.combination.m4yearly.rda") : 
+  object ‘fcast.combination.m4yearly’ not found
 Execution halted
