@@ -497,6 +497,8 @@ plot_pdp_yearly <- ggplot(data = ur_ppgrid_long, aes_string(x = ur_ppgrid_long$u
   facet_grid(. ~ class)+theme(strip.text.x = element_text(size = 10))+xlab("test statistic based on Phillips-Perron unit root test (ur_pp)")+ylab("probability of selecting forecast-models")
 plot_pdp_yearly
 
+
+
 ## ---- pdpmonthlyseasonality
 load("data/monthly/seasonalitygridM.rda")
 keep.modelnamesm <- c("ARIMA", "ARMA.AR.MA", "ETS.dampedtrend", "ETS.dampedtrendseasonal",
@@ -621,6 +623,28 @@ plot_pdp_hourly_entropy <- ggplot(data = entropy1_long, aes_string(x = entropy1_
   theme(axis.text.x = element_text(angle = 90), text = element_text(size=16), axis.title = element_text(size = 16))+
   facet_grid(. ~ class)+theme(strip.text.x = element_text(size = 16))+xlab("entropy")+ylab("probability of selecting forecast-models")
 plot_pdp_hourly_entropy
+
+## ---- curvaturehourly
+load("data/hourly/curvaturegridH.rda")
+## Arrange graphs for faceting
+keep.modelnames <- c("mstlarima", "mstlets","theta")
+keepcurvature <- c(keep.modelnames, "curvature")
+curvaturehourly1 <- curvaturegridH[, names(curvaturegridH) %in% keepcurvature]
+curvaturehourly1_long <- gather(curvaturehourly1 , class, probability,  "mstlarima":"theta", factor_key = TRUE)
+curvaturehourly1_long$class <- factor(curvaturehourly1_long$class,
+                                      levels = c("mstlarima", "mstlets","theta"))
+
+plot_pdp_hourly_curvature <- ggplot(data = curvaturehourly1_long, aes_string(x = curvaturehourly1_long$curvature, y = "probability")) +
+  stat_summary(fun.y = mean, geom = "line", col = "#1b9e77", size = 1) +
+  stat_summary(fun.data = mean_cl_normal,fill="#1b9e77", geom = "ribbon", fun.args = list(mult = 1), alpha = 0.3)+ 
+  theme(axis.text.x = element_text(angle = 90), text = element_text(size=16), axis.title = element_text(size = 16))+
+  facet_grid(. ~ class)+theme(strip.text.x = element_text(size = 16))+xlab("curvature")+ylab("probability of selecting forecast-models")
+plot_pdp_hourly_curvature
+
+
+
+## ----diff1yacf1
+
 
 ## ---- ypacf5
 load("data/yearly/y_pacf5grid.rda")
@@ -939,23 +963,6 @@ plot_pdp_hourly_linearity <- ggplot(data = linearityhourly1_long, aes_string(x =
   facet_grid(. ~ class)+theme(strip.text.x = element_text(size = 16))+xlab("linearity")+ylab("probability of selecting forecast-models")
 plot_pdp_hourly_linearity
 
-## ---- curvaturehourly
-load("data/hourly/curvaturegridH.rda")
-## Arrange graphs for faceting
-keep.modelnames <- c("snaive", "rw", "rwd", "mstlarima", "mstlets", "tbats","stlar",
-                     "theta","nn","wn")
-keepcurvature <- c(keep.modelnames, "curvature")
-curvaturehourly1 <- curvaturegridH[, names(curvaturegridH) %in% keepcurvature]
-curvaturehourly1_long <- gather(curvaturehourly1 , class, probability,  "mstlarima":"wn", factor_key = TRUE)
-curvaturehourly1_long$class <- factor(curvaturehourly1_long$class,
-                                      levels = c("snaive", "rw", "rwd", "mstlarima", "mstlets", "tbats","stlar",
-                                                 "theta","nn","wn"))
 
-plot_pdp_hourly_curvature <- ggplot(data = curvaturehourly1_long, aes_string(x = curvaturehourly1_long$curvature, y = "probability")) +
-  stat_summary(fun.y = mean, geom = "line", col = "red", size = 1) +
-  stat_summary(fun.data = mean_cl_normal,fill="red", geom = "ribbon", fun.args = list(mult = 1), alpha = 0.3)+ 
-  theme(axis.text.x = element_text(angle = 90), text = element_text(size=16), axis.title = element_text(size = 16))+
-  facet_grid(. ~ class)+theme(strip.text.x = element_text(size = 16))+xlab("curvature")+ylab("probability of selecting forecast-models")
-plot_pdp_hourly_curvature
 
 
