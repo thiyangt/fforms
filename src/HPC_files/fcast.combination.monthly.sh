@@ -1,7 +1,7 @@
 #!/bin/env bash
 #SBATCH --job-name=M4M
-#SBATCH --time=90:00:00
-#SBATCH --mem=60G
+#SBATCH --time=100:00:00
+#SBATCH --mem=100G
 #SBATCH --ntasks=1
 #SBATCH --array=0-19
 #SBATCH --partition=short,gpu,comp
