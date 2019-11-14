@@ -642,8 +642,79 @@ plot_pdp_hourly_curvature <- ggplot(data = curvaturehourly1_long, aes_string(x =
 plot_pdp_hourly_curvature
 
 
-
 ## ----diff1yacf1
+load("data/yearly/diff1y_acf1grid.rda")
+keep.modelnames <- c("ARIMA", "ETS.dampedtrend","ETS.notrendnoseasonal", 
+                     "ETS.trend", "nn", "rwd", "theta", "wn")
+keepdiff1yacf1 <- c(keep.modelnames, "diff1y_acf1")
+diff1yacf1grid <- diff1y_acf1grid[, names(diff1y_acf1grid) %in% keepdiff1yacf1]
+diff1yacf1grid_long <- gather(diff1yacf1grid, class, probability, "ARIMA":"wn", factor_key = TRUE)
+diff1yacf1grid_long <- diff1yacf1grid_long %>%
+  mutate(class = recode(class, nn="nn",
+                        theta = "theta",
+                        wn = "wn",
+                        ARIMA = "ARIMA",
+                        "ETS.notrendnoseasonal" = "ETS_NTNS",
+                        "ETS.dampedtrend" = "ETS_DT",
+                        "ETS.trend" = "ETS_T",
+                        "rwd" = "rwd" ))
+
+diff1yacf1grid_long$class <- factor(diff1yacf1grid_long$class,
+                                 levels = c("rwd", "ETS_NTNS", "ETS_DT", "ETS_T", "ARIMA", 
+                                            "theta", "nn", "wn"))
+
+load("data/monthly/diff1y_acf1gridM.rda")
+keep.modelnamesMdiff1yacf1 <- c("rwd", "ARIMA", "ETS.dampedtrend", "tbats")
+keepdiff1yacf1 <- c(keep.modelnamesMdiff1yacf1, "diff1y_acf1")
+diff1y_acf1gridM <- diff1y_acf1gridM[, names(diff1y_acf1gridM) %in% keepdiff1yacf1]
+diff1y_acf1gridM_long <- gather(diff1y_acf1gridM, class, probability, "ARIMA":"tbats", factor_key = TRUE)
+
+diff1y_acf1gridM_long <- diff1y_acf1gridM_long %>%
+  mutate(class = recode(class,  ARIMA = "ARIMA",
+                        "ETS.dampedtrend" = "ETS_DT",
+                        "tbats" = "tbats",
+                        "rwd" = "rwd" ))
+
+diff1y_acf1gridM_long$class <- factor(diff1y_acf1gridM_long$class,
+                                  levels = c("rwd", "ETS_DT", "ARIMA", "tbats"))
+
+
+diff1yacf1grid_long_mean <- diff1yacf1grid_long %>%
+  group_by(diff1y_acf1, class) %>%
+  summarise(n=n(), mean=mean(probability), sd=sd(probability)) %>%
+  mutate(sem = sd/sqrt(n-1),
+         CI_lower = mean+qt((1-0.95)/2, n-1)*sem,
+         CI_upper = mean - qt((1-0.95)/2, n-1)*sem)
+
+diff1y_acf1gridM_long_mean <- diff1y_acf1gridM_long %>%
+  group_by(diff1y_acf1, class) %>%
+  summarise(n=n(), mean=mean(probability), sd=sd(probability)) %>%
+  mutate(sem = sd/sqrt(n-1),
+         CI_lower = mean+qt((1-0.95)/2, n-1)*sem,
+         CI_upper = mean - qt((1-0.95)/2, n-1)*sem)
+
+
+diff1yacf1_YM <- dplyr::bind_rows(diff1yacf1grid_long_mean, diff1y_acf1gridM_long_mean)
+diff1yacf1_YM$feature <- c(rep("Yearly", dim(diff1yacf1grid_long_mean)[1]), 
+                         rep("Monthly", dim(diff1y_acf1gridM_long_mean)[1]))
+diff1yacf1_YM$class <- factor(diff1yacf1_YM$class,
+                            levels = c("rwd", "ETS_NTNS", "ETS_DT", "ETS_T", "ARIMA", 
+                                       "theta", "nn", "wn","tbats"))
+
+
+ggplot(diff1yacf1_YM, aes(x=diff1y_acf1, y=mean, color=feature))+
+  geom_line(aes(x=diff1y_acf1, y=mean, color=feature), size = 1)+
+  geom_ribbon(aes(ymin=CI_lower, ymax=CI_upper, fill=feature),alpha=0.4, colour = NA)+
+  facet_wrap(. ~ class, ncol=9)+
+  theme(axis.text.x = element_text(angle = 90), text = element_text(size=16), axis.title = element_text(size = 14))+
+  theme(strip.text.x = element_text(size = 16))+xlab("diff1y_acf1")+
+  ylab("probability of selecting forecast-models")+
+  theme(legend.position="bottom", legend.title=element_blank())+
+  scale_colour_manual("",values=c("#1b9e77", "#d95f02"))+
+  scale_fill_manual("",values=c("#1b9e77", "#d95f02"))
+
+
+
 
 
 ## ---- ypacf5
@@ -726,8 +797,6 @@ plot_pdp_YMH_y_pacf5 <- ggplot(y_pacf5_YMH, aes(x=y_pacf5, y=mean, color=feature
   scale_colour_manual("",values=c("#1b9e77", "#d95f02","#7570b3"))+
   scale_fill_manual("",values=c("#1b9e77", "#d95f02","#7570b3"))
 plot_pdp_YMH_y_pacf5
-
-
 
 
 ## ---- pdpyearlytrend
@@ -940,28 +1009,6 @@ plot_pdp_YMH_linearity+xlim(-15,15)
 
 
 
-
-
-
-
-## ---- linearityhourly
-load("data/hourly/linearitygridH.rda")
-## Arrange graphs for faceting
-keep.modelnames <- c("snaive", "rw", "rwd", "mstlarima", "mstlets", "tbats","stlar",
-                     "theta","nn","wn")
-keeplinearity <- c(keep.modelnames, "linearity")
-linearityhourly1 <- linearitygridH[, names(linearitygridH) %in% keeplinearity]
-linearityhourly1_long <- gather(linearityhourly1 , class, probability,  "mstlarima":"wn", factor_key = TRUE)
-linearityhourly1_long$class <- factor(linearityhourly1_long$class,
-                                      levels = c("snaive", "rw", "rwd", "mstlarima", "mstlets", "tbats","stlar",
-                                                 "theta","nn","wn"))
-
-plot_pdp_hourly_linearity <- ggplot(data = linearityhourly1_long, aes_string(x = linearityhourly1_long$linearity, y = "probability")) +
-  stat_summary(fun.y = mean, geom = "line", col = "red", size = 1) +
-  stat_summary(fun.data = mean_cl_normal,fill="red", geom = "ribbon", fun.args = list(mult = 1), alpha = 0.3)+ 
-  theme(axis.text.x = element_text(angle = 90), text = element_text(size=16), axis.title = element_text(size = 16))+
-  facet_grid(. ~ class)+theme(strip.text.x = element_text(size = 16))+xlab("linearity")+ylab("probability of selecting forecast-models")
-plot_pdp_hourly_linearity
 
 
 
