@@ -1,0 +1,55 @@
+
+R version 3.5.1 (2018-07-02) -- "Feather Spray"
+Copyright (C) 2018 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> ####----pkg
+> library(randomForest)
+> library(tidyverse)
+> library(magrittr)
+> library(explainer)
+> 
+> ####---- general function to create a grid
+> #Predictions based on different variables
+> ## load random forest
+> load("phdproject2/yearly_training.rda") # training data
+> load("phdproject2/rfu_m4yearly.rda") # random forest model
+> load("phdproject2/subset_yearly.rda")
+> subset_yearly <- subset_yearly[,1:25]
+> 
+> 
+> y_pacf5.linearityrmout.y <- twowayinteraction(rfu_m4yearly, y_pacf5, linearity, 
++                                             fulldf = yearly_training,
++                                             subsetdf = subset_yearly, grid.resolution=20, trim2=TRUE)
+> save(y_pacf5.linearityrmout.y, file="fforms/y_pacf5.linearityrmout.y.rda")
+> 
+> 
+> stability.linearityrmout.y <- twowayinteraction(rfu_m4yearly, stability, linearity, 
++                                               fulldf = yearly_training,
++                                               subsetdf = subset_yearly, grid.resolution=20, trim2=TRUE)
+> save(stability.linearityrmout.y, file="fforms/stability.linearityrmout.y.rda")
+> 
+> curvature.linearityrmout.y <- twowayinteraction(rfu_m4yearly, curvature, linearity, 
++                                                 fulldf = yearly_training,
++                                                 subsetdf = subset_yearly, grid.resolution=20, trim1=TRUE,trim2=TRUE)
+> save(curvature.linearityrmout.y, file="fforms/curvature.linearityrmout.y.rda")
+> 
+> y_acf1.linearityrmout.y <- twowayinteraction(rfu_m4yearly, y_acf1, linearity, 
++                                                 fulldf = yearly_training,
++                                                 subsetdf = subset_yearly, grid.resolution=20, trim2=TRUE)
+/opt/slurm/var/spool/job4989004/slurm_script: line 11:  7918 Killed                  R --vanilla < y_twowayinteractions.R > y_twowayinteractions.txt
+slurmstepd: error: Detected 1 oom-kill event(s) in step 4989004.batch cgroup. Some of your processes may have been killed by the cgroup out-of-memory handler.
