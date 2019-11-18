@@ -15,12 +15,17 @@ load("phdproject2/subset_monthly.rda")
 subset_monthly <- subset_monthly[,1:30]
 
 
+diff1y_acf1.linearity.m <- twowayinteraction(rfu_m4monthly, diff1y_acf1, linearity, 
+                                               fulldf = monthly_training,
+                                               subsetdf = subset_monthly, grid.resolution=20, trim2=TRUE)
+save(diff1y_acf1.linearity.m, file="fforms/diff1y_acf1.linearity.m.rda")
+
 y_pacf5.linearity.m <- twowayinteraction(rfu_m4monthly, y_pacf5, linearity, 
                                          fulldf = monthly_training,
-                                         subsetdf = subset_monthly, grid.resolution=100, trim2=TRUE)
+                                         subsetdf = subset_monthly, grid.resolution=20, trim2=TRUE)
 save(y_pacf5.linearity.m, file="fforms/y_pacf5.linearity.m.rda")
 
 sediff_seacf1.linearity.m <- twowayinteraction(rfu_m4monthly, sediff_seacf1, linearity, 
                                          fulldf = monthly_training,
-                                         subsetdf = subset_monthly, grid.resolution=100, trim2=TRUE)
+                                         subsetdf = subset_monthly, grid.resolution=20, trim2=TRUE)
 save(sediff_seacf1.linearity.m, file="fforms/sediff_seacf1.linearity.m.rda")
