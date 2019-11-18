@@ -1,0 +1,45 @@
+
+R version 3.5.1 (2018-07-02) -- "Feather Spray"
+Copyright (C) 2018 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> ## ---- pkg
+> library(seer)
+> 
+> ## ---- data
+> load("fforms/weeklym4_votes.rda")
+> library(M4comp2018)
+> data(M4)
+> weekly_m4 <- Filter(function(l) l$period == "Weekly", M4)
+> 
+> 
+> weekly_list <- list(359)
+> for (i in 1: 359){
++   y <- weekly_m4
++   weekly_list[[i]] <- list(x=ts(weekly_m4[[1]]$x, frequency=52))
++ }
+> 
+> ## ---- calculations
+> models.weights <- fforms_ensemble(weeklym4_votes, threshold = 0.6)
+> fcast.combination.m4weekly.all <- fforms_combinationforecast(models.weights, weekly_list, "M4", 13, parallel=TRUE)
+Error in socketConnection("localhost", port = port, server = TRUE, blocking = TRUE,  : 
+  cannot open the connection
+Calls: fforms_combinationforecast ... resolve.list -> signalConditionsASAP -> signalConditions
+In addition: Warning message:
+In socketConnection("localhost", port = port, server = TRUE, blocking = TRUE,  :
+  port 11959 cannot be opened
+Execution halted

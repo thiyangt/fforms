@@ -1,0 +1,46 @@
+
+R version 3.5.1 (2018-07-02) -- "Feather Spray"
+Copyright (C) 2018 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> # yearly data time to compute forecasts
+> library(M4metaresults)
+> library(microbenchmark)
+> library(xgboost)
+> library(M4metalearning)
+> 
+> 
+> # data
+> load("dataThesis/weekly_subset.rda")
+> 
+> 
+> #this will take time
+> M4_fcast_weekly <- function(){
++   lapply(weekly_subset, function(temp){
++     fcast <- forecast_meta_M4(model_M4, temp$x, h=13)
++   })
++ }
+> microbenchmark(M4_fcast_weekly(), times=100)
+<simpleError in stl(ts(deseas, frequency = msts[i]), s.window = s.window[i],     ...): series is not periodic or has less than two periods>
+<simpleError in ts(x): 'ts' object must have one or more observations>
+[1] "ERROR processing series:  "
+[1] "The forecast method that produced the error is: auto_arima_forec"
+[1] "Returning snaive forecasts instead"
+Error in 1:h : argument of length 0
+Calls: microbenchmark ... tryCatchList -> tryCatchOne -> <Anonymous> -> snaive_forec
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Execution halted
