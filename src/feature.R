@@ -64,7 +64,7 @@ summary(features_M4D)
 saveRDS(features_M4D, file="data/HPCfiles/features_M4D.rds")
 
  ## Hourly
-hourly_m4 <- subset(M4, "hourly")
+hourly_m4 <- Filter(function(l) l$period == "Hourly", M4)
 length(hourly_m4)
 ## convert data into msts object
 hourlym4_msts <- lapply(hourly_m4, function(temp){
