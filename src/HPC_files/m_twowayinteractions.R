@@ -15,17 +15,39 @@ load("phdproject2/subset_monthly.rda")
 subset_monthly <- subset_monthly[,1:30]
 
 
-diff1y_acf1.linearity.m <- twowayinteraction(rfu_m4monthly, diff1y_acf1, linearity, 
+stability.linearity.m <- twowayinteraction(rfu_m4monthly, stability, linearity, 
                                                fulldf = monthly_training,
                                                subsetdf = subset_monthly, grid.resolution=20, trim2=TRUE)
-save(diff1y_acf1.linearity.m, file="fforms/diff1y_acf1.linearity.m.rda")
+save(stability.linearity.m, file="fforms/stability.linearity.m.rda")
 
-y_pacf5.linearity.m <- twowayinteraction(rfu_m4monthly, y_pacf5, linearity, 
+hwgamma.linearity.m <- twowayinteraction(rfu_m4monthly, hwgamma, linearity, 
                                          fulldf = monthly_training,
                                          subsetdf = subset_monthly, grid.resolution=20, trim2=TRUE)
-save(y_pacf5.linearity.m, file="fforms/y_pacf5.linearity.m.rda")
+save(hwgamma.linearity.m, file="fforms/hwgamma.linearity.m.rda")
 
-sediff_seacf1.linearity.m <- twowayinteraction(rfu_m4monthly, sediff_seacf1, linearity, 
+e_acf1.linearity.m <- twowayinteraction(rfu_m4monthly, e_acf1, linearity, 
                                          fulldf = monthly_training,
                                          subsetdf = subset_monthly, grid.resolution=20, trim2=TRUE)
-save(sediff_seacf1.linearity.m, file="fforms/sediff_seacf1.linearity.m.rda")
+save(e_acf1.linearity.m, file="fforms/e_acf1.linearity.m.rda")
+
+entropy.linearity.m <- twowayinteraction(rfu_m4monthly, entropy, linearity, 
+                                        fulldf = monthly_training,
+                                        subsetdf = subset_monthly, grid.resolution=20, trim2=TRUE)
+save(entropy.linearity.m, file="fforms/entropy.linearity.m.rda")
+
+hwalpha.linearity.m <- twowayinteraction(rfu_m4monthly, hwalpha, linearity, 
+                                         fulldf = monthly_training,
+                                         subsetdf = subset_monthly, grid.resolution=20, trim2=TRUE)
+save(hwalpha.linearity.m, file="fforms/hwalpha.linearity.m.rda")
+
+
+diff1y_acf5.linearity.m <- twowayinteraction(rfu_m4monthly, diff1y_acf5, linearity, 
+                                         fulldf = monthly_training,
+                                         subsetdf = subset_monthly, grid.resolution=20, trim2=TRUE)
+save(diff1y_acf5.linearity.m, file="fforms/diff1y_acf5.linearity.m.rda")
+
+
+N.linearity.m <- twowayinteraction(rfu_m4monthly, N, linearity, 
+                                             fulldf = monthly_training,
+                                             subsetdf = subset_monthly, grid.resolution=20, trim2=TRUE, trim1=TRUE)
+save(N.linearity.m, file="fforms/N.linearity.m.rda")

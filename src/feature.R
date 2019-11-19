@@ -40,8 +40,7 @@ saveRDS(features_M4M, file="data/HPCfiles/features_M4M.rds")
 weekly_m4 <- Filter(function(l) l$period == "Weekly", M4)
 weekly_list <- list(359)
 for (i in 1: 359){
-  y <- weekly_m4
-  weekly_list[[i]] <- list(x=ts(weekly_m4[[1]]$x, frequency=52))
+  weekly_list[[i]] <- list(x=ts(weekly_m4[[i]]$x, frequency=52))
 }
 length(weekly_m4) # 359
 features_M4W <- seer::cal_features(weekly_list, seasonal=TRUE, m=52, lagmax=53L, database="M4", highfreq = FALSE)

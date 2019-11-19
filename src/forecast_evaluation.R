@@ -109,3 +109,60 @@ for(i in 1:48000){
 }
 
 mean(MASE_monthly) # 0.9454616
+
+## Weekly
+
+fcast.combination.m4weekly.all <- readRDS("data/HPCfiles/fcast.combination.m4weekly.all.rds")
+MASE_weekly <- rep(NA, 359)
+weekly_M4 <- Filter(function(l) l$period == "Weekly", M4)
+weekly_M4_test <- lapply(weekly_M4, function(temp){temp$xx})
+weekly_M4_training <- lapply(weekly_M4, function(temp){temp$x})
+
+MASE_weekly <- rep(NA, 359)
+
+
+cal_MASE <- function(training, test, forecast){
+  m <- 52
+  q_t <- abs(as.vector(test)-forecast)/mean(abs(diff(training, lag=52)))
+  return(mean(q_t))
+}
+
+
+for(i in 1:359){
+  insample <- weekly_M4_training[[i]]
+  outsample <- weekly_M4_test[[i]]
+  forecasts <- fcast.combination.m4weekly.all[[i]]$mean
+  #MASE_weekly[i] <- mean(mase_cal(insample, outsample, forecasts))
+  MASE_weekly[i] <- cal_MASE(insample, outsample, forecasts)
+}
+
+mean(MASE_weekly) # 1.16
+
+
+## HOURLY
+
+fcast.combination.m4hourly.all <- readRDS("data/HPCfiles/fcast.combination.m4hourly.all.rds")
+MASE_hourly <- rep(NA, 414)
+hourly_M4 <- Filter(function(l) l$period == "Hourly", M4)
+hourly_M4_test <- lapply(hourly_M4, function(temp){temp$xx})
+hourly_M4_training <- lapply(hourly_M4, function(temp){temp$x})
+
+MASE_hourly <- rep(NA, 414)
+
+
+cal_MASE <- function(training, test, forecast){
+  m <- 1
+  q_t <- abs(as.vector(test)-forecast)/mean(abs(diff(training)))
+  return(mean(q_t))
+}
+
+
+for(i in 1:414){
+  insample <- hourly_M4_training[[i]]
+  outsample <- hourly_M4_test[[i]]
+  forecasts <- fcast.combination.m4hourly.all[[i]]$mean
+  MASE_hourly[i] <- mean(mase_cal(insample, outsample, forecasts))
+  #MASE_weekly[i] <- cal_MASE(insample, outsample, forecasts)
+}
+
+mean(MASE_hourly) # 0.81

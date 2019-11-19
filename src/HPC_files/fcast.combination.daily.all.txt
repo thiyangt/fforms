@@ -1,0 +1,50 @@
+
+R version 3.5.1 (2018-07-02) -- "Feather Spray"
+Copyright (C) 2018 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> ## ---- pkg
+> library(seer)
+> 
+> ## ---- data
+> load("fforms/dailym4_votes.rda")
+> library(M4comp2018)
+> data(M4)
+> daily_m4 <- Filter(function(l) l$period == "Daily", M4)
+> ## convert data into msts object
+> dailym4_msts <- lapply(daily_m4, function(temp){
++   temp$x <- convert_msts(temp$x, "daily")
++   return(temp)
++ })
+> 
+> 
+> ## ---- calculations
+> models.weights <- fforms_ensemble(dailym4_votes, threshold = 0.6)
+> fcast.combination.m4daily.all <- fforms_combinationforecast(models.weights, dailym4_msts, "M4", 14)
+Error in shapiro.test(Y_residuals[3:n]) : 
+  sample size must be between 3 and 5000
+Calls: fforms_combinationforecast ... <Anonymous> -> .f -> <Anonymous> -> twoTL -> shapiro.test
+In addition: Warning messages:
+1: In bats(as.numeric(y), use.box.cox = use.box.cox, use.trend = use.trend,  :
+  optim() did not converge.
+2: In bats(as.numeric(y), use.box.cox = use.box.cox, use.trend = use.trend,  :
+  optim() did not converge.
+3: In bats(as.numeric(y), use.box.cox = use.box.cox, use.trend = use.trend,  :
+  optim() did not converge.
+4: In bats(as.numeric(y), use.box.cox = use.box.cox, use.trend = use.trend,  :
+  optim() did not converge.
+Execution halted
