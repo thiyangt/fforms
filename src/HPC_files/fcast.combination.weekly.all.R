@@ -11,7 +11,7 @@ weekly_m4 <- Filter(function(l) l$period == "Weekly", M4)
 weekly_list <- list(359)
 for (i in 1: 359){
   y <- weekly_m4
-  weekly_list[[i]] <- list(x=ts(weekly_m4[[1]]$x, frequency=52))
+  weekly_list[[i]] <- list(x=ts(weekly_m4[[i]]$x, frequency=52))
 }
 
 ## ---- calculations
