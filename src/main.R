@@ -1008,9 +1008,92 @@ plot_pdp_YMH_linearity <- ggplot(linearity_YMH, aes(x=linearity, y=mean, color=f
 plot_pdp_YMH_linearity+xlim(-15,15)
 
 
-## ----linearity1
+## ----y2dpdp
+load("data/HPCfiles/lmres_acf1.linearityrmout.y.rda")
+colNamesls <- colnames(lmres_acf1.linearityrmout.y)[27:36]
+
+keep.modelnames <- c("ARIMA", "ARMA.AR.MA", "ETS.dampedtrend", "ETS.notrendnoseasonal",
+                     "ETS.trend", "nn", "rw", "rwd", "theta", "wn")
+keepy <- c(keep.modelnames, c("lmres_acf1", "linearity"))
+lmres_acf1.linearityrmout.y <- lmres_acf1.linearityrmout.y[, names(lmres_acf1.linearityrmout.y) %in% keepy]
+lmres_acf1.linearityrmout.y.long <- gather(lmres_acf1.linearityrmout.y, class, probability, "ARIMA":"wn", factor_key = TRUE)
+lmres_acf1.linearityrmout.y.long <- lmres_acf1.linearityrmout.y.long %>%
+  mutate(class = recode(class, nn="nn",
+                        theta = "theta",
+                        wn = "wn",
+                        "ARMA.AR.MA" = "ARMA",
+                        ARIMA = "ARIMA",
+                        "ETS.notrendnoseasonal" = "ETS_NTNS",
+                        "ETS.dampedtrend" = "ETS_DT",
+                        "ETS.trend" = "ETS_T",
+                        "rwd" = "rwd",
+                        "rw" = "rw" ))
+lmres_acf1.linearityrmout.y.long$class <- factor(lmres_acf1.linearityrmout.y.long$class,
+                                                 levels = c("rw", "rwd", "theta", "nn", "wn", "ARIMA","ETS_T", "ETS_DT", "ETS_NTNS",
+                                                             "ARMA"))
+
+y1 <- lmres_acf1.linearityrmout.y.long %>%
+  ggplot(aes(y = lmres_acf1, x = linearity, fill = probability)) +
+  geom_raster() +
+  theme(axis.text.x = element_text(angle = 90)) +
+  facet_wrap(~class, ncol=10) +
+  scale_fill_viridis_c(option = "A", direction = -1, breaks=c(0,0.45,20),
+                       limits=c(0,0.45))+
+  theme(strip.text.x = element_text(size = 10))+ylim(-1,1)
+
+load("~/PhD_journey/fforms/data/HPCfiles/diff1y_acf1.linearityrmout.y.rda")
+colNamesls <- colnames(diff1y_acf1.linearityrmout.y)[27:36]
+
+keep.modelnames <- c("ARIMA", "ARMA.AR.MA", "ETS.dampedtrend", "ETS.notrendnoseasonal",
+                     "ETS.trend", "nn", "rw", "rwd", "theta", "wn")
+keepy <- c(keep.modelnames, c("diff1y_acf1", "linearity"))
+diff1y_acf1.linearityrmout.y <- diff1y_acf1.linearityrmout.y[, names(diff1y_acf1.linearityrmout.y) %in% keepy]
+diff1y_acf1.linearityrmout.y.long <- gather(diff1y_acf1.linearityrmout.y, class, probability, "ARIMA":"wn", factor_key = TRUE)
+diff1y_acf1.linearityrmout.y.long <- diff1y_acf1.linearityrmout.y.long %>%
+  mutate(class = recode(class, nn="nn",
+                        theta = "theta",
+                        wn = "wn",
+                        "ARMA.AR.MA" = "ARMA",
+                        ARIMA = "ARIMA",
+                        "ETS.notrendnoseasonal" = "ETS_NTNS",
+                        "ETS.dampedtrend" = "ETS_DT",
+                        "ETS.trend" = "ETS_T",
+                        "rwd" = "rwd",
+                        "rw" = "rw" ))
+diff1y_acf1.linearityrmout.y.long$class <- factor(diff1y_acf1.linearityrmout.y.long$class,
+                                                  levels = c("rw", "rwd", "theta", "nn", "wn", "ARIMA","ETS_T", "ETS_DT", "ETS_NTNS",
+                                                             "ARMA"))
+
+y2 <- diff1y_acf1.linearityrmout.y.long %>%
+  ggplot(aes(y = diff1y_acf1, x = linearity, fill = probability)) +
+  geom_raster() +
+  theme(axis.text.x = element_text(angle = 90)) +
+  facet_wrap(~class, ncol=10) +
+  scale_fill_viridis_c(option = "A", direction = -1, breaks=c(0,0.45,100),
+                       limits=c(0,0.45))+
+  theme(strip.text.x = element_text(size = 10))+ylim(-1,1)
+
+y1/y2
+
+## ----m2dpdp
 
 
+## ----h2dpdp
+load("data/HPCfiles/linearity.sediff_seacf1.h.rda")
+colNamesss <- colnames(linearity.sediff_seacf1.h)[28:37]
 
+keep.modelnames <- c("tbats", "nn", "stlar", "rw", "theta", "mstlarima")
+keepd <- c(keep.modelnames, c("linearity", "sediff_seacf1"))
+linearity.sediff_seacf1.h <- linearity.sediff_seacf1.h[, names(linearity.sediff_seacf1.h) %in% keepd]
+linearity.sediff_seacf1.h.long <- gather(linearity.sediff_seacf1.h, class, probability, "mstlarima":"theta", factor_key = TRUE)
+linearity.sediff_seacf1.h.long$class <- factor(linearity.sediff_seacf1.h.long$class,
+                                               levels = c("tbats", "nn", "stlar", "rw",  "mstlarima", "theta"))
 
-
+linearity.sediff_seacf1.h.long %>%
+  ggplot(aes(x = linearity, y = sediff_seacf1, fill = probability)) +
+  geom_raster() +
+  theme(axis.text.x = element_text(angle = 90)) +
+  facet_wrap(~class, ncol=6) +
+  scale_fill_viridis_c(option = "A", direction = -1, breaks=c(0,0.2,100),
+                       limits=c(0,0.2))+
+  theme(strip.text.x = element_text(size = 10))+ylab("sediff_seacf1")
