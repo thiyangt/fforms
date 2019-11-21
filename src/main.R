@@ -1076,6 +1076,99 @@ y2 <- diff1y_acf1.linearityrmout.y.long %>%
 y1/y2
 
 ## ----m2dpdp
+load("data/HPCfiles/sediff_seacf1.linearity.m.rda")
+colNamesds <-colnames(sediff_seacf1.linearity.m)[32:48]
+keep.modelnames <- c("ETS.notrendnoseasonal","nn", "rw","snaive","stlar","tbats","theta")
+keepm <- c(keep.modelnames, c("sediff_seacf1", "linearity"))
+sediff_seacf1.linearity.m <- sediff_seacf1.linearity.m[, names(sediff_seacf1.linearity.m) %in% keepm]
+sediff_seacf1.linearity.m.long <- gather(sediff_seacf1.linearity.m, class, probability, "ETS.notrendnoseasonal":"theta", factor_key = TRUE)
+sediff_seacf1.linearity.m.long <- sediff_seacf1.linearity.m.long %>%
+  mutate(class = recode(class, "ARIMA"="ARIMA", "ARMA.AR.MA"="ARMA", 
+                        "ETS.dampedtrend"="ETS_DT", "ETS.dampedtrendseasonal"="ETS_DTS",
+                        "ETS.notrendnoseasonal"="ETS_NTNS", "ETS.seasonal"="ETS_S", 
+                        "ETS.trend"="ETS_T","ETS.trendseasonal"="ETS_TS"  ,"nn"="nn", "rw"="rw",
+                        "rwd"="rwd", "SARIMA"="SARIMA","snaive"="snaive","stlar"="stlar","tbats"="tbats","theta"="theta", "wn"="wn"))
+sediff_seacf1.linearity.m.long$class <- factor(sediff_seacf1.linearity.m.long$class,
+                                               levels = c("stlar","nn", "theta", "tbats","snaive", "rw", "ETS_NTNS"))
+m12d <- sediff_seacf1.linearity.m.long %>%
+  ggplot(aes(y = sediff_seacf1, x = linearity, fill = probability)) +
+  geom_raster() +
+  theme(axis.text.x = element_text(angle = 90)) +
+  facet_wrap(~class, ncol=8) +
+  scale_fill_viridis_c(breaks=c(0,0.15,100),
+                       limits=c(0,0.15), option = "A", direction = -1)+
+  theme(strip.text.x = element_text(size = 10))
+
+load("data/HPCfiles/stability.linearity.m.rda")
+colNamesds <-colnames(stability.linearity.m)[32:48]
+keep.modelnames <- c("ETS.notrendnoseasonal","nn", "rw","snaive","stlar","tbats","theta")
+keepm <- c(keep.modelnames, c("stability", "linearity"))
+stability.linearity.m <- stability.linearity.m[, names(stability.linearity.m) %in% keepm]
+stability.linearity.m.long <- gather(stability.linearity.m, class, probability, "ETS.notrendnoseasonal":"theta", factor_key = TRUE)
+stability.linearity.m.long <- stability.linearity.m.long %>%
+  mutate(class = recode(class, "ARIMA"="ARIMA", "ARMA.AR.MA"="ARMA", 
+                        "ETS.dampedtrend"="ETS_DT", "ETS.dampedtrendseasonal"="ETS_DTS",
+                        "ETS.notrendnoseasonal"="ETS_NTNS", "ETS.seasonal"="ETS_S", 
+                        "ETS.trend"="ETS_T","ETS.trendseasonal"="ETS_TS"  ,"nn"="nn", "rw"="rw",
+                        "rwd"="rwd", "SARIMA"="SARIMA","snaive"="snaive","stlar"="stlar","tbats"="tbats","theta"="theta", "wn"="wn"))
+stability.linearity.m.long$class <- factor(stability.linearity.m.long$class,
+                                           levels = c("stlar","nn", "theta", "tbats","snaive", "rw", "ETS_NTNS"))
+m22d <- stability.linearity.m.long %>%
+  ggplot(aes(y = stability, x = linearity, fill = probability)) +
+  geom_raster() +
+  theme(axis.text.x = element_text(angle = 90)) +
+  facet_wrap(~class, ncol=8) +
+  scale_fill_viridis_c(breaks=c(0,0.2,100),
+                       limits=c(0,0.2), option = "A", direction = -1)+
+  theme(strip.text.x = element_text(size = 10))
+
+load("data/HPCfiles/e_acf1.linearity.m.rda")
+colNamesds <-colnames(e_acf1.linearity.m)[32:48]
+keep.modelnames <- c("ETS.notrendnoseasonal","nn", "rw","snaive","stlar","tbats","theta")
+keepm <- c(keep.modelnames, c("e_acf1", "linearity"))
+e_acf1.linearity.m <- e_acf1.linearity.m[, names(e_acf1.linearity.m) %in% keepm]
+e_acf1.linearity.m.long <- gather(e_acf1.linearity.m, class, probability, "ETS.notrendnoseasonal":"theta", factor_key = TRUE)
+e_acf1.linearity.m.long <- e_acf1.linearity.m.long %>%
+  mutate(class = recode(class, "ARIMA"="ARIMA", "ARMA.AR.MA"="ARMA", 
+                        "ETS.dampedtrend"="ETS_DT", "ETS.dampedtrendseasonal"="ETS_DTS",
+                        "ETS.notrendnoseasonal"="ETS_NTNS", "ETS.seasonal"="ETS_S", 
+                        "ETS.trend"="ETS_T","ETS.trendseasonal"="ETS_TS"  ,"nn"="nn", "rw"="rw",
+                        "rwd"="rwd", "SARIMA"="SARIMA","snaive"="snaive","stlar"="stlar","tbats"="tbats","theta"="theta", "wn"="wn"))
+e_acf1.linearity.m.long$class <- factor(e_acf1.linearity.m.long$class,
+                                        levels = c("stlar","nn", "theta", "tbats", "snaive", "rw", "ETS_NTNS"))
+m32d <- e_acf1.linearity.m.long %>%
+  ggplot(aes(y = e_acf1, x = linearity, fill = probability)) +
+  geom_raster() +
+  theme(axis.text.x = element_text(angle = 90)) +
+  facet_wrap(~class, ncol=8) +
+  scale_fill_viridis_c(breaks=c(0,0.2,100),
+                       limits=c(0,0.2), option = "A", direction = -1)+
+  theme(strip.text.x = element_text(size = 10))
+
+load("data/HPCfiles/hwalpha.linearity.m.rda")
+colNamesds <-colnames(hwalpha.linearity.m)[32:48]
+keep.modelnames <- c("ETS.notrendnoseasonal","nn", "rw","snaive","stlar","tbats","theta")
+keepm <- c(keep.modelnames, c("hwalpha", "linearity"))
+hwalpha.linearity.m <- hwalpha.linearity.m[, names(hwalpha.linearity.m) %in% keepm]
+hwalpha.linearity.m.long <- gather(hwalpha.linearity.m, class, probability, "ETS.notrendnoseasonal":"theta", factor_key = TRUE)
+hwalpha.linearity.m.long <- hwalpha.linearity.m.long %>%
+  mutate(class = recode(class, "ARIMA"="ARIMA", "ARMA.AR.MA"="ARMA", 
+                        "ETS.dampedtrend"="ETS_DT", "ETS.dampedtrendseasonal"="ETS_DTS",
+                        "ETS.notrendnoseasonal"="ETS_NTNS", "ETS.seasonal"="ETS_S", 
+                        "ETS.trend"="ETS_T","ETS.trendseasonal"="ETS_TS"  ,"nn"="nn", "rw"="rw",
+                        "rwd"="rwd", "SARIMA"="SARIMA","snaive"="snaive","stlar"="stlar","tbats"="tbats","theta"="theta", "wn"="wn"))
+hwalpha.linearity.m.long$class <- factor(hwalpha.linearity.m.long$class,
+                                         levels = c("stlar","nn", "theta", "tbats",  "snaive", "rw", "ETS_NTNS"))
+m42d <- hwalpha.linearity.m.long %>%
+  ggplot(aes(y = hwalpha, x = linearity, fill = probability)) +
+  geom_raster() +
+  theme(axis.text.x = element_text(angle = 90)) +
+  facet_wrap(~class, ncol=8) +
+  scale_fill_viridis_c(breaks=c(0,0.2,100),
+                       limits=c(0,0.2), option = "A", direction = -1)+
+  theme(strip.text.x = element_text(size = 10))
+
+m12d/m22d/m32d/m42d
 
 
 ## ----h2dpdp

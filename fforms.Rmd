@@ -508,6 +508,18 @@ The vote-matrix information for the yearly, monthly and hourly data are presente
 ```
 
 
+```{r y2dpdp,  fig.height=6, fig.width=15,fig.cap="Partial dependence plots for linearity for yearly monthly and hourly series. The shading shows the 95\\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class. ", fig.pos="h", dev="pdf"}
+```
+
+```{r m2dpdp,  fig.height=9, fig.width=10,fig.cap="Partial dependence plots for linearity for yearly monthly and hourly series. The shading shows the 95\\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class. ", fig.pos="h", dev="pdf"}
+```
+
+
+
+
+```{r h2dpdp,  fig.height=3, fig.width=10,fig.cap="Partial dependence plots for linearity for yearly monthly and hourly series. The shading shows the 95\\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class. ", fig.pos="h", dev="pdf"}
+```
+
 
 
 

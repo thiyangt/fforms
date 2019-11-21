@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.7.18)  18 NOV 2019 16:29
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.7.18)  21 NOV 2019 14:53
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2112,30 +2112,55 @@ Package pdftex.def Info: figure/linearity-1.pdf  used on input line 832.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
+<figure/y2dpdp-1.pdf, id=415, 1084.05pt x 433.62pt>
+File: figure/y2dpdp-1.pdf Graphic file (type pdf)
+<use figure/y2dpdp-1.pdf>
+Package pdftex.def Info: figure/y2dpdp-1.pdf  used on input line 841.
+(pdftex.def)             Requested size: 455.24411pt x 182.0993pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<figure/m2dpdp-1.pdf, id=416, 722.7pt x 650.43pt>
+File: figure/m2dpdp-1.pdf Graphic file (type pdf)
+<use figure/m2dpdp-1.pdf>
+Package pdftex.def Info: figure/m2dpdp-1.pdf  used on input line 850.
+(pdftex.def)             Requested size: 455.24411pt x 409.72343pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<figure/h2dpdp-1.pdf, id=417, 722.7pt x 216.81pt>
+File: figure/h2dpdp-1.pdf Graphic file (type pdf)
+<use figure/h2dpdp-1.pdf>
+Package pdftex.def Info: figure/h2dpdp-1.pdf  used on input line 859.
+(pdftex.def)             Requested size: 455.24411pt x 136.57448pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
 [21
 
  <./figure/pdpyearlyurpp-1.pdf> <./figure/pdpmonthlyseasonality-1.pdf>] [22 <./
 figure/pdpmonthlyT-1.pdf> <./figure/seasonalityhourly-1.pdf> <./figure/entropyh
 ourly-1.pdf> <./figure/curvaturehourly-1.pdf>] [23 <./figure/ypacf5-1.pdf> <./f
-igure/pdpyearlytrend-1.pdf>] [24 <./figure/linearity-1.pdf>]
+igure/pdpyearlytrend-1.pdf>] [24 <./figure/linearity-1.pdf> <./figure/y2dpdp-1.
+pdf>] [25 <./figure/m2dpdp-1.pdf> <./figure/h2dpdp-1.pdf>]
 
 Package hyperref Warning: Difference (2) between bookmark levels is greater 
-(hyperref)                than one, level fixed on input line 858.
+(hyperref)                than one, level fixed on input line 885.
 
 
 Package hyperref Warning: The anchor of a bookmark and its parent's must not
-(hyperref)                be the same. Added a new anchor on input line 858.
+(hyperref)                be the same. Added a new anchor on input line 885.
 
-[25
+[26
 
-] [26] [27] [28] [29] [30] [31]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 956.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 956.
+] [27] [28] [29] [30] [31] [32]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 983.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 983.
 (./fforms.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 956.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 956.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 983.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 983.
 Package rerunfilecheck Info: File `fforms.out' has not changed.
-(rerunfilecheck)             Checksum: 1F6EA99AC64393BAD63AD09B100D5B96;9798.
+(rerunfilecheck)             Checksum: DC4625DD5261D0888B2E74C0C2F7770A;9798.
 
 Package biblatex Warning: Please rerun LaTeX.
 (biblatex)                Page breaks have changed.
@@ -2143,17 +2168,17 @@ Package biblatex Warning: Please rerun LaTeX.
 Package logreq Info: Writing requests to 'fforms.run.xml'.
 \openout1 = `fforms.run.xml'.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 956.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 983.
  )
 (\end occurred inside a group at level 1)
 
 ### semi simple group (level 1) entered at line 178 (\begingroup)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 43217 strings out of 494553
- 804032 string characters out of 6175442
- 1230336 words of memory out of 5000000
- 45838 multiletter control sequences out of 15000+600000
+ 43239 strings out of 494553
+ 804519 string characters out of 6175442
+ 1231029 words of memory out of 5000000
+ 45853 multiletter control sequences out of 15000+600000
  640700 words of font info for 348 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  62i,15n,92p,1809b,18574s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -2175,10 +2200,10 @@ haminitalagala/Library/TinyTeX/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb><
 /Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/fonts/type1/urw/palat
 ino/uplr8a.pfb></Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/fonts
 /type1/urw/palatino/uplri8a.pfb>
-Output written on fforms.pdf (31 pages, 858787 bytes).
+Output written on fforms.pdf (32 pages, 911911 bytes).
 PDF statistics:
- 686 PDF objects out of 1000 (max. 8388607)
- 590 compressed objects within 6 object streams
- 159 named destinations out of 1000 (max. 500000)
- 31192 words of extra memory for PDF output out of 35830 (max. 10000000)
+ 774 PDF objects out of 1000 (max. 8388607)
+ 609 compressed objects within 7 object streams
+ 163 named destinations out of 1000 (max. 500000)
+ 31207 words of extra memory for PDF output out of 35830 (max. 10000000)
 
