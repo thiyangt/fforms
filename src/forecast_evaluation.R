@@ -131,12 +131,40 @@ cal_MASE <- function(training, test, forecast){
 for(i in 1:359){
   insample <- weekly_M4_training[[i]]
   outsample <- weekly_M4_test[[i]]
-  forecasts <- fcast.combination.m4weekly.all[[i]]$mean
-  MASE_weekly[i] <- mean(mase_cal(insample, outsample, forecasts))
-  #MASE_weekly[i] <- cal_MASE(insample, outsample, forecasts)
+  forecasts <- tryCatch({fcast.combination.m4weekly.all[[i]]$mean}, error=function(e){return(NA)})
+  #MASE_weekly[i] <- mean(mase_cal(insample, outsample, forecasts))
+  MASE_weekly[i] <- cal_MASE(insample, outsample, forecasts)
 }
 
-mean(MASE_weekly) # 1.16
+mean(MASE_weekly, na.rm=TRUE) # 2.55
+
+## Daily
+
+fcast.combination.m4weekly.all <- readRDS("data/HPCfiles/fcast.combination.m4daily.all.rds")
+MASE_daily <- rep(NA, 4227)
+daily_M4 <- Filter(function(l) l$period == "Daily", M4)
+daily_M4_test <- lapply(daily_M4, function(temp){temp$xx})
+daily_M4_training <- lapply(daily_M4, function(temp){temp$x})
+
+MASE_daily <- rep(NA, 4227)
+
+
+cal_MASE <- function(training, test, forecast){
+  m <- 1
+  q_t <- abs(as.vector(test)-forecast)/mean(abs(diff(training, lag=1)))
+  return(mean(q_t))
+}
+
+
+for(i in 1:4227){
+  insample <- daily_M4_training[[i]]
+  outsample <- daily_M4_test[[i]]
+  forecasts <- tryCatch({fcast.combination.m4daily.all[[i]]$mean}, error=function(e){return(NA)})
+  #MASE_weekly[i] <- mean(mase_cal(insample, outsample, forecasts))
+  MASE_daily[i] <- cal_MASE(insample, outsample, forecasts)
+}
+
+mean(MASE_daily, na.rm=TRUE) # 3.42
 
 
 ## HOURLY

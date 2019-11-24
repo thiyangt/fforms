@@ -15,6 +15,12 @@ load("phdproject2/subset_monthly.rda")
 subset_monthly <- subset_monthly[,1:30]
 
 
+stability.diff1y_acf1.m <- twowayinteraction(rfu_m4monthly, stability, diff1y_acf1, 
+                                             fulldf = monthly_training,
+                                             subsetdf = subset_monthly, grid.resolution=20, trim1=TRUE)
+save(stability.diff1y_acf1.m, file="fforms/stability.diff1y_acf1.m.rda")
+
+
 stability.linearity.m <- twowayinteraction(rfu_m4monthly, stability, linearity, 
                                                fulldf = monthly_training,
                                                subsetdf = subset_monthly, grid.resolution=20, trim2=TRUE)

@@ -558,6 +558,70 @@ plot_pdp_monthlyN <- ggplot(data = NgridM_long, aes_string(x = NgridM_long$"T", 
   facet_wrap(. ~ class, ncol=9)+theme(strip.text.x = element_text(size = 10))+xlab("length of time series (T)")+ylab("probability of selecting forecast-models")
 plot_pdp_monthlyN
 
+## ---- pdpmonthlyhourlyStability
+load("data/HPCfiles/stabilitygridM.rda")
+keep.modelnamesM <- c("ARMA.AR.MA", "wn",
+                      "rwd", "rw",
+                      "nn", "theta",
+                      "ETS.seasonal", "stlar","snaive")
+keepStability <- c(keep.modelnamesM, "stability")
+stabilitygridM <- stabilitygridM[, names(stabilitygridM) %in% keepStability]
+stabilitygridM_long <- gather(stabilitygridM, class, probability, "ARMA.AR.MA":"wn", factor_key = TRUE)
+
+stabilitygridM_long <- stabilitygridM_long %>%
+  mutate(class = recode(class, "ARMA.AR.MA"="ARMA", "ETS.seasonal"="ETS_S", 
+                       "wn"="wn",
+                        "rwd"="rwd", "rw"="rw","nn"="nn", "theta"="theta", "stlar"="stlar", "snaive"="snaive"))
+
+stabilitygridM_long$class <- factor(stabilitygridM_long$class,
+                            levels = c("ARMA", "wn",
+                                       "rwd", "rw",
+                                       "nn", "theta",
+                                       "ETS_S", "stlar","snaive"))
+
+load("data/HPCfiles/stabilitygridH.rda")
+keep.modelnamesH <- c("rwd", "rw")
+keepStability <- c(keep.modelnamesH, "stability")
+stabilitygridH <- stabilitygridH[, names(stabilitygridH) %in% keepStability]
+stabilitygridH_long <- gather(stabilitygridH, class, probability, "rw":"rwd", factor_key = TRUE)
+
+stabilitygridH_long <- stabilitygridH_long %>%
+  mutate(class = recode(class, "rwd"="rwd", "rw"="rw"))
+
+stabilitygridH_long$class <- factor(stabilitygridH_long$class,
+                                    levels = c( "rwd", "rw"))
+
+stability1_long_mean <- stabilitygridM_long%>%
+  group_by(stability, class) %>%
+  summarise(n=n(), mean=mean(probability), sd=sd(probability)) %>%
+  mutate(sem = sd/sqrt(n-1),
+         CI_lower = mean+qt((1-0.95)/2, n-1)*sem,
+         CI_upper = mean - qt((1-0.95)/2, n-1)*sem)
+stability2_long_mean <- stabilitygridH_long %>%
+  group_by(stability, class) %>%
+  summarise(n=n(), mean=mean(probability), sd=sd(probability)) %>%
+  mutate(sem = sd/sqrt(n-1),
+         CI_lower = mean+qt((1-0.95)/2, n-1)*sem,
+         CI_upper = mean - qt((1-0.95)/2, n-1)*sem)
+
+stability_MH <- dplyr::bind_rows(stability1_long_mean, stability2_long_mean)
+stability_MH$feature <- c(rep("Monthly", 180), rep("Hourly", 40))
+stability_MH$class <- factor(stability_MH$class,levels = c("ARMA", "wn",
+                                    "rwd", "rw",
+                                    "nn", "theta",
+                                    "ETS_S", "stlar","snaive"))
+
+plot_pdp_MH <- ggplot(stability_MH, aes(x=stability, y=mean, color=feature))+
+  geom_line(aes(x=stability, y=mean, color=feature), size = 1)+
+  geom_ribbon(aes(ymin=CI_lower, ymax=CI_upper, fill=feature),alpha=0.4, colour = NA)+
+  facet_wrap(. ~ class, ncol=9)+
+  theme(axis.text.x = element_text(angle = 90), text = element_text(size=16), axis.title = element_text(size = 14))+
+  theme(strip.text.x = element_text(size = 16))+xlab("stability")+
+  ylab("probability of selecting forecast-models")+
+  theme(legend.position="bottom", legend.title=element_blank())+
+  scale_colour_manual("",values=c("#1b9e77", "#d95f02"))+
+  scale_fill_manual("",values=c("#1b9e77", "#d95f02"))
+plot_pdp_MH
 
 
 ## ---- seasonalityhourly
@@ -712,8 +776,6 @@ ggplot(diff1yacf1_YM, aes(x=diff1y_acf1, y=mean, color=feature))+
   theme(legend.position="bottom", legend.title=element_blank())+
   scale_colour_manual("",values=c("#1b9e77", "#d95f02"))+
   scale_fill_manual("",values=c("#1b9e77", "#d95f02"))
-
-
 
 
 

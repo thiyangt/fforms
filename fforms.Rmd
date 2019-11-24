@@ -494,6 +494,16 @@ The vote-matrix information for the yearly, monthly and hourly data are presente
 ```{r curvaturehourly, fig.height=4.5, fig.width=15, fig.cap="Partial dependence plots for curvature for hourly series. The shading shows the 95\\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class.", fig.pos="h"}
 ```
 
+```{r pdpmonthlyhourlyStability, fig.height=4.5, fig.width=15, fig.cap="Partial dependence plots for stability for monthly and hourly series. The shading shows the 95\\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class.", fig.pos="h"}
+
+```
+
+```{r diff1yacf1, fig.height=4.5, fig.width=15, fig.cap="Partial dependence plots for diff1y\\_acf1 for yearly and monthly series. The shading shows the 95\\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class.", fig.pos="h"}
+
+```
+
+
+
 ```{r ypacf5, fig.height=4.5, fig.width=15, fig.cap="Partial dependence plots for y\\_pacf5 for yearly monthly and hourly series. The shading shows the 95\\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class. ", fig.pos="h"}
 ```
 

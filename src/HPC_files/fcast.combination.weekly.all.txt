@@ -36,9 +36,8 @@ Type 'q()' to quit R.
 > ## ---- calculations
 > models.weights <- fforms_ensemble(weeklym4_votes, threshold = 0.6)
 > fcast.combination.m4weekly.all <- fforms_combinationforecast(models.weights, weekly_list, "M4", 13)
-Error in stl(ts(deseas, frequency = msts[i]), s.window = s.window[i],  : 
-  series is not periodic or has less than two periods
-Calls: fforms_combinationforecast -> <Anonymous> -> .f -> stlf -> mstl -> stl
+Error in fcast[[i]] : subscript out of bounds
+Calls: fforms_combinationforecast -> <Anonymous> -> .f -> as.vector
 In addition: Warning messages:
 1: In auto.arima(training, seasonal = TRUE) :
   Stepwise search was stopped early due to reaching the model number limit: `nmodels = 94`
