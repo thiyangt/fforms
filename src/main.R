@@ -606,10 +606,8 @@ stability2_long_mean <- stabilitygridH_long %>%
 
 stability_MH <- dplyr::bind_rows(stability1_long_mean, stability2_long_mean)
 stability_MH$feature <- c(rep("Monthly", 180), rep("Hourly", 40))
-stability_MH$class <- factor(stability_MH$class,levels = c("ARMA", "wn",
-                                    "rwd", "rw",
-                                    "nn", "theta",
-                                    "ETS_S", "stlar","snaive"))
+stability_MH$feature <- factor(stability_MH$feature,levels = c("Monthly", "Hourly"))
+
 
 plot_pdp_MH <- ggplot(stability_MH, aes(x=stability, y=mean, color=feature))+
   geom_line(aes(x=stability, y=mean, color=feature), size = 1)+
@@ -619,8 +617,8 @@ plot_pdp_MH <- ggplot(stability_MH, aes(x=stability, y=mean, color=feature))+
   theme(strip.text.x = element_text(size = 16))+xlab("stability")+
   ylab("probability of selecting forecast-models")+
   theme(legend.position="bottom", legend.title=element_blank())+
-  scale_colour_manual("",values=c("#1b9e77", "#d95f02"))+
-  scale_fill_manual("",values=c("#1b9e77", "#d95f02"))
+  scale_colour_manual("",values=c("#d95f02", "#1b9e77"))+
+  scale_fill_manual("",values=c("#d95f02", "#1b9e77"))
 plot_pdp_MH
 
 
@@ -764,7 +762,7 @@ diff1yacf1_YM$feature <- c(rep("Yearly", dim(diff1yacf1grid_long_mean)[1]),
 diff1yacf1_YM$class <- factor(diff1yacf1_YM$class,
                             levels = c("rwd", "ETS_NTNS", "ETS_DT", "ETS_T", "ARIMA", 
                                        "theta", "nn", "wn","tbats"))
-
+diff1yacf1_YM$feature <- factor(diff1yacf1_YM$feature,levels = c("Yearly", "Monthly"))
 
 ggplot(diff1yacf1_YM, aes(x=diff1y_acf1, y=mean, color=feature))+
   geom_line(aes(x=diff1y_acf1, y=mean, color=feature), size = 1)+
@@ -774,8 +772,8 @@ ggplot(diff1yacf1_YM, aes(x=diff1y_acf1, y=mean, color=feature))+
   theme(strip.text.x = element_text(size = 16))+xlab("diff1y_acf1")+
   ylab("probability of selecting forecast-models")+
   theme(legend.position="bottom", legend.title=element_blank())+
-  scale_colour_manual("",values=c("#d95f02",  "#7570b3"))+
-  scale_fill_manual("",values=c("#d95f02", "#7570b3"))
+  scale_colour_manual("",values=c("#7570b3", "#d95f02"))+
+  scale_fill_manual("",values=c("#7570b3", "#d95f02"))
 
 
 
@@ -846,6 +844,7 @@ y_pacf5_YMH$feature <- c(rep("Yearly", dim(y_pacf5y_long_mean)[1]),
                          rep("Hourly", dim(y_pacf5h_long_mean)[1]))
 y_pacf5_YMH$class <- factor(y_pacf5_YMH$class,
                             levels = c("rw", "rwd", "tbats","stlar","wn", "theta", "nn","mstlarima", "mstlets"))
+y_pacf5_YMH$feature <- factor(y_pacf5_YMH$feature,levels = c("Yearly", "Monthly", "Hourly"))
 
 
 plot_pdp_YMH_y_pacf5 <- ggplot(y_pacf5_YMH, aes(x=y_pacf5, y=mean, color=feature))+
@@ -856,8 +855,8 @@ plot_pdp_YMH_y_pacf5 <- ggplot(y_pacf5_YMH, aes(x=y_pacf5, y=mean, color=feature
   theme(strip.text.x = element_text(size = 16))+xlab("y_pacf5")+
   ylab("probability of selecting forecast-models")+
   theme(legend.position="bottom", legend.title=element_blank())+
-  scale_colour_manual("",values=c("#1b9e77", "#d95f02","#7570b3"))+
-  scale_fill_manual("",values=c("#1b9e77", "#d95f02","#7570b3"))
+  scale_colour_manual("",values=c("#7570b3", "#d95f02", "#1b9e77"))+
+  scale_fill_manual("",values=c("#7570b3", "#d95f02", "#1b9e77"))
 plot_pdp_YMH_y_pacf5
 
 
@@ -942,6 +941,7 @@ trend_YMH$class <- factor(trend_YMH$class,
                             levels = c("snaive","rw", "rwd", "ETS_NTNS","ETS_DT", "ETS_T", "ETS_DTS",
                                        "ETS_TS", "ETS_S","tbats","stlar", "SARIMA",
                                        "ARIMA", "ARMA", "wn", "theta", "nn", "mstlarima"))
+trend_YMH$feature <- factor(trend_YMH$feature,levels = c("Yearly", "Monthly", "Hourly"))
 
 
 plot_pdp_YMH <- ggplot(trend_YMH, aes(x=trend, y=mean, color=feature))+
@@ -952,8 +952,8 @@ plot_pdp_YMH <- ggplot(trend_YMH, aes(x=trend, y=mean, color=feature))+
   theme(strip.text.x = element_text(size = 16))+xlab("strength of trend")+
   ylab("probability of selecting forecast-models")+
   theme(legend.position="bottom", legend.title=element_blank())+
-  scale_colour_manual("",values=c("#1b9e77", "#d95f02","#7570b3"))+
-  scale_fill_manual("",values=c("#1b9e77", "#d95f02","#7570b3"))
+  scale_colour_manual("",values=c("#7570b3", "#d95f02", "#1b9e77"))+
+  scale_fill_manual("",values=c("#7570b3", "#d95f02", "#1b9e77"))
 plot_pdp_YMH
 
 
@@ -979,13 +979,6 @@ linearitygrid_long <- linearitygrid_long %>%
 linearitygrid_long$class <- factor(linearitygrid_long$class,
                                    levels = c("rw", "rwd", "ETS_T", "ETS_DT", "ETS_NTNS",
                                               "ARIMA", "ARMA", "wn", "theta", "nn" ))
-# 
-# plot_pdp_yearly_linearity <- ggplot(data = linearitygrid_long, aes_string(x = linearitygrid_long$linearity, y = "probability")) +
-#   stat_summary(fun.y = mean, geom = "line", col = "red", size = 1) +
-#   stat_summary(fun.data = mean_cl_normal,fill="red", geom = "ribbon", fun.args = list(mult = 1), alpha = 0.3)+ 
-#   theme(axis.text.x = element_text(angle = 90), text = element_text(size=18), axis.title = element_text(size = 16))+
-#   facet_grid(. ~ class)+theme(strip.text.x = element_text(size = 10))+xlab("strength of linearity")+ylab("probability of selecting forecast-models")
-# plot_pdp_yearly_linearity+xlim(-20,20)
 
 load("data/monthly/linearitygridM.rda")
 keep.modelnamesM <- c("ARIMA", "ARMA.AR.MA", "ETS.dampedtrend", "ETS.dampedtrendseasonal",
@@ -1008,13 +1001,6 @@ linearitygridM_long$class <- factor(linearitygridM_long$class,
                                                "ETS_TS", "ETS_S","tbats","stlar", "SARIMA",
                                                "ARIMA", "ARMA", "wn", "theta", "nn" ))
 
-#plot_pdp_monthlyL <- ggplot(data = linearitygridM_long, aes_string(x = linearitygridM_long$"linearity", y = "probability")) +
-#   stat_summary(fun.y = mean, geom = "line", col = "red", size = 1) +
-#   stat_summary(fun.data = mean_cl_normal,fill="red", geom = "ribbon", fun.args = list(mult = 1), alpha = 0.3)+ 
-#   theme(axis.text.x = element_text(angle = 90), text = element_text(size=18), axis.title = element_text(size = 16))+
-#   facet_wrap(. ~ class, ncol=9)+theme(strip.text.x = element_text(size = 10))+xlab("linearity")+ylab("probability of selecting forecast-models")
-# plot_pdp_monthlyL
-
 load("data/hourly/linearitygridH.rda")
 ## Arrange graphs for faceting
 keep.modelnames <- c("snaive", "rw", "rwd", "mstlarima", "mstlets", "tbats","stlar",
@@ -1025,14 +1011,6 @@ linearityhourly1_long <- gather(linearityhourly1 , class, probability,  "mstlari
 linearityhourly1_long$class <- factor(linearityhourly1_long$class,
                                       levels = c("snaive", "rw", "rwd", "mstlarima", "mstlets", "tbats","stlar",
                                                  "theta","nn","wn"))
-
-# plot_pdp_hourly_linearity <- ggplot(data = linearityhourly1_long, aes_string(x = linearityhourly1_long$linearity, y = "probability")) +
-#   stat_summary(fun.y = mean, geom = "line", col = "red", size = 1) +
-#   stat_summary(fun.data = mean_cl_normal,fill="red", geom = "ribbon", fun.args = list(mult = 1), alpha = 0.3)+ 
-#   theme(axis.text.x = element_text(angle = 90), text = element_text(size=16), axis.title = element_text(size = 16))+
-#   facet_grid(. ~ class)+theme(strip.text.x = element_text(size = 16))+xlab("linearity")+ylab("probability of selecting forecast-models")
-# plot_pdp_hourly_linearity
-
 
 ly_long_mean <- linearitygrid_long%>%
   group_by(linearity, class) %>%
@@ -1060,6 +1038,7 @@ linearity_YMH$class <- factor(linearity_YMH$class,
                          levels = c("snaive","rw", "rwd", "ETS_NTNS","ETS_DT", "ETS_T", "ETS_DTS",
                                     "ETS_TS", "ETS_S","tbats","stlar", "SARIMA",
                                     "ARIMA", "ARMA", "wn", "theta", "nn","mstlarima", "mstlets"))
+linearity_YMH$feature <- factor(linearity_YMH$feature,levels = c("Yearly", "Monthly", "Hourly"))
 
 
 plot_pdp_YMH_linearity <- ggplot(linearity_YMH, aes(x=linearity, y=mean, color=feature))+
@@ -1070,8 +1049,8 @@ plot_pdp_YMH_linearity <- ggplot(linearity_YMH, aes(x=linearity, y=mean, color=f
   theme(strip.text.x = element_text(size = 16))+xlab("strength of linearity")+
   ylab("probability of selecting forecast-models")+
   theme(legend.position="bottom", legend.title=element_blank())+
-  scale_colour_manual("",values=c("#1b9e77", "#d95f02","#7570b3"))+
-  scale_fill_manual("",values=c("#1b9e77", "#d95f02","#7570b3"))
+  scale_colour_manual("",values=c("#7570b3", "#d95f02", "#1b9e77"))+
+  scale_fill_manual("",values=c("#7570b3", "#d95f02", "#1b9e77"))
 plot_pdp_YMH_linearity+xlim(-15,15)
 
 
@@ -1237,7 +1216,56 @@ m42d <- hwalpha.linearity.m.long %>%
 
 m12d/m22d/m32d/m42d
 
+## ---- thetapdp
+load("data/HPCfiles/stability.trend.m.rda")
+colNamesds <-colnames(stability.trend.m)[32:48]
+keep.modelnames <- c("ETS.notrendnoseasonal","nn", "rw","snaive","stlar","tbats","theta")
+keepm <- c(keep.modelnames, c("stability", "trend"))
+stability.trend.m <- stability.trend.m[, names(stability.trend.m) %in% keepm]
+stability.trend.m.long <- gather(stability.trend.m, class, probability, "theta", factor_key = TRUE)
+stability.trend.m.long$class <- factor(stability.trend.m.long$class,levels = c("theta"))
+theta1 <- stability.trend.m.long %>%
+  ggplot(aes(y = stability, x = trend, fill = probability)) +
+  geom_raster() +
+  theme(axis.text.x = element_text(angle = 90)) +
+  facet_wrap(~class, ncol=8) +
+  scale_fill_viridis_c(breaks=c(0,0.13,100),
+                       limits=c(0,0.13), option = "A", direction = -1)+
+  theme(strip.text.x = element_text(size = 10))
 
+load("data/HPCfiles/stability.N.m.rda")
+colNamesds <-colnames(stability.N.m)[32:48]
+keep.modelnames <- c("ETS.notrendnoseasonal","nn", "rw","snaive","stlar","tbats","theta")
+keepm <- c(keep.modelnames, c("stability", "N"))
+stability.N.m <- stability.N.m[, names(stability.N.m) %in% keepm]
+stability.N.m.long <- gather(stability.N.m, class, probability, "theta", factor_key = TRUE)
+stability.N.m.long$class <- factor(stability.N.m.long$class,levels = c( "theta"))
+theta2 <- stability.N.m.long %>%
+  ggplot(aes(y = stability, x = N, fill = probability)) +
+  geom_raster() +
+  theme(axis.text.x = element_text(angle = 90)) +
+  facet_wrap(~class, ncol=8) +
+  scale_fill_viridis_c(breaks=c(0,0.1,100),
+                       limits=c(0,0.1), option = "A", direction = -1)+
+  theme(strip.text.x = element_text(size = 10))
+
+load("data/HPCfiles/stability.diff1y_acf1.m.rda")
+colNamesds <-colnames(stability.diff1y_acf1.m)[32:48]
+keep.modelnames <- c("ETS.notrendnoseasonal","nn", "rw","snaive","stlar","tbats","theta")
+keepm <- c(keep.modelnames, c("stability", "diff1y_acf1"))
+stability.diff1y_acf1.m <- stability.diff1y_acf1.m[, names(stability.diff1y_acf1.m) %in% keepm]
+stability.diff1y_acf1.m.long <- gather(stability.diff1y_acf1.m, class, probability, "theta", factor_key = TRUE)
+stability.diff1y_acf1.m.long$class <- factor(stability.diff1y_acf1.m.long$class,levels = c( "theta"))
+theta3 <- stability.diff1y_acf1.m.long %>%
+  ggplot(aes(y = stability, x = diff1y_acf1, fill = probability)) +
+  geom_raster() +
+  theme(axis.text.x = element_text(angle = 90)) +
+  facet_wrap(~class, ncol=8) +
+  scale_fill_viridis_c(breaks=c(0,0.1,100),
+                       limits=c(0,0.1), option = "A", direction = -1)+
+  theme(strip.text.x = element_text(size = 10))
+
+theta1|theta2|theta3
 
 ## ----h2dpdp
 load("data/HPCfiles/linearity.sediff_seacf1.h.rda")
