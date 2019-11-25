@@ -774,8 +774,8 @@ ggplot(diff1yacf1_YM, aes(x=diff1y_acf1, y=mean, color=feature))+
   theme(strip.text.x = element_text(size = 16))+xlab("diff1y_acf1")+
   ylab("probability of selecting forecast-models")+
   theme(legend.position="bottom", legend.title=element_blank())+
-  scale_colour_manual("",values=c("#1b9e77", "#d95f02"))+
-  scale_fill_manual("",values=c("#1b9e77", "#d95f02"))
+  scale_colour_manual("",values=c("#d95f02",  "#7570b3"))+
+  scale_fill_manual("",values=c("#d95f02", "#7570b3"))
 
 
 
@@ -883,13 +883,6 @@ trendgrid_long$class <- factor(trendgrid_long$class,
                                levels = c("rw", "rwd", "ETS_T", "ETS_DT", "ETS_NTNS",
                                           "ARIMA", "ARMA", "wn", "theta", "nn" ))
 
-plot_pdp_yearly_trend <- ggplot(data = trendgrid_long, aes_string(x = trendgrid_long$trend, y = "probability")) +
-  stat_summary(fun.y = mean, geom = "line", col = "red", size = 1) +
-  stat_summary(fun.data = mean_cl_normal,fill="red", geom = "ribbon", fun.args = list(mult = 1), alpha = 0.3, se=TRUE)+ 
-  theme(axis.text.x = element_text(angle = 90), text = element_text(size=18), axis.title = element_text(size = 16))+
-  facet_grid(. ~ class)+theme(strip.text.x = element_text(size = 10))+xlab("strength of trend")+ylab("probability of selecting forecast-models")+ggtitle("Yearly")
-
-
 
 load("data/monthly/trendgridM.rda")
 keep.modelnamet <- c("ARIMA", "ARMA.AR.MA", "ETS.dampedtrend", "ETS.dampedtrendseasonal",
@@ -910,13 +903,18 @@ trendgridM_long$class <- factor(trendgridM_long$class,
                                            "ETS_TS", "ETS_S","tbats","stlar", "SARIMA",
                                            "ARIMA", "ARMA", "wn", "theta", "nn" ))
 
-plot_pdp_monthlyT <- ggplot(data = trendgridM_long, aes_string(x = trendgridM_long$trend, y = "probability")) +
-  stat_summary(fun.y = mean, geom = "line", col = "red", size = 1) +
-  stat_summary(fun.data = mean_cl_normal,fill="red", geom = "ribbon", fun.args = list(mult = 1), alpha = 0.3, se=TRUE)+ 
-  theme(axis.text.x = element_text(angle = 90), text = element_text(size=18), axis.title = element_text(size = 16))+
-  facet_wrap(. ~ class, ncol=9)+theme(strip.text.x = element_text(size = 10))+xlab("strength of trend")+ylab("probability of selecting forecast-models")+ggtitle("Monthly")
 
-#plot_pdp_yearly_trend + plot_pdp_monthlyT+plot_layout(ncol = 1, heights = c(1, 2))
+load("data/HPCfiles/trendgridH.rda")
+keep.modelnamet <- c("wn", "mstlarima")
+keeptrend <- c(keep.modelnamet, "trend")
+trendgridH <- trendgridH[, names(trendgridH) %in% keeptrend]
+trendgridH_long <- gather(trendgridH, class, probability, "mstlarima":"wn", factor_key = TRUE)
+trendgridH_long <- trendgridH_long %>%
+  mutate(class = recode(class, "mstlarima"="mstlarima", "wn"="wn"))
+trendgridH_long$class <- factor(trendgridH_long$class,
+                                levels = c("mstlarima","wn"))
+
+
 
 trend1_long_mean <- trendgrid_long%>%
   group_by(trend, class) %>%
@@ -930,16 +928,23 @@ trend2_long_mean <- trendgridM_long %>%
   mutate(sem = sd/sqrt(n-1),
          CI_lower = mean+qt((1-0.95)/2, n-1)*sem,
          CI_upper = mean - qt((1-0.95)/2, n-1)*sem)
+trend3_long_mean <- trendgridH_long %>%
+  group_by(trend, class) %>%
+  summarise(n=n(), mean=mean(probability), sd=sd(probability)) %>%
+  mutate(sem = sd/sqrt(n-1),
+         CI_lower = mean+qt((1-0.95)/2, n-1)*sem,
+         CI_upper = mean - qt((1-0.95)/2, n-1)*sem)
 
-trend_YM <- dplyr::bind_rows(trend1_long_mean, trend2_long_mean)
-trend_YM$feature <- c(rep("Yearly", 200), rep("Monthly", 340))
-trend_YM$class <- factor(trend_YM$class,
+
+trend_YMH <- dplyr::bind_rows(trend1_long_mean, trend2_long_mean, trend3_long_mean)
+trend_YMH$feature <- c(rep("Yearly", 200), rep("Monthly", 340), rep("Hourly", 40))
+trend_YMH$class <- factor(trend_YMH$class,
                             levels = c("snaive","rw", "rwd", "ETS_NTNS","ETS_DT", "ETS_T", "ETS_DTS",
                                        "ETS_TS", "ETS_S","tbats","stlar", "SARIMA",
-                                       "ARIMA", "ARMA", "wn", "theta", "nn" ))
+                                       "ARIMA", "ARMA", "wn", "theta", "nn", "mstlarima"))
 
 
-plot_pdp_YM <- ggplot(trend_YM, aes(x=trend, y=mean, color=feature))+
+plot_pdp_YMH <- ggplot(trend_YMH, aes(x=trend, y=mean, color=feature))+
   geom_line(aes(x=trend, y=mean, color=feature), size = 1)+
   geom_ribbon(aes(ymin=CI_lower, ymax=CI_upper, fill=feature),alpha=0.4, colour = NA)+
   facet_wrap(. ~ class, ncol=9)+
@@ -947,9 +952,9 @@ plot_pdp_YM <- ggplot(trend_YM, aes(x=trend, y=mean, color=feature))+
   theme(strip.text.x = element_text(size = 16))+xlab("strength of trend")+
   ylab("probability of selecting forecast-models")+
   theme(legend.position="bottom", legend.title=element_blank())+
-  scale_colour_manual("",values=c( "#d95f02","#7570b3"))+
-  scale_fill_manual("",values=c( "#d95f02","#7570b3"))
-plot_pdp_YM
+  scale_colour_manual("",values=c("#1b9e77", "#d95f02","#7570b3"))+
+  scale_fill_manual("",values=c("#1b9e77", "#d95f02","#7570b3"))
+plot_pdp_YMH
 
 
 ## ---- linearity
@@ -1231,6 +1236,7 @@ m42d <- hwalpha.linearity.m.long %>%
   theme(strip.text.x = element_text(size = 10))
 
 m12d/m22d/m32d/m42d
+
 
 
 ## ----h2dpdp
