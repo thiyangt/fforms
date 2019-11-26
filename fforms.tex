@@ -21,7 +21,7 @@
 \PassOptionsToPackage{hyphens}{url} % url is loaded by hyperref
 \usepackage[unicode=true]{hyperref}
 \hypersetup{
-            pdftitle={FFORMS: Feature-based forecast model selection},
+            pdftitle={Meta-learning how to forecast time series},
             pdfkeywords={Algorithm selection problem, Time series, Random forest, Machine learning interpretability},
             pdfborder={0 0 0},
             breaklinks=true}
@@ -50,7 +50,7 @@
 \makeatother
 
 
-\title{FFORMS: Feature-based forecast model selection}
+\title{Meta-learning how to forecast time series}
 
 %% MONASH STUFF
 
@@ -892,6 +892,15 @@ The partial dependency plots of the strength of seasonalities are shown in \auto
 }
 
 \caption{Two\-way partial dependence plots for linearity for hourly series. Dark regions show the high probability of belonging to the corresponding class shown in the plot title.}\label{fig:h2dpdp}
+\end{figure}
+
+\begin{figure}[h]
+
+{\centering \includegraphics[width=\textwidth]{figure/pcayearly-1} 
+
+}
+
+\caption{Two\-way partial dependence plots for linearity for hourly series. Dark regions show the high probability of belonging to the corresponding class shown in the plot title.}\label{fig:pcayearly}
 \end{figure}
 
 \clearpage

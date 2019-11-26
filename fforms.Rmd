@@ -1,5 +1,5 @@
 ---
-title: "FFORMS: Feature-based forecast model selection"
+title: "Meta-learning how to forecast time series"
 author:
   - familyname: Talagala
     othernames: Thiyanga S
@@ -543,6 +543,8 @@ The partial dependency plots of the strength of seasonalities are shown in \auto
 ```
 
 
+```{r pcayearly,  fig.height=5, fig.width=25,fig.cap="Two\\-way partial dependence plots for linearity for hourly series. Dark regions show the high probability of belonging to the corresponding class shown in the plot title.", fig.pos="h", dev="png"}
+```
 
 
 
