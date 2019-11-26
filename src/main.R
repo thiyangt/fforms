@@ -1286,3 +1286,254 @@ linearity.sediff_seacf1.h.long %>%
   scale_fill_viridis_c(option = "A", direction = -1, breaks=c(0,0.2,100),
                        limits=c(0,0.2))+
   theme(strip.text.x = element_text(size = 10))+ylab("sediff_seacf1")
+
+
+## ----pcayearly
+library(seer)
+load("data/HPCfiles/yearlym4_votes.rda")
+models.weights <- fforms_ensemble(yearlym4_votes, threshold = 0.6)
+a <- lapply(models.weights, function(temp){length(temp)})
+aunlist <- unlist(a)
+features_M4Y <- readRDS("~/PhD_journey/fforms/data/HPCfiles/features_M4Y.rds")
+calculate_pca <- function(feature_dataset){
+  pcaY_cal <- prcomp(feature_dataset, center = TRUE, scale = TRUE)
+  PCAresults <- data.frame(PC1 = pcaY_cal$x[, 1], 
+                           PC2 = pcaY_cal$x[, 2], 
+                           PC3 = pcaY_cal$x[, 3])
+  return(list(prcomp_out =pcaY_cal,pca_components = PCAresults))
+}
+pca_ref_calc <- calculate_pca(features_M4Y)
+df <- pca_ref_calc$pca_components
+highlight <- which(aunlist==1)
+df2 <- cbind(df, features_M4Y)
+df3 <- data.frame(name = as.factor(unlist(lapply(models.weights[highlight], function(temp){names(temp)}))),
+                  highlight = highlight,
+                  PC1=df$PC1[highlight],
+                  PC2=df$PC1[highlight])
+
+pca1y <- ggplot(df,aes(x=PC1,y=PC2)) + 
+  geom_point(colour="grey") +
+  geom_point(data=df[highlight, ], aes(x=PC1, y=PC2, color=df3$name))+labs(fill = "Model")
+
+pca2y <- ggplot(df2,aes(x=PC1,y=PC2, color=trend)) + 
+  geom_point()+
+  geom_point(data=df[highlight, ], aes(x=PC1, y=PC2), colour="red")
+
+pca3y <- ggplot(df2,aes(x=PC1,y=PC2, color=beta)) + 
+  geom_point()+
+  geom_point(data=df[highlight, ], aes(x=PC1, y=PC2), colour="red")
+
+pca4y <- ggplot(df2,aes(x=PC1,y=PC2, color=diff1y_acf1)) + 
+  geom_point()+
+  geom_point(data=df[highlight, ], aes(x=PC1, y=PC2), colour="red")
+
+pca5y <- ggplot(df2,aes(x=PC1,y=PC2, color=diff1y_acf5)) + 
+  geom_point()+
+  geom_point(data=df[highlight, ], aes(x=PC1, y=PC2), colour="red")
+
+pca1y|pca2y|pca3y|pca5y
+
+## ----pcayearly
+library(seer)
+load("data/HPCfiles/yearlym4_votes.rda")
+models.weights <- fforms_ensemble(yearlym4_votes, threshold = 0.6)
+a <- lapply(models.weights, function(temp){length(temp)})
+aunlist <- unlist(a)
+features_M4Y <- readRDS("~/PhD_journey/fforms/data/HPCfiles/features_M4Y.rds")
+calculate_pca <- function(feature_dataset){
+  pcaY_cal <- prcomp(feature_dataset, center = TRUE, scale = TRUE)
+  PCAresults <- data.frame(PC1 = pcaY_cal$x[, 1], 
+                           PC2 = pcaY_cal$x[, 2], 
+                           PC3 = pcaY_cal$x[, 3])
+  return(list(prcomp_out =pcaY_cal,pca_components = PCAresults))
+}
+pca_ref_calc <- calculate_pca(features_M4Y)
+df <- pca_ref_calc$pca_components
+highlight <- which(aunlist==1)
+df2 <- cbind(df, features_M4Y)
+df3 <- data.frame(name = as.factor(unlist(lapply(models.weights[highlight], function(temp){names(temp)}))),
+                  highlight = highlight,
+                  PC1=df$PC1[highlight],
+                  PC2=df$PC1[highlight])
+
+pca1y <- ggplot(df,aes(x=PC1,y=PC2)) + 
+  geom_point(colour="grey") +
+  geom_point(data=df[highlight, ], aes(x=PC1, y=PC2, color=df3$name))+labs(color="Model")
+
+pca2y <- ggplot(df2,aes(x=PC1,y=PC2, color=trend)) + 
+  geom_point()+
+  geom_point(data=df[highlight, ], aes(x=PC1, y=PC2), colour="red")
+
+pca3y <- ggplot(df2,aes(x=PC1,y=PC2, color=beta)) + 
+  geom_point()+
+  geom_point(data=df[highlight, ], aes(x=PC1, y=PC2), colour="red")
+
+pca4y <- ggplot(df2,aes(x=PC1,y=PC2, color=diff1y_acf1)) + 
+  geom_point()+
+  geom_point(data=df[highlight, ], aes(x=PC1, y=PC2), colour="red")
+
+pca5y <- ggplot(df2,aes(x=PC1,y=PC2, color=diff1y_acf5)) + 
+  geom_point()+
+  geom_point(data=df[highlight, ], aes(x=PC1, y=PC2), colour="red")
+
+pca1y|pca2y|pca3y|pca5y
+
+## ----pcamonthly
+monthlym4_votes <- readRDS("data/HPCfiles/monthlym4_votes.rds")
+models.weights.monthly <- fforms_ensemble(monthlym4_votes, threshold = 0.6)
+a <- lapply(models.weights.monthly, function(temp){length(temp)})
+aunlist <- unlist(a)
+features_M4M <- readRDS("data/HPCfiles/features_M4M.rds")
+calculate_pca <- function(feature_dataset){
+  pcaY_cal <- prcomp(feature_dataset, center = TRUE, scale = TRUE)
+  PCAresults <- data.frame(PC1 = pcaY_cal$x[, 1], 
+                           PC2 = pcaY_cal$x[, 2], 
+                           PC3 = pcaY_cal$x[, 3])
+  return(list(prcomp_out =pcaY_cal,pca_components = PCAresults))
+}
+pca_ref_calc <- calculate_pca(features_M4M)
+df <- pca_ref_calc$pca_components
+highlight <- which(aunlist==1)
+df2 <- cbind(df, features_M4M)
+df3 <- data.frame(name = as.factor(unlist(lapply(models.weights.monthly[highlight], function(temp){names(temp)}))),
+                  highlight = highlight,
+                  PC1=df$PC1[highlight],
+                  PC2=df$PC1[highlight])
+
+pca1y <- ggplot(df,aes(x=PC1,y=PC2)) + 
+  geom_point(colour="grey") +
+  geom_point(data=df[highlight, ], aes(x=PC1, y=PC2, color=df3$name))+labs(color="Model")
+
+pca2y <- ggplot(df2,aes(x=PC1,y=PC2, color=trend)) + 
+  geom_point()+
+  geom_point(data=df[highlight, ], aes(x=PC1, y=PC2), colour="red")
+
+pca3y <- ggplot(df2,aes(x=PC1,y=PC2, color=stability)) + 
+  geom_point()+
+  geom_point(data=df[highlight, ], aes(x=PC1, y=PC2), colour="red")
+
+pca4y <- ggplot(df2,aes(x=PC1,y=PC2, color=diff1y_acf1)) + 
+  geom_point()+
+  geom_point(data=df[highlight, ], aes(x=PC1, y=PC2), colour="red")
+
+pca5y <- ggplot(df2,aes(x=PC1,y=PC2, color=y_pacf5)) + 
+  geom_point()+
+  geom_point(data=df[highlight, ], aes(x=PC1, y=PC2), colour="red")
+
+pca6y <- ggplot(df2,aes(x=PC1,y=PC2, color=sediff_seacf1)) + 
+  geom_point()+
+  geom_point(data=df[highlight, ], aes(x=PC1, y=PC2), colour="red")
+
+pca7y <- ggplot(df2,aes(x=PC1,y=PC2, color=hwalpha)) + 
+  geom_point()+
+  geom_point(data=df[highlight, ], aes(x=PC1, y=PC2), colour="red")
+
+pca7y <- ggplot(df2,aes(x=PC1,y=PC2, color=hwgamma)) + 
+  geom_point()+
+  geom_point(data=df[highlight, ], aes(x=PC1, y=PC2), colour="red")
+
+pca8y <- ggplot(df2,aes(x=PC1,y=PC2, color=sediff_acf5)) + 
+  geom_point()+
+  geom_point(data=df[highlight, ], aes(x=PC1, y=PC2), colour="red", shape=1)
+
+
+pca8y <- ggplot(df2,aes(x=PC1,y=PC2, color=e_acf1)) + 
+  geom_point()+
+  geom_point(data=df[highlight, ], aes(x=PC1, y=PC2), colour="red", shape=1)
+
+
+pca8y <- ggplot(df2,aes(x=PC1,y=PC2, color=beta)) + ##important
+  geom_point()+
+  geom_point(data=df[highlight, ], aes(x=PC1, y=PC2), colour="red", shape=1)
+
+
+
+pca8y <- ggplot(df2,aes(x=PC1,y=PC2, color=alpha)) + 
+  geom_point()+
+  geom_point(data=df[highlight, ], aes(x=PC1, y=PC2), colour="red", shape=1)
+
+
+pca8y <- ggplot(df2,aes(x=PC1,y=PC2, color=seasonality)) + 
+  geom_point()+
+  geom_point(data=df[highlight, ], aes(x=PC1, y=PC2), colour="red", shape=1)
+
+pca1y|pca2y|pca3y|pca5y
+
+
+## ----pcahourly
+load("data/HPCfiles/hourlym4_votes.rda")
+models.weights.hourly <- fforms_ensemble(hourlym4_votes, threshold = 0.6)
+a <- lapply(models.weights.hourly, function(temp){length(temp)})
+aunlist <- unlist(a)
+features_M4H <- readRDS("data/HPCfiles/features_M4H.rds")
+calculate_pca <- function(feature_dataset){
+  pcaY_cal <- prcomp(feature_dataset, center = TRUE, scale = TRUE)
+  PCAresults <- data.frame(PC1 = pcaY_cal$x[, 1], 
+                           PC2 = pcaY_cal$x[, 2], 
+                           PC3 = pcaY_cal$x[, 3])
+  return(list(prcomp_out =pcaY_cal,pca_components = PCAresults))
+}
+pca_ref_calc <- calculate_pca(features_M4H)
+df <- pca_ref_calc$pca_components
+highlight <- which(aunlist==1)
+df2 <- cbind(df, features_M4H)
+df3 <- data.frame(name = as.factor(unlist(lapply(models.weights.hourly[highlight], function(temp){names(temp)}))),
+                  highlight = highlight,
+                  PC1=df$PC1[highlight],
+                  PC2=df$PC1[highlight])
+
+pca1y <- ggplot(df,aes(x=PC1,y=PC2)) + 
+  geom_point(colour="grey") +
+  geom_point(data=df[highlight, ], aes(x=PC1, y=PC2, color=df3$name))+labs(color="Model")
+
+pca2y <- ggplot(df2,aes(x=PC1,y=PC2, color=trend)) + 
+  geom_point()+
+  geom_point(data=df[highlight, ], aes(x=PC1, y=PC2), colour="red")
+
+
+pca4y <- ggplot(df2,aes(x=PC1,y=PC2, color=diff1y_acf1)) + 
+  geom_point()+
+  geom_point(data=df[highlight, ], aes(x=PC1, y=PC2), colour="red")
+
+pca5y <- ggplot(df2,aes(x=PC1,y=PC2, color=entropy)) + 
+  geom_point()
+
+pca6y <- ggplot(df2,aes(x=PC1,y=PC2, color=sediff_seacf1)) + 
+  geom_point()+
+  geom_point(data=df[highlight, ], aes(x=PC1, y=PC2), colour="red")
+
+pca7y <- ggplot(df2,aes(x=PC1,y=PC2, color=seasonal_strength2)) + 
+  geom_point()+
+  geom_point(data=df[highlight, ], aes(x=PC1, y=PC2), colour="red")
+
+pca7y <- ggplot(df2,aes(x=PC1,y=PC2, color=seasonal_strength2)) + 
+  geom_point()+
+  geom_point(data=df[highlight, ], aes(x=PC1, y=PC2), colour="red")
+
+pca8y <- ggplot(df2,aes(x=PC1,y=PC2, color=sediff_acf5)) + 
+  geom_point()+
+  geom_point(data=df[highlight, ], aes(x=PC1, y=PC2), colour="red", shape=1)
+
+
+pca8y <- ggplot(df2,aes(x=PC1,y=PC2, color=diff1y_pacf5)) + 
+  geom_point()+
+  geom_point(data=df[highlight, ], aes(x=PC1, y=PC2), colour="red", shape=1)
+
+
+pca8y <- ggplot(df2,aes(x=PC1,y=PC2, color=N)) + # important
+  geom_point()+
+  geom_point(data=df[highlight, ], aes(x=PC1, y=PC2), colour="red", shape=1)
+
+
+
+pca8y <- ggplot(df2,aes(x=PC1,y=PC2, color=diff2y_acf1)) + 
+  geom_point()+
+  geom_point(data=df[highlight, ], aes(x=PC1, y=PC2), colour="red", shape=1)
+
+
+pca8y <- ggplot(df2,aes(x=PC1,y=PC2, color=diff1y_pacf5)) + 
+  geom_point()+
+  geom_point(data=df[highlight, ], aes(x=PC1, y=PC2), colour="red", shape=1)
+
+pca1y|pca2y|pca3y|pca5y
+
