@@ -606,23 +606,25 @@ Our aim is different from most classification problems in that we are not intere
 \hypertarget{peeking}{%
 \section{Peeking inside FFORMS}\label{peeking}}
 
-The main objective of this paper is to explore the nature of the relationship between features and forecast model selection learned by the FFORMS framework. More specifically, it is to identify which of the features are important for model predictions and how different features and their interactions led to the different choices. First, we explore the global role of features in the choice of different forecast model selection. Global interpretability evaluates the behaviour of a model on an entire data set. The global perspective of model interpretation helps users to understand the overall modelled relationship between features and the FFORMS outcome. In the following subsections, we provide a description of tools we use to explore the global perspective of the FFORMS meta-learners.
-
-\hypertarget{visualise-patterns-learned-by-the-meta-learner}{%
-\subsection{Visualise patterns learned by the meta-learner}\label{visualise-patterns-learned-by-the-meta-learner}}
-
-A useful by-product of random forest model is out-of-bag (OOB) observations. OOB observations are the observations not included in building a given tree. In general, each tree uses only around one third of observations in its construction. Further, each tree is grown based on different bootstrap samples; hence, each tree has a different set of OOB observations. We use a vote matrix calculated based on OOBs to visualise patterns learned by the random forest. The vote matrix (\(N \times P\); \(N\) is the total number of observations; \(P\) is the number of classes) contains the proportion of times each observation was classified to each class based on OOB observations.
-
-\hypertarget{feature-importance}{%
-\subsection{Feature importance}\label{feature-importance}}
-
 Let \(\mathcal{P}=\{(\mathbf{f_i}, z_i)\}_{i=1}^{N}\) be the
 historical data set we use to train a classifier. Consider a
 \(d\)-dimensional feature vector \(\mathbf{F}=(F_1, F_2, ..., F_d)\) and a dependent
 variable, the best forecasting method for each series \(Z\). Let \(\mathcal{G}\) be the unknown relationship between \(\mathbf{F}\) and
 \(Z\). \textcite{Zhao} call this `law of nature'. Inside the FFORMS framework, the random forest algorithm tries to learn this relationship using
 the historical data we provided. We denote the predicted function as
-\(g\).
+\(g\). The second objective of this paper is to explore the nature of the relationship between features and forecast model selection learned by the FFORMS framework. In the following subsections, we provide a description of tools we use to explore what is happening under the hood of the FFORMS framework.
+
+\hypertarget{visualise-patterns-learned-by-the-meta-learner}{%
+\subsection{Visualise patterns learned by the meta-learner}\label{visualise-patterns-learned-by-the-meta-learner}}
+
+\textbf{The out-of-bag (OOB) observations:} A useful by-product of random forest model is OOB observations. OOB observations are the observations not included in building a given tree. In general, each tree uses only around one third of observations in its construction. Further, each tree is grown based on different bootstrap samples; hence, each tree has a different set of OOB observations.
+
+\textbf{The vote matrix:} The vote matrix (\(N \times P\); \(N\) is the total number of observations; \(P\) is the number of classes) contains the proportion of times each observation was classified to each class based on OOB observations.
+
+We use a vote matrix calculated based on OOBs to visualise patterns learned by the random forest.
+
+\hypertarget{feature-importance}{%
+\subsection{Feature importance}\label{feature-importance}}
 
 \textcite{jiang2002} explain variable importance under three different views: i) causality (change in the value of \(Z\) for an increase or decrease in the value of \(F_i\)), ii) contribution of \(F_i\) based on out-of-sample prediction accuracy and iii) face value of \(F_i\) on prediction function \(g\). For example, in linear regression models estimated coefficients of each predictor can be considered a measure of variable importance. See \textcite{jiang2002} for comparable face value interpretation for machine learning models. In this paper we use the first two notions of variable importance. Partial dependency functions and individual conditional expectation curves are used to explore the `causality' notion of variable importance, while mean decrease in Gini coefficient and permutation-based variable importance are used to capture the second notion of variable importance (feature contribution to the predictive accuracy) (\textcite{Zhao}). We introduce each of these variable importance measures below.
 
@@ -717,10 +719,12 @@ naive & 56.55 & 14.07 &  12.30 & 26.35 & 32.55 & 71.24\\\hline
 \hypertarget{what-is-happening-under-the-hood-of-fforms}{%
 \subsection{What is happening under the hood of FFORMS?}\label{what-is-happening-under-the-hood-of-fforms}}
 
+The results for quarterly and weekly data are very similar to the corresponding plots of monthly data and the results for daily data are very similar to the corresponding plots of hourly data. Hence, the results correspond to quarterly, weekly and daily data are not presented in the subsequent analysis.
+
 \hypertarget{visualisation-of-meta-learner-fformss-understanding-of-similarity-and-dissimilarity-between-forecast-models}{%
 \subsection{Visualisation of meta-learner (FFORMS)'s understanding of similarity and dissimilarity between forecast models}\label{visualisation-of-meta-learner-fformss-understanding-of-similarity-and-dissimilarity-between-forecast-models}}
 
-The vote-matrix information for the yearly, monthly and hourly data are presented in \autoref{fig:yearlyoob}. \autoref{fig:yearlyoob} indicates three primary patterns: i) the distributions of correctly classified classes dominate, indicating a good classification of the meta-learner, and the associated outliers of the boxplots indicate some series are correctly classified with high probability; ii) irrespective of the class labels, the random walk with drift has a high chance of being selected for all series; and iii) the FFORMS framework successfully learned the similarities and dissimilarities between the classes itself. For example, within ETS models with a trend component (ETS\_T, 3rd panel), disparities between forecast models with trend components and forecast models without trend components (wn, ARMA, ETS\_NTNS) are immediately visible. The results for quarterly and weekly data are very similar to the corresponding plots of monthly data and the results for daily data are very similar to the corresponding plots of hourly data. Hence, the results corresponds to quarterly, weekly and daily data are not presented in the subsequent analysis.
+The vote-matrix information for the yearly, monthly and hourly data are presented in \autoref{fig:yearlyoob}. \autoref{fig:yearlyoob} indicates two primary patterns: i) the distributions of correctly classified classes dominate, indicating a good classification of the meta-learner; and ii) the FFORMS framework successfully learned the similarities and dissimilarities between the classes itself. For example, within ARMA classlabel panel disparities between stationary and non-stationary models are immediately visible. Furthermore, within ETS\_T (models with a trend component), disparities between forecast models with trend components (ETS\_T, ETS\_DT, ARIMA) and forecast models without trend components (wn, ARMA, ETS\_NTNS) are immediately visible.
 
 \begin{figure}[h]
 
@@ -728,7 +732,7 @@ The vote-matrix information for the yearly, monthly and hourly data are presente
 
 }
 
-\caption{Visualisation of the vote matrix for yearly, monthly and hourly series. The X-axis denotes the fraction of trees in the forest that vote for the classlabel in the panel. The colours of boxplots correspond to class label of the best forecast model identified based on MASE and sMAPE. On each row, distribution of correctly classified class dominates, indicating a good classification of the meta-learner.}\label{fig:yearlyoob}
+\caption{Visualisation of the vote matrix for yearly, monthly and hourly series. Each panel shows the forecast models considered as classlabels. The X-axis denotes the fraction of trees in the forest that vote for the classlabel in the panel. The Y-axis corresponds to class label of the best forecast model identified based on MASE and sMAPE. On each row, distribution of correctly classified class dominates, indicating a good classification of the meta-learner.}\label{fig:yearlyoob}
 \end{figure}
 
 \clearpage
