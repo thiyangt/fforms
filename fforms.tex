@@ -670,11 +670,8 @@ To identify important class-specific features we rank features in three differen
 
 The partial-dependence curves, along with their confidence intervals, are used to visualise the relationship between top features and the choice of forecast model selection.
 
-\hypertarget{results}{%
-\section{Results}\label{results}}
-
-\hypertarget{application-to-m4-competition-data}{%
-\subsection{Application to M4-competition data}\label{application-to-m4-competition-data}}
+\hypertarget{results-application-to-m4-competition-data}{%
+\section{Results: Application to M4-competition data}\label{results-application-to-m4-competition-data}}
 
 \begin{table}[!h]
 \centering\scriptsize\tabcolsep=0.12cm
@@ -721,12 +718,12 @@ naive & 56.55 & 14.07 &  12.30 & 26.35 & 32.55 & 71.24\\\hline
 \hypertarget{what-is-happening-under-the-hood-of-fforms}{%
 \subsection{What is happening under the hood of FFORMS?}\label{what-is-happening-under-the-hood-of-fforms}}
 
-The main question we have now is: `Can we trust the FFORMS framework if we do not know how it works?' In the next sections we present results showing what is happening inside the FFORMS framework. We present the results for yearly series; represents non-seasonal time series, monthly series: represents time series with single seasonal component and hourly series: represents series with multiple seasonal components. Note that, the results for quarterly and weekly data are very similar to the corresponding results of monthly data and the results for daily data are very similar to the corresponding plots of hourly data. Hence, the results correspond to quarterly, weekly and daily data are not presented in the subsequent analysis.
+The main question we have now is: `Can we trust the FFORMS framework if we do not know how it works?' In the next sections we present results showing what is happening inside the FFORMS framework. Note that, the results for quarterly and weekly data are very similar to the corresponding results of monthly data and the results for daily data are very similar to the corresponding plots of hourly data. Hence, the results correspond to quarterly, weekly and daily data are not presented in the subsequent analysis. We present the results for yearly series; represents non-seasonal time series, monthly series: represents time series with single seasonal component and hourly series: represents series with multiple seasonal components.
 
 \hypertarget{oobviz}{%
-\subsection{Visualisation of meta-learner (FFORMS)'s understanding of similarity and dissimilarity between forecast models}\label{oobviz}}
+\subsection{Visualisation of FFORMS's understanding of the similarity and dissimilarity between forecast models}\label{oobviz}}
 
-The vote-matrix information for the yearly, monthly and hourly data are presented in \autoref{fig:yearlyoob}. \autoref{fig:yearlyoob} indicates two primary patterns: i) the distributions of correctly classified classes dominate, indicating a good classification of the meta-learner; and ii) the FFORMS framework successfully learned the similarities and dissimilarities between the classes itself. For example, within ARMA classlabel panel disparities between stationary and non-stationary models are immediately visible. Furthermore, within ETS\_T (models with a trend component), disparities between forecast models with trend components (ETS\_T, ETS\_DT, ARIMA) and forecast models without trend components (wn, ARMA, ETS\_NTNS) are immediately visible.
+\autoref{fig:yearlyoob} shows the distribution of voting probabilities for each class by classlabels: the best forecast model. For example, the `rw' panel in the top left corner of the yearly series shows the distribution of voting probabilities for random walk class by class labels for all yearly series. As expected, we see the distibution of the series that are labeled as `rw' dominates the top, and the associated outliers of the boxplots indicates some series are correctly classified with very high probability. Furthermore, the series that are labeled as ETS\_NTNS: ETS (N,N,N) also have a high probability of classified into the `rw' class. Similarly, within ETS\_T panel, inaddition to the series that are labeled as ETS\_T, the series that are labeld as ETS\_DT (ETS models with damped trend) and ARIMA also have a high voting probabilities for ETS\_T class while the series labeled as WN, ARMA, ETS\_NTNS have very low probabilities. Within ARMA classlabel panel disparities between stationary and non-stationary models are immediately visible. In general, \autoref{fig:yearlyoob} indicates three primary patterns: i) the distributions of correctly classified classes dominate, indicating a good classification of the meta-learner; ii) the FFORMS framework successfully learned the similarities and dissimilarities between the classes itself; and iii) irrespective of the class labels, the random walk with dirft has a high chance of being selected for all yearly series.
 
 \begin{figure}[h]
 
