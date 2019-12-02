@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.7.18)  2 DEC 2019 17:40
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.7.18)  3 DEC 2019 09:47
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2153,11 +2153,11 @@ Package pdftex.def Info: figure/thetapdp-1.pdf  used on input line 896.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<figure/pcayearly-1.png, id=600, 1806.75pt x 361.35pt>
+<figure/pcayearly-1.png, id=600, 1806.75pt x 722.7pt>
 File: figure/pcayearly-1.png Graphic file (type png)
 <use figure/pcayearly-1.png>
 Package pdftex.def Info: figure/pcayearly-1.png  used on input line 905.
-(pdftex.def)             Requested size: 455.24411pt x 91.04855pt.
+(pdftex.def)             Requested size: 455.24411pt x 182.09709pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
@@ -2199,11 +2199,11 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1029.
 ### semi simple group (level 1) entered at line 178 (\begingroup)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 43281 strings out of 494553
- 805533 string characters out of 6175442
+ 43284 strings out of 494553
+ 805563 string characters out of 6175442
  1231611 words of memory out of 5000000
  45882 multiletter control sequences out of 15000+600000
- 640849 words of font info for 350 fonts, out of 8000000 for 9000
+ 641004 words of font info for 352 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  62i,15n,92p,1889b,18562s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/font
@@ -2224,7 +2224,7 @@ haminitalagala/Library/TinyTeX/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb><
 /Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/fonts/type1/urw/palat
 ino/uplr8a.pfb></Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/fonts
 /type1/urw/palatino/uplri8a.pfb>
-Output written on fforms.pdf (35 pages, 1166779 bytes).
+Output written on fforms.pdf (35 pages, 1395302 bytes).
 PDF statistics:
  845 PDF objects out of 1000 (max. 8388607)
  663 compressed objects within 7 object streams

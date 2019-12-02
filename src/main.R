@@ -1313,51 +1313,6 @@ df3 <- data.frame(name = as.factor(unlist(lapply(models.weights[highlight], func
 
 pca1y <- ggplot(df,aes(x=PC1,y=PC2)) + 
   geom_point(colour="grey") +
-  geom_point(data=df[highlight, ], aes(x=PC1, y=PC2, color=df3$name))+labs(fill = "Model")
-
-pca2y <- ggplot(df2,aes(x=PC1,y=PC2, color=trend)) + 
-  geom_point()+
-  geom_point(data=df[highlight, ], aes(x=PC1, y=PC2), colour="red")
-
-pca3y <- ggplot(df2,aes(x=PC1,y=PC2, color=beta)) + 
-  geom_point()+
-  geom_point(data=df[highlight, ], aes(x=PC1, y=PC2), colour="red")
-
-pca4y <- ggplot(df2,aes(x=PC1,y=PC2, color=diff1y_acf1)) + 
-  geom_point()+
-  geom_point(data=df[highlight, ], aes(x=PC1, y=PC2), colour="red")
-
-pca5y <- ggplot(df2,aes(x=PC1,y=PC2, color=diff1y_acf5)) + 
-  geom_point()+
-  geom_point(data=df[highlight, ], aes(x=PC1, y=PC2), colour="red")
-
-pca1y|pca2y|pca3y|pca5y
-
-## ----pcayearly
-library(seer)
-load("data/HPCfiles/yearlym4_votes.rda")
-models.weights <- fforms_ensemble(yearlym4_votes, threshold = 0.6)
-a <- lapply(models.weights, function(temp){length(temp)})
-aunlist <- unlist(a)
-features_M4Y <- readRDS("~/PhD_journey/fforms/data/HPCfiles/features_M4Y.rds")
-calculate_pca <- function(feature_dataset){
-  pcaY_cal <- prcomp(feature_dataset, center = TRUE, scale = TRUE)
-  PCAresults <- data.frame(PC1 = pcaY_cal$x[, 1], 
-                           PC2 = pcaY_cal$x[, 2], 
-                           PC3 = pcaY_cal$x[, 3])
-  return(list(prcomp_out =pcaY_cal,pca_components = PCAresults))
-}
-pca_ref_calc <- calculate_pca(features_M4Y)
-df <- pca_ref_calc$pca_components
-highlight <- which(aunlist==1)
-df2 <- cbind(df, features_M4Y)
-df3 <- data.frame(name = as.factor(unlist(lapply(models.weights[highlight], function(temp){names(temp)}))),
-                  highlight = highlight,
-                  PC1=df$PC1[highlight],
-                  PC2=df$PC1[highlight])
-
-pca1y <- ggplot(df,aes(x=PC1,y=PC2)) + 
-  geom_point(colour="grey") +
   geom_point(data=df[highlight, ], aes(x=PC1, y=PC2, color=df3$name))+labs(color="Model")
 
 pca2y <- ggplot(df2,aes(x=PC1,y=PC2, color=trend)) + 
@@ -1376,7 +1331,7 @@ pca5y <- ggplot(df2,aes(x=PC1,y=PC2, color=diff1y_acf5)) +
   geom_point()+
   geom_point(data=df[highlight, ], aes(x=PC1, y=PC2), colour="red")
 
-pca1y|pca2y|pca3y|pca5y
+(pca1y|pca2y|pca3y|pca5y)/(pca1y|pca2y|pca3y|pca5y)/(pca1y|pca2y|pca3y|pca5y)
 
 ## ----pcamonthly
 monthlym4_votes <- readRDS("data/HPCfiles/monthlym4_votes.rds")
