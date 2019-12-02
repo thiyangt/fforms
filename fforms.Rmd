@@ -536,16 +536,16 @@ The features, sum of the first five partial autocorrelation coefficients, streng
 ```{r y2dpdp,  fig.height=6, fig.width=15,fig.cap="Two\\-way partial dependence plots for linearity for yearly series. Dark regions show the high probability of belonging to the corresponding class shown in the plot title.", fig.pos="h", dev="pdf"}
 ```
 
+The two-way partial dependency plots of linearity are explored to see how linearity behaved in the presence of other top-5 features. The associated two-way partial dependency plots are shown in \autoref{fig:y2dpdp}, \autoref{fig:m2dpdp} and \autoref{fig:h2dpdp} for yearly, monthly and hourly series respectively. According to the \autoref{fig:y2dpdp} within wn, random walk, theta and nn classes linearity shows a pattern of interactivity with lmres_acf1 and diff1y_acf1. Both the ARIMA and ARMA classes do not show an interactivity between the features. Within both ARIMA and ARMA classes main effect of linearity dominates. This is consistent with partial dependency curves we observed in \autoref{fig:linearity}. For monthly series, linearity shows interactivity with acf value at the first seasonal lag of seasonally-differenced series, stability, first ACF value at the remainder series and a parameter estimate of ETS(A, A, A) model.  According to \autoref{fig:m2dpdp}, we can see there is a unique pattern of interactivity existing within each class. 
 
 
-\clearpage
 
 ```{r m2dpdp,  fig.height=9, fig.width=10,fig.cap="Two\\-way partial dependence plots for linearity for monthly series. Dark regions show the high probability of belonging to the corresponding class shown in the plot title.", fig.pos="h", dev="pdf"}
 ```
 
+\clearpage
 
-
-```{r h2dpdp,  fig.height=3, fig.width=9,fig.cap="Two\\-way partial dependence plots for linearity for hourly series. Dark regions show the high probability of belonging to the corresponding class shown in the plot title.", fig.pos="h", dev="pdf"}
+```{r h2dpdp,  fig.height=2, fig.width=9,fig.cap="Two\\-way partial dependence plots for linearity for hourly series. Dark regions show the high probability of belonging to the corresponding class shown in the plot title.", fig.pos="h", dev="pdf"}
 ```
 
 
