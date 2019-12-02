@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.7.18)  2 DEC 2019 13:38
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.7.18)  2 DEC 2019 14:03
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2114,77 +2114,73 @@ Package pdftex.def Info: figure/pdpyearlytrend-1.pdf  used on input line 847.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<figure/linearity-1.pdf, id=439, 1084.05pt x 578.16pt>
-File: figure/linearity-1.pdf Graphic file (type pdf)
-<use figure/linearity-1.pdf>
-Package pdftex.def Info: figure/linearity-1.pdf  used on input line 856.
-(pdftex.def)             Requested size: 455.24411pt x 242.79907pt.
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<figure/y2dpdp-1.pdf, id=440, 1084.05pt x 433.62pt>
-File: figure/y2dpdp-1.pdf Graphic file (type pdf)
-<use figure/y2dpdp-1.pdf>
-Package pdftex.def Info: figure/y2dpdp-1.pdf  used on input line 865.
-(pdftex.def)             Requested size: 455.24411pt x 182.0993pt.
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<figure/m2dpdp-1.pdf, id=441, 722.7pt x 650.43pt>
-File: figure/m2dpdp-1.pdf Graphic file (type pdf)
-<use figure/m2dpdp-1.pdf>
-Package pdftex.def Info: figure/m2dpdp-1.pdf  used on input line 874.
-(pdftex.def)             Requested size: 455.24411pt x 409.72343pt.
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<figure/h2dpdp-1.pdf, id=442, 650.43pt x 216.81pt>
-File: figure/h2dpdp-1.pdf Graphic file (type pdf)
-<use figure/h2dpdp-1.pdf>
-Package pdftex.def Info: figure/h2dpdp-1.pdf  used on input line 883.
-(pdftex.def)             Requested size: 455.24411pt x 151.75272pt.
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<figure/thetapdp-1.pdf, id=443, 650.43pt x 216.81pt>
-File: figure/thetapdp-1.pdf Graphic file (type pdf)
-<use figure/thetapdp-1.pdf>
-Package pdftex.def Info: figure/thetapdp-1.pdf  used on input line 892.
-(pdftex.def)             Requested size: 455.24411pt x 151.75272pt.
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<figure/pcayearly-1.png, id=444, 1806.75pt x 361.35pt>
-File: figure/pcayearly-1.png Graphic file (type png)
-<use figure/pcayearly-1.png>
-Package pdftex.def Info: figure/pcayearly-1.png  used on input line 901.
-(pdftex.def)             Requested size: 455.24411pt x 91.04855pt.
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
 [22] [23 <./figure/pdpyearlyurpp-1.pdf> <./figure/pdpmonthlyseasonality-1.pdf> 
 <./figure/pdpmonthlyT-1.pdf>] [24 <./figure/seasonalityhourly-1.pdf> <./figure/
 entropyhourly-1.pdf> <./figure/curvaturehourly-1.pdf> <./figure/pdpmonthlyhourl
 yStability-1.pdf>] [25 <./figure/diff1yacf1-1.pdf> <./figure/ypacf5-1.pdf> <./f
-igure/pdpyearlytrend-1.pdf>] [26 <./figure/linearity-1.pdf> <./figure/y2dpdp-1.
-pdf>] [27 <./figure/m2dpdp-1.pdf> <./figure/h2dpdp-1.pdf>] [28 <./figure/thetap
-dp-1.pdf> <./figure/pcayearly-1.png>]
+igure/pdpyearlytrend-1.pdf>]
+<figure/linearity-1.pdf, id=543, 1084.05pt x 578.16pt>
+File: figure/linearity-1.pdf Graphic file (type pdf)
+<use figure/linearity-1.pdf>
+Package pdftex.def Info: figure/linearity-1.pdf  used on input line 858.
+(pdftex.def)             Requested size: 455.24411pt x 242.79907pt.
+<figure/y2dpdp-1.pdf, id=544, 1084.05pt x 433.62pt>
+File: figure/y2dpdp-1.pdf Graphic file (type pdf)
+<use figure/y2dpdp-1.pdf>
+Package pdftex.def Info: figure/y2dpdp-1.pdf  used on input line 867.
+(pdftex.def)             Requested size: 455.24411pt x 182.0993pt.
+[26
+
+ <./figure/linearity-1.pdf> <./figure/y2dpdp-1.pdf>]
+<figure/m2dpdp-1.pdf, id=585, 722.7pt x 650.43pt>
+File: figure/m2dpdp-1.pdf Graphic file (type pdf)
+<use figure/m2dpdp-1.pdf>
+Package pdftex.def Info: figure/m2dpdp-1.pdf  used on input line 878.
+(pdftex.def)             Requested size: 455.24411pt x 409.72343pt.
+<figure/h2dpdp-1.pdf, id=586, 650.43pt x 216.81pt>
+File: figure/h2dpdp-1.pdf Graphic file (type pdf)
+<use figure/h2dpdp-1.pdf>
+Package pdftex.def Info: figure/h2dpdp-1.pdf  used on input line 887.
+(pdftex.def)             Requested size: 455.24411pt x 151.75272pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<figure/thetapdp-1.pdf, id=587, 650.43pt x 216.81pt>
+File: figure/thetapdp-1.pdf Graphic file (type pdf)
+<use figure/thetapdp-1.pdf>
+Package pdftex.def Info: figure/thetapdp-1.pdf  used on input line 896.
+(pdftex.def)             Requested size: 455.24411pt x 151.75272pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<figure/pcayearly-1.png, id=588, 1806.75pt x 361.35pt>
+File: figure/pcayearly-1.png Graphic file (type png)
+<use figure/pcayearly-1.png>
+Package pdftex.def Info: figure/pcayearly-1.png  used on input line 905.
+(pdftex.def)             Requested size: 455.24411pt x 91.04855pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[27
+
+ <./figure/m2dpdp-1.pdf>] [28 <./figure/h2dpdp-1.pdf> <./figure/thetapdp-1.pdf>
+ <./figure/pcayearly-1.png>]
 
 Package hyperref Warning: Difference (2) between bookmark levels is greater 
-(hyperref)                than one, level fixed on input line 927.
+(hyperref)                than one, level fixed on input line 931.
 
 
 Package hyperref Warning: The anchor of a bookmark and its parent's must not
-(hyperref)                be the same. Added a new anchor on input line 927.
+(hyperref)                be the same. Added a new anchor on input line 931.
 
 [29
 
 ] [30] [31] [32] [33] [34] [35]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1025.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1025.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1029.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1029.
 (./fforms.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1025.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1025.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1029.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1029.
 
 Package rerunfilecheck Info: File `fforms.out' has not changed.
 (rerunfilecheck)             Checksum: 7B01DAD2BDCFB774B5F97E83AA3B6181;9077.
@@ -2198,7 +2194,7 @@ Package biblatex Warning: Please rerun LaTeX.
 Package logreq Info: Writing requests to 'fforms.run.xml'.
 \openout1 = `fforms.run.xml'.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1025.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1029.
  )
 (\end occurred inside a group at level 1)
 
@@ -2230,7 +2226,7 @@ haminitalagala/Library/TinyTeX/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb><
 /Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/fonts/type1/urw/palat
 ino/uplr8a.pfb></Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/fonts
 /type1/urw/palatino/uplri8a.pfb>
-Output written on fforms.pdf (35 pages, 1164848 bytes).
+Output written on fforms.pdf (35 pages, 1164785 bytes).
 PDF statistics:
  836 PDF objects out of 1000 (max. 8388607)
  654 compressed objects within 7 object streams

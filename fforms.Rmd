@@ -526,7 +526,7 @@ The features, sum of the first five partial autocorrelation coefficients, streng
 ```{r pdpyearlytrend, fig.height=6, fig.width=15, fig.cap="Partial dependence plots for trend for yearly and monthly series. The shading shows the 95\\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class. Probability of selecting ETS models without a trend component and stationary models (WN and ARMA) decreases for an extremely high value of trend.", fig.pos="h"}
 ```
 
-
+\clearpage
 
 
 ```{r linearity, fig.height=8, fig.width=15, fig.cap="Partial dependence plots for linearity for yearly monthly and hourly series. The shading shows the 95\\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class. ", fig.pos="h"}
@@ -535,6 +535,10 @@ The features, sum of the first five partial autocorrelation coefficients, streng
 
 ```{r y2dpdp,  fig.height=6, fig.width=15,fig.cap="Two\\-way partial dependence plots for linearity for yearly series. Dark regions show the high probability of belonging to the corresponding class shown in the plot title.", fig.pos="h", dev="pdf"}
 ```
+
+
+
+\clearpage
 
 ```{r m2dpdp,  fig.height=9, fig.width=10,fig.cap="Two\\-way partial dependence plots for linearity for monthly series. Dark regions show the high probability of belonging to the corresponding class shown in the plot title.", fig.pos="h", dev="pdf"}
 ```
