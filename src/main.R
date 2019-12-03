@@ -1313,25 +1313,26 @@ df3 <- data.frame(name = as.factor(unlist(lapply(models.weights[highlight], func
 
 pca1y <- ggplot(df,aes(x=PC1,y=PC2)) + 
   geom_point(colour="grey") +
-  geom_point(data=df[highlight, ], aes(x=PC1, y=PC2, color=df3$name))+labs(color="Model")
+  geom_point(data=df[highlight, ], aes(x=PC1, y=PC2, color=df3$name))+labs(color="Model")+
+  theme(legend.position="bottom", legend.text=element_text(size=15), legend.title = element_blank(), aspect.ratio=1)
 
 pca2y <- ggplot(df2,aes(x=PC1,y=PC2, color=trend)) + 
   geom_point()+
-  geom_point(data=df[highlight, ], aes(x=PC1, y=PC2), colour="red")
+  geom_point(data=df[highlight, ], aes(x=PC1, y=PC2), colour="red")+
+  theme(legend.position="bottom", legend.text=element_text(size=15),aspect.ratio=1)
 
 pca3y <- ggplot(df2,aes(x=PC1,y=PC2, color=beta)) + 
   geom_point()+
-  geom_point(data=df[highlight, ], aes(x=PC1, y=PC2), colour="red")
+  geom_point(data=df[highlight, ], aes(x=PC1, y=PC2), colour="red")+
+  theme(legend.position="bottom", legend.text=element_text(size=15), aspect.ratio=1)
 
-pca4y <- ggplot(df2,aes(x=PC1,y=PC2, color=diff1y_acf1)) + 
-  geom_point()+
-  geom_point(data=df[highlight, ], aes(x=PC1, y=PC2), colour="red")
 
 pca5y <- ggplot(df2,aes(x=PC1,y=PC2, color=diff1y_acf5)) + 
   geom_point()+
-  geom_point(data=df[highlight, ], aes(x=PC1, y=PC2), colour="red")
+  geom_point(data=df[highlight, ], aes(x=PC1, y=PC2), colour="red")+
+  theme(legend.position="bottom", legend.text=element_text(size=15), aspect.ratio=1)
 
-(pca1y|pca2y|pca3y|pca5y)/(pca1y|pca2y|pca3y|pca5y)/(pca1y|pca2y|pca3y|pca5y)
+pca1y|pca2y|pca3y|pca5y
 
 ## ----pcamonthly
 monthlym4_votes <- readRDS("data/HPCfiles/monthlym4_votes.rds")
@@ -1354,65 +1355,35 @@ df3 <- data.frame(name = as.factor(unlist(lapply(models.weights.monthly[highligh
                   highlight = highlight,
                   PC1=df$PC1[highlight],
                   PC2=df$PC1[highlight])
+df3 <- df3 %>%
+  mutate(name = recode(name, "ARIMA"="other", "ETS-dampedtrendseasonal"="other", 
+                        "ETS-seasonal"="other", "ETS-trendseasonal"="other",
+                        "nn"="nn", "rw"="other", 
+                        "rwd"="other","SARIMA"="SARIMA"  ,"snaive"="other", "stlar"="stlar",
+                        "tbats"="other", "theta"="other","wn"="other"))
+df3$name <- factor(df3$name, levels = c("stlar", "SARIMA", "nn", "other"))
 
-pca1y <- ggplot(df,aes(x=PC1,y=PC2)) + 
+pca1m <- ggplot(df,aes(x=PC1,y=PC2)) + 
   geom_point(colour="grey") +
-  geom_point(data=df[highlight, ], aes(x=PC1, y=PC2, color=df3$name))+labs(color="Model")
+  geom_point(data=df[highlight, ], aes(x=PC1, y=PC2, color=df3$name))+labs(color="Model")+
+  theme(legend.position="bottom", legend.text=element_text(size=15), aspect.ratio=1, legend.title = element_blank())
 
-pca2y <- ggplot(df2,aes(x=PC1,y=PC2, color=trend)) + 
+pca2m <- ggplot(df2,aes(x=PC1,y=PC2, color=beta)) + ##important
   geom_point()+
-  geom_point(data=df[highlight, ], aes(x=PC1, y=PC2), colour="red")
+  geom_point(data=df[highlight, ], aes(x=PC1, y=PC2), colour="red", shape=1)+
+  theme(legend.position="bottom", legend.text=element_text(size=15), aspect.ratio=1)
 
-pca3y <- ggplot(df2,aes(x=PC1,y=PC2, color=stability)) + 
+pca3m <- ggplot(df2,aes(x=PC1,y=PC2, color=sediff_acf5)) + 
   geom_point()+
-  geom_point(data=df[highlight, ], aes(x=PC1, y=PC2), colour="red")
+  geom_point(data=df[highlight, ], aes(x=PC1, y=PC2), colour="red", shape=1)+
+  theme(legend.position="bottom", legend.text=element_text(size=15), aspect.ratio=1)
 
-pca4y <- ggplot(df2,aes(x=PC1,y=PC2, color=diff1y_acf1)) + 
+pca4m <- ggplot(df2,aes(x=PC1,y=PC2, color=entropy)) + 
   geom_point()+
-  geom_point(data=df[highlight, ], aes(x=PC1, y=PC2), colour="red")
+  geom_point(data=df[highlight, ], aes(x=PC1, y=PC2), colour="red", shape=1)+
+  theme(legend.position="bottom", legend.text=element_text(size=15), aspect.ratio=1)
 
-pca5y <- ggplot(df2,aes(x=PC1,y=PC2, color=y_pacf5)) + 
-  geom_point()+
-  geom_point(data=df[highlight, ], aes(x=PC1, y=PC2), colour="red")
-
-pca6y <- ggplot(df2,aes(x=PC1,y=PC2, color=sediff_seacf1)) + 
-  geom_point()+
-  geom_point(data=df[highlight, ], aes(x=PC1, y=PC2), colour="red")
-
-pca7y <- ggplot(df2,aes(x=PC1,y=PC2, color=hwalpha)) + 
-  geom_point()+
-  geom_point(data=df[highlight, ], aes(x=PC1, y=PC2), colour="red")
-
-pca7y <- ggplot(df2,aes(x=PC1,y=PC2, color=hwgamma)) + 
-  geom_point()+
-  geom_point(data=df[highlight, ], aes(x=PC1, y=PC2), colour="red")
-
-pca8y <- ggplot(df2,aes(x=PC1,y=PC2, color=sediff_acf5)) + 
-  geom_point()+
-  geom_point(data=df[highlight, ], aes(x=PC1, y=PC2), colour="red", shape=1)
-
-
-pca8y <- ggplot(df2,aes(x=PC1,y=PC2, color=e_acf1)) + 
-  geom_point()+
-  geom_point(data=df[highlight, ], aes(x=PC1, y=PC2), colour="red", shape=1)
-
-
-pca8y <- ggplot(df2,aes(x=PC1,y=PC2, color=beta)) + ##important
-  geom_point()+
-  geom_point(data=df[highlight, ], aes(x=PC1, y=PC2), colour="red", shape=1)
-
-
-
-pca8y <- ggplot(df2,aes(x=PC1,y=PC2, color=alpha)) + 
-  geom_point()+
-  geom_point(data=df[highlight, ], aes(x=PC1, y=PC2), colour="red", shape=1)
-
-
-pca8y <- ggplot(df2,aes(x=PC1,y=PC2, color=seasonality)) + 
-  geom_point()+
-  geom_point(data=df[highlight, ], aes(x=PC1, y=PC2), colour="red", shape=1)
-
-pca1y|pca2y|pca3y|pca5y
+pca1m|pca2m|pca3m|pca4m
 
 
 ## ----pcahourly
@@ -1437,58 +1408,34 @@ df3 <- data.frame(name = as.factor(unlist(lapply(models.weights.hourly[highlight
                   PC1=df$PC1[highlight],
                   PC2=df$PC1[highlight])
 
-pca1y <- ggplot(df,aes(x=PC1,y=PC2)) + 
+df3 <- df3 %>%
+  mutate(name = recode(name, "mstlarima"="mstlarima", "mstlets"="mstlets", 
+                       "nn"="nn", "snaive"="other",
+                       "stlar"="other", "tbats"="other"))
+df3$name <- factor(df3$name, levels = c("mstlarima", "mstlets", "nn", "other"))
+
+pca1h <- ggplot(df,aes(x=PC1,y=PC2)) + 
   geom_point(colour="grey") +
-  geom_point(data=df[highlight, ], aes(x=PC1, y=PC2, color=df3$name))+labs(color="Model")
+  geom_point(data=df[highlight, ], aes(x=PC1, y=PC2, color=df3$name))+labs(color="Model")+
+  theme(legend.position="bottom", legend.text=element_text(size=15), aspect.ratio=1, legend.title = element_blank())
 
-pca2y <- ggplot(df2,aes(x=PC1,y=PC2, color=trend)) + 
+pca2h <- ggplot(df2,aes(x=PC1,y=PC2, color=N)) + 
   geom_point()+
-  geom_point(data=df[highlight, ], aes(x=PC1, y=PC2), colour="red")
+  geom_point(data=df[highlight, ], aes(x=PC1, y=PC2), colour="red", shape=1)+
+  theme(legend.position="bottom", legend.text=element_text(size=6), aspect.ratio=1)
 
-
-pca4y <- ggplot(df2,aes(x=PC1,y=PC2, color=diff1y_acf1)) + 
+pca3h <- ggplot(df2,aes(x=PC1,y=PC2, color=entropy)) + 
   geom_point()+
-  geom_point(data=df[highlight, ], aes(x=PC1, y=PC2), colour="red")
+  geom_point(data=df[highlight, ], aes(x=PC1, y=PC2), colour="red", shape=1)+
+  theme(legend.position="bottom", legend.text=element_text(size=15), aspect.ratio=1)
 
-pca5y <- ggplot(df2,aes(x=PC1,y=PC2, color=entropy)) + 
-  geom_point()
-
-pca6y <- ggplot(df2,aes(x=PC1,y=PC2, color=sediff_seacf1)) + 
+names(df2)[names(df2) == 'seasonal_strength2'] <- 'seasonal_W'
+pca4h <- ggplot(df2,aes(x=PC1,y=PC2, color=seasonal_W)) + 
   geom_point()+
-  geom_point(data=df[highlight, ], aes(x=PC1, y=PC2), colour="red")
-
-pca7y <- ggplot(df2,aes(x=PC1,y=PC2, color=seasonal_strength2)) + 
-  geom_point()+
-  geom_point(data=df[highlight, ], aes(x=PC1, y=PC2), colour="red")
-
-pca7y <- ggplot(df2,aes(x=PC1,y=PC2, color=seasonal_strength2)) + 
-  geom_point()+
-  geom_point(data=df[highlight, ], aes(x=PC1, y=PC2), colour="red")
-
-pca8y <- ggplot(df2,aes(x=PC1,y=PC2, color=sediff_acf5)) + 
-  geom_point()+
-  geom_point(data=df[highlight, ], aes(x=PC1, y=PC2), colour="red", shape=1)
-
-
-pca8y <- ggplot(df2,aes(x=PC1,y=PC2, color=diff1y_pacf5)) + 
-  geom_point()+
-  geom_point(data=df[highlight, ], aes(x=PC1, y=PC2), colour="red", shape=1)
-
-
-pca8y <- ggplot(df2,aes(x=PC1,y=PC2, color=N)) + # important
-  geom_point()+
-  geom_point(data=df[highlight, ], aes(x=PC1, y=PC2), colour="red", shape=1)
+  geom_point(data=df[highlight, ], aes(x=PC1, y=PC2), colour="red", shape=1)+
+  theme(legend.position="bottom", legend.text=element_text(size=15), aspect.ratio=1)
 
 
 
-pca8y <- ggplot(df2,aes(x=PC1,y=PC2, color=diff2y_acf1)) + 
-  geom_point()+
-  geom_point(data=df[highlight, ], aes(x=PC1, y=PC2), colour="red", shape=1)
-
-
-pca8y <- ggplot(df2,aes(x=PC1,y=PC2, color=diff1y_pacf5)) + 
-  geom_point()+
-  geom_point(data=df[highlight, ], aes(x=PC1, y=PC2), colour="red", shape=1)
-
-pca1y|pca2y|pca3y|pca5y
+pca1h|pca2h|pca3h|pca4h
 

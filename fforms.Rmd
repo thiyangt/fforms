@@ -67,6 +67,7 @@ library(reshape2)
 #devtools::install_github("thomasp85/patchwork")
 library(patchwork)
 library(Hmisc)
+library(seer)
 ```
 
 
@@ -542,7 +543,7 @@ The two-way partial dependency plots of linearity are explored to see how linear
 ```{r m2dpdp,  fig.height=9, fig.width=10,fig.cap="Two-way partial dependence plots for linearity for monthly series. Dark regions show the high probability of belonging to the corresponding class shown in the plot title.", fig.pos="h", dev="pdf"}
 ```
 
-
+\clearpage
 
 ```{r h2dpdp,  fig.height=2, fig.width=9,fig.cap="Two-way partial dependence plots for linearity for hourly series. Dark regions show the high probability of belonging to the corresponding class shown in the plot title.", fig.pos="h", dev="pdf"}
 ```
@@ -551,11 +552,19 @@ The two-way partial dependency plots of linearity are explored to see how linear
 ```{r thetapdp,  fig.height=2, fig.width=9, fig.cap="Two-way partial dependence plots for linearity for monthly series within theta class. Dark regions show the high probability of belonging to the corresponding class shown in the plot title.", fig.pos="h", dev="pdf"}
 ```
 
-```{r pcayearly,  fig.height=10, fig.width=25,fig.cap="Two-way partial dependence plots for linearity for hourly series. Dark regions show the high probability of belonging to the corresponding class shown in the plot title.", fig.pos="h", dev="png"}
+
+```{r pcayearly,  fig.height=6, fig.width=20,fig.cap="Two-way partial dependence plots for linearity for hourly series. Dark regions show the high probability of belonging to the corresponding class shown in the plot title.", fig.pos="h", dev="png"}
 ```
 
+```{r pcamonthly,  fig.height=6, fig.width=20,fig.cap="Two-way partial dependence plots for linearity for hourly series. Dark regions show the high probability of belonging to the corresponding class shown in the plot title.", fig.pos="h", dev="png"}
+```
 
 \clearpage
+
+```{r pcahourly,  fig.height=6, fig.width=20,fig.cap="Two-way partial dependence plots for linearity for hourly series. Dark regions show the high probability of belonging to the corresponding class shown in the plot title.", fig.pos="h", dev="png"}
+```
+
+FFORMS framework classified some series with very high probability (greater than 0.6). 
 
 # Discussion and conclusions {#discussion}
 

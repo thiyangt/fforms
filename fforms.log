@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.7.18)  3 DEC 2019 09:47
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.7.18)  3 DEC 2019 16:35
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2137,51 +2137,59 @@ File: figure/m2dpdp-1.pdf Graphic file (type pdf)
 <use figure/m2dpdp-1.pdf>
 Package pdftex.def Info: figure/m2dpdp-1.pdf  used on input line 878.
 (pdftex.def)             Requested size: 455.24411pt x 409.72343pt.
-<figure/h2dpdp-1.pdf, id=598, 650.43pt x 144.54pt>
+[27 <./figure/m2dpdp-1.pdf>]
+<figure/h2dpdp-1.pdf, id=640, 650.43pt x 144.54pt>
 File: figure/h2dpdp-1.pdf Graphic file (type pdf)
 <use figure/h2dpdp-1.pdf>
-Package pdftex.def Info: figure/h2dpdp-1.pdf  used on input line 887.
+Package pdftex.def Info: figure/h2dpdp-1.pdf  used on input line 889.
 (pdftex.def)             Requested size: 455.24411pt x 101.16847pt.
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<figure/thetapdp-1.pdf, id=599, 650.43pt x 144.54pt>
+<figure/thetapdp-1.pdf, id=641, 650.43pt x 144.54pt>
 File: figure/thetapdp-1.pdf Graphic file (type pdf)
 <use figure/thetapdp-1.pdf>
-Package pdftex.def Info: figure/thetapdp-1.pdf  used on input line 896.
+Package pdftex.def Info: figure/thetapdp-1.pdf  used on input line 898.
 (pdftex.def)             Requested size: 455.24411pt x 101.16847pt.
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<figure/pcayearly-1.png, id=600, 1806.75pt x 722.7pt>
+<figure/pcayearly-1.png, id=642, 1445.4pt x 433.62pt>
 File: figure/pcayearly-1.png Graphic file (type png)
 <use figure/pcayearly-1.png>
-Package pdftex.def Info: figure/pcayearly-1.png  used on input line 905.
-(pdftex.def)             Requested size: 455.24411pt x 182.09709pt.
+Package pdftex.def Info: figure/pcayearly-1.png  used on input line 907.
+(pdftex.def)             Requested size: 455.24411pt x 136.57117pt.
+<figure/pcamonthly-1.png, id=643, 1445.4pt x 433.62pt>
+File: figure/pcamonthly-1.png Graphic file (type png)
+<use figure/pcamonthly-1.png>
+Package pdftex.def Info: figure/pcamonthly-1.png  used on input line 916.
+(pdftex.def)             Requested size: 455.24411pt x 136.57117pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[27 <./figure/m2dpdp-1.pdf>] [28 <./figure/h2dpdp-1.pdf> <./figure/thetapdp-1.p
-df> <./figure/pcayearly-1.png>]
+[28
+
+ <./figure/h2dpdp-1.pdf> <./figure/thetapdp-1.pdf> <./figure/pcayearly-1.png>] 
+[29 <./figure/pcamonthly-1.png>]
+<figure/pcahourly-1.png, id=679, 1445.4pt x 433.62pt>
+File: figure/pcahourly-1.png Graphic file (type png)
+<use figure/pcahourly-1.png>
+Package pdftex.def Info: figure/pcahourly-1.png  used on input line 927.
+(pdftex.def)             Requested size: 455.24411pt x 136.57117pt.
+[30
+
+ <./figure/pcahourly-1.png>]
 
 Package hyperref Warning: Difference (2) between bookmark levels is greater 
-(hyperref)                than one, level fixed on input line 931.
+(hyperref)                than one, level fixed on input line 953.
 
 
 Package hyperref Warning: The anchor of a bookmark and its parent's must not
-(hyperref)                be the same. Added a new anchor on input line 931.
+(hyperref)                be the same. Added a new anchor on input line 953.
 
-[29
-
-] [30] [31] [32] [33] [34] [35]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1029.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1029.
+[31] [32] [33] [34] [35] [36] [37]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1051.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1051.
 (./fforms.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1029.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1029.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1051.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1051.
 
 Package rerunfilecheck Info: File `fforms.out' has not changed.
-(rerunfilecheck)             Checksum: 7B01DAD2BDCFB774B5F97E83AA3B6181;9077.
+(rerunfilecheck)             Checksum: 774A7F3EF291A104E2FD1959014A70A8;9077.
 
 LaTeX Warning: There were undefined references.
 
@@ -2192,17 +2200,17 @@ Package biblatex Warning: Please rerun LaTeX.
 Package logreq Info: Writing requests to 'fforms.run.xml'.
 \openout1 = `fforms.run.xml'.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1029.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1051.
  )
 (\end occurred inside a group at level 1)
 
 ### semi simple group (level 1) entered at line 178 (\begingroup)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 43284 strings out of 494553
- 805563 string characters out of 6175442
- 1231611 words of memory out of 5000000
- 45882 multiletter control sequences out of 15000+600000
+ 43300 strings out of 494553
+ 805891 string characters out of 6175442
+ 1232017 words of memory out of 5000000
+ 45892 multiletter control sequences out of 15000+600000
  641004 words of font info for 352 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  62i,15n,92p,1889b,18562s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -2224,10 +2232,10 @@ haminitalagala/Library/TinyTeX/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb><
 /Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/fonts/type1/urw/palat
 ino/uplr8a.pfb></Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/fonts
 /type1/urw/palatino/uplri8a.pfb>
-Output written on fforms.pdf (35 pages, 1395302 bytes).
+Output written on fforms.pdf (37 pages, 1465480 bytes).
 PDF statistics:
- 845 PDF objects out of 1000 (max. 8388607)
- 663 compressed objects within 7 object streams
- 169 named destinations out of 1000 (max. 500000)
- 31203 words of extra memory for PDF output out of 35830 (max. 10000000)
+ 862 PDF objects out of 1000 (max. 8388607)
+ 674 compressed objects within 7 object streams
+ 173 named destinations out of 1000 (max. 500000)
+ 31213 words of extra memory for PDF output out of 35830 (max. 10000000)
 
