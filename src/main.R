@@ -1314,6 +1314,7 @@ df3 <- data.frame(name = as.factor(unlist(lapply(models.weights[highlight], func
 pca1y <- ggplot(df,aes(x=PC1,y=PC2)) + 
   geom_point(colour="grey") +
   geom_point(data=df[highlight, ], aes(x=PC1, y=PC2, color=df3$name))+labs(color="Model")+
+  scale_color_brewer(palette="Dark2")+
   theme(legend.position="bottom", legend.text=element_text(size=15), legend.title = element_blank(), aspect.ratio=1)
 
 pca2y <- ggplot(df2,aes(x=PC1,y=PC2, color=trend)) + 
@@ -1366,6 +1367,7 @@ df3$name <- factor(df3$name, levels = c("stlar", "SARIMA", "nn", "other"))
 pca1m <- ggplot(df,aes(x=PC1,y=PC2)) + 
   geom_point(colour="grey") +
   geom_point(data=df[highlight, ], aes(x=PC1, y=PC2, color=df3$name))+labs(color="Model")+
+  scale_color_brewer(palette="Dark2")+
   theme(legend.position="bottom", legend.text=element_text(size=15), aspect.ratio=1, legend.title = element_blank())
 
 pca2m <- ggplot(df2,aes(x=PC1,y=PC2, color=beta)) + ##important
@@ -1417,7 +1419,9 @@ df3$name <- factor(df3$name, levels = c("mstlarima", "mstlets", "nn", "other"))
 pca1h <- ggplot(df,aes(x=PC1,y=PC2)) + 
   geom_point(colour="grey") +
   geom_point(data=df[highlight, ], aes(x=PC1, y=PC2, color=df3$name))+labs(color="Model")+
+  scale_color_brewer(palette="Dark2")+
   theme(legend.position="bottom", legend.text=element_text(size=15), aspect.ratio=1, legend.title = element_blank())
+
 
 pca2h <- ggplot(df2,aes(x=PC1,y=PC2, color=N)) + 
   geom_point()+
