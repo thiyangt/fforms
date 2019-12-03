@@ -1231,7 +1231,7 @@ theta1 <- stability.trend.m.long %>%
   facet_wrap(~class, ncol=8) +
   scale_fill_viridis_c(breaks=c(0,0.13,100),
                        limits=c(0,0.13), option = "A", direction = -1)+
-  theme(strip.text.x = element_text(size = 10))+ theme(legend.title = element_blank())
+  theme(strip.text.x = element_text(size = 10))+ theme(legend.position = "none")
 
 load("data/HPCfiles/stability.N.m.rda")
 colNamesds <-colnames(stability.N.m)[32:48]
@@ -1247,7 +1247,7 @@ theta2 <- stability.N.m.long %>%
   facet_wrap(~class, ncol=8) +
   scale_fill_viridis_c(breaks=c(0,0.13,100),
                        limits=c(0,0.13), option = "A", direction = -1)+
-  theme(strip.text.x = element_text(size = 10))+ theme(legend.title = element_blank())
+  theme(strip.text.x = element_text(size = 10))+ theme(legend.position = "none")
 
 load("data/HPCfiles/stability.diff1y_acf1.m.rda")
 colNamesds <-colnames(stability.diff1y_acf1.m)[32:48]

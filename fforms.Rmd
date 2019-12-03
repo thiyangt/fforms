@@ -549,7 +549,7 @@ The two-way partial dependency plots of linearity are explored to see how linear
 ```
 
 
-```{r thetapdp,  fig.height=2, fig.width=9, fig.cap="Two-way partial dependence plots for linearity for monthly series within theta class. Dark regions show the high probability of belonging to the corresponding class shown in the plot title.", fig.pos="h", dev="pdf"}
+```{r thetapdp,  fig.height=2, fig.width=6, fig.cap="Two-way partial dependence plots for linearity for monthly series within theta class. Dark regions show the high probability of belonging to the corresponding class shown in the plot title.", fig.pos="h", dev="pdf"}
 ```
 
 
