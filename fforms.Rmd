@@ -534,7 +534,7 @@ The features, sum of the first five partial autocorrelation coefficients, streng
 ```
 
 
-```{r y2dpdp,  fig.height=6, fig.width=15,fig.cap="Two\\-way partial dependence plots for linearity for yearly series. Dark regions show the high probability of belonging to the corresponding class shown in the plot title.", fig.pos="h", dev="pdf"}
+```{r y2dpdp,  fig.height=6, fig.width=15,fig.cap="Two-way partial dependence plots for linearity for yearly series. Dark regions show the high probability of belonging to the corresponding class shown in the plot title.", fig.pos="h", dev="pdf"}
 ```
 
 The two-way partial dependency plots of linearity are explored to see how linearity behaved in the presence of other top-5 features. The associated two-way partial dependency plots are shown in \autoref{fig:y2dpdp}, \autoref{fig:m2dpdp} and \autoref{fig:h2dpdp} for yearly, monthly and hourly series respectively. According to the \autoref{fig:y2dpdp} within wn, random walk, theta and nn classes linearity shows a pattern of interactivity with lmres_acf1 and diff1y_acf1. Within both ARIMA and ARMA classes main effect of linearity dominates. This is consistent with partial dependency curves we observed in \autoref{fig:linearity}. For monthly series, linearity shows interactivity with acf value at the first seasonal lag of seasonally-differenced series, stability, first ACF value at the remainder series and a parameter estimate of ETS(A, A, A) model.  According to \autoref{fig:m2dpdp}, we can see there is a unique pattern of interactivity existing within each class. The two-way partial dependency plot for hourly series between the ACF value at the first seasonal lag of seasonally-differenced series and linearity are shown in \autoref{fig:h2dpdp}. The inconsistent level of colour intensity throughout the panels in tbats, nn and stlar indicate probability of selecting the corresponding forecast models changes according to the changes in both the features. Within rw and mstlarima we can see a separation between the lower half and the upper half due to the main effect of sediff_seacf1.  The partial dependency curves of theta for stability is relatively flat. \autoref{fig:thetapdp} shows how trend, length, first autocorrelation coefficient of the differenced series interact with stability within different ranges. For example, \autoref{fig:thetapdp} as length of time series decreases, a pattern of interaction is visible with stability. 
@@ -553,18 +553,19 @@ The two-way partial dependency plots of linearity are explored to see how linear
 ```
 
 
-```{r pcayearly,  fig.height=6, fig.width=20,fig.cap="Two-way partial dependence plots for linearity for hourly series. Dark regions show the high probability of belonging to the corresponding class shown in the plot title.", fig.pos="h", dev="png"}
+```{r pcayearly,  fig.height=6, fig.width=20,fig.cap="Distribution of the yearly time series on the PCA space. On each graph the series that were classified with high probability are highlighted. In the first graph the highlighted points are coloured according to the predicted forecast model. The second, third and forth panels show the distribution of features trend, beta and diff1y\\_acf1.  All series that were assigned high voting probability are highly trended.", fig.pos="h", dev="png"}
 ```
 
-```{r pcamonthly,  fig.height=6, fig.width=20,fig.cap="Two-way partial dependence plots for linearity for hourly series. Dark regions show the high probability of belonging to the corresponding class shown in the plot title.", fig.pos="h", dev="png"}
+```{r pcamonthly,  fig.height=6, fig.width=20,fig.cap="Distribution of the monthly time series on the PCA space. On each graph the series that were classified with high probability are highlighted. In the first graph the highlighted points are coloured according to the predicted forecast model. The second, third and forth panels show the distribution of features beta, sediff\\_acf5 and entropy.  The series that are classifed into neural network class with high probability have high entropy value.", fig.pos="h", dev="png"}
 ```
 
-\clearpage
 
-```{r pcahourly,  fig.height=6, fig.width=20,fig.cap="Two-way partial dependence plots for linearity for hourly series. Dark regions show the high probability of belonging to the corresponding class shown in the plot title.", fig.pos="h", dev="png"}
+```{r pcahourly,  fig.height=6, fig.width=20,fig.cap="Distribution of the hourly time series on the PCA space. On each graph the series that were classified with high probability are highlighted. In the first graph the highlighted points are coloured according to the predicted forecast model. The second, third and forth panels show the distribution of features length, entropy and strength of weekly seasonality. All series that were assigned high voting probability have high value for length.", fig.pos="h", dev="png"}
 ```
 
 FFORMS framework classified some series with very high probability (greater than 0.6). 
+
+\clearpage
 
 # Discussion and conclusions {#discussion}
 

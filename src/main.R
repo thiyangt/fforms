@@ -1231,7 +1231,7 @@ theta1 <- stability.trend.m.long %>%
   facet_wrap(~class, ncol=8) +
   scale_fill_viridis_c(breaks=c(0,0.13,100),
                        limits=c(0,0.13), option = "A", direction = -1)+
-  theme(strip.text.x = element_text(size = 10))
+  theme(strip.text.x = element_text(size = 10))+ theme(legend.title = element_blank())
 
 load("data/HPCfiles/stability.N.m.rda")
 colNamesds <-colnames(stability.N.m)[32:48]
@@ -1245,9 +1245,9 @@ theta2 <- stability.N.m.long %>%
   geom_raster() +
   theme(axis.text.x = element_text(angle = 90)) +
   facet_wrap(~class, ncol=8) +
-  scale_fill_viridis_c(breaks=c(0,0.1,100),
-                       limits=c(0,0.1), option = "A", direction = -1)+
-  theme(strip.text.x = element_text(size = 10))
+  scale_fill_viridis_c(breaks=c(0,0.13,100),
+                       limits=c(0,0.13), option = "A", direction = -1)+
+  theme(strip.text.x = element_text(size = 10))+ theme(legend.title = element_blank())
 
 load("data/HPCfiles/stability.diff1y_acf1.m.rda")
 colNamesds <-colnames(stability.diff1y_acf1.m)[32:48]
@@ -1261,8 +1261,8 @@ theta3 <- stability.diff1y_acf1.m.long %>%
   geom_raster() +
   theme(axis.text.x = element_text(angle = 90)) +
   facet_wrap(~class, ncol=8) +
-  scale_fill_viridis_c(breaks=c(0,0.1,100),
-                       limits=c(0,0.1), option = "A", direction = -1)+
+  scale_fill_viridis_c(breaks=c(0,0.13,100),
+                       limits=c(0,0.13), option = "A", direction = -1)+
   theme(strip.text.x = element_text(size = 10))
 
 theta1|theta2|theta3
