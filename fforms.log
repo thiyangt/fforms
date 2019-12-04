@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.7.18)  3 DEC 2019 18:17
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.7.18)  5 DEC 2019 09:09
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2175,20 +2175,18 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 [29 <./figure/pcamonthly-1.png> <./figure/pcahourly-1.png>]
 
 Package hyperref Warning: Difference (2) between bookmark levels is greater 
-(hyperref)                than one, level fixed on input line 953.
+(hyperref)                than one, level fixed on input line 951.
 
 
 Package hyperref Warning: The anchor of a bookmark and its parent's must not
-(hyperref)                be the same. Added a new anchor on input line 953.
+(hyperref)                be the same. Added a new anchor on input line 951.
 
-[30
-
-] [31] [32] [33] [34] [35] [36]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1051.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1051.
+[30] [31] [32] [33] [34] [35] [36]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1049.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1049.
 (./fforms.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1051.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1051.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1049.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1049.
 
 Package rerunfilecheck Info: File `fforms.out' has not changed.
 (rerunfilecheck)             Checksum: 774A7F3EF291A104E2FD1959014A70A8;9077.
@@ -2202,7 +2200,7 @@ Package biblatex Warning: Please rerun LaTeX.
 Package logreq Info: Writing requests to 'fforms.run.xml'.
 \openout1 = `fforms.run.xml'.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1051.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1049.
  )
 (\end occurred inside a group at level 1)
 
@@ -2234,7 +2232,7 @@ haminitalagala/Library/TinyTeX/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb><
 /Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/fonts/type1/urw/palat
 ino/uplr8a.pfb></Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/fonts
 /type1/urw/palatino/uplri8a.pfb>
-Output written on fforms.pdf (36 pages, 1464889 bytes).
+Output written on fforms.pdf (36 pages, 1465300 bytes).
 PDF statistics:
  853 PDF objects out of 1000 (max. 8388607)
  668 compressed objects within 7 object streams

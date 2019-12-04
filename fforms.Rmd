@@ -563,9 +563,7 @@ The two-way partial dependency plots of linearity are explored to see how linear
 ```{r pcahourly,  fig.height=6, fig.width=20,fig.cap="Distribution of the hourly time series on the PCA space. On each graph the series that were classified with high probability are highlighted. In the first graph the highlighted points are coloured according to the predicted forecast model. The second, third and forth panels show the distribution of features length, entropy and strength of weekly seasonality. All series that were assigned high voting probability have high value for length.", fig.pos="h", dev="png"}
 ```
 
-FFORMS framework classified some series with very high probability (greater than 0.6). 
-
-\clearpage
+FFORMS framework classified some series with very high probability (greater than 0.6), which indicatesfor a given series, majority of the trees voted for the same class. Hence, these instances can be considered as series that are easy to classify. We next try to visualize the distribution of these instances in the feature space. 
 
 # Discussion and conclusions {#discussion}
 
