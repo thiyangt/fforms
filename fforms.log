@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.7.18)  5 DEC 2019 09:36
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.7.18)  5 DEC 2019 10:04
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2143,12 +2143,12 @@ File: figure/h2dpdp-1.pdf Graphic file (type pdf)
 <use figure/h2dpdp-1.pdf>
 Package pdftex.def Info: figure/h2dpdp-1.pdf  used on input line 889.
 (pdftex.def)             Requested size: 455.24411pt x 101.16847pt.
-<figure/thetapdp-1.pdf, id=641, 433.62pt x 144.54pt>
+<figure/thetapdp-1.pdf, id=641, 722.7pt x 216.81pt>
 File: figure/thetapdp-1.pdf Graphic file (type pdf)
 <use figure/thetapdp-1.pdf>
 Package pdftex.def Info: figure/thetapdp-1.pdf  used on input line 898.
-(pdftex.def)             Requested size: 455.24411pt x 151.75601pt.
-<figure/pcayearly-1.png, id=642, 1445.4pt x 433.62pt>
+(pdftex.def)             Requested size: 455.24411pt x 136.57448pt.
+<figure/pcayearly-1.png, id=645, 1445.4pt x 433.62pt>
 File: figure/pcayearly-1.png Graphic file (type png)
 <use figure/pcayearly-1.png>
 Package pdftex.def Info: figure/pcayearly-1.png  used on input line 909.
@@ -2156,7 +2156,7 @@ Package pdftex.def Info: figure/pcayearly-1.png  used on input line 909.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<figure/pcamonthly-1.png, id=643, 1445.4pt x 433.62pt>
+<figure/pcamonthly-1.png, id=646, 1445.4pt x 433.62pt>
 File: figure/pcamonthly-1.png Graphic file (type png)
 <use figure/pcamonthly-1.png>
 Package pdftex.def Info: figure/pcamonthly-1.png  used on input line 918.
@@ -2164,7 +2164,7 @@ Package pdftex.def Info: figure/pcamonthly-1.png  used on input line 918.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<figure/pcahourly-1.png, id=644, 1445.4pt x 433.62pt>
+<figure/pcahourly-1.png, id=647, 1445.4pt x 433.62pt>
 File: figure/pcahourly-1.png Graphic file (type png)
 <use figure/pcahourly-1.png>
 Package pdftex.def Info: figure/pcahourly-1.png  used on input line 927.
@@ -2237,10 +2237,10 @@ haminitalagala/Library/TinyTeX/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb><
 /Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/fonts/type1/urw/palat
 ino/uplr8a.pfb></Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/fonts
 /type1/urw/palatino/uplri8a.pfb>
-Output written on fforms.pdf (36 pages, 1465237 bytes).
+Output written on fforms.pdf (36 pages, 1466121 bytes).
 PDF statistics:
- 853 PDF objects out of 1000 (max. 8388607)
- 668 compressed objects within 7 object streams
+ 856 PDF objects out of 1000 (max. 8388607)
+ 671 compressed objects within 7 object streams
  172 named destinations out of 1000 (max. 500000)
  31213 words of extra memory for PDF output out of 35830 (max. 10000000)
 
