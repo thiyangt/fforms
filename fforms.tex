@@ -902,13 +902,15 @@ The two-way partial dependency plots of linearity are explored to see how linear
 \caption{Two-way partial dependence plots for linearity for monthly series within theta class. Dark regions show the high probability of belonging to the corresponding class shown in the plot title.}\label{fig:thetapdp}
 \end{figure}
 
+FFORMS framework classified some series with very high probability (greater than 0.6), which indicatesfor a given series, majority of the trees voted for the same class. Hence, these instances can be considered as series that are easy to classify. We next try to visualize the distribution of these instances in the feature space. This is achieved by projecting the training dataset into a meaningful low-dimensional feature space and then visualize locations of the series that are classified with very high probabilities. We use principal component analysis (PCA) to map each time series as a point in a two-dimensional instance space given by features.
+
 \begin{figure}[h]
 
 {\centering \includegraphics[width=\textwidth]{figure/pcayearly-1} 
 
 }
 
-\caption{Distribution of the yearly time series on the PCA space. On each graph the series that were classified with high probability are highlighted. In the first graph the highlighted points are coloured according to the predicted forecast model. The second, third and forth panels show the distribution of features trend, beta and diff1y\_acf1.  All series that were assigned high voting probability are highly trended.}\label{fig:pcayearly}
+\caption{Distribution of the yearly time series on the instance space based on PCA. On each graph the series that were classified with high probability are highlighted. In the first graph the highlighted points are coloured according to the predicted forecast model. The second, third and forth panels show the distribution of features trend, beta and diff1y\_acf1.  All series that were assigned high voting probability are highly trended.}\label{fig:pcayearly}
 \end{figure}
 
 \begin{figure}[h]
@@ -917,7 +919,7 @@ The two-way partial dependency plots of linearity are explored to see how linear
 
 }
 
-\caption{Distribution of the monthly time series on the PCA space. On each graph the series that were classified with high probability are highlighted. In the first graph the highlighted points are coloured according to the predicted forecast model. The second, third and forth panels show the distribution of features beta, sediff\_acf5 and entropy.  The series that are classifed into neural network class with high probability have high entropy value.}\label{fig:pcamonthly}
+\caption{Distribution of the monthly time series on the instance space based on PCA. On each graph the series that were classified with high probability are highlighted. In the first graph the highlighted points are coloured according to the predicted forecast model. The second, third and forth panels show the distribution of features beta, sediff\_acf5 and entropy.  The series that are classifed into neural network class with high probability have high entropy value.}\label{fig:pcamonthly}
 \end{figure}
 
 \begin{figure}[h]
@@ -929,7 +931,7 @@ The two-way partial dependency plots of linearity are explored to see how linear
 \caption{Distribution of the hourly time series on the PCA space. On each graph the series that were classified with high probability are highlighted. In the first graph the highlighted points are coloured according to the predicted forecast model. The second, third and forth panels show the distribution of features length, entropy and strength of weekly seasonality. All series that were assigned high voting probability have high value for length.}\label{fig:pcahourly}
 \end{figure}
 
-FFORMS framework classified some series with very high probability (greater than 0.6), which indicatesfor a given series, majority of the trees voted for the same class. Hence, these instances can be considered as series that are easy to classify. We next try to visualize the distribution of these instances in the feature space.
+\clearpage
 
 \hypertarget{discussion}{%
 \section{Discussion and conclusions}\label{discussion}}
