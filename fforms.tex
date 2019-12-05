@@ -938,16 +938,7 @@ In this paper we have proposed a novel framework for forecast-model selection us
 fills an important gap in contemporary forecasting practice, with many available models
 to choose from and with predictions being required extremely fast.
 
-We further explore the role of features under the hood of the FFORMS framework, thereby presenting an understanding of what features lead to the different choice of models for forecasting. This was accomplished using model-agnostic machine learning approaches. We explored which features are
-the most important for the choice of the FFORMS framework, and where they are most
-important: that is, for the overall classification process, or within a specific class of models
-or a set of multiple classes of models. Further, partial dependency plots were used to
-visualise when and how these features link with the prediction outcome of the FFORMS
-framework. For all features, the displayed relationships of partial dependency plots
-are consistent with the domain knowledge expectations. This is an important aspect in
-encouraging people to trust and use the proposed framework effectively. Further, the
-results of this study are useful in identifying new ways to improve forecasting accuracy by
-capturing different features of time series. Although we have illustrated the method using the M1, M3 and M4 competition data, the framework is general and can be applied to any large collection of time series.
+We further explore the role of features under the hood of the FFORMS framework, thereby presenting an understanding of what features lead to the different choice of models for forecasting. This was accomplished using model-agnostic machine learning approaches. For all features, the displayed relationships of partial dependency plots are consistent with the domain knowledge expectations. This is an important aspect in encouraging people to trust and use the proposed framework effectively. Further, the results of this study are useful in identifying new ways to improve forecasting accuracy by capturing different features of time series. Although we have illustrated the method using the M1, M3 and M4 competition data, the framework is general and can be applied to any large collection of time series.
 
 \hypertarget{appendix-a-definition-of-features}{%
 \section*{Appendix A: Definition of features}\label{appendix-a-definition-of-features}}
@@ -1024,7 +1015,7 @@ The ETS (A,A,N) model \autocite{expsmooth08} produces equivalent forecasts to Ho
 \end{align*}
 where \(\alpha\) is the smoothing parameter for the level, and \(\beta\) is the smoothing parameter for the trend. We include the parameter estimates of both \(\alpha\) and \(\beta\) in our feature set for yearly time series. These indicate the variability in the level and slope of the time series.
 
-The ETS(A,A,A) model \autocite{expsmooth08} produces equivalent forecasts to Holt-Winters' additive method, and can be expressed as follows:
+The ETS (A,A,A) model \autocite{expsmooth08} produces equivalent forecasts to Holt-Winters' additive method, and can be expressed as follows:
 \begin{align*}
   y_t    & = \ell_{t-1}+b_{t-1}+s_{t-m}+\varepsilon_t\\
   \ell_t & = \ell_{t-1}+b_{t-1}+s_{t-m}+\alpha \varepsilon_t\\

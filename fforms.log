@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.7.18)  5 DEC 2019 11:05
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.7.18)  5 DEC 2019 11:32
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2170,38 +2170,42 @@ Package pdftex.def Info: figure/pcahourly-1.png  used on input line 927.
 1.png>]
 
 Package hyperref Warning: Difference (2) between bookmark levels is greater 
-(hyperref)                than one, level fixed on input line 958.
+(hyperref)                than one, level fixed on input line 949.
 
 
 Package hyperref Warning: The anchor of a bookmark and its parent's must not
-(hyperref)                be the same. Added a new anchor on input line 958.
+(hyperref)                be the same. Added a new anchor on input line 949.
 
-[30] [31] [32] [33] [34] [35] [36] [37]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1056.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1056.
+[30] [31] [32] [33] [34] [35] [36]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1047.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1047.
 (./fforms.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1056.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1056.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1047.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1047.
 
 Package rerunfilecheck Info: File `fforms.out' has not changed.
 (rerunfilecheck)             Checksum: 774A7F3EF291A104E2FD1959014A70A8;9077.
 
 LaTeX Warning: There were undefined references.
 
+
+Package biblatex Warning: Please rerun LaTeX.
+(biblatex)                Page breaks have changed.
+
 Package logreq Info: Writing requests to 'fforms.run.xml'.
 \openout1 = `fforms.run.xml'.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1056.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1047.
  )
 (\end occurred inside a group at level 1)
 
 ### semi simple group (level 1) entered at line 178 (\begingroup)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 43414 strings out of 494553
- 807165 string characters out of 6175442
- 1234947 words of memory out of 5000000
- 46000 multiletter control sequences out of 15000+600000
+ 43305 strings out of 494553
+ 805938 string characters out of 6175442
+ 1232842 words of memory out of 5000000
+ 45892 multiletter control sequences out of 15000+600000
  641314 words of font info for 356 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  62i,15n,92p,1889b,18562s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -2223,10 +2227,10 @@ haminitalagala/Library/TinyTeX/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb><
 /Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/fonts/type1/urw/palat
 ino/uplr8a.pfb></Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/fonts
 /type1/urw/palatino/uplri8a.pfb>
-Output written on fforms.pdf (37 pages, 1466640 bytes).
+Output written on fforms.pdf (36 pages, 1466014 bytes).
 PDF statistics:
- 863 PDF objects out of 1000 (max. 8388607)
- 677 compressed objects within 7 object streams
- 173 named destinations out of 1000 (max. 500000)
+ 856 PDF objects out of 1000 (max. 8388607)
+ 671 compressed objects within 7 object streams
+ 172 named destinations out of 1000 (max. 500000)
  31213 words of extra memory for PDF output out of 35830 (max. 10000000)
 
