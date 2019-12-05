@@ -581,6 +581,16 @@ Although we have illustrated the method using the M1, M3 and M4 competition data
 models might not be the right choice for forecasting stock return data, intermittent time series or irregular
 time series, etc. Hence, it is important to expand the frameworks to other datasets that come from different application domains. When adapting the frameworks to other applications the feature space should be revised with appropriate features that measure characteristics of interest. The algorithm space should also be revised with suitable forecast models. A suitable forecast error metric should also be considered to evaluate the performance of different forecast models. 
 
+# Supplemental Materials
+
+**Data and scripts:** Datasets and R code to reproduce all figures in this article (main.R).
+
+**R-package seer:** R-package oddstream consists of the implementation of FFORMS algorithm is available from Github (https://github.com/thiyangt/seer).
+
+**R-packages:** Each of the R packages used in this article (ggplot2 (Wickham 2009), dplyr (Wickham
+et al. 2017), tibble (Müller & Wickham 2017), tidyr (Wickham & Henry 2017), reshape (Wickham
+2007)) are available online (URLs are provided in the bibliography).
+
 # Appendix A: Definition of features {-}
 
 ### Length of time series {-}
