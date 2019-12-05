@@ -378,16 +378,7 @@ Rather than work with the time series directly at the level of individual observ
 
 }
 
-\caption{Time-domain representation of time series}\label{fig:fig1}
-\end{figure}
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.7\linewidth]{figure/fig2-1} 
-
-}
-
-\caption{Feature-based representation of time series}\label{fig:fig2}
+\caption{Time-domain representation of time series (left) and feature-based representation of time series (right).}\label{fig:fig1}
 \end{figure}
 
 \hypertarget{meta-learning-for-algorithm-selection}{%
@@ -902,7 +893,7 @@ The two-way partial dependency plots of linearity are explored to see how linear
 \caption{Two-way partial dependence plots for linearity for monthly series within theta class. Dark regions show the high probability of belonging to the corresponding class shown in the plot title.}\label{fig:thetapdp}
 \end{figure}
 
-FFORMS framework classified some series with very high probability (greater than 0.6), which indicatesfor a given series, majority of the trees voted for the same class. Hence, these instances can be considered as series that are easy to classify. We next try to visualize the distribution of these instances in the feature space. This is achieved by projecting the training dataset into a meaningful low-dimensional feature space and then visualize locations of the series that are classified with very high probabilities. This approach is a visualisation of data in the models space \autocite{wickham2015visualizing}. We use principal component analysis (PCA) to map each time series as a point in a two-dimensional instance space given by features. The corresponding yearly reasults are shown in \autoref{fig:pcayearly}, \autoref{fig:pcamonthly} and \autoref{fig:pcahourly}. Most of the yearly series that are classified with very high probability belong to either ARIMA class or random walk with drift class. Distribution of the trend in the feature space shows they are highly trended. Furthermore, these ARIMA series and random walk with drift are even visually distinguishable based on the features beta and diff1y\_acf5. Furthermore, the monthly series classified into SARIMA and stlar class with high probability take very high value for entropy, which means the series are easily forecastable. On the otherhand the series that are classified in to neural network class with high probability are less forecastable, less trended (low values for beta) and less seasonal (low value for sediff\_acf5). For hourly series, the series that are classified with very high probability are very high in length. Lengthy time series means more information, hence easy to recognise clear patterns and therefore easy to classify.
+FFORMS framework classified some series with very high probability (greater than 0.6), which indicatesfor a given series, majority of the trees voted for the same class. Hence, these instances can be considered as series that are easy to classify. We next try to visualize the distribution of these instances in the feature space. This is achieved by projecting the training dataset into a meaningful low-dimensional feature space and then visualize locations of the series that are classified with very high probabilities. This approach is a visualisation of model in the data space \autocite{wickham2015visualizing}. We use principal component analysis (PCA) to map each time series as a point in a two-dimensional instance space given by features. The corresponding yearly reasults are shown in \autoref{fig:pcayearly}, \autoref{fig:pcamonthly} and \autoref{fig:pcahourly}. Most of the yearly series that are classified with very high probability belong to either ARIMA class or random walk with drift class. Distribution of the trend in the feature space shows they are highly trended. Furthermore, these ARIMA series and random walk with drift are even visually distinguishable based on the features beta and diff1y\_acf5. Furthermore, the monthly series classified into SARIMA and stlar class with high probability take very high value for entropy, which means the series are easily forecastable. On the otherhand the series that are classified in to neural network class with high probability are less forecastable, less trended (low values for beta) and less seasonal (low value for sediff\_acf5). For hourly series, the series that are classified with very high probability are very high in length. Lengthy time series means more information, hence easy to recognise clear patterns and therefore easy to classify.
 
 \begin{figure}[H]
 
