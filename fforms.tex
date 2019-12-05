@@ -335,7 +335,7 @@ An alternative approach, which avoids selecting a class of models \emph{a priori
 Clearly, there is a need for a fast and scalable algorithm to automate the process of selecting models with the aim of forecasting. We refer to this process as forecast model selection.
 There have been several recent studies on the use of meta-learning approaches to automate forecast model selection based on features computed from the time series \autocites{shah1997model}{prudencio2004meta}{lemke2010meta}{kuck2016meta}. A meta-learning approach provides systematic guidance on model selection based on knowledge acquired from historical data sets. The key idea is that forecast model selection is posed as a supervised learning task. Each time series in the metadata set is represented as a vector of features and labelled according to the best forecast model (for example, the model with the lowest mean absolute scaled error (MASE) over a test set). Then a meta-learner is trained to identify a suitable forecast model (usually a machine learning algorithm is used). In the era of big data, such an automated model selection process is necessary because the cost of invoking all possible forecast models is prohibitive. However, the existing literature suffers from limited answers to questions such as: How are features related to the property being modelled? How do features interact with each other to identify a suitable forecast model? Which features contribute most to the classification process? Addressing such questions can enhance the understanding of the relations between features and model selection outcomes. To the best of our knowledge, a very limited effort has been made to understand how the meta-learners are making their decisions and what is really happening inside these complex model structures. Providing transparency will result, building trust in the prediction results of the meta-learner.
 
-To fill the gaps in the literature,, we make the following contributions:
+To fill the gaps in the literature, we make the following contributions:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -936,15 +936,14 @@ models might not be the right choice for forecasting stock return data, intermit
 time series, etc. Hence, it is important to expand the frameworks to other datasets that come from different application domains. When adapting the frameworks to other applications the feature space should be revised with appropriate features that measure characteristics of interest. The algorithm space should also be revised with suitable forecast models. A suitable forecast error metric should also be considered to evaluate the performance of different forecast models.
 
 \hypertarget{supplemental-materials}{%
-\section{Supplemental Materials}\label{supplemental-materials}}
+\section*{Supplemental Materials}\label{supplemental-materials}}
+\addcontentsline{toc}{section}{Supplemental Materials}
 
-\textbf{Data and scripts:} Datasets and R code to reproduce all figures in this article (main.R).
+\textbf{Reproducibility:} All the code and data used in this paper is available at \url{https://github.com/thiyangt/fforms}.
 
-\textbf{R-package seer:} R-package oddstream consists of the implementation of FFORMS algorithm is available from Github (\url{https://github.com/thiyangt/seer}).
+\textbf{Software:} R-package \texttt{seer} consists of the implementation of FFORMS algorithm is available from Github (\url{https://github.com/thiyangt/seer}).
 
-\textbf{R-packages:} Each of the R packages used in this article (ggplot2 (Wickham 2009), dplyr (Wickham
-et al.~2017), tibble (Müller \& Wickham 2017), tidyr (Wickham \& Henry 2017), reshape (Wickham
-2007)) are available online (URLs are provided in the bibliography).
+\textbf{R-packages:} The R packages \textcite{ggplot} provides the basis for graphics. The document is written in \textcite{xie2017dynamic}.
 
 \hypertarget{appendix-a-definition-of-features}{%
 \section*{Appendix A: Definition of features}\label{appendix-a-definition-of-features}}
