@@ -904,7 +904,7 @@ The two-way partial dependency plots of linearity are explored to see how linear
 
 FFORMS framework classified some series with very high probability (greater than 0.6), which indicatesfor a given series, majority of the trees voted for the same class. Hence, these instances can be considered as series that are easy to classify. We next try to visualize the distribution of these instances in the feature space. This is achieved by projecting the training dataset into a meaningful low-dimensional feature space and then visualize locations of the series that are classified with very high probabilities. We use principal component analysis (PCA) to map each time series as a point in a two-dimensional instance space given by features. The corresponding yearly reasults are shown in \autoref{fig:pcayearly}, \autoref{fig:pcamonthly} and \autoref{fig:pcahourly}. Most of the yearly series that are classified with very high probability belong to either ARIMA class or random walk with drift class. Distribution of the trend in the feature space shows they are highly trended. Furthermore, these ARIMA series and random walk with drift are even visually distinguishable based on the features beta and diff1y\_acf5. Furthermore, the monthly series classified into SARIMA and stlar class with high probability take very high value for entropy, which means the series are easily forecastable. On the otherhand the series that are classified in to neural network class with high probability are less forecastable, less trended (low values for beta) and less seasonal (low value for sediff\_acf5). For hourly series, the series that are classified with very high probability are very high in length. Lengthy time series means more information, hence easy to recognise clear patterns and therefore easy to classify.
 
-\begin{figure}[h]
+\begin{figure}[H]
 
 {\centering \includegraphics[width=\textwidth]{figure/pcayearly-1} 
 
@@ -913,7 +913,7 @@ FFORMS framework classified some series with very high probability (greater than
 \caption{Distribution of the yearly time series on the instance space based on PCA. On each graph the series that were classified with high probability are highlighted. In the first graph the highlighted points are coloured according to the predicted forecast model. The second, third and forth panels show the distribution of features trend, beta and diff1y\_acf1.  All series that were assigned high voting probability are highly trended.}\label{fig:pcayearly}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[H]
 
 {\centering \includegraphics[width=\textwidth]{figure/pcamonthly-1} 
 
@@ -922,7 +922,7 @@ FFORMS framework classified some series with very high probability (greater than
 \caption{Distribution of the monthly time series on the instance space based on PCA. On each graph the series that were classified with high probability are highlighted. In the first graph the highlighted points are coloured according to the predicted forecast model. The second, third and forth panels show the distribution of features beta, sediff\_acf5 and entropy.  The series that are classifed into neural network class with high probability have high entropy value.}\label{fig:pcamonthly}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[H]
 
 {\centering \includegraphics[width=\textwidth]{figure/pcahourly-1} 
 
@@ -931,8 +931,6 @@ FFORMS framework classified some series with very high probability (greater than
 \caption{Distribution of the hourly time series on the PCA space. On each graph the series that were classified with high probability are highlighted. In the first graph the highlighted points are coloured according to the predicted forecast model. The second, third and forth panels show the distribution of features length, entropy and strength of weekly seasonality. All series that were assigned high voting probability have high value for length.}\label{fig:pcahourly}
 \end{figure}
 
-\clearpage
-
 \hypertarget{discussion}{%
 \section{Discussion and conclusions}\label{discussion}}
 
@@ -940,7 +938,16 @@ In this paper we have proposed a novel framework for forecast-model selection us
 fills an important gap in contemporary forecasting practice, with many available models
 to choose from and with predictions being required extremely fast.
 
-Although we have illustrated the method using the M1, M3 and M4 competition data, the framework is general and can be applied to any large collection of time series.
+We further explore the role of features under the hood of the FFORMS framework, thereby presenting an understanding of what features lead to the different choice of models for forecasting. This was accomplished using model-agnostic machine learning approaches. We explored which features are
+the most important for the choice of the FFORMS framework, and where they are most
+important: that is, for the overall classification process, or within a specific class of models
+or a set of multiple classes of models. Further, partial dependency plots were used to
+visualise when and how these features link with the prediction outcome of the FFORMS
+framework. For all features, the displayed relationships of partial dependency plots
+are consistent with the domain knowledge expectations. This is an important aspect in
+encouraging people to trust and use the proposed framework effectively. Further, the
+results of this study are useful in identifying new ways to improve forecasting accuracy by
+capturing different features of time series. Although we have illustrated the method using the M1, M3 and M4 competition data, the framework is general and can be applied to any large collection of time series.
 
 \hypertarget{appendix-a-definition-of-features}{%
 \section*{Appendix A: Definition of features}\label{appendix-a-definition-of-features}}
