@@ -429,7 +429,7 @@ More recently, \textcite{kuck2016meta} proposed a meta-learning framework based 
 \hypertarget{fforms}{%
 \section{Methodology}\label{fforms}}
 
-Our proposed FFORMS framework, presented in \autoref{fig:framework}, builds on this preceding research. The offline and online phases are shown in blue and red respectively. A classification algorithm (the meta-learner) is trained during the offline phase and is then used to select an appropriate forecast model for a new time series in the online phase. Furthermore, we use machine learning interpretability tools to gain insights into what is happening under the hood of the FFORMS framework. We refer to this process as ``peeking inside FFORMS'' which is shown in yellow.
+Our proposed FFORMS framework, presented in \autoref{fig:framework}, builds on this preceding research. The offline and online phases are shown in blue and red respectively. A classification algorithm (the meta-learner) is trained during the offline phase and is then used to select an appropriate forecast model for a new time series in the online phase. We use machine learning interpretability tools to gain insights into what is happening under the hood of the FFORMS framework. We refer to this process as ``peeking inside FFORMS'' which is shown in yellow.
 
 \begin{figure}
 
@@ -437,7 +437,7 @@ Our proposed FFORMS framework, presented in \autoref{fig:framework}, builds on t
 
 }
 
-\caption{FFORMS (Feature-based FORecast-Model Selection) framework. The offline phase is shown in blue, the online phase in red and the peeking inside FFORMS is shown in yellow.}\label{fig:framework}
+\caption{FFORMS (Feature-based FORecast-Model Selection) framework. The offline phase is shown in blue, the online phase is in red and the peeking inside FFORMS is shown in yellow.}\label{fig:framework}
 \end{figure}
 
 In order to train our classification algorithm, we need a large collection of time series which are similar to those we will be forecasting. We assume that we have an essentially infinite population of time series, and we take a sample of them in order to train the classification algorithm denoted as the ``observed sample''. The new time series we wish to forecast can be thought of as additional draws from the same population. Hence, any conclusions made from the classification framework refer only to the population from which the sample has been selected. We may call this the ``target population'' of time series. It is important to have a well-defined target population to avoid misapplying the classification rules. In practice, we may wish to augment the set of observed time series by simulating new time series similar to those in the assumed population (we provide details and discussion in Section \ref{simulatingseries} that follows). We denote the total collection of time series used for training the classifier as the ``reference set''.
@@ -491,7 +491,7 @@ Each time series within the reference set is split into a training period and a 
 \hypertarget{simulatingseries}{%
 \subsection{Augmenting the observed sample with simulated time series}\label{simulatingseries}}
 
-In practice, we may wish to augment the set of observed time series by simulating new time series similar to those in the assumed population. This process may be useful when the number of observed time series is too small to build a reliable classifier. Alternatively, we may wish to add more of some particular types of time series to the reference set in order to get a more balanced sample for the classification. In order to produce simulated series that are similar to those in the population, we consider two classes of data generating processes: exponential smoothing models and ARIMA models. Using the automated \texttt{ets} and \texttt{auto.arima} algorithms \autocite{forecast} we identify models, based on model selection criteria (such as AICc) and simulate multiple time series from the selected models within each model class. Assuming the models produce data that are similar to the observed time series ensures that the simulated series are similar to those in the population. As this is done in the offline phase of the algorithm the computational time in producing these simulated series is of no real consequence.
+In practice, we may wish to augment the set of observed time series by simulating new time series similar to those in the assumed population. This process may be useful when the number of observed time series is too small to build a reliable classifier. Alternatively, we may wish to add more of some particular types of time series to the reference set in order to get a more balanced sample for the classification. In order to produce simulated series that are similar to those in the population, we consider three classes of data generating processes: exponential smoothing models, ARIMA models and multiple seasonal decomposition approach. The \texttt{ets} and \texttt{auto.arima} functions available in the forecast package in R \autocite{forecast} are used to simulate yearly, quarterly and monthly data from exponential smooting and ARIMA models. The \texttt{stlf} function, also available in the forecast package is used to simulate time series based on multiple seasonal decomposition approach for weekly, daily and hourly series. Assuming the models produce data that are similar to the observed time series ensures that the simulated series are similar to those in the population. As this is done in the offline phase of the algorithm the computational time in producing these simulated series is of no real consequence.
 
 \hypertarget{input-features}{%
 \subsection{Input: features}\label{input-features}}
@@ -661,8 +661,13 @@ To identify important class-specific features we rank features in three differen
 
 The partial-dependence curves, along with their confidence intervals, are used to visualise the relationship between top features and the choice of forecast model selection.
 
+\hypertarget{application-to-m4-competition-data}{%
+\subsection{Application to M4-competition data}\label{application-to-m4-competition-data}}
+
+To test how well our proposed framework can identify suitable models for forecasting, we use the time series from the M1 \autocite{makridakis1982accuracy}, M3 \autocite{makridakis2000m3} and M4 \autocite{makridakis2019m4} competitions. The M-competition data were a sample of time series collected from several domains such as demographics, finance, business and economics. In our experiment, we treat the time series from the M1 and M3 competitions as the observed sample. We augment the reference set by adding multiple time series simulated using the training period of each series in the M4 competition. Then the FFORMS framework is use to forecast the test period of the M4 competition data.
+
 \hypertarget{results}{%
-\section{Results: Application to M4-competition data}\label{results}}
+\section{Summary of the main results}\label{results}}
 
 \begin{table}[!h]
 \centering\scriptsize\tabcolsep=0.12cm
