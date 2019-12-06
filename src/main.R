@@ -1437,8 +1437,8 @@ pca1h <- ggplot(df,aes(x=PC1,y=PC2)) +
   scale_color_brewer(palette="Dark2")+
   theme(legend.position="bottom", legend.text=element_text(size=15), aspect.ratio=1, legend.title = element_blank())
 
-
-pca2h <- ggplot(df2,aes(x=PC1,y=PC2, color=N)) + 
+names(df2)[names(df2) == 'N'] <- 'T'
+pca2h <- ggplot(df2,aes(x=PC1,y=PC2, color=T)) + 
   geom_point()+
   geom_point(data=df[highlight, ], aes(x=PC1, y=PC2), colour="red", shape=1)+
   theme(legend.position="bottom", legend.text=element_text(size=6), aspect.ratio=1)
