@@ -612,8 +612,8 @@ variable, the best forecasting method for each series \(Z\). Let \(\mathcal{G}\)
 the historical data we provided. We denote the predicted function as
 \(g\). The second objective of this paper is to explore the nature of the relationship between features and forecast model selection learned by the FFORMS framework. In the following subsections, we provide a description of tools we use to explore what is happening under the hood of the FFORMS framework.
 
-\hypertarget{visualise-patterns-learned-by-the-meta-learner}{%
-\subsection{Visualise patterns learned by the meta-learner}\label{visualise-patterns-learned-by-the-meta-learner}}
+\hypertarget{visualize-patterns-learned-by-the-meta-learner}{%
+\subsection{Visualize patterns learned by the meta-learner}\label{visualize-patterns-learned-by-the-meta-learner}}
 
 \textbf{The out-of-bag (OOB) observations:} A useful by-product of random forest model is OOB observations. OOB observations are the observations not included in building a given tree. In general, each tree uses only around one third of observations in its construction and is grown based on different bootstrap samples. Hence, each tree has a different set of OOB observations.
 
@@ -714,7 +714,7 @@ naive & 56.55 & 14.07 &  12.30 & 26.35 & 32.55 & 71.24\\\hline
 The main question we have now is: `Can we trust the FFORMS framework if we do not know how it works?' In the next sections we present results showing \textbf{``what is happening under the hood of FFORMS?''}. Note that, the results for quarterly and weekly data are very similar to the corresponding results of monthly data and the results for daily data are very similar to the corresponding plots of hourly data. Hence, the results correspond to quarterly, weekly and daily data are not presented in the subsequent analysis. We present the results for yearly series; represents non-seasonal time series, monthly series: represents time series with single seasonal component and hourly series: represents series with multiple seasonal components.
 
 \hypertarget{oobviz}{%
-\subsection{Visualisation of FFORMS's understanding of the similarity and dissimilarity between forecast models}\label{oobviz}}
+\subsection{Visualization of FFORMS's understanding of the similarity and dissimilarity between forecast models}\label{oobviz}}
 
 \autoref{fig:yearlyoob} shows the distribution of voting probabilities for each class by classlabels. For example, the `wn' panel in the top left corner of the yearly series shows the distribution of voting probabilities for white noise class by class labels for all yearly series. As expected, we see the distribution of the series that are labelled as `wn' dominates the top, and the associated outliers of the box plots indicates some series are correctly classified with very high probability. Furthermore, the series that are labelled as ARMA also have a high probability of classified into the `wn' class. Similarly, within ETS\_T panel, in addition to the series that are labelled as ETS\_T, the series that are labels as ETS\_DT and ARIMA also have a high voting probabilities for ETS\_T class while the series labelled as WN, ARMA, ETS\_NTNS have very low probabilities. Within ARMA class label panel disparities between stationary and non-stationary models are immediately visible. In general, \autoref{fig:yearlyoob} indicates three primary patterns: i) the distributions of correctly classified classes dominate, indicating a good classification of the meta-learner; ii) the FFORMS framework successfully learned the similarities and dissimilarities between the different classes; and iii) irrespective of the class labels, the random walk with drift has a high chance of being selected for all yearly series. It is important to note that for hourly series within `nn' panel all distributions are located away from zero, which indicates all hourly series have been assigned a non-zero probability of being selected to neural network class.
 

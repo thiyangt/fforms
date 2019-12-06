@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.12.5)  6 DEC 2019 12:44
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.12.5)  6 DEC 2019 12:52
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2154,7 +2154,7 @@ Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1051.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1051.
 
 Package rerunfilecheck Info: File `fforms.out' has not changed.
-(rerunfilecheck)             Checksum: 20DF2D4DA28765F73AE8C4691ED94F9D;9412.
+(rerunfilecheck)             Checksum: A43F9E775962A6FC874305F4E4505F1A;9412.
 
 Package biblatex Warning: Please rerun LaTeX.
 (biblatex)                Page breaks have changed.
@@ -2194,7 +2194,7 @@ haminitalagala/Library/TinyTeX/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb><
 /Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/fonts/type1/urw/palat
 ino/uplr8a.pfb></Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/fonts
 /type1/urw/palatino/uplri8a.pfb>
-Output written on fforms.pdf (37 pages, 1468561 bytes).
+Output written on fforms.pdf (37 pages, 1468630 bytes).
 PDF statistics:
  890 PDF objects out of 1000 (max. 8388607)
  705 compressed objects within 8 object streams
