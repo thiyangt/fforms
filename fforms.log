@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.12.5)  6 DEC 2019 15:56
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.12.5)  6 DEC 2019 16:15
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1968,34 +1968,23 @@ Overfull \hbox (45.52718pt too wide) in paragraph at lines 438--439
 Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
 put line 450.
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 10.42007pt on input line 455.
+(Font)              scaled to size 9.37807pt on input line 455.
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 7.91925pt on input line 455.
+(Font)              scaled to size 7.29405pt on input line 455.
+LaTeX Font Info:    Font shape `U/msa/m/n' will be
+(Font)              scaled to size 5.21004pt on input line 455.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 10.42007pt on input line 455.
+(Font)              scaled to size 9.37807pt on input line 455.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 7.91925pt on input line 455.
-
-Underfull \hbox (badness 1810) in paragraph at lines 468--469
-[]\T1/ppl/m/n/10 (+20) The time se-ries in $\OML/zplm/m/it/10 O$ \T1/ppl/m/n/10
- (+20) and sim-u-lated time se-ries in step 2 form the ref-er-ence set $\OML/zp
-lm/m/it/10 R \OT1/zplm/m/n/10 =
+(Font)              scaled to size 7.29405pt on input line 455.
+LaTeX Font Info:    Font shape `U/msb/m/n' will be
+(Font)              scaled to size 5.21004pt on input line 455.
+[9] [10] [11]
+Overfull \hbox (5.04176pt too wide) in paragraph at lines 566--588
+ [][] 
  []
 
-[9]
-LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 9.37807pt on input line 508.
-LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 7.29405pt on input line 508.
-LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 5.21004pt on input line 508.
-LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 9.37807pt on input line 508.
-LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 7.29405pt on input line 508.
-LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 5.21004pt on input line 508.
-[10] [11] [12] [13] [14] [15] [16] [17]
+[12] [13] [14] [15] [16] [17]
 <figure/yearlyoob-1.png, id=398, 1445.4pt x 2023.56pt>
 File: figure/yearlyoob-1.png Graphic file (type png)
 <use figure/yearlyoob-1.png>
@@ -2180,11 +2169,11 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1050.
 ### semi simple group (level 1) entered at line 178 (\begingroup)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 43461 strings out of 494553
- 808111 string characters out of 6175442
+ 43428 strings out of 494553
+ 807399 string characters out of 6175442
  1234711 words of memory out of 5000000
- 46026 multiletter control sequences out of 15000+600000
- 644389 words of font info for 367 fonts, out of 8000000 for 9000
+ 45986 multiletter control sequences out of 15000+600000
+ 637714 words of font info for 350 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  62i,15n,92p,1896b,18566s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/font
@@ -2205,7 +2194,7 @@ haminitalagala/Library/TinyTeX/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb><
 /Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/fonts/type1/urw/palat
 ino/uplr8a.pfb></Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/fonts
 /type1/urw/palatino/uplri8a.pfb>
-Output written on fforms.pdf (37 pages, 1469224 bytes).
+Output written on fforms.pdf (37 pages, 1469387 bytes).
 PDF statistics:
  901 PDF objects out of 1000 (max. 8388607)
  716 compressed objects within 8 object streams

@@ -446,7 +446,7 @@ In order to train our classification algorithm, we need a large collection of ti
 Each time series within the reference set is split into a training period and a test period. From each training period we compute a range of time series features, and fit a selection of candidate models. The calculated features form the input vector to the classification algorithm. Using the fitted models, we generate forecasts and identify the ``best'' model for each time series based on a forecast error measure (e.g., MASE) calculated over the test period. The models deemed ``best'' form the output labels for the classification algorithm. The pseudo code for our proposed framework is presented in Algorithm \ref{alg:algo-lab} below. In the following sections, we briefly discuss aspects of the offline phase.
 
 \begin{algorithm}[!ht]
-\centering\small
+\centering\footnotesize
   \caption{The FFORMS framework - Forecasting based on meta-learning. }
   \label{alg:algo-lab}
   \begin{algorithmic}[1]
@@ -563,7 +563,7 @@ According to the \textcite{M4compguide}, in the M4 competition the forecast accu
 \centering\footnotesize\tabcolsep=0.12cm
 \caption{Class labels}
 \label{classlabels}
-\begin{tabular}{llrrrr}
+\begin{tabular}{lp{11,11cm}rrrr}
 Class label & Description & Y & Q/M & W & D/H \\ \hline
 wn & white noise process & \checkmark & \checkmark & \checkmark & \checkmark \\
 ARMA & AR, MA, ARMA processes & \checkmark & \checkmark & \checkmark & -\\
@@ -572,7 +572,7 @@ SARIMA & seasonal ARIMA & - & \checkmark & \checkmark & -\\
 rwd & random walk with drift & \checkmark & \checkmark & \checkmark & \checkmark \\
 rw & random walk & \checkmark & \checkmark & \checkmark & \checkmark  \\
 theta & standard theta method & \checkmark & \checkmark & \checkmark & \checkmark \\
-stlar &  & - & \checkmark & \checkmark & \checkmark \\
+stlar & seasonal decomposition with AR modelling of the seasonally adjusted series & - & \checkmark & \checkmark & \checkmark \\
 ETS\_NTNS & ETS without trend and seasonal components & \checkmark & \checkmark & - & - \\
 ETS\_T & ETS with trend component and without seasonal component & \checkmark & \checkmark & - & -\\
 ETS\_DT& ETS with damped trend component and without seasonal component  & \checkmark &  \checkmark & - & - \\
@@ -582,8 +582,8 @@ ETS\_S & ETS with seasonal component and without trend component & -  & \checkma
 snaive & seasonal naive method & - & \checkmark & \checkmark & \checkmark \\
 tbats & TBATS forecasting & - & \checkmark & \checkmark & \checkmark \\
 nn & neural network time series forecasts & \checkmark & \checkmark & \checkmark & \checkmark \\
-mstlets &  & - & - & \checkmark & \checkmark \\
-mstlarima & & - & - & - & \checkmark \\\hline
+mstlets & multiple seasonal decomposition with ETS modelling of the seasonally adjusted series & - & - & \checkmark & \checkmark \\
+mstlarima & multiple seasonal decomposition with ARIMA modelling of the seasonally adjusted series & - & - & - & \checkmark \\\hline
 \end{tabular}
 \end{table}
 
