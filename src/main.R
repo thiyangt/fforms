@@ -31,17 +31,17 @@ votes_oob <- votes_oob %>%
                            "ETS-trend" = "ETS_T", "rwd" = "rwd", "rw" = "rw" ))
 # arrange labels
 votes_oob$variable <- factor(votes_oob$variable,
-                             levels = rev(c(
+                             levels = c(
+                               "wn",
+                               "rwd",
+                               "rw",
                                "nn",
                                "theta",
-                               "wn",
                                "ARMA",
                                "ARIMA",
                                "ETS_NTNS",
                                "ETS_DT",
-                               "ETS_T",
-                               "rwd",
-                               "rw" )))
+                               "ETS_T"))
 
 oob_boxplot_yearly <- ggplot(votes_oob, aes(x = classlabel, y = value, fill = classlabel)) +
   geom_boxplot(outlier.size = 0.2, outlier.alpha = 0.4) +
@@ -51,7 +51,11 @@ oob_boxplot_yearly <- ggplot(votes_oob, aes(x = classlabel, y = value, fill = cl
         legend.text.align = 0, text = element_text(size = 20), axis.text.x = element_text(angle = 90),
         strip.text = element_text(size = 20)) +
   guides(fill = guide_legend(reverse = TRUE)) +
-  scale_x_discrete(limits = c("nn", "theta", "wn", "ARMA", "ARIMA", "ETS_NTNS", "ETS_DT", "ETS_T", "rwd", "rw" )) +
+  scale_x_discrete(limits = rev(c("wn", "rwd", "rw", "nn", "theta", "ARMA", "ARIMA", "ETS_NTNS", "ETS_DT", "ETS_T" ))) +
+  scale_fill_manual(breaks=c("wn", "rwd", "rw", "nn", "theta", "ARMA", "ARIMA", "ETS_NTNS", "ETS_DT", "ETS_T"),
+                                    values=c("wn"="#a6cee3","rwd"="#1f78b4","rw"="#b2df8a",
+                                             "nn"="#33a02c", "theta"="#fb9a99","ARMA"="#e31a1c", 
+                                             "ARIMA"="#fdbf6f","ETS_NTNS"="#ff7f00","ETS_DT"="#cab2d6","ETS_T"="#6a3d9a"))+
   coord_flip() + facet_wrap(. ~ variable, ncol=5)+ggtitle("Yearly series")
 
 
@@ -65,7 +69,9 @@ votes_oobM$classlabel <- monthly_training$classlabels
 votes_oobM <- votes_oobM %>% mutate(id=seq_len(n())) %>%
   melt(id.var=c('classlabel','id','predicted'), na.rm=T) %>%
   select(-id)
-votes_oobM$classlabel <- factor(votes_oobM$classlabel, levels=rev(c("snaive","rwd", "rw", "ETS-notrendnoseasonal","ETS-dampedtrend", "ETS-trend", "ETS-dampedtrendseasonal", "ETS-trendseasonal","ETS-seasonal","SARIMA",
+votes_oobM$classlabel <- factor(votes_oobM$classlabel, 
+                                levels=rev(
+                                  c("snaive","rwd", "rw", "ETS-notrendnoseasonal","ETS-dampedtrend", "ETS-trend", "ETS-dampedtrendseasonal", "ETS-trendseasonal","ETS-seasonal","SARIMA",
                                                                     "ARIMA", "ARMA/AR/MA","stlar" ,"tbats","wn", "theta","nn"))
 )
 
@@ -93,9 +99,7 @@ votes_oobM <- votes_oobM %>% mutate(variable= recode(variable,
                                                      "tbats"="tbats", "wn"="wn", "theta"="theta", "nn"="nn"))
 # new addition to arrange labels
 votes_oobM$variable <- factor(votes_oobM$variable, levels = c(
-  "snaive", "rwd", "rw", "ETS_NTNS", "ETS_DT", "ETS_T", "ETS_DTS", "ETS_TS", "ETS_S", "SARIMA",
-  "ARIMA", "ARMA", "stlar", "tbats", "wn", "theta", "nn"
-))
+  "wn","rwd","rw","nn","theta","ARMA","ARIMA","ETS_NTNS","ETS_DT","ETS_T","ETS_DTS","ETS_TS","ETS_S","SARIMA","stlar","tbats","snaive"))
 
 #votes_oobM <- votes_oobM[!(votes_oobM$variable %in% c("rw", "ETS_NTNS", "ETS_DT", "ETS_T",
 #                                                      "ARIMA", "ARMA","theta")),]
@@ -111,9 +115,13 @@ oob_boxplot_monthly <- ggplot(votes_oobM, aes(x = classlabel, y = value, fill = 
         strip.background = element_rect(size=4)) +
   guides(fill = guide_legend(reverse = TRUE)) +
   scale_x_discrete(limits = rev(c(
-    "snaive", "rwd", "rw", "ETS_NTNS", "ETS_DT", "ETS_T", "ETS_DTS", "ETS_TS", "ETS_S", "SARIMA",
-    "ARIMA", "ARMA", "stlar", "tbats", "wn", "theta", "nn"
+    "wn","rwd","rw","nn","theta","ARMA","ARIMA","ETS_NTNS","ETS_DT","ETS_T","ETS_DTS","ETS_TS","ETS_S","SARIMA","stlar","tbats","snaive"
   ))) +
+  scale_fill_manual(breaks=c("wn","rwd","rw","nn","theta","ARMA","ARIMA","ETS_NTNS","ETS_DT","ETS_T","ETS_DTS","ETS_TS","ETS_S","SARIMA","stlar","tbats","snaive"),
+                    values=c("wn"="#a6cee3","rwd"="#1f78b4","rw"="#b2df8a",
+                             "nn"="#33a02c", "theta"="#fb9a99","ARMA"="#e31a1c", "ARIMA"="#fdbf6f",
+                             "ETS_NTNS"="#ff7f00","ETS_DT"="#cab2d6","ETS_T"="#6a3d9a",
+                             "ETS_DTS"="#ffff99","ETS_TS"="#b15928","ETS_S"="#1b9e77","SARIMA"="#d95f02","stlar"="#7570b3","tbats"="#e7298a","snaive"="#66a61e"))+
   coord_flip() + facet_wrap(. ~ variable, ncol=5)+ggtitle("Monthly series")
 
 
@@ -129,8 +137,7 @@ votes_oobH <- votes_oobH %>% mutate(id=seq_len(n())) %>%
   select(-id)
 #new addition to arrange labels 
 votes_oobH$variable <- factor(votes_oobH$variable, 
-                              levels=c("snaive", "rw", "rwd", "mstlarima", "mstlets", "tbats","stlar",
-                                       "theta","nn","wn")
+                              levels=c("wn","rwd","rw","nn","theta","stlar","tbats","snaive", "mstlarima", "mstlets")
 )
 oob_boxplot_hourly <- ggplot(votes_oobH, aes(x = classlabel, y = value, fill = classlabel)) +
   geom_boxplot(outlier.size = 0.2, outlier.alpha = 0.4) +
@@ -140,8 +147,11 @@ oob_boxplot_hourly <- ggplot(votes_oobH, aes(x = classlabel, y = value, fill = c
         legend.text.align = 0, text = element_text(size = 20), axis.text.x = element_text(angle = 90),
         strip.text = element_text(size = 20)) +
   guides(fill = guide_legend(reverse = TRUE)) +
-  scale_x_discrete(limits = rev(c("snaive", "rw", "rwd", "mstlarima", "mstlets", "tbats","stlar",
-                                  "theta","nn","wn" ))) +
+  scale_x_discrete(limits = rev(c("wn","rwd","rw","nn","theta","stlar","tbats","snaive", "mstlarima", "mstlets"))) +
+  scale_fill_manual(breaks=c("wn","rwd","rw","nn","theta","stlar","tbats","snaive", "mstlarima", "mstlets"),
+                    values=c("wn"="#a6cee3","rwd"="#1f78b4","rw"="#b2df8a",
+                             "nn"="#33a02c", "theta"="#fb9a99","stlar"="#7570b3","tbats"="#e7298a","snaive"="#66a61e", 
+                             "mstlarima"="#e6ab02", "mstlets"="#a6761d"))+
   coord_flip() + facet_wrap(. ~ variable, ncol=5)+ggtitle("Hourly series")
 
 
@@ -454,7 +464,12 @@ ggplot(vi.fforms, aes(x = classnew,y=featurenew+shift, fill=V1, height=height)) 
   scale_x_discrete(limit=c("wn","rwd", "rw", "nn", "theta", "ARMA.AR.MA","ARIMA",  "ETS.notrendnoseasonal", "ETS.dampedtrend",
                            "ETS.trend", "ETS.dampedtrendseasonal", "ETS.trendseasonal",
                            "ETS.seasonal", "SARIMA",  
-                           "stlar", "tbats","snaive","mstlarima", "mstlets"))+
+                           "stlar", "tbats","snaive","mstlarima", "mstlets"),
+                   labels=c("wn"="wn","rwd"="rwd", "rw"="rw", "nn"="nn", "theta"="theta", 
+                            "ARMA.AR.MA"="ARMA", "ARIMA"="ARIMA",  "ETS.notrendnoseasonal"="ETS_NTNS", "ETS.dampedtrend"="ETS_DT",
+                           "ETS.trend"="ETS_T", "ETS.dampedtrendseasonal"="ETS_DTS", "ETS.trendseasonal"="ETS_TS",
+                           "ETS.seasonal"="ETS_S", "SARIMA"="SARIMA",  
+                           "stlar"="stlar", "tbats"="tbats","snaive"="snaive","mstlarima"="mstlarima", "mstlets"="mstlets"))+
   scale_y_discrete(limit=c(
     "diff2y_pacf5","hurst","hwbeta","lumpiness",
     "nonlinearity" , "ur_kpss","y_acf5",

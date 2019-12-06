@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.12.5)  6 DEC 2019 10:39
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.12.5)  6 DEC 2019 12:38
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1980,16 +1980,7 @@ LaTeX Font Info:    Font shape `U/msb/m/n' will be
 (Font)              scaled to size 7.29405pt on input line 507.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
 (Font)              scaled to size 5.21004pt on input line 507.
-[11] [12] [13] [14] [15] [16]
-LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 10.42007pt on input line 707.
-LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 7.91925pt on input line 707.
-LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 10.42007pt on input line 707.
-LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 7.91925pt on input line 707.
-[17]
+[11] [12] [13] [14] [15] [16] [17]
 <figure/yearlyoob-1.png, id=390, 1445.4pt x 2023.56pt>
 File: figure/yearlyoob-1.png Graphic file (type png)
 <use figure/yearlyoob-1.png>
@@ -2163,7 +2154,11 @@ Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1051.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1051.
 
 Package rerunfilecheck Info: File `fforms.out' has not changed.
-(rerunfilecheck)             Checksum: E75EF1D987015E700D0D75EA913C638A;9412.
+(rerunfilecheck)             Checksum: 20DF2D4DA28765F73AE8C4691ED94F9D;9412.
+
+Package biblatex Warning: Please rerun LaTeX.
+(biblatex)                Page breaks have changed.
+
 Package logreq Info: Writing requests to 'fforms.run.xml'.
 \openout1 = `fforms.run.xml'.
 
@@ -2174,13 +2169,13 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1051.
 ### semi simple group (level 1) entered at line 178 (\begingroup)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 43441 strings out of 494553
- 807887 string characters out of 6175442
- 1227580 words of memory out of 5000000
- 46019 multiletter control sequences out of 15000+600000
- 641314 words of font info for 356 fonts, out of 8000000 for 9000
+ 43264 strings out of 494553
+ 805526 string characters out of 6175442
+ 1225224 words of memory out of 5000000
+ 45851 multiletter control sequences out of 15000+600000
+ 631674 words of font info for 328 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 62i,15n,92p,1895b,18566s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 62i,15n,92p,1896b,18566s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/font
 s/enc/dvips/base/8r.enc}</Users/thiyangashaminitalagala/Library/TinyTeX/texmf-d
 ist/fonts/type1/public/amsfonts/cm/cmex10.pfb></Users/thiyangashaminitalagala/L
@@ -2199,10 +2194,10 @@ haminitalagala/Library/TinyTeX/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb><
 /Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/fonts/type1/urw/palat
 ino/uplr8a.pfb></Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/fonts
 /type1/urw/palatino/uplri8a.pfb>
-Output written on fforms.pdf (37 pages, 1468844 bytes).
+Output written on fforms.pdf (37 pages, 1468553 bytes).
 PDF statistics:
  890 PDF objects out of 1000 (max. 8388607)
  705 compressed objects within 8 object streams
  182 named destinations out of 1000 (max. 500000)
- 31224 words of extra memory for PDF output out of 35830 (max. 10000000)
+ 27128 words of extra memory for PDF output out of 29859 (max. 10000000)
 
