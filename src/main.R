@@ -478,7 +478,7 @@ ggplot(vi.fforms, aes(x = classnew,y=featurenew+shift, fill=V1, height=height)) 
     "lmres_acf1","ur_pp","sediff_acf5", "seas_pacf","sediff_acf1",
     "sediff_seacf1","alpha","diff2y_acf5","e_acf1",
     "diff1y_acf5","diff1y_pacf5","diff2y_acf1",  "spikiness",
-    "y_acf1","beta","curvature","entropy","diff1y_acf1","stability","y_pacf5","N","linearity","trend"))+
+    "y_acf1","beta","curvature","entropy","diff1y_acf1","stability","y_pacf5","T","linearity","trend"))+
   theme(axis.text.x = element_text(angle = 90, hjust = 1), text = element_text(size=30))+xlab("")+ylab("")
 
 ## ---- pdpyearlyurpp
