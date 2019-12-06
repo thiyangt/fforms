@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.12.5)  6 DEC 2019 16:15
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.12.5)  6 DEC 2019 17:07
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1803,15 +1803,7 @@ Package biblatex Info: Data encoding 'utf8' specified.
 
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'fforms.bbl' found.
-(./fforms.bbl
-
-Package biblatex Warning: The following entry could not be found
-(biblatex)                in the database:
-(biblatex)                Zhao
-(biblatex)                Please verify the spelling and rerun
-(biblatex)                LaTeX afterwards.
-
-)
+(./fforms.bbl)
 Package biblatex Info: Reference section=0 on input line 315.
 Package biblatex Info: Reference segment=0 on input line 315.
 Package caption Info: Begin \AtBeginDocument code.
@@ -1985,7 +1977,7 @@ Overfull \hbox (5.04176pt too wide) in paragraph at lines 566--588
  []
 
 [12] [13] [14] [15] [16] [17]
-<figure/yearlyoob-1.png, id=398, 1445.4pt x 2023.56pt>
+<figure/yearlyoob-1.png, id=399, 1445.4pt x 2023.56pt>
 File: figure/yearlyoob-1.png Graphic file (type png)
 <use figure/yearlyoob-1.png>
 Package pdftex.def Info: figure/yearlyoob-1.png  used on input line 724.
@@ -1997,15 +1989,15 @@ LaTeX Warning: Float too large for page by 4.54907pt on input line 729.
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [18] [19 <./figure/yearlyoob-1.png>]
-<figure/viplot-1.pdf, id=412, 1445.4pt x 1445.4pt>
+<figure/viplot-1.pdf, id=413, 1445.4pt x 1300.86pt>
 File: figure/viplot-1.pdf Graphic file (type pdf)
 <use figure/viplot-1.pdf>
 Package pdftex.def Info: figure/viplot-1.pdf  used on input line 738.
-(pdftex.def)             Requested size: 455.24411pt x 455.23724pt.
+(pdftex.def)             Requested size: 455.24411pt x 409.71353pt.
 [20
 
  <./figure/viplot-1.pdf>] [21]
-<figure/pdpyearlyurpp-1.pdf, id=450, 1084.05pt x 325.215pt>
+<figure/pdpyearlyurpp-1.pdf, id=451, 1084.05pt x 325.215pt>
 File: figure/pdpyearlyurpp-1.pdf Graphic file (type pdf)
 <use figure/pdpyearlyurpp-1.pdf>
 Package pdftex.def Info: figure/pdpyearlyurpp-1.pdf  used on input line 763.
@@ -2013,7 +2005,7 @@ Package pdftex.def Info: figure/pdpyearlyurpp-1.pdf  used on input line 763.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<figure/pdpmonthlyseasonality-1.pdf, id=451, 1084.05pt x 433.62pt>
+<figure/pdpmonthlyseasonality-1.pdf, id=452, 1084.05pt x 433.62pt>
 File: figure/pdpmonthlyseasonality-1.pdf Graphic file (type pdf)
 <use figure/pdpmonthlyseasonality-1.pdf>
 Package pdftex.def Info: figure/pdpmonthlyseasonality-1.pdf  used on input line
@@ -2022,7 +2014,7 @@ Package pdftex.def Info: figure/pdpmonthlyseasonality-1.pdf  used on input line
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<figure/pdpmonthlyT-1.pdf, id=452, 1084.05pt x 325.215pt>
+<figure/pdpmonthlyT-1.pdf, id=453, 1084.05pt x 325.215pt>
 File: figure/pdpmonthlyT-1.pdf Graphic file (type pdf)
 <use figure/pdpmonthlyT-1.pdf>
 Package pdftex.def Info: figure/pdpmonthlyT-1.pdf  used on input line 781.
@@ -2030,7 +2022,7 @@ Package pdftex.def Info: figure/pdpmonthlyT-1.pdf  used on input line 781.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<figure/seasonalityhourly-1.pdf, id=453, 1445.4pt x 361.35pt>
+<figure/seasonalityhourly-1.pdf, id=454, 1445.4pt x 361.35pt>
 File: figure/seasonalityhourly-1.pdf Graphic file (type pdf)
 <use figure/seasonalityhourly-1.pdf>
 Package pdftex.def Info: figure/seasonalityhourly-1.pdf  used on input line 790
@@ -2039,7 +2031,7 @@ Package pdftex.def Info: figure/seasonalityhourly-1.pdf  used on input line 790
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<figure/entropyhourly-1.pdf, id=454, 1445.4pt x 361.35pt>
+<figure/entropyhourly-1.pdf, id=455, 1445.4pt x 361.35pt>
 File: figure/entropyhourly-1.pdf Graphic file (type pdf)
 <use figure/entropyhourly-1.pdf>
 Package pdftex.def Info: figure/entropyhourly-1.pdf  used on input line 799.
@@ -2047,7 +2039,7 @@ Package pdftex.def Info: figure/entropyhourly-1.pdf  used on input line 799.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<figure/curvaturehourly-1.pdf, id=455, 1084.05pt x 325.215pt>
+<figure/curvaturehourly-1.pdf, id=456, 1084.05pt x 325.215pt>
 File: figure/curvaturehourly-1.pdf Graphic file (type pdf)
 <use figure/curvaturehourly-1.pdf>
 Package pdftex.def Info: figure/curvaturehourly-1.pdf  used on input line 808.
@@ -2055,7 +2047,7 @@ Package pdftex.def Info: figure/curvaturehourly-1.pdf  used on input line 808.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<figure/pdpmonthlyhourlyStability-1.pdf, id=456, 1084.05pt x 325.215pt>
+<figure/pdpmonthlyhourlyStability-1.pdf, id=457, 1084.05pt x 325.215pt>
 File: figure/pdpmonthlyhourlyStability-1.pdf Graphic file (type pdf)
 <use figure/pdpmonthlyhourlyStability-1.pdf>
 Package pdftex.def Info: figure/pdpmonthlyhourlyStability-1.pdf  used on input 
@@ -2064,7 +2056,7 @@ line 817.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<figure/diff1yacf1-1.pdf, id=457, 1084.05pt x 325.215pt>
+<figure/diff1yacf1-1.pdf, id=458, 1084.05pt x 325.215pt>
 File: figure/diff1yacf1-1.pdf Graphic file (type pdf)
 <use figure/diff1yacf1-1.pdf>
 Package pdftex.def Info: figure/diff1yacf1-1.pdf  used on input line 826.
@@ -2072,7 +2064,7 @@ Package pdftex.def Info: figure/diff1yacf1-1.pdf  used on input line 826.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<figure/ypacf5-1.pdf, id=458, 1084.05pt x 325.215pt>
+<figure/ypacf5-1.pdf, id=459, 1084.05pt x 325.215pt>
 File: figure/ypacf5-1.pdf Graphic file (type pdf)
 <use figure/ypacf5-1.pdf>
 Package pdftex.def Info: figure/ypacf5-1.pdf  used on input line 835.
@@ -2080,7 +2072,7 @@ Package pdftex.def Info: figure/ypacf5-1.pdf  used on input line 835.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<figure/pdpyearlytrend-1.pdf, id=459, 1084.05pt x 433.62pt>
+<figure/pdpyearlytrend-1.pdf, id=460, 1084.05pt x 433.62pt>
 File: figure/pdpyearlytrend-1.pdf Graphic file (type pdf)
 <use figure/pdpyearlytrend-1.pdf>
 Package pdftex.def Info: figure/pdpyearlytrend-1.pdf  used on input line 844.
@@ -2093,12 +2085,12 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 entropyhourly-1.pdf> <./figure/curvaturehourly-1.pdf> <./figure/pdpmonthlyhourl
 yStability-1.pdf>] [25 <./figure/diff1yacf1-1.pdf> <./figure/ypacf5-1.pdf> <./f
 igure/pdpyearlytrend-1.pdf>]
-<figure/linearity-1.pdf, id=564, 1084.05pt x 578.16pt>
+<figure/linearity-1.pdf, id=565, 1084.05pt x 578.16pt>
 File: figure/linearity-1.pdf Graphic file (type pdf)
 <use figure/linearity-1.pdf>
 Package pdftex.def Info: figure/linearity-1.pdf  used on input line 855.
 (pdftex.def)             Requested size: 455.24411pt x 242.79907pt.
-<figure/y2dpdp-1.pdf, id=565, 1084.05pt x 433.62pt>
+<figure/y2dpdp-1.pdf, id=566, 1084.05pt x 433.62pt>
 File: figure/y2dpdp-1.pdf Graphic file (type pdf)
 <use figure/y2dpdp-1.pdf>
 Package pdftex.def Info: figure/y2dpdp-1.pdf  used on input line 864.
@@ -2106,23 +2098,23 @@ Package pdftex.def Info: figure/y2dpdp-1.pdf  used on input line 864.
 [26
 
  <./figure/linearity-1.pdf> <./figure/y2dpdp-1.pdf>]
-<figure/m2dpdp-1.pdf, id=618, 722.7pt x 650.43pt>
+<figure/m2dpdp-1.pdf, id=619, 722.7pt x 650.43pt>
 File: figure/m2dpdp-1.pdf Graphic file (type pdf)
 <use figure/m2dpdp-1.pdf>
 Package pdftex.def Info: figure/m2dpdp-1.pdf  used on input line 875.
 (pdftex.def)             Requested size: 455.24411pt x 409.72343pt.
 [27 <./figure/m2dpdp-1.pdf>]
-<figure/h2dpdp-1.pdf, id=661, 650.43pt x 144.54pt>
+<figure/h2dpdp-1.pdf, id=662, 650.43pt x 144.54pt>
 File: figure/h2dpdp-1.pdf Graphic file (type pdf)
 <use figure/h2dpdp-1.pdf>
 Package pdftex.def Info: figure/h2dpdp-1.pdf  used on input line 886.
 (pdftex.def)             Requested size: 455.24411pt x 101.16847pt.
-<figure/thetapdp-1.pdf, id=662, 1084.05pt x 289.08pt>
+<figure/thetapdp-1.pdf, id=663, 1084.05pt x 289.08pt>
 File: figure/thetapdp-1.pdf Graphic file (type pdf)
 <use figure/thetapdp-1.pdf>
 Package pdftex.def Info: figure/thetapdp-1.pdf  used on input line 895.
 (pdftex.def)             Requested size: 455.24411pt x 121.39954pt.
-<figure/pcayearly-1.png, id=667, 1445.4pt x 433.62pt>
+<figure/pcayearly-1.png, id=668, 1445.4pt x 433.62pt>
 File: figure/pcayearly-1.png Graphic file (type png)
 <use figure/pcayearly-1.png>
 Package pdftex.def Info: figure/pcayearly-1.png  used on input line 906.
@@ -2130,12 +2122,12 @@ Package pdftex.def Info: figure/pcayearly-1.png  used on input line 906.
 [28
 
  <./figure/h2dpdp-1.pdf> <./figure/thetapdp-1.pdf>]
-<figure/pcamonthly-1.png, id=697, 1445.4pt x 433.62pt>
+<figure/pcamonthly-1.png, id=698, 1445.4pt x 433.62pt>
 File: figure/pcamonthly-1.png Graphic file (type png)
 <use figure/pcamonthly-1.png>
 Package pdftex.def Info: figure/pcamonthly-1.png  used on input line 915.
 (pdftex.def)             Requested size: 455.24411pt x 136.57117pt.
-<figure/pcahourly-1.png, id=698, 1445.4pt x 433.62pt>
+<figure/pcahourly-1.png, id=699, 1445.4pt x 433.62pt>
 File: figure/pcahourly-1.png Graphic file (type png)
 <use figure/pcahourly-1.png>
 Package pdftex.def Info: figure/pcahourly-1.png  used on input line 924.
@@ -2169,13 +2161,13 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1050.
 ### semi simple group (level 1) entered at line 178 (\begingroup)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 43428 strings out of 494553
- 807399 string characters out of 6175442
- 1234711 words of memory out of 5000000
+ 43431 strings out of 494553
+ 807432 string characters out of 6175442
+ 1234590 words of memory out of 5000000
  45986 multiletter control sequences out of 15000+600000
- 637714 words of font info for 350 fonts, out of 8000000 for 9000
+ 637869 words of font info for 352 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 62i,15n,92p,1896b,18566s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 62i,15n,92p,1920b,18566s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/font
 s/enc/dvips/base/8r.enc}</Users/thiyangashaminitalagala/Library/TinyTeX/texmf-d
 ist/fonts/type1/public/amsfonts/cm/cmex10.pfb></Users/thiyangashaminitalagala/L
@@ -2194,10 +2186,10 @@ haminitalagala/Library/TinyTeX/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb><
 /Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/fonts/type1/urw/palat
 ino/uplr8a.pfb></Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/fonts
 /type1/urw/palatino/uplri8a.pfb>
-Output written on fforms.pdf (37 pages, 1469387 bytes).
+Output written on fforms.pdf (37 pages, 1469358 bytes).
 PDF statistics:
- 901 PDF objects out of 1000 (max. 8388607)
- 716 compressed objects within 8 object streams
+ 902 PDF objects out of 1000 (max. 8388607)
+ 717 compressed objects within 8 object streams
  183 named destinations out of 1000 (max. 500000)
  31224 words of extra memory for PDF output out of 35830 (max. 10000000)
 
