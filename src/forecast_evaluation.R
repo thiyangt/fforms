@@ -35,16 +35,17 @@ MASE_yearly <- rep(NA, 23000)
 for(i in 1:23000){
   insample <- yearly_M4_training[[i]]
   outsample <- yearly_M4_test[[i]]
-  forecasts <- fcast.combination.m4yearly[[i]]$mean
+  forecasts <- as.vector(fcast.combination.m4yearly[[i]]$mean)
+  forecasts[forecasts < 0] <- 0
   #MASE_yearly[i] <- mean(mase_cal(insample, outsample, forecasts))
   MASE_yearly[i] <- cal_MASE(insample, outsample, forecasts)
 }
 
-mean(MASE_yearly) # 3.233323
+mean(MASE_yearly) # 3.231955
 
 
 ## Quarterly series
-readRDS("data/HPCfiles/fcast.combination.m4quarterly.rds")
+fcast.combination.m4quarterly <- readRDS("data/HPCfiles/fcast.combination.m4quarterly.rds")
 MASE_quarterly <- rep(NA, 24000)
 quarterly_M4 <- Filter(function(l) l$period == "Quarterly", M4)
 quarterly_M4_test <- lapply(quarterly_M4, function(temp){temp$xx})
@@ -55,7 +56,8 @@ MASE_quarterly <- rep(NA, 24000)
 for(i in 1:24000){
   insample <- quarterly_M4_training[[i]]
   outsample <- quarterly_M4_test[[i]]
-  forecasts <- fcast.combination.m4quarterly[[i]]$mean
+  forecasts <- as.vector(fcast.combination.m4quarterly[[i]]$mean)
+  forecasts[forecasts < 0] <- 0
   MASE_quarterly[i] <- mean(mase_cal(insample, outsample, forecasts))
   #MASE_quarterly[i] <- cal_MASE(insample, outsample, forecasts)
 }
@@ -103,12 +105,13 @@ MASE_monthly <- rep(NA, 48000)
 for(i in 1:48000){
   insample <- monthly_M4_training[[i]]
   outsample <- monthly_M4_test[[i]]
-  forecasts <- round(fcast.combination.m4monthly[[i]]$mean,2)
+  forecasts <- as.vector(round(fcast.combination.m4monthly[[i]]$mean,2))
+  forecasts[forecasts < 0] <- 0
   MASE_monthly[i] <- mean(mase_cal(insample, outsample, forecasts))
   #MASE_quarterly[i] <- cal_MASE(insample, outsample, forecasts)
 }
 
-mean(MASE_monthly) # 0.9454616
+mean(MASE_monthly) # 0.9453575
 
 ## Weekly
 
@@ -132,6 +135,7 @@ for(i in 1:359){
   insample <- weekly_M4_training[[i]]
   outsample <- weekly_M4_test[[i]]
   forecasts <- tryCatch({fcast.combination.m4weekly.all[[i]]$mean}, error=function(e){return(NA)})
+  forecasts[forecasts < 0] <- 0
   #MASE_weekly[i] <- mean(mase_cal(insample, outsample, forecasts))
   MASE_weekly[i] <- cal_MASE(insample, outsample, forecasts)
 }
@@ -160,6 +164,7 @@ for(i in 1:4227){
   insample <- daily_M4_training[[i]]
   outsample <- daily_M4_test[[i]]
   forecasts <- tryCatch({fcast.combination.m4daily.all[[i]]$mean}, error=function(e){return(NA)})
+  forecasts[forecasts < 0] <- 0
   #MASE_weekly[i] <- mean(mase_cal(insample, outsample, forecasts))
   MASE_daily[i] <- cal_MASE(insample, outsample, forecasts)
 }
@@ -188,7 +193,8 @@ cal_MASE <- function(training, test, forecast){
 for(i in 1:414){
   insample <- hourly_M4_training[[i]]
   outsample <- hourly_M4_test[[i]]
-  forecasts <- fcast.combination.m4hourly.all[[i]]$mean
+  forecasts <- as.vector(fcast.combination.m4hourly.all[[i]]$mean)
+  forecasts[forecasts < 0] <- 0
   MASE_hourly[i] <- mean(mase_cal(insample, outsample, forecasts))
   #MASE_weekly[i] <- cal_MASE(insample, outsample, forecasts)
 }
