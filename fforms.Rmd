@@ -594,7 +594,7 @@ time series, etc. Hence, it is important to expand the frameworks to other datas
 
 **Reproducibility:** All the code and data used in this paper is available at https://github.com/thiyangt/fforms. The R packages ggplot2 [@ggplot] provides the basis for graphics. The document is written in knitr [@xie2017dynamic].
 
-**Software:** R-package `seer` consists of the implementation of FFORMS algorithm is available at (https://github.com/thiyangt/seer). 
+**Software:** R-package `seer` consists of the implementation of FFORMS algorithm is available on CRAN (https://cran.r-project.org/web/packages/seer/index.html). 
 
 
 
