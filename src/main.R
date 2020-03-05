@@ -1306,7 +1306,7 @@ linearity.sediff_seacf1.h.long %>%
 ## ----pcayearly
 library(seer)
 load("data/HPCfiles/yearlym4_votes.rda")
-models.weights <- fforms_ensemble(yearlym4_votes, threshold = 0.6)
+models.weights <- fforms_ensemble(yearlym4_votes, threshold = 0.4)
 a <- lapply(models.weights, function(temp){length(temp)})
 aunlist <- unlist(a)
 features_M4Y <- readRDS("~/PhD_journey/fforms/data/HPCfiles/features_M4Y.rds")
@@ -1327,24 +1327,24 @@ df3 <- data.frame(name = as.factor(unlist(lapply(models.weights[highlight], func
                   PC2=df$PC1[highlight])
 
 pca1y <- ggplot(df,aes(x=PC1,y=PC2)) + 
-  geom_point(colour="grey") +
+  geom_point(colour="grey", alpha=0.5) +
   geom_point(data=df[highlight, ], aes(x=PC1, y=PC2, color=df3$name))+labs(color="Model")+
   scale_color_brewer(palette="Dark2")+
   theme(legend.position="bottom", legend.text=element_text(size=15), legend.title = element_blank(), aspect.ratio=1)
 
 pca2y <- ggplot(df2,aes(x=PC1,y=PC2, color=trend)) + 
-  geom_point()+
+  geom_point(alpha=0.5)+
   geom_point(data=df[highlight, ], aes(x=PC1, y=PC2), colour="red")+
   theme(legend.position="bottom", legend.text=element_text(size=15),aspect.ratio=1)
 
 pca3y <- ggplot(df2,aes(x=PC1,y=PC2, color=beta)) + 
-  geom_point()+
+  geom_point(alpha=0.5)+
   geom_point(data=df[highlight, ], aes(x=PC1, y=PC2), colour="red")+
   theme(legend.position="bottom", legend.text=element_text(size=15), aspect.ratio=1)
 
 
 pca5y <- ggplot(df2,aes(x=PC1,y=PC2, color=diff1y_acf5)) + 
-  geom_point()+
+  geom_point(alpha=0.5)+
   geom_point(data=df[highlight, ], aes(x=PC1, y=PC2), colour="red")+
   theme(legend.position="bottom", legend.text=element_text(size=15), aspect.ratio=1)
 
@@ -1352,7 +1352,7 @@ pca1y|pca2y|pca3y|pca5y
 
 ## ----pcamonthly
 monthlym4_votes <- readRDS("data/HPCfiles/monthlym4_votes.rds")
-models.weights.monthly <- fforms_ensemble(monthlym4_votes, threshold = 0.6)
+models.weights.monthly <- fforms_ensemble(monthlym4_votes, threshold = 0.4)
 a <- lapply(models.weights.monthly, function(temp){length(temp)})
 aunlist <- unlist(a)
 features_M4M <- readRDS("data/HPCfiles/features_M4M.rds")
@@ -1405,7 +1405,7 @@ pca1m|pca2m|pca3m|pca4m
 
 ## ----pcahourly
 load("data/HPCfiles/hourlym4_votes.rda")
-models.weights.hourly <- fforms_ensemble(hourlym4_votes, threshold = 0.6)
+models.weights.hourly <- fforms_ensemble(hourlym4_votes, threshold = 0.4)
 a <- lapply(models.weights.hourly, function(temp){length(temp)})
 aunlist <- unlist(a)
 features_M4H <- readRDS("data/HPCfiles/features_M4H.rds")
