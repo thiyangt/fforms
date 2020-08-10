@@ -1,6 +1,7 @@
 ## ---- packages
 library(Mcomp)
 library(tidyverse)
+library(magrittr)
 
 ## ---- yearlyoob
 load("data/yearly/yearly_training.rda") # random forest training set 
@@ -158,6 +159,52 @@ oob_boxplot_hourly <- ggplot(votes_oobH, aes(x = classlabel, y = value, fill = c
 
 oob_boxplot_yearly + oob_boxplot_monthly + oob_boxplot_hourly + plot_layout(ncol = 1, heights = c(1.2, 4,1))
 
+## ---- parallel
+load("data/yearly/yearly_training.rda") # random forest training set 
+load("data/yearly/train_votes.rda") # oob votes from the random forest (see: yearly_cluster_results for more info)
+load("data/yearly/train_predictions_oob.rda") # based on oob prediction (see: yearly_cluster_results for more info)
+votes_oob <- data.frame(train_votes)
+names(votes_oob) <- names(table(train_predictions_oob))
+votes_oob$predicted <- train_predictions_oob
+votes_oob$classlabel <- yearly_training$classlabels
+votes_oob <- votes_oob[, -c(11)]
+#head(votes_oob)
+paralle_y_df <- votes_oob %>%
+  group_by(classlabel) %>%
+  summarise_all(.funs = c(mean="mean"))
+head(paralle_y_df)
+paralle_y_df_pivot <- paralle_y_df %>% pivot_longer(2:11, "mean", "rf_classlabel")
+
+
+paralle_y_df_pivot <- paralle_y_df_pivot %>%
+  mutate(mean = recode(mean, "nn_mean"="nn",
+                             "theta_mean" = "theta", "wn_mean" = "wn", "ARMA/AR/MA_mean" = "ARMA", "ARIMA_mean" = "ARIMA", "ETS-notrendnoseasonal_mean" = "ETS_NTNS",
+                             "ETS-dampedtrend_mean" = "ETS_DT", "ETS-trend_mean" = "ETS_T", "rwd_mean" = "rwd", "rw_mean" = "rw" ))
+
+paralle_y_df_pivot <- paralle_y_df_pivot %>%
+  mutate(classlabel = recode(classlabel, nn="nn", theta = "theta",
+                            wn = "wn", "ARMA/AR/MA" = "ARMA", ARIMA = "ARIMA",
+                            "ETS-notrendnoseasonal" = "ETS_NTNS", "ETS-dampedtrend" = "ETS_DT",
+                            "ETS-trend" = "ETS_T","rwd" = "rwd", "rw" = "rw" ))
+paralle_y_df_pivot$mean <- factor(paralle_y_df_pivot$mean,
+                             levels = c(
+                               "wn",
+                               "rwd",
+                               "rw",
+                               "nn",
+                               "theta",
+                               "ARMA",
+                               "ARIMA",
+                               "ETS_NTNS",
+                               "ETS_DT",
+                               "ETS_T"))
+
+
+
+ggplot(paralle_y_df_pivot, aes(x=mean, y=value, group=classlabel))+
+  geom_point(aes(color=classlabel)) +
+  geom_line(aes(color=classlabel), alpha=0.5) 
+  
 
 ## ---- viplot
 library(here)

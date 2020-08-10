@@ -1,11 +1,11 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2020.2.8)  4 MAR 2020 12:21
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.8.10)  10 AUG 2020 13:28
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **fforms.tex
 (./fforms.tex
-LaTeX2e <2020-02-02>
-L3 programming layer <2020-02-03>
+LaTeX2e <2020-02-02> patch level 5
+L3 programming layer <2020-08-07>
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/latex/base/artic
 le.cls
 Document Class: article 2019/12/20 v1.4l Standard LaTeX document class
@@ -14,14 +14,14 @@ Document Class: article 2019/12/20 v1.4l Standard LaTeX document class
 1.clo
 File: size11.clo 2019/12/20 v1.4l Standard LaTeX file (size option)
 )
-\c@part=\count167
-\c@section=\count168
-\c@subsection=\count169
-\c@subsubsection=\count170
-\c@paragraph=\count171
-\c@subparagraph=\count172
-\c@figure=\count173
-\c@table=\count174
+\c@part=\count168
+\c@section=\count169
+\c@subsection=\count170
+\c@subsubsection=\count171
+\c@paragraph=\count172
+\c@subparagraph=\count173
+\c@figure=\count174
+\c@table=\count175
 \abovecaptionskip=\skip47
 \belowcaptionskip=\skip48
 \bibindent=\dimen134
@@ -69,7 +69,7 @@ Package: amssymb 2013/01/14 v3.01 AMS font symbols
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/a
 msfonts.sty
 Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
-\@emptytoks=\toks14
+\@emptytoks=\toks15
 \symAMSa=\mathgroup4
 \symAMSb=\mathgroup5
 LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
@@ -89,7 +89,7 @@ Package: amstext 2000/06/29 v2.01 AMS text
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/latex/amsmath/am
 sgen.sty
 File: amsgen.sty 1999/11/30 v2.0 generic functions
-\@emptytoks=\toks15
+\@emptytoks=\toks16
 \ex@=\dimen135
 ))
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/latex/amsmath/am
@@ -101,13 +101,13 @@ Package: amsbsy 1999/11/29 v1.2d Bold Symbols
 sopn.sty
 Package: amsopn 2016/03/08 v2.02 operator names
 )
-\inf@bad=\count175
+\inf@bad=\count176
 LaTeX Info: Redefining \frac on input line 227.
-\uproot@=\count176
-\leftroot@=\count177
+\uproot@=\count177
+\leftroot@=\count178
 LaTeX Info: Redefining \overline on input line 389.
-\classnum@=\count178
-\DOTSCASE@=\count179
+\classnum@=\count179
+\DOTSCASE@=\count180
 LaTeX Info: Redefining \ldots on input line 486.
 LaTeX Info: Redefining \dots on input line 489.
 LaTeX Info: Redefining \cdots on input line 610.
@@ -116,26 +116,26 @@ LaTeX Info: Redefining \cdots on input line 610.
 \big@size=\dimen137
 LaTeX Font Info:    Redeclaring font encoding OML on input line 733.
 LaTeX Font Info:    Redeclaring font encoding OMS on input line 734.
-\macc@depth=\count180
-\c@MaxMatrixCols=\count181
+\macc@depth=\count181
+\c@MaxMatrixCols=\count182
 \dotsspace@=\muskip16
-\c@parentequation=\count182
-\dspbrk@lvl=\count183
-\tag@help=\toks16
-\row@=\count184
-\column@=\count185
-\maxfields@=\count186
-\andhelp@=\toks17
+\c@parentequation=\count183
+\dspbrk@lvl=\count184
+\tag@help=\toks17
+\row@=\count185
+\column@=\count186
+\maxfields@=\count187
+\andhelp@=\toks18
 \eqnshift@=\dimen138
 \alignsep@=\dimen139
 \tagshift@=\dimen140
 \tagwidth@=\dimen141
 \totwidth@=\dimen142
 \lineht@=\dimen143
-\@envbody=\toks18
+\@envbody=\toks19
 \multlinegap=\skip50
 \multlinetaggap=\skip51
-\mathdisplay@stack=\toks19
+\mathdisplay@stack=\toks20
 LaTeX Info: Redefining \[ on input line 2859.
 LaTeX Info: Redefining \] on input line 2860.
 )
@@ -145,7 +145,7 @@ Package: ifxetex 2019/10/25 v0.7 ifxetex legacy package. Use iftex instead.
 
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/generic/iftex/if
 tex.sty
-Package: iftex 2019/11/07 v1.0c TeX engine tests
+Package: iftex 2020/03/06 v1.0d TeX engine tests
 ))
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/generic/iftex/if
 luatex.sty
@@ -164,7 +164,7 @@ Already applied: [0000/00/00] Old fixltx2e package on input line 53.
 )
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/latex/base/fonte
 nc.sty
-Package: fontenc 2020/01/25 v2.0m Standard LaTeX package
+Package: fontenc 2020/02/11 v2.0o Standard LaTeX package
 LaTeX Font Info:    Trying to load font information for T1+lmr on input line 11
 2.
 
@@ -175,8 +175,8 @@ File: t1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/latex/base/input
 enc.sty
 Package: inputenc 2018/08/11 v1.3c Input encoding file
-\inpenc@prehook=\toks20
-\inpenc@posthook=\toks21
+\inpenc@prehook=\toks21
+\inpenc@posthook=\toks22
 )
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/latex/upquote/up
 quote.sty
@@ -185,7 +185,7 @@ tim
 
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/latex/base/textc
 omp.sty
-Package: textcomp 2020/02/02 v2.0m Standard LaTeX package
+Package: textcomp 2020/02/02 v2.0n Standard LaTeX package
 ))
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/latex/microtype/
 microtype.sty
@@ -194,14 +194,14 @@ Package: microtype 2019/11/18 v2.7d Micro-typographical refinements (RS)
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/latex/graphics/k
 eyval.sty
 Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
-\KV@toks@=\toks22
+\KV@toks@=\toks23
 )
-\MT@toks=\toks23
-\MT@count=\count187
+\MT@toks=\toks24
+\MT@count=\count188
 LaTeX Info: Redefining \textls on input line 790.
 \MT@outer@kern=\dimen144
 LaTeX Info: Redefining \textmicrotypecontext on input line 1354.
-\MT@listname@count=\count188
+\MT@listname@count=\count189
 
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/latex/microtype/
 microtype-pdftex.def
@@ -219,15 +219,15 @@ File: microtype.cfg 2019/11/18 v2.7d microtype main configuration file (RS)
 ))
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/latex/hyperref/h
 yperref.sty
-Package: hyperref 2020/01/14 v7.00d Hypertext links for LaTeX
+Package: hyperref 2020-05-15 v7.00e Hypertext links for LaTeX
 
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/generic/ltxcmds/
 ltxcmds.sty
 Package: ltxcmds 2019/12/15 v1.24 LaTeX kernel commands for general use (HO)
 )
-(/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/latex/pdftexcmds
-/pdftexcmds.sty
-Package: pdftexcmds 2019/11/24 v0.31 Utility functions of pdfTeX for LuaTeX (HO
+(/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/generic/pdftexcm
+ds/pdftexcmds.sty
+Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO
 )
 
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/generic/infwarer
@@ -267,12 +267,12 @@ kvoptions.sty
 Package: kvoptions 2019/11/29 v3.13 Key value format for package options (HO)
 )
 \@linkdim=\dimen145
-\Hy@linkcounter=\count189
-\Hy@pagecounter=\count190
+\Hy@linkcounter=\count190
+\Hy@pagecounter=\count191
 
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/latex/hyperref/p
 d1enc.def
-File: pd1enc.def 2020/01/14 v7.00d Hyperref: PDFDocEncoding definition (HO)
+File: pd1enc.def 2020-05-15 v7.00e Hyperref: PDFDocEncoding definition (HO)
 Now handling font encoding PD1 ...
 ... no UTF-8 mapping file for font encoding PD1
 )
@@ -284,23 +284,22 @@ Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
 /etexcmds.sty
 Package: etexcmds 2019/12/15 v1.7 Avoid name clashes with e-TeX commands (HO)
 )
-\Hy@SavedSpaceFactor=\count191
-\pdfmajorversion=\count192
-Package hyperref Info: Option `unicode' set `true' on input line 4421.
+\Hy@SavedSpaceFactor=\count192
+Package hyperref Info: Option `unicode' set `true' on input line 4338.
 
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/latex/hyperref/p
 uenc.def
-File: puenc.def 2020/01/14 v7.00d Hyperref: PDF Unicode definition (HO)
+File: puenc.def 2020-05-15 v7.00e Hyperref: PDF Unicode definition (HO)
 Now handling font encoding PU ...
 ... no UTF-8 mapping file for font encoding PU
 )
-Package hyperref Info: Hyper figures OFF on input line 4547.
-Package hyperref Info: Link nesting OFF on input line 4552.
-Package hyperref Info: Hyper index ON on input line 4555.
-Package hyperref Info: Plain pages OFF on input line 4562.
-Package hyperref Info: Backreferencing OFF on input line 4567.
+Package hyperref Info: Hyper figures OFF on input line 4464.
+Package hyperref Info: Link nesting OFF on input line 4469.
+Package hyperref Info: Hyper index ON on input line 4472.
+Package hyperref Info: Plain pages OFF on input line 4479.
+Package hyperref Info: Backreferencing OFF on input line 4484.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
-Package hyperref Info: Bookmarks ON on input line 4800.
+Package hyperref Info: Bookmarks ON on input line 4717.
 \c@Hy@tempcnt=\count193
 
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/latex/url/url.st
@@ -308,7 +307,7 @@ y
 \Urlmuskip=\muskip17
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
-LaTeX Info: Redefining \url on input line 5159.
+LaTeX Info: Redefining \url on input line 5076.
 \XeTeXLinkMargin=\dimen146
 
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/generic/bitset/b
@@ -323,15 +322,15 @@ Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO
 \Fld@menulength=\count194
 \Field@Width=\dimen147
 \Fld@charsize=\dimen148
-Package hyperref Info: Hyper figures OFF on input line 6430.
-Package hyperref Info: Link nesting OFF on input line 6435.
-Package hyperref Info: Hyper index ON on input line 6438.
-Package hyperref Info: backreferencing OFF on input line 6445.
-Package hyperref Info: Link coloring OFF on input line 6450.
-Package hyperref Info: Link coloring with OCG OFF on input line 6455.
-Package hyperref Info: PDF/A mode OFF on input line 6460.
-LaTeX Info: Redefining \ref on input line 6500.
-LaTeX Info: Redefining \pageref on input line 6504.
+Package hyperref Info: Hyper figures OFF on input line 6347.
+Package hyperref Info: Link nesting OFF on input line 6352.
+Package hyperref Info: Hyper index ON on input line 6355.
+Package hyperref Info: backreferencing OFF on input line 6362.
+Package hyperref Info: Link coloring OFF on input line 6367.
+Package hyperref Info: Link coloring with OCG OFF on input line 6372.
+Package hyperref Info: PDF/A mode OFF on input line 6377.
+LaTeX Info: Redefining \ref on input line 6417.
+LaTeX Info: Redefining \pageref on input line 6421.
 
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/generic/atbegshi
 /atbegshi.sty
@@ -345,7 +344,7 @@ Package hyperref Info: Driver (autodetected): hpdftex.
 
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/latex/hyperref/h
 pdftex.def
-File: hpdftex.def 2020/01/14 v7.00d Hyperref driver for pdfTeX
+File: hpdftex.def 2020-05-15 v7.00e Hyperref driver for pdfTeX
 
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/latex/atveryend/
 atveryend.sty
@@ -389,7 +388,7 @@ Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
 \Gm@layoutheight=\dimen154
 \Gm@layouthoffset=\dimen155
 \Gm@layoutvoffset=\dimen156
-\Gm@dimlist=\toks24
+\Gm@dimlist=\toks25
 )
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/latex/biblatex/b
 iblatex.sty
@@ -397,7 +396,7 @@ Package: biblatex 2019/12/01 v3.14 programmable bibliographies (PK/MW)
 
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/latex/etoolbox/e
 toolbox.sty
-Package: etoolbox 2019/09/21 v2.5h e-TeX tools for LaTeX (JAW)
+Package: etoolbox 2020/07/15 v2.5i e-TeX tools for LaTeX (JAW)
 \etb@tempcnta=\count269
 )
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/latex/logreq/log
@@ -464,7 +463,7 @@ Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
 \bibhang=\skip61
 \blx@bcfin=\read2
 \blx@bcfout=\write3
-\blx@langwohyphens=\language3
+\blx@langwohyphens=\language5
 \c@mincomprange=\count312
 \c@maxcomprange=\count313
 \c@mincompwidth=\count314
@@ -652,7 +651,7 @@ Package: longtable 2020/01/07 v4.13 Multi-page Table package (DPC)
 \LT@rows=\count396
 \c@LT@tables=\count397
 \c@LT@chunks=\count398
-\LT@p@ftn=\toks25
+\LT@p@ftn=\toks26
 )
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/latex/booktabs/b
 ooktabs.sty
@@ -675,17 +674,13 @@ Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
 \@lastruleclass=\count402
 \@thisrulewidth=\dimen170
 )
-(/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/latex/parskip/pa
-rskip.sty
-Package: parskip 2020-01-22 v2.0d non-zero parskip adjustments
-)
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/latex/caption/ca
 ption.sty
-Package: caption 2020/01/03 v3.4h Customizing captions (AR)
+Package: caption 2020/05/30 v3.4k Customizing captions (AR)
 
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/latex/caption/ca
 ption3.sty
-Package: caption3 2020/01/03 v1.8h caption3 kernel (AR)
+Package: caption3 2020/07/20 v1.12b caption3 kernel (AR)
 Package caption3 Info: TeX engine: e-TeX on input line 61.
 \captionmargin=\dimen171
 \captionmargin@=\dimen172
@@ -703,7 +698,7 @@ Package caption Info: longtable package is loaded.
 
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/latex/caption/lt
 caption.sty
-Package: ltcaption 2018/08/26 v1.4a longtable captions (AR)
+Package: ltcaption 2020/05/30 v1.4b longtable captions (AR)
 ))
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/latex/bera/bera.
 sty
@@ -711,7 +706,7 @@ Package: bera 2004/01/31 (WaS)
 
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/latex/base/fonte
 nc.sty
-Package: fontenc 2020/01/25 v2.0m Standard LaTeX package
+Package: fontenc 2020/02/11 v2.0o Standard LaTeX package
 )
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/latex/bera/beras
 erif.sty
@@ -736,7 +731,7 @@ Package: beramono 2004/01/31 (WaS)
 ))
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/latex/psnfss/mat
 hpazo.sty
-Package: mathpazo 2005/04/12 PSNFSS-v9.2a Palatino w/ Pazo Math (D.Puga, WaS) 
+Package: mathpazo 2020/03/25 PSNFSS-v9.3 Palatino w/ Pazo Math (D.Puga, WaS) 
 \symupright=\mathgroup6
 )
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/latex/fancyhdr/f
@@ -796,7 +791,7 @@ Package: titlesec 2019/10/16 v2.13 Sectioning titles
 \aftertitleunit=\skip90
 \ttl@plus=\dimen180
 \ttl@minus=\dimen181
-\ttl@toksa=\toks26
+\ttl@toksa=\toks27
 \titlewidth=\dimen182
 \titlewidthlast=\dimen183
 \titlewidthfirst=\dimen184
@@ -832,7 +827,7 @@ Package hyperref Info: Option `colorlinks' set `true' on input line 207.
 
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/latex/base/fonte
 nc.sty
-Package: fontenc 2020/01/25 v2.0m Standard LaTeX package
+Package: fontenc 2020/02/11 v2.0o Standard LaTeX package
 LaTeX Font Info:    Trying to load font information for T1+ppl on input line 11
 2.
 
@@ -842,7 +837,7 @@ File: t1ppl.fd 2001/06/04 font definitions for T1/ppl.
 ))
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/latex/mathtools/
 mathtools.sty
-Package: mathtools 2020/01/17 v1.23 mathematical typesetting tools
+Package: mathtools 2020/03/24 v1.24 mathematical typesetting tools
 
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/latex/tools/calc
 .sty
@@ -862,10 +857,10 @@ LaTeX Info: Redefining \addtolength on input line 81.
 mhsetup.sty
 Package: mhsetup 2017/03/31 v1.3 programming setup (MH)
 )
-LaTeX Info: Thecontrolsequence`\('isalreadyrobust on input line 129.
-LaTeX Info: Thecontrolsequence`\)'isalreadyrobust on input line 129.
-LaTeX Info: Thecontrolsequence`\['isalreadyrobust on input line 129.
-LaTeX Info: Thecontrolsequence`\]'isalreadyrobust on input line 129.
+LaTeX Info: Thecontrolsequence`\('isalreadyrobust on input line 130.
+LaTeX Info: Thecontrolsequence`\)'isalreadyrobust on input line 130.
+LaTeX Info: Thecontrolsequence`\['isalreadyrobust on input line 130.
+LaTeX Info: Thecontrolsequence`\]'isalreadyrobust on input line 130.
 \g_MT_multlinerow_int=\count408
 \l_MT_multwidth_dim=\dimen187
 \origjot=\skip94
@@ -875,6 +870,8 @@ LaTeX Info: Thecontrolsequence`\]'isalreadyrobust on input line 129.
 \l_MT_below_intertext_sep=\dimen191
 \l_MT_above_shortintertext_sep=\dimen192
 \l_MT_below_shortintertext_sep=\dimen193
+\xmathstrut@box=\box52
+\xmathstrut@dim=\dimen194
 )
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/latex/eukdate/eu
 kdate.sty
@@ -888,24 +885,27 @@ Package: eukdate 2009/03/18 v1.04 UK format date (Hart's Rules) with weekday
 tch.sty
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/latex/l3kernel/e
 xpl3.sty
-Package: expl3 2020-02-03 L3 programming layer (loader) 
+Package: expl3 2020-08-07 L3 programming layer (loader) 
 
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/latex/l3backend/
 l3backend-pdfmode.def
-File: l3backend-pdfmode.def 2020-02-03 L3 backend support: PDF mode
+File: l3backend-pdfmode.def 2020-08-07 L3 backend support: PDF mode
 \l__kernel_color_stack_int=\count413
-\l__pdf_internal_box=\box52
+\l__pdf_internal_box=\box53
 ))
-Package: xpatch 2012/10/02 v0.3 Extending etoolbox patching commands
+Package: xpatch 2020/03/25 v0.3a Extending etoolbox patching commands
 
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/latex/l3packages
 /xparse/xparse.sty
-Package: xparse 2020-02-03 L3 Experimental document command parser
+Package: xparse 2020-05-15 L3 Experimental document command parser
+
+(/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/latex/l3packages
+/xparse/xparse-generic.tex
 \l__xparse_current_arg_int=\count414
 \g__xparse_grabber_int=\count415
 \l__xparse_m_args_int=\count416
 \l__xparse_v_nesting_int=\count417
-))
+)))
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/latex/textpos/te
 xtpos.sty
 Package: textpos 2019/04/15 v1.9.1
@@ -915,18 +915,18 @@ Package: textpos 2019/04/15 1.9.1, absolute positioning of text on the page
 i.sty
 Package: everyshi 2001/05/15 v3.00 EveryShipout Package (MS)
 )
-\TP@textbox=\box53
-\TP@holdbox=\box54
-\TPHorizModule=\dimen194
-\TPVertModule=\dimen195
-\TP@margin=\dimen196
-\TP@absmargin=\dimen197
+\TP@textbox=\box54
+\TP@holdbox=\box55
+\TPHorizModule=\dimen195
+\TPVertModule=\dimen196
+\TP@margin=\dimen197
+\TP@absmargin=\dimen198
 Grid set 16 x 16 = 37.34424pt x 52.81541pt
-\TPboxrulesize=\dimen198
-\TP@ox=\dimen199
-\TP@oy=\dimen256
-\TP@tbargs=\toks27
-\TP@prevdepth=\dimen257
+\TPboxrulesize=\dimen199
+\TP@ox=\dimen256
+\TP@oy=\dimen257
+\TP@tbargs=\toks28
+\TP@prevdepth=\dimen258
 TextBlockOrigin set to 0pt x 0pt
 )
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/latex/algorithms
@@ -938,12 +938,12 @@ nment
 t.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \c@float@type=\count418
-\float@exts=\toks28
-\float@box=\box55
-\@float@everytoks=\toks29
-\@floatcapt=\box56
+\float@exts=\toks29
+\float@box=\box56
+\@float@everytoks=\toks30
+\@floatcapt=\box57
 )
-\@float@every@algorithm=\toks30
+\@float@every@algorithm=\toks31
 \c@algorithm=\count419
 )
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/latex/algorithmi
@@ -969,16 +969,16 @@ Document Style - pseudocode environments for use with the `algorithmicx' style
 )
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/latex/amscls/ams
 thm.sty
-Package: amsthm 2017/10/31 v2.20.4
-\thm@style=\toks31
-\thm@bodyfont=\toks32
-\thm@headfont=\toks33
-\thm@notefont=\toks34
-\thm@headpunct=\toks35
+Package: amsthm 2020/05/29 v2.20.6
+\thm@style=\toks32
+\thm@bodyfont=\toks33
+\thm@headfont=\toks34
+\thm@notefont=\toks35
+\thm@headpunct=\toks36
 \thm@preskip=\skip98
 \thm@postskip=\skip99
 \thm@headsep=\skip100
-\dth@everypar=\toks36
+\dth@everypar=\toks37
 )
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/latex/paralist/p
 aralist.sty
@@ -987,7 +987,7 @@ Package: paralist 2017/01/22 v2.7 Extended list environments
 \plpartopsep=\skip102
 \plitemsep=\skip103
 \plparsep=\skip104
-\pl@lab=\toks37
+\pl@lab=\toks38
 )
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/latex/todonotes/
 todonotes.sty
@@ -1002,8 +1002,8 @@ Package: xkeyval 2014/12/03 v2.7a package option processing (HA)
 xkeyval.tex
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/generic/xkeyval/
 xkvutils.tex
-\XKV@toks=\toks38
-\XKV@tempa@toks=\toks39
+\XKV@toks=\toks39
+\XKV@tempa@toks=\toks40
 )
 \XKV@depth=\count427
 File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
@@ -1016,15 +1016,15 @@ ayer/pgf.sty
 ies/pgfrcs.sty
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/generic/pgf/util
 ities/pgfutil-common.tex
-\pgfutil@everybye=\toks40
-\pgfutil@tempdima=\dimen258
-\pgfutil@tempdimb=\dimen259
+\pgfutil@everybye=\toks41
+\pgfutil@tempdima=\dimen259
+\pgfutil@tempdimb=\dimen260
 
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/generic/pgf/util
 ities/pgfutil-common-lists.tex))
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/generic/pgf/util
 ities/pgfutil-latex.def
-\pgfutil@abb=\box57
+\pgfutil@abb=\box58
 )
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/generic/pgf/util
 ities/pgfrcs.code.tex
@@ -1044,32 +1044,32 @@ Package: pgfsys 2020/01/08 v3.1.5b (3.1.5b)
 
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/generic/pgf/util
 ities/pgfkeys.code.tex
-\pgfkeys@pathtoks=\toks41
-\pgfkeys@temptoks=\toks42
+\pgfkeys@pathtoks=\toks42
+\pgfkeys@temptoks=\toks43
 
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/generic/pgf/util
 ities/pgfkeysfiltered.code.tex
-\pgfkeys@tmptoks=\toks43
+\pgfkeys@tmptoks=\toks44
 ))
-\pgf@x=\dimen260
-\pgf@y=\dimen261
-\pgf@xa=\dimen262
-\pgf@ya=\dimen263
-\pgf@xb=\dimen264
-\pgf@yb=\dimen265
-\pgf@xc=\dimen266
-\pgf@yc=\dimen267
-\pgf@xd=\dimen268
-\pgf@yd=\dimen269
+\pgf@x=\dimen261
+\pgf@y=\dimen262
+\pgf@xa=\dimen263
+\pgf@ya=\dimen264
+\pgf@xb=\dimen265
+\pgf@yb=\dimen266
+\pgf@xc=\dimen267
+\pgf@yc=\dimen268
+\pgf@xd=\dimen269
+\pgf@yd=\dimen270
 \w@pgf@writea=\write4
 \r@pgf@reada=\read3
 \c@pgf@counta=\count428
 \c@pgf@countb=\count429
 \c@pgf@countc=\count430
 \c@pgf@countd=\count431
-\t@pgf@toka=\toks44
-\t@pgf@tokb=\toks45
-\t@pgf@tokc=\toks46
+\t@pgf@toka=\toks45
+\t@pgf@tokb=\toks46
+\t@pgf@tokc=\toks47
 \pgf@sys@id@count=\count432
 
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/generic/pgf/syst
@@ -1108,12 +1108,12 @@ Package: pgfcore 2020/01/08 v3.1.5b (3.1.5b)
 /pgfmathutil.code.tex)
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/generic/pgf/math
 /pgfmathparser.code.tex
-\pgfmath@dimen=\dimen270
+\pgfmath@dimen=\dimen271
 \pgfmath@count=\count435
-\pgfmath@box=\box58
-\pgfmath@toks=\toks47
-\pgfmath@stack@operand=\toks48
-\pgfmath@stack@operation=\toks49
+\pgfmath@box=\box59
+\pgfmath@toks=\toks48
+\pgfmath@stack@operand=\toks49
+\pgfmath@stack@operation=\toks50
 )
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/generic/pgf/math
 /pgfmathfunctions.code.tex
@@ -1142,52 +1142,52 @@ Package: pgfcore 2020/01/08 v3.1.5b (3.1.5b)
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/generic/pgf/basi
 clayer/pgfcorepoints.code.tex
 File: pgfcorepoints.code.tex 2020/01/08 v3.1.5b (3.1.5b)
-\pgf@picminx=\dimen271
-\pgf@picmaxx=\dimen272
-\pgf@picminy=\dimen273
-\pgf@picmaxy=\dimen274
-\pgf@pathminx=\dimen275
-\pgf@pathmaxx=\dimen276
-\pgf@pathminy=\dimen277
-\pgf@pathmaxy=\dimen278
-\pgf@xx=\dimen279
-\pgf@xy=\dimen280
-\pgf@yx=\dimen281
-\pgf@yy=\dimen282
-\pgf@zx=\dimen283
-\pgf@zy=\dimen284
+\pgf@picminx=\dimen272
+\pgf@picmaxx=\dimen273
+\pgf@picminy=\dimen274
+\pgf@picmaxy=\dimen275
+\pgf@pathminx=\dimen276
+\pgf@pathmaxx=\dimen277
+\pgf@pathminy=\dimen278
+\pgf@pathmaxy=\dimen279
+\pgf@xx=\dimen280
+\pgf@xy=\dimen281
+\pgf@yx=\dimen282
+\pgf@yy=\dimen283
+\pgf@zx=\dimen284
+\pgf@zy=\dimen285
 )
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/generic/pgf/basi
 clayer/pgfcorepathconstruct.code.tex
 File: pgfcorepathconstruct.code.tex 2020/01/08 v3.1.5b (3.1.5b)
-\pgf@path@lastx=\dimen285
-\pgf@path@lasty=\dimen286
+\pgf@path@lastx=\dimen286
+\pgf@path@lasty=\dimen287
 )
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/generic/pgf/basi
 clayer/pgfcorepathusage.code.tex
 File: pgfcorepathusage.code.tex 2020/01/08 v3.1.5b (3.1.5b)
-\pgf@shorten@end@additional=\dimen287
-\pgf@shorten@start@additional=\dimen288
+\pgf@shorten@end@additional=\dimen288
+\pgf@shorten@start@additional=\dimen289
 )
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/generic/pgf/basi
 clayer/pgfcorescopes.code.tex
 File: pgfcorescopes.code.tex 2020/01/08 v3.1.5b (3.1.5b)
-\pgfpic=\box59
-\pgf@hbox=\box60
-\pgf@layerbox@main=\box61
+\pgfpic=\box60
+\pgf@hbox=\box61
+\pgf@layerbox@main=\box62
 \pgf@picture@serial@count=\count437
 )
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/generic/pgf/basi
 clayer/pgfcoregraphicstate.code.tex
 File: pgfcoregraphicstate.code.tex 2020/01/08 v3.1.5b (3.1.5b)
-\pgflinewidth=\dimen289
+\pgflinewidth=\dimen290
 )
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/generic/pgf/basi
 clayer/pgfcoretransformations.code.tex
 File: pgfcoretransformations.code.tex 2020/01/08 v3.1.5b (3.1.5b)
-\pgf@pt@x=\dimen290
-\pgf@pt@y=\dimen291
-\pgf@pt@temp=\dimen292
+\pgf@pt@x=\dimen291
+\pgf@pt@y=\dimen292
+\pgf@pt@temp=\dimen293
 )
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/generic/pgf/basi
 clayer/pgfcorequick.code.tex
@@ -1204,12 +1204,12 @@ File: pgfcorepathprocessing.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/generic/pgf/basi
 clayer/pgfcorearrows.code.tex
 File: pgfcorearrows.code.tex 2020/01/08 v3.1.5b (3.1.5b)
-\pgfarrowsep=\dimen293
+\pgfarrowsep=\dimen294
 )
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/generic/pgf/basi
 clayer/pgfcoreshade.code.tex
 File: pgfcoreshade.code.tex 2020/01/08 v3.1.5b (3.1.5b)
-\pgf@max=\dimen294
+\pgf@max=\dimen295
 \pgf@sys@shading@range@num=\count438
 \pgf@shadingcount=\count439
 )
@@ -1220,7 +1220,7 @@ File: pgfcoreimage.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/generic/pgf/basi
 clayer/pgfcoreexternal.code.tex
 File: pgfcoreexternal.code.tex 2020/01/08 v3.1.5b (3.1.5b)
-\pgfexternal@startupbox=\box62
+\pgfexternal@startupbox=\box63
 ))
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/generic/pgf/basi
 clayer/pgfcorelayers.code.tex
@@ -1241,7 +1241,7 @@ File: pgfcorerdf.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/generic/pgf/modu
 les/pgfmoduleshapes.code.tex
 File: pgfmoduleshapes.code.tex 2020/01/08 v3.1.5b (3.1.5b)
-\pgfnodeparttextbox=\box63
+\pgfnodeparttextbox=\box64
 )
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/generic/pgf/modu
 les/pgfmoduleplot.code.tex
@@ -1250,8 +1250,8 @@ File: pgfmoduleplot.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/latex/pgf/compat
 ibility/pgfcomp-version-0-65.sty
 Package: pgfcomp-version-0-65 2020/01/08 v3.1.5b (3.1.5b)
-\pgf@nodesepstart=\dimen295
-\pgf@nodesepend=\dimen296
+\pgf@nodesepstart=\dimen296
+\pgf@nodesepend=\dimen297
 )
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/latex/pgf/compat
 ibility/pgfcomp-version-1-18.sty
@@ -1273,10 +1273,10 @@ Package: pgffor 2020/01/08 v3.1.5b (3.1.5b)
 
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/generic/pgf/math
 /pgfmath.code.tex)
-\pgffor@iter=\dimen297
-\pgffor@skip=\dimen298
-\pgffor@stack=\toks50
-\pgffor@toks=\toks51
+\pgffor@iter=\dimen298
+\pgffor@skip=\dimen299
+\pgffor@stack=\toks51
+\pgffor@toks=\toks52
 ))
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/generic/pgf/fron
 tendlayer/tikz/tikz.code.tex
@@ -1286,20 +1286,20 @@ Package: tikz 2020/01/08 v3.1.5b (3.1.5b)
 aries/pgflibraryplothandlers.code.tex
 File: pgflibraryplothandlers.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 \pgf@plot@mark@count=\count440
-\pgfplotmarksize=\dimen299
+\pgfplotmarksize=\dimen300
 )
-\tikz@lastx=\dimen300
-\tikz@lasty=\dimen301
-\tikz@lastxsaved=\dimen302
-\tikz@lastysaved=\dimen303
-\tikz@lastmovetox=\dimen304
-\tikz@lastmovetoy=\dimen305
-\tikzleveldistance=\dimen306
-\tikzsiblingdistance=\dimen307
-\tikz@figbox=\box64
-\tikz@figbox@bg=\box65
-\tikz@tempbox=\box66
-\tikz@tempbox@bg=\box67
+\tikz@lastx=\dimen301
+\tikz@lasty=\dimen302
+\tikz@lastxsaved=\dimen303
+\tikz@lastysaved=\dimen304
+\tikz@lastmovetox=\dimen305
+\tikz@lastmovetoy=\dimen306
+\tikzleveldistance=\dimen307
+\tikzsiblingdistance=\dimen308
+\tikz@figbox=\box65
+\tikz@figbox@bg=\box66
+\tikz@tempbox=\box67
+\tikz@tempbox@bg=\box68
 \tikztreelevel=\count441
 \tikznumberofchildren=\count442
 \tikznumberofcurrentchild=\count443
@@ -1348,24 +1348,24 @@ Package: ifpdf 2019/10/25 v3.4 ifpdf legacy package. Use iftex instead.
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/latex/tools/arra
 y.sty
 Package: array 2019/08/31 v2.4l Tabular extension package (FMi)
-\col@sep=\dimen308
-\ar@mcellbox=\box68
-\extrarowheight=\dimen309
-\NC@list=\toks52
+\col@sep=\dimen309
+\ar@mcellbox=\box69
+\extrarowheight=\dimen310
+\NC@list=\toks53
 \extratabsurround=\skip105
 \backup@length=\skip106
-\ar@cellbox=\box69
+\ar@cellbox=\box70
 )
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/latex/tools/tabu
 larx.sty
 Package: tabularx 2020/01/15 v2.11c `tabularx' package (DPC)
-\TX@col@width=\dimen310
-\TX@old@table=\dimen311
-\TX@old@col=\dimen312
-\TX@target=\dimen313
-\TX@delta=\dimen314
+\TX@col@width=\dimen311
+\TX@old@table=\dimen312
+\TX@old@col=\dimen313
+\TX@target=\dimen314
+\TX@delta=\dimen315
 \TX@cols=\count450
-\TX@ftn=\toks53
+\TX@ftn=\toks54
 )
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/latex/graphics/r
 otating.sty
@@ -1373,33 +1373,33 @@ Package: rotating 2016/08/11 v2.16d rotated objects in LaTeX
 \c@r@tfl@t=\count451
 \rotFPtop=\skip107
 \rotFPbot=\skip108
-\rot@float@box=\box70
-\rot@mess@toks=\toks54
+\rot@float@box=\box71
+\rot@mess@toks=\toks55
 )
 
 Package ctable Warning:  Transparency disabled: incompatible with tikz package 
  on input line 36.
 
-\@CTframesep=\dimen315
-\@dfltCTframesep=\dimen316
-\@CTframerule=\dimen317
-\@dfltCTframerule=\dimen318
-\@CTwidth=\dimen319
-\@dfltCTwidth=\dimen320
-\@CTcaptionskip=\dimen321
-\@dfltCTcaptionskip=\dimen322
-\@CTmaxwidth=\dimen323
-\@dfltCTmaxwidth=\dimen324
-\@CTmincapwidth=\dimen325
-\@dfltCTmincapwidth=\dimen326
-\@CTfooterwidth=\dimen327
-\@dfltCTfooterwidth=\dimen328
-\@CTw=\dimen329
-\@CTfloatwidth=\dimen330
-\@CToldsep=\dimen331
-\@CToldrule=\dimen332
-\CT@t=\box71
-\@CTcurftwidth=\dimen333
+\@CTframesep=\dimen316
+\@dfltCTframesep=\dimen317
+\@CTframerule=\dimen318
+\@dfltCTframerule=\dimen319
+\@CTwidth=\dimen320
+\@dfltCTwidth=\dimen321
+\@CTcaptionskip=\dimen322
+\@dfltCTcaptionskip=\dimen323
+\@CTmaxwidth=\dimen324
+\@dfltCTmaxwidth=\dimen325
+\@CTmincapwidth=\dimen326
+\@dfltCTmincapwidth=\dimen327
+\@CTfooterwidth=\dimen328
+\@dfltCTfooterwidth=\dimen329
+\@CTw=\dimen330
+\@CTfloatwidth=\dimen331
+\@CToldsep=\dimen332
+\@CToldrule=\dimen333
+\CT@t=\box72
+\@CTcurftwidth=\dimen334
 )
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/latex/multirow/m
 ultirow.sty
@@ -1407,7 +1407,7 @@ Package: multirow 2019/05/31 v2.5 Span multiple rows of a table
 \multirow@colwidth=\skip109
 \multirow@cntb=\count452
 \multirow@dima=\skip110
-\bigstrutjot=\dimen334
+\bigstrutjot=\dimen335
 )
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/latex/graphics/l
 scape.sty
@@ -1416,7 +1416,7 @@ Package: lscape 2000/10/22 v3.01 Landscape Pages (DPC)
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/latex/threepartt
 able/threeparttable.sty
 Package: threeparttable 2003/06/13  v 3.0
-\@tempboxb=\box72
+\@tempboxb=\box73
 )
 \@quotelevel=\count453
 \@quotereset=\count454
@@ -1457,7 +1457,7 @@ Package microtype Info: No adjustment of character kerning.
 mt-ppl.cfg
 File: mt-ppl.cfg 2005/11/16 v1.6 microtype config. file: Palatino (RS)
 )
-\AtBeginShipoutBox=\box73
+\AtBeginShipoutBox=\box74
 Package hyperref Info: Link coloring ON on input line 315.
 
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/latex/hyperref/n
@@ -1654,18 +1654,18 @@ LaTeX Font Info:    Font shape `T1/fvs/b/n' will be
 LaTeX Font Info:    Font shape `T1/fvs/b/n' will be
 (Font)              scaled to size 10.79993pt on input line 374.
 [4]
-<figure/fig1-1.pdf, id=214, 722.7pt x 361.35pt>
+<figure/fig1-1.pdf, id=212, 722.7pt x 361.35pt>
 File: figure/fig1-1.pdf Graphic file (type pdf)
 <use figure/fig1-1.pdf>
 Package pdftex.def Info: figure/fig1-1.pdf  used on input line 382.
 (pdftex.def)             Requested size: 455.24411pt x 227.62413pt.
-<images/RiceFramework.png, id=216, 818.30719pt x 401.24907pt>
+<images/RiceFramework.png, id=214, 818.30719pt x 401.24907pt>
 File: images/RiceFramework.png Graphic file (type png)
 <use images/RiceFramework.png>
 Package pdftex.def Info: images/RiceFramework.png  used on input line 396.
 (pdftex.def)             Requested size: 273.14923pt x 133.9371pt.
 [5 <./figure/fig1-1.pdf> <./images/RiceFramework.png>] [6] [7]
-<images/framework.png, id=263, 1156.32pt x 650.43pt>
+<images/framework.png, id=262, 1156.32pt x 650.43pt>
 File: images/framework.png Graphic file (type png)
 <use images/framework.png>
 Package pdftex.def Info: images/framework.png  used on input line 441.
@@ -1675,7 +1675,7 @@ Overfull \hbox (45.52718pt too wide) in paragraph at lines 441--442
  [][] 
  []
 
-[8 <./images/framework.png>]
+[8]
 Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
 put line 453.
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
@@ -1690,13 +1690,17 @@ LaTeX Font Info:    Font shape `U/msb/m/n' will be
 (Font)              scaled to size 7.29405pt on input line 458.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
 (Font)              scaled to size 5.21004pt on input line 458.
-[9] [10] [11]
+[9 <./images/framework.png>] [10] [11]
 Overfull \hbox (5.04176pt too wide) in paragraph at lines 569--591
  [][] 
  []
 
-[12] [13] [14]
-<figure/yearlyoob-1.png, id=336, 1445.4pt x 2023.56pt>
+[12] [13]
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[14] [15]
+<figure/yearlyoob-1.png, id=341, 1445.4pt x 2023.56pt>
 File: figure/yearlyoob-1.png Graphic file (type png)
 <use figure/yearlyoob-1.png>
 Package pdftex.def Info: figure/yearlyoob-1.png  used on input line 666.
@@ -1707,16 +1711,16 @@ LaTeX Warning: Float too large for page by 4.54907pt on input line 671.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[15] [16 <./figure/yearlyoob-1.png>]
-<figure/viplot-1.pdf, id=349, 1445.4pt x 1300.86pt>
+[16] [17 <./figure/yearlyoob-1.png>]
+<figure/viplot-1.pdf, id=353, 1445.4pt x 1300.86pt>
 File: figure/viplot-1.pdf Graphic file (type pdf)
 <use figure/viplot-1.pdf>
 Package pdftex.def Info: figure/viplot-1.pdf  used on input line 680.
 (pdftex.def)             Requested size: 455.24411pt x 409.71353pt.
-[17
+[18
 
- <./figure/viplot-1.pdf>] [18]
-<figure/pdpyearlyurpp-1.pdf, id=387, 1084.05pt x 325.215pt>
+ <./figure/viplot-1.pdf>] [19]
+<figure/pdpyearlyurpp-1.pdf, id=392, 1084.05pt x 325.215pt>
 File: figure/pdpyearlyurpp-1.pdf Graphic file (type pdf)
 <use figure/pdpyearlyurpp-1.pdf>
 Package pdftex.def Info: figure/pdpyearlyurpp-1.pdf  used on input line 705.
@@ -1724,7 +1728,7 @@ Package pdftex.def Info: figure/pdpyearlyurpp-1.pdf  used on input line 705.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<figure/pdpmonthlyseasonality-1.pdf, id=388, 1084.05pt x 433.62pt>
+<figure/pdpmonthlyseasonality-1.pdf, id=393, 1084.05pt x 433.62pt>
 File: figure/pdpmonthlyseasonality-1.pdf Graphic file (type pdf)
 <use figure/pdpmonthlyseasonality-1.pdf>
 Package pdftex.def Info: figure/pdpmonthlyseasonality-1.pdf  used on input line
@@ -1733,7 +1737,7 @@ Package pdftex.def Info: figure/pdpmonthlyseasonality-1.pdf  used on input line
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<figure/pdpmonthlyT-1.pdf, id=389, 1084.05pt x 325.215pt>
+<figure/pdpmonthlyT-1.pdf, id=394, 1084.05pt x 325.215pt>
 File: figure/pdpmonthlyT-1.pdf Graphic file (type pdf)
 <use figure/pdpmonthlyT-1.pdf>
 Package pdftex.def Info: figure/pdpmonthlyT-1.pdf  used on input line 723.
@@ -1741,7 +1745,7 @@ Package pdftex.def Info: figure/pdpmonthlyT-1.pdf  used on input line 723.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<figure/seasonalityhourly-1.pdf, id=390, 1445.4pt x 361.35pt>
+<figure/seasonalityhourly-1.pdf, id=395, 1445.4pt x 361.35pt>
 File: figure/seasonalityhourly-1.pdf Graphic file (type pdf)
 <use figure/seasonalityhourly-1.pdf>
 Package pdftex.def Info: figure/seasonalityhourly-1.pdf  used on input line 732
@@ -1750,7 +1754,7 @@ Package pdftex.def Info: figure/seasonalityhourly-1.pdf  used on input line 732
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<figure/entropyhourly-1.pdf, id=391, 1445.4pt x 361.35pt>
+<figure/entropyhourly-1.pdf, id=396, 1445.4pt x 361.35pt>
 File: figure/entropyhourly-1.pdf Graphic file (type pdf)
 <use figure/entropyhourly-1.pdf>
 Package pdftex.def Info: figure/entropyhourly-1.pdf  used on input line 741.
@@ -1758,7 +1762,7 @@ Package pdftex.def Info: figure/entropyhourly-1.pdf  used on input line 741.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<figure/curvaturehourly-1.pdf, id=392, 1084.05pt x 325.215pt>
+<figure/curvaturehourly-1.pdf, id=397, 1084.05pt x 325.215pt>
 File: figure/curvaturehourly-1.pdf Graphic file (type pdf)
 <use figure/curvaturehourly-1.pdf>
 Package pdftex.def Info: figure/curvaturehourly-1.pdf  used on input line 750.
@@ -1766,7 +1770,7 @@ Package pdftex.def Info: figure/curvaturehourly-1.pdf  used on input line 750.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<figure/pdpmonthlyhourlyStability-1.pdf, id=393, 1084.05pt x 325.215pt>
+<figure/pdpmonthlyhourlyStability-1.pdf, id=398, 1084.05pt x 325.215pt>
 File: figure/pdpmonthlyhourlyStability-1.pdf Graphic file (type pdf)
 <use figure/pdpmonthlyhourlyStability-1.pdf>
 Package pdftex.def Info: figure/pdpmonthlyhourlyStability-1.pdf  used on input 
@@ -1775,7 +1779,7 @@ line 759.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<figure/diff1yacf1-1.pdf, id=394, 1084.05pt x 325.215pt>
+<figure/diff1yacf1-1.pdf, id=399, 1084.05pt x 325.215pt>
 File: figure/diff1yacf1-1.pdf Graphic file (type pdf)
 <use figure/diff1yacf1-1.pdf>
 Package pdftex.def Info: figure/diff1yacf1-1.pdf  used on input line 768.
@@ -1783,7 +1787,7 @@ Package pdftex.def Info: figure/diff1yacf1-1.pdf  used on input line 768.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<figure/ypacf5-1.pdf, id=395, 1084.05pt x 325.215pt>
+<figure/ypacf5-1.pdf, id=400, 1084.05pt x 325.215pt>
 File: figure/ypacf5-1.pdf Graphic file (type pdf)
 <use figure/ypacf5-1.pdf>
 Package pdftex.def Info: figure/ypacf5-1.pdf  used on input line 777.
@@ -1791,7 +1795,7 @@ Package pdftex.def Info: figure/ypacf5-1.pdf  used on input line 777.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<figure/pdpyearlytrend-1.pdf, id=396, 1084.05pt x 433.62pt>
+<figure/pdpyearlytrend-1.pdf, id=401, 1084.05pt x 433.62pt>
 File: figure/pdpyearlytrend-1.pdf Graphic file (type pdf)
 <use figure/pdpyearlytrend-1.pdf>
 Package pdftex.def Info: figure/pdpyearlytrend-1.pdf  used on input line 786.
@@ -1799,60 +1803,60 @@ Package pdftex.def Info: figure/pdpyearlytrend-1.pdf  used on input line 786.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[19] [20 <./figure/pdpyearlyurpp-1.pdf> <./figure/pdpmonthlyseasonality-1.pdf> 
-<./figure/pdpmonthlyT-1.pdf>] [21 <./figure/seasonalityhourly-1.pdf> <./figure/
+[20] [21 <./figure/pdpyearlyurpp-1.pdf> <./figure/pdpmonthlyseasonality-1.pdf> 
+<./figure/pdpmonthlyT-1.pdf>] [22 <./figure/seasonalityhourly-1.pdf> <./figure/
 entropyhourly-1.pdf> <./figure/curvaturehourly-1.pdf> <./figure/pdpmonthlyhourl
-yStability-1.pdf>] [22 <./figure/diff1yacf1-1.pdf> <./figure/ypacf5-1.pdf> <./f
+yStability-1.pdf>] [23 <./figure/diff1yacf1-1.pdf> <./figure/ypacf5-1.pdf> <./f
 igure/pdpyearlytrend-1.pdf>]
-<figure/linearity-1.pdf, id=501, 1084.05pt x 578.16pt>
+<figure/linearity-1.pdf, id=505, 1084.05pt x 578.16pt>
 File: figure/linearity-1.pdf Graphic file (type pdf)
 <use figure/linearity-1.pdf>
 Package pdftex.def Info: figure/linearity-1.pdf  used on input line 797.
 (pdftex.def)             Requested size: 455.24411pt x 242.79907pt.
-<figure/y2dpdp-1.pdf, id=502, 1084.05pt x 433.62pt>
+<figure/y2dpdp-1.pdf, id=506, 1084.05pt x 433.62pt>
 File: figure/y2dpdp-1.pdf Graphic file (type pdf)
 <use figure/y2dpdp-1.pdf>
 Package pdftex.def Info: figure/y2dpdp-1.pdf  used on input line 806.
 (pdftex.def)             Requested size: 455.24411pt x 182.0993pt.
-[23
+[24
 
  <./figure/linearity-1.pdf> <./figure/y2dpdp-1.pdf>]
-<figure/m2dpdp-1.pdf, id=554, 722.7pt x 650.43pt>
+<figure/m2dpdp-1.pdf, id=558, 722.7pt x 650.43pt>
 File: figure/m2dpdp-1.pdf Graphic file (type pdf)
 <use figure/m2dpdp-1.pdf>
 Package pdftex.def Info: figure/m2dpdp-1.pdf  used on input line 817.
 (pdftex.def)             Requested size: 455.24411pt x 409.72343pt.
-[24 <./figure/m2dpdp-1.pdf>]
-<figure/h2dpdp-1.pdf, id=597, 650.43pt x 144.54pt>
+[25 <./figure/m2dpdp-1.pdf>]
+<figure/h2dpdp-1.pdf, id=602, 650.43pt x 144.54pt>
 File: figure/h2dpdp-1.pdf Graphic file (type pdf)
 <use figure/h2dpdp-1.pdf>
 Package pdftex.def Info: figure/h2dpdp-1.pdf  used on input line 828.
 (pdftex.def)             Requested size: 455.24411pt x 101.16847pt.
-<figure/thetapdp-1.pdf, id=598, 1084.05pt x 289.08pt>
+<figure/thetapdp-1.pdf, id=603, 1084.05pt x 289.08pt>
 File: figure/thetapdp-1.pdf Graphic file (type pdf)
 <use figure/thetapdp-1.pdf>
 Package pdftex.def Info: figure/thetapdp-1.pdf  used on input line 837.
 (pdftex.def)             Requested size: 455.24411pt x 121.39954pt.
-<figure/pcayearly-1.png, id=603, 1445.4pt x 433.62pt>
+<figure/pcayearly-1.png, id=608, 1445.4pt x 433.62pt>
 File: figure/pcayearly-1.png Graphic file (type png)
 <use figure/pcayearly-1.png>
 Package pdftex.def Info: figure/pcayearly-1.png  used on input line 848.
 (pdftex.def)             Requested size: 455.24411pt x 136.57117pt.
-[25
+[26
 
  <./figure/h2dpdp-1.pdf> <./figure/thetapdp-1.pdf>]
-<figure/pcamonthly-1.png, id=635, 1445.4pt x 433.62pt>
+<figure/pcamonthly-1.png, id=639, 1445.4pt x 433.62pt>
 File: figure/pcamonthly-1.png Graphic file (type png)
 <use figure/pcamonthly-1.png>
 Package pdftex.def Info: figure/pcamonthly-1.png  used on input line 857.
 (pdftex.def)             Requested size: 455.24411pt x 136.57117pt.
-<figure/pcahourly-1.png, id=636, 1445.4pt x 433.62pt>
+<figure/pcahourly-1.png, id=640, 1445.4pt x 433.62pt>
 File: figure/pcahourly-1.png Graphic file (type png)
 <use figure/pcahourly-1.png>
 Package pdftex.def Info: figure/pcahourly-1.png  used on input line 866.
 (pdftex.def)             Requested size: 455.24411pt x 136.57117pt.
-[26 <./figure/pcayearly-1.png> <./figure/pcamonthly-1.png> <./figure/pcahourly-
-1.png>] [27]
+[27 <./figure/pcayearly-1.png> <./figure/pcamonthly-1.png> <./figure/pcahourly-
+1.png>] [28]
 
 Package hyperref Warning: Difference (2) between bookmark levels is greater 
 (hyperref)                than one, level fixed on input line 900.
@@ -1861,7 +1865,7 @@ Package hyperref Warning: Difference (2) between bookmark levels is greater
 Package hyperref Warning: The anchor of a bookmark and its parent's must not
 (hyperref)                be the same. Added a new anchor on input line 900.
 
-[28] [29] [30] [31] [32] [33] [34]
+[29] [30] [31] [32] [33] [34] [35]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 992.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 992.
 (./fforms.aux)
@@ -1879,13 +1883,13 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 992.
 ### semi simple group (level 1) entered at line 178 (\begingroup)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 34742 strings out of 483192
- 643880 string characters out of 5964248
- 1311608 words of memory out of 5000000
- 48626 multiletter control sequences out of 15000+600000
- 637140 words of font info for 343 fonts, out of 8000000 for 9000
+ 34799 strings out of 482816
+ 645500 string characters out of 5953141
+ 1319728 words of memory out of 5000000
+ 49046 multiletter control sequences out of 15000+600000
+ 639890 words of font info for 348 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 68i,15n,90p,1919b,15454s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 68i,15n,90p,1919b,15477s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/font
 s/enc/dvips/base/8r.enc}</Users/thiyangashaminitalagala/Library/TinyTeX/texmf-d
 ist/fonts/type1/public/amsfonts/cm/cmex10.pfb></Users/thiyangashaminitalagala/L
@@ -1903,10 +1907,10 @@ rary/TinyTeX/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></Users/thiyangasha
 minitalagala/Library/TinyTeX/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></U
 sers/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/fonts/type1/urw/palatin
 o/uplri8a.pfb>
-Output written on fforms.pdf (34 pages, 1530544 bytes).
+Output written on fforms.pdf (35 pages, 1531038 bytes).
 PDF statistics:
- 828 PDF objects out of 1000 (max. 8388607)
- 648 compressed objects within 7 object streams
- 161 named destinations out of 1000 (max. 500000)
+ 832 PDF objects out of 1000 (max. 8388607)
+ 651 compressed objects within 7 object streams
+ 162 named destinations out of 1000 (max. 500000)
  31168 words of extra memory for PDF output out of 35830 (max. 10000000)
 
