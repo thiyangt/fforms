@@ -39,3 +39,5 @@ hm <- main_heatmap(yearlym4_votes)
 if (interactive()) hm 
 hm@xaxes # To obtain column ordering
 hm@yaxes@listData$y@order # Row order in the matrix
+
+

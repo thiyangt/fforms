@@ -3,6 +3,7 @@
 
 ## ---- package
 library(iheatmapr)
+library(viridis)
 
 ## ---- yearlyiheatmapr
 load("~/PhD_journey/fforms/data/HPCfiles/yearlym4_votes.rda")
@@ -24,20 +25,27 @@ iheatmapr::main_heatmap(yearlym4_votes) %>%
   add_row_clustering(method="kmeans", k = 5) %>%
   add_col_labels()
 
-yheatmap <- iheatmapr::main_heatmap(yearlym4_votes) %>%
+yheatmap <- iheatmapr::main_heatmap(yearlym4_votes, name="Vote probability") %>%
   add_col_clustering(method="kmeans", k=4) %>%
   add_row_clustering(method="kmeans", k = 5) %>%
-  add_col_labels()
+  add_col_labels() %>%
+  add_col_clustering() %>%
+  add_row_title("Time series (each row corresponds to a single time series)") %>%
+  add_col_title("Class", side="top") 
+
+
 yheatmap@yaxes@listData$y@order # tail of this is hown as the first row in the visualisation
 yheatmap@xaxes@listData$x@order 
 colnames(yearlym4_votes)
  # add_col_annotation(annotation) 
 
+yheatmap@plots@listData$`Row<br>Clusters`@data # row clusters
+
 features_M4Y <- readRDS("~/PhD_journey/fforms/data/HPCfiles/features_M4Y.rds")
 features_M4Y <- as.matrix(features_M4Y)
 iheatmapr::main_heatmap(yearlym4_votes) %>%
   add_col_clustering(method="kmeans", k=4) %>%
-  add_row_clustering(method="kmeans", k = 5) 
+  add_row_clustering(method="kmeans", k = 5)  
 
 ## Method 2
 
