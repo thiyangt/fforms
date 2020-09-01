@@ -30,3 +30,12 @@ superheat(hourlym4_votes,
           n.clusters.rows =5)
 
 
+# Iheatmaper
+
+# library(iheatmapr)
+
+
+hm <- main_heatmap(yearlym4_votes)
+if (interactive()) hm 
+hm@xaxes # To obtain column ordering
+hm@yaxes@listData$y@order # Row order in the matrix
