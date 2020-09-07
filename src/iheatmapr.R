@@ -23,15 +23,23 @@ Classes <- colnames(yearlym4_votes)
 iheatmapr::main_heatmap(yearlym4_votes) %>%
   add_col_clustering(method="kmeans", k=4) %>%
   add_row_clustering(method="kmeans", k = 5) %>%
-  add_col_labels()
+  add_col_labels() %>%
+  add_col_summary(groups = TRUE)
+
+
+Classes <- colnames(yearlym4_votes)
+iheatmapr::main_heatmap(yearlym4_votes) %>%
+  add_col_clustering(method="kmeans", k=4) %>%
+  add_row_clustering(method="kmeans", k = 5) %>%
+  add_col_labels() 
 
 yheatmap <- iheatmapr::main_heatmap(yearlym4_votes, name="Vote probability") %>%
   add_col_clustering(method="kmeans", k=4) %>%
   add_row_clustering(method="kmeans", k = 5) %>%
   add_col_labels() %>%
-  add_col_clustering() %>%
   add_row_title("Time series (each row corresponds to a single time series)") %>%
   add_col_title("Class", side="top") 
+
 
 
 yheatmap@yaxes@listData$y@order # tail of this is hown as the first row in the visualisation
