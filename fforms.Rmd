@@ -421,10 +421,31 @@ knitr::include_graphics("images/yearlyvote.png")
 
 ```
 
-```{r, comment=NA, fig.width=10, fig.height=10}
-# This is a plotly graph converted into static graph. The code to generate the graph is available at src/flexdashboardviz.R under pcayearlydb
-knitr::include_graphics("images/pcayearly.png")
+
+\clearpage
+
+```{r, fig.height=10, fig.width=20, fig.cap="Visualization of vote matrix of monthly series. The X-axis denotes the class labels.", fig.pos="h"}
+# This is a plotly graph converted into static graph. The code to generate the graph is available at src/flexdashboardviz.R under monthlydb
+knitr::include_graphics("images/monthlyvote.png")
 ```
+
+```{r classlabledismonthly, comment=NA, fig.width=15, fig.height=12}
+
+
+```
+
+
+\clearpage
+
+```{r, fig.height=10, fig.width=20, fig.cap="Visualization of vote matrix of hourly series. The X-axis denotes the class labels.", fig.pos="h"}
+# This is a plotly graph converted into static graph. The code to generate the graph is available at src/flexdashboardviz.R under hourlyvotedb
+knitr::include_graphics("images/votehourly2.png")
+```
+
+```{r hourlylabel, comment=NA, fig.width=15, fig.height=12}
+
+```
+
 
 \clearpage
 
@@ -465,19 +486,9 @@ The features, sum of the first five partial autocorrelation coefficients, streng
 ```
 
 
-
-
 ```{r seasonalityhourly, fig.height=5, fig.width=20, fig.cap="Partial dependence plots for strength of seasonality for hourly series. The shading shows the 95\\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class.", fig.pos="h"}
 ```
 
-
-```{r entropyhourly, fig.height=5, fig.width=20, fig.cap="Partial dependence plots for entropy for hourly series. The shading shows the 95\\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class.", fig.pos="h"}
-```
-
-
-
-```{r curvaturehourly, fig.height=4.5, fig.width=15, fig.cap="Partial dependence plots for curvature for hourly series. The shading shows the 95\\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class.", fig.pos="h"}
-```
 
 ```{r pdpmonthlyhourlyStability, fig.height=4.5, fig.width=15, fig.cap="Partial dependence plots for stability for monthly and hourly series. The shading shows the 95\\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class.", fig.pos="h"}
 
@@ -493,11 +504,8 @@ The features, sum of the first five partial autocorrelation coefficients, streng
 ```
 
 
-
 ```{r pdpyearlytrend, fig.height=6, fig.width=15, fig.cap="Partial dependence plots for trend for yearly and monthly series. The shading shows the 95\\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class. Probability of selecting ETS models without a trend component and stationary models (WN and ARMA) decreases for an extremely high value of trend.", fig.pos="h"}
 ```
-
-\clearpage
 
 
 ```{r linearity, fig.height=8, fig.width=15, fig.cap="Partial dependence plots for linearity for yearly monthly and hourly series. The shading shows the 95\\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class. ", fig.pos="h"}

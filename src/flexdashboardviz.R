@@ -98,3 +98,139 @@ plot_ly(df, x=~PC1, y=~PC2, z=~PC3, type="scatter3d",
         mode="markers", color=df$class, opacity=0.7, size=18,
         colors    = ~c("#1b9e77","#d95f02",
                        "#7570b3", "#e7298a", "#66a61e"))
+
+## ---- monthlydb
+monthlym4_votes <-readRDS(here("dashboard_data", "monthly", "monthlym4_votes.rds"))
+set.seed(10011)
+mheatmap <- iheatmapr::main_heatmap(monthlym4_votes, name="Vote probability") %>%
+  add_row_clustering(method="kmeans", k = 5) %>%
+  add_col_clustering(method="kmeans", k=4) %>%
+  add_col_labels(size=0.2, textangle = -90) %>%
+  add_row_title("Time series (each row corresponds to a single time series)") %>%
+  add_col_title("Class", side="bottom", buffer=0.2)  
+mheatmap
+
+## ---- classlabledismonthly
+monthlym4_votes <-readRDS(here("dashboard_data", "monthly", "monthlym4_votes.rds"))
+set.seed(10011)
+mheatmap <- iheatmapr::main_heatmap(monthlym4_votes, name="Vote probability") %>%
+  add_row_clustering(method="kmeans", k = 5) %>%
+  add_col_clustering(method="kmeans", k=4) %>%
+  add_col_labels(size=0.2, textangle = -90) %>%
+  add_row_title("Time series (each row corresponds to a single time series)") %>%
+  add_col_title("Class", side="bottom", buffer=0.2)  
+
+load(here("dashboard_data", "monthly", "mm4_true_classlabels.rda"))
+row_cluster_monthly <- mheatmap@plots@listData$`Row<br>Clusters`@data 
+monthly_m4_clus <- data.frame(cluster=row_cluster_monthly)
+
+monthly_m4_clus$trueLabel <- factor(mm4_true_classlabels,
+                                    levels=c("SARIMA", "tbats", "theta", "nn", "rwd",  "stlar", "ARIMA",
+                                             "ARMA/AR/MA", "ETS-dampedtrend", "ETS-notrendnoseasonal", "ETS-trend", 
+                                             "rw",  "wn", "ETS-dampedtrendseasonal", "ETS-seasonal", "ETS-trendseasonal",  
+                                             "snaive"
+                                    )
+)
+
+
+monthly_m4_clus$cluster <- factor(monthly_m4_clus$cluster,
+                                  c(5, 4, 3, 2, 1))
+
+pm <- ggplot(monthly_m4_clus, 
+             aes(trueLabel, fill=cluster)) + 
+  geom_bar() + 
+  facet_wrap(~cluster, ncol=1) +
+  scale_fill_manual(values=rev(c("#1b9e77","#d95f02",
+                                 "#7570b3", "#e7298a", "#66a61e"))) + 
+  theme(axis.text.x = element_text(angle = 90)) + xlab("True class label") +    
+  ylab("Count")+ggtitle("Composition of clusters by true class labels") + ggtitle("A")
+
+load(here("dashboard_data", "monthly", "features_M4M.rda"))
+
+
+fclusm <- data.frame(trend = features_M4M$trend,
+                     seasonality = features_M4M$seasonality,
+                     diff1y_acf1 = features_M4M$diff1y_acf1,
+                     sediff_seacf1 = features_M4M$sediff_seacf1,
+                     cluster = monthly_m4_clus$cluster)
+fclusm <- pivot_longer(fclusm, 1:4)
+
+fm <- ggplot(fclusm, aes(x=cluster, y=value, fill=cluster)) + geom_violin() +
+  geom_violin() +
+  geom_boxplot(width=0.1, color="grey", alpha=0.2, outlier.colour = NA)+
+  facet_wrap(~name, ncol=1, scales = "free") + 
+  scale_fill_manual(values=rev(c("#1b9e77","#d95f02","#7570b3", "#e7298a", "#66a61e")))+ggtitle("B")
+pm|fm
+
+## ---- pcamonthly
+pca_ref_calc_m <- calculate_pca(features_M4M)
+dfm <- pca_ref_calc_m$pca_components
+dfm$class <- monthly_m4_clus$cluster 
+
+plot_ly(dfm, x=~PC1, y=~PC2, z=~PC3, type="scatter3d", 
+        mode="markers", color=dfm$class, opacity=0.7, size=18,
+        colors    = ~c("#1b9e77","#d95f02",
+                       "#7570b3", "#e7298a", "#66a61e"))
+
+## ---- hourlyvotedb
+load(here("dashboard_data", "hourly", "hourlym4_votes.rda"))
+set.seed(5) #10011
+hheatmap <- iheatmapr::main_heatmap(hourlym4_votes, name="Vote probability") %>%
+  add_row_clustering(method="kmeans", k = 5) %>%
+  add_col_clustering(method="kmeans", k=4) %>%
+  add_col_labels(size=0.2, textangle = -90) %>%
+  add_row_title("Time series") %>%
+  add_col_title("Class", side="bottom", buffer=0.2)  
+hheatmap
+
+## ---- hourlylabel
+load(here("dashboard_data", "hourly", "hourlym4_votes.rda"))
+set.seed(5) #10011
+hheatmap <- iheatmapr::main_heatmap(hourlym4_votes, name="Vote probability") %>%
+  add_row_clustering(method="kmeans", k = 5) %>%
+  add_col_clustering(method="kmeans", k=4) %>%
+  add_col_labels(size=0.2, textangle = -90) %>%
+  add_row_title("Time series") %>%
+  add_col_title("Class", side="bottom", buffer=0.2)  
+load(here("dashboard_data", "hourly", "hm4_true_classlabels.rda"))
+
+row_cluster_hourly <- hheatmap@plots@listData$`Row<br>Clusters`@data 
+hourly_m4_clus <- data.frame(cluster=row_cluster_hourly)
+
+hourly_m4_clus$trueLabel <- factor(hm4_true_classlabels,
+                                   levels=c("rw", "rwd",  "theta", "wn","mstlarima", "mstlets", "snaive", "stlar", "tbats", "nn"
+                                   )
+)
+
+
+hourly_m4_clus$cluster <- factor(hourly_m4_clus$cluster,
+                                 c(5, 4, 3, 2, 1))
+hp <- ggplot(hourly_m4_clus, 
+             aes(trueLabel, fill=cluster)) + 
+  geom_bar() + 
+  facet_wrap(~cluster, ncol=1) +
+  scale_fill_manual(values=rev(c("#1b9e77","#d95f02",
+                                 "#7570b3", "#e7298a", "#66a61e"))) + 
+  scale_x_discrete(drop=F) + 
+  theme(axis.text.x = element_text(angle = 90)) + xlab("True class label") +  ylab("Count")+
+  ggtitle("Composition of clusters by true class labels") + ggtitle("A")
+
+load(here( "dashboard_data", "hourly", "features_M4H.rda"))
+
+
+fclush <- data.frame(trend = features_M4H$trend,
+                     seasonal_Weekly = features_M4H$seasonal_strength1,
+                     seasonal_Daily = features_M4H$seasonal_strength2,
+                     entropy = features_M4H$entropy,
+                     cluster = hourly_m4_clus$cluster)
+fclush <- pivot_longer(fclush, 1:4)
+
+fh <- ggplot(fclush, aes(x=cluster, y=value, fill=cluster)) + geom_violin() +
+  geom_boxplot(width=0.1, color="grey", alpha=0.2, outlier.colour = NA) +
+  facet_wrap(~name, ncol=1, scales = "free") + 
+  scale_fill_manual(values=rev(c("#1b9e77","#d95f02", "#7570b3", "#e7298a", "#66a61e"))) + 
+  ggtitle("B")
+
+hp|fh
+
+
