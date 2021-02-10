@@ -64,3 +64,37 @@ fclusplot <- ggplot(fclusy, aes(x=cluster, y=value, fill=cluster)) +
   facet_wrap(~name, ncol=1, scales = "free") + 
   scale_fill_manual(values=rev(c("#1b9e77","#d95f02","#7570b3", "#e7298a", "#66a61e"))) + ggtitle("B")
 pyclus|fclusplot
+
+## ---- pcayearlydb
+calculate_pca <- function(feature_dataset){
+  pcaY_cal <- prcomp(feature_dataset, center = TRUE, scale = TRUE)
+  PCAresults <- data.frame(PC1 = pcaY_cal$x[, 1], 
+                           PC2 = pcaY_cal$x[, 2], 
+                           PC3 = pcaY_cal$x[, 3])
+  return(list(prcomp_out =pcaY_cal,pca_components = PCAresults))
+}
+
+pca_projection <- function(prcomp_out, data_to_project){
+  
+  PCA <- scale(data_to_project, prcomp_out$center, prcomp_out$scale) %*% prcomp_out$rotation
+  pca_projected <- data.frame(PC1=PCA[,1], PC2=PCA[,2], PC3=PCA[,3]) 
+  return(pca_projected)
+  
+}
+
+pca_ref_calc <- calculate_pca(features_M4Y)
+df <- pca_ref_calc$pca_components
+df$class <- yearly_m4_clus$cluster 
+
+#pca_df <- data.frame(pc_x = c(df$PC1, df$PC1, df$PC2),
+#                     pc_y = c(df$PC2, df$PC3, df$PC3),
+#                    frame=factor(rep(1:3, each=2300)), #col=rep(yearly_m4_clus$cluster, 3))
+
+#pcy <- ggplot(pca_df, aes(x=pc_x, y=pc_y, frame=frame)) +
+#  geom_point(aes(colour=col))
+#ggplotly(pcy)
+
+plot_ly(df, x=~PC1, y=~PC2, z=~PC3, type="scatter3d", 
+        mode="markers", color=df$class, opacity=0.7, size=18,
+        colors    = ~c("#1b9e77","#d95f02",
+                       "#7570b3", "#e7298a", "#66a61e"))

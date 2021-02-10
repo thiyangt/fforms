@@ -408,16 +408,23 @@ The main question we have now is: 'Can we trust the FFORMS framework if we do no
 
 \autoref{fig:yearlyoob} shows the distribution of voting probabilities for each class by classlabels. For example, the 'wn' panel in the top left corner of the yearly series shows the distribution of voting probabilities for white noise class by class labels for all yearly series. As expected, we see the distribution of the series that are labelled as 'wn' dominates the top, and the associated outliers of the box plots indicates some series are correctly classified with very high probability. Furthermore, the series that are labelled as ARMA also have a high probability of classified into the 'wn' class. Similarly, within ETS_T panel, in addition to the series that are labelled as ETS_T, the series that are labels as ETS_DT and ARIMA also have a high voting probabilities for ETS_T class while the series labelled as WN, ARMA, ETS_NTNS have very low probabilities. Within ARMA class label panel disparities between stationary and non-stationary models are immediately visible. In general, \autoref{fig:yearlyoob} indicates three primary patterns: i) the distributions of correctly classified classes dominate, indicating a good classification of the meta-learner; ii) the FFORMS framework successfully learned the similarities and dissimilarities between the different classes; and iii) irrespective of the class labels, the random walk with drift has a high chance of being selected for all yearly series. It is important to note that for hourly series within 'nn' panel all distributions are located away from zero, which indicates all hourly series have been assigned a non-zero probability of being selected to neural network class.
 
+
+\newpage
+
 ```{r, fig.height=10, fig.width=20, fig.cap="Visualization of vote matrix of yearly series. The X-axis denotes the class labels.", fig.pos="h"}
 # This is a plotly graph converted into static graph. The code to generate the graph is available at src/flexdashboardviz.R under yearlydb
 knitr::include_graphics("images/yearlyvote.png")
 ```
 
-```{r classdisyearly, comment=NA}
+```{r classdisyearly, comment=NA, fig.width=15, fig.height=12}
 
 
 ```
 
+```{r, comment=NA, fig.width=10, fig.height=10}
+# This is a plotly graph converted into static graph. The code to generate the graph is available at src/flexdashboardviz.R under pcayearlydb
+knitr::include_graphics("images/pcayearly.png")
+```
 
 \clearpage
 
@@ -519,15 +526,6 @@ The two-way partial dependency plots of linearity are explored to see how linear
 FFORMS framework classified some series with very high probability (greater than 0.6), which indicates for a given series, majority of the trees voted for the same class. Hence, these instances can be considered as series that are easy to classify. We next try to visualize the distribution of these instances in the feature space. This is achieved by projecting the training dataset into a meaningful low-dimensional feature space and then visualize locations of the series that are classified with very high probabilities. This approach is a visualisation of model in the data space [@wickham2015visualizing]. We use principal component analysis (PCA) to map each time series as a point in a two-dimensional instance space given by features. The corresponding results for yearly, monthly and hourly are shown in \autoref{fig:pcayearly}, \autoref{fig:pcamonthly} and \autoref{fig:pcahourly}. Most of the yearly series that are classified with very high probability belong to either ARIMA class or random walk with drift class. Distribution of the trend in the feature space shows they are highly trended. Furthermore, these ARIMA series and random walk with drift are even visually distinguishable based on the features beta and diff1y_acf5. Furthermore, the monthly series classified into SARIMA and stlar class with high probability take very low value for entropy, which means the series are easily forecastable. On the other hand the series that are classified in to neural network class with high probability are less forecastable, less trended (low values for beta) and less seasonal (low value for sediff_acf5). For hourly series, the series that are classified with very high probability are very high in length. Lengthy time series means more information, hence easy to recognise clear patterns and therefore easy to classify. 
 
 
-```{r pcayearly,  fig.height=6, fig.width=20,fig.cap="Distribution of the yearly time series on the instance space based on PCA. On each graph the series that were classified with high probability are highlighted. In the first graph the highlighted points are coloured according to the predicted forecast model. The second, third and forth panels show the distribution of features trend, beta and diff1y\\_acf1.  All series that were assigned high voting probability are highly trended.", fig.pos="H", dev="png"}
-```
-
-```{r pcamonthly,  fig.height=6, fig.width=20,fig.cap="Distribution of the monthly time series on the instance space based on PCA. On each graph the series that were classified with high probability are highlighted. In the first graph the highlighted points are coloured according to the predicted forecast model. The second, third and forth panels show the distribution of features beta, sediff\\_acf5 and entropy.  The series that are classifed into neural network class with high probability have high entropy value.", fig.pos="H", dev="png"}
-```
-
-
-```{r pcahourly,  fig.height=6, fig.width=20,fig.cap="Distribution of the hourly time series on the PCA space. On each graph the series that were classified with high probability are highlighted. In the first graph the highlighted points are coloured according to the predicted forecast model. The second, third and forth panels show the distribution of features length, entropy and strength of weekly seasonality. All series that were assigned high voting probability have high value for length.", fig.pos="H", dev="png"}
-```
 
 # Discussion and conclusions {#discussion}
 
