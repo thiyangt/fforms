@@ -3,8 +3,8 @@ title: "Meta-learning how to forecast time series"
 author:
   - familyname: Talagala
     othernames: Thiyanga S
-    address: Department of Econometrics and Business Statistics, \newline Monash University, VIC 3800, Australia.
-    email : tstalagala@gmail.com
+    address: Department of Statistics, Faculty of Applied Sciences \newline University of Sri Jayewardenepura, Sri Lanka.
+    email : ttalagala@sjp.ac.lk
     correspondingauthor: true
   - familyname: Hyndman
     othernames: Rob J
@@ -18,8 +18,8 @@ abstract: "Features of time series are useful in identifying suitable models for
 keywords: "Algorithm selection problem, Black-box models, Random forest, Machine learning interpretability, Visualization"
 wpnumber: no/yr
 jelcodes: C10,C14,C22
-blind: true
-cover: true
+blind: false
+cover: false
 toc: false
 bibliography: references.bib
 biblio-style: authoryear-comp
@@ -54,7 +54,7 @@ opts_chunk$set(
   out.width = "\\textwidth"
 )
 read_chunk("src/main.R")
-read_chunk("src/parallel_coordinate_plots.R")
+read_chunk("src/flexdashboardviz.R")
 library(Mcomp)
 library(ggplot2)
 library(grid)
@@ -69,6 +69,10 @@ library(reshape2)
 library(patchwork)
 library(Hmisc)
 library(seer)
+library(iheatmapr)
+#install.packages("webshot") # to convert plotly to png
+library(webshot)
+#webshot::install_phantomjs()
 ```
 
 
@@ -184,10 +188,10 @@ More recently, @kuck2016meta proposed a meta-learning framework based on neural 
 
 # Methodology {#fforms}
 
-Our proposed FFORMS framework, presented in \autoref{fig:framework}, builds on this preceding research. The offline and online phases are shown in blue and red respectively. A classification algorithm (the meta-learner) is trained during the offline phase and is then used to select an appropriate forecast model for a new time series in the online phase. We use machine learning interpretability tools to gain insights into what is happening under the hood of the FFORMS framework. We refer to this process as "peeking inside FFORMS" which is shown in yellow. 
+Our proposed FFORMS framework, presented in \autoref{fig:framework}, builds on this preceding research. The offline and online phases are shown in blue and red respectively. A classification algorithm (the meta-learner) is trained during the offline phase and is then used to select an appropriate forecast model for a new time series in the online phase. We use machine learning interpretability tools to gain insights into what is happening under the hood of the FFORMS framework. We refer to this process as "peeking inside FFORMS".
 
 
-```{r framework, fig.cap="FFORMS (Feature-based FORecast-Model Selection) framework. The offline phase is shown in blue, the online phase is in red and the peeking inside FFORMS is shown in yellow.", out.width='110%'}
+```{r framework, fig.cap="FFORMS (Feature-based FORecast-Model Selection) framework. The offline phase is shown in blue, the online phase is in red.", out.width='110%'}
 knitr::include_graphics("images/framework.png")
 ```
 
@@ -404,8 +408,16 @@ The main question we have now is: 'Can we trust the FFORMS framework if we do no
 
 \autoref{fig:yearlyoob} shows the distribution of voting probabilities for each class by classlabels. For example, the 'wn' panel in the top left corner of the yearly series shows the distribution of voting probabilities for white noise class by class labels for all yearly series. As expected, we see the distribution of the series that are labelled as 'wn' dominates the top, and the associated outliers of the box plots indicates some series are correctly classified with very high probability. Furthermore, the series that are labelled as ARMA also have a high probability of classified into the 'wn' class. Similarly, within ETS_T panel, in addition to the series that are labelled as ETS_T, the series that are labels as ETS_DT and ARIMA also have a high voting probabilities for ETS_T class while the series labelled as WN, ARMA, ETS_NTNS have very low probabilities. Within ARMA class label panel disparities between stationary and non-stationary models are immediately visible. In general, \autoref{fig:yearlyoob} indicates three primary patterns: i) the distributions of correctly classified classes dominate, indicating a good classification of the meta-learner; ii) the FFORMS framework successfully learned the similarities and dissimilarities between the different classes; and iii) irrespective of the class labels, the random walk with drift has a high chance of being selected for all yearly series. It is important to note that for hourly series within 'nn' panel all distributions are located away from zero, which indicates all hourly series have been assigned a non-zero probability of being selected to neural network class.
 
-```{r parallelyearly, fig.height=10, fig.width=20, fig.cap="Visualisation of the vote matrix for yearlyEach panel shows the forecast models considered as classlabels. The X-axis denotes the fraction of trees in the forest that vote for the classlabel in the panel name. The Y-axis corresponds to class label of the best forecast model identified based on MASE and sMAPE. On each row, distribution of correctly classified class dominates, indicating a good classification of the meta-learners.", fig.pos="h"}
+```{r, fig.height=10, fig.width=20, fig.cap="Visualization of vote matrix of yearly series. The X-axis denotes the class labels.", fig.pos="h"}
+# This is a plotly graph converted into static graph. The code to generate the graph is available at src/flexdashboardviz.R under yearlydb
+knitr::include_graphics("images/yearlyvote.png")
 ```
+
+```{r classdisyearly, comment=NA}
+
+
+```
+
 
 \clearpage
 
