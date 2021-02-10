@@ -661,13 +661,27 @@ The main question we have now is: `Can we trust the FFORMS framework if we do no
 
 \autoref{fig:yearlyoob} shows the distribution of voting probabilities for each class by classlabels. For example, the `wn' panel in the top left corner of the yearly series shows the distribution of voting probabilities for white noise class by class labels for all yearly series. As expected, we see the distribution of the series that are labelled as `wn' dominates the top, and the associated outliers of the box plots indicates some series are correctly classified with very high probability. Furthermore, the series that are labelled as ARMA also have a high probability of classified into the `wn' class. Similarly, within ETS\_T panel, in addition to the series that are labelled as ETS\_T, the series that are labels as ETS\_DT and ARIMA also have a high voting probabilities for ETS\_T class while the series labelled as WN, ARMA, ETS\_NTNS have very low probabilities. Within ARMA class label panel disparities between stationary and non-stationary models are immediately visible. In general, \autoref{fig:yearlyoob} indicates three primary patterns: i) the distributions of correctly classified classes dominate, indicating a good classification of the meta-learner; ii) the FFORMS framework successfully learned the similarities and dissimilarities between the different classes; and iii) irrespective of the class labels, the random walk with drift has a high chance of being selected for all yearly series. It is important to note that for hourly series within `nn' panel all distributions are located away from zero, which indicates all hourly series have been assigned a non-zero probability of being selected to neural network class.
 
+\begin{verbatim}
+## # A tibble: 6 x 11
+##   classlabel ARIMA_mean `ARMA/AR/MA_mea~ `ETS-dampedtren~ `ETS-notrendnos~
+##   <chr>           <dbl>            <dbl>            <dbl>            <dbl>
+## 1 ARIMA          0.266           0.00261          0.0193           0.0114 
+## 2 ARMA/AR/MA     0.0159          0.141            0.00705          0.0633 
+## 3 ETS-dampe~     0.186           0.0104           0.0653           0.00896
+## 4 ETS-notre~     0.0330          0.0294           0.00273          0.0968 
+## 5 ETS-trend      0.182           0.00452          0.0139           0.00605
+## 6 nn             0.0838          0.0218           0.0104           0.0502 
+## # ... with 6 more variables: `ETS-trend_mean` <dbl>, nn_mean <dbl>,
+## #   rw_mean <dbl>, rwd_mean <dbl>, theta_mean <dbl>, wn_mean <dbl>
+\end{verbatim}
+
 \begin{figure}[h]
 
-{\centering \includegraphics[width=\textwidth]{figure/yearlyoob-1} 
+{\centering \includegraphics[width=\textwidth]{figure/parallelyearly-1} 
 
 }
 
-\caption{Visualisation of the vote matrix for yearly, monthly and hourly series. Each panel shows the forecast models considered as classlabels. The X-axis denotes the fraction of trees in the forest that vote for the classlabel in the panel name. The Y-axis corresponds to class label of the best forecast model identified based on MASE and sMAPE. On each row, distribution of correctly classified class dominates, indicating a good classification of the meta-learners.}\label{fig:yearlyoob}
+\caption{Visualisation of the vote matrix for yearlyEach panel shows the forecast models considered as classlabels. The X-axis denotes the fraction of trees in the forest that vote for the classlabel in the panel name. The Y-axis corresponds to class label of the best forecast model identified based on MASE and sMAPE. On each row, distribution of correctly classified class dominates, indicating a good classification of the meta-learners.}\label{fig:parallelyearly}
 \end{figure}
 
 \clearpage
