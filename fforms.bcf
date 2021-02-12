@@ -2364,4 +2364,122 @@
     <bcf:citekey order="17">seer</bcf:citekey>
     <bcf:citekey order="18">makridakis2000m3</bcf:citekey>
     <bcf:citekey order="19">wang2009rule</bcf:citekey>
-    <bcf:citekey order="20">wang2
+    <bcf:citekey order="20">wang2009rule</bcf:citekey>
+    <bcf:citekey order="21">fulcher2014highly</bcf:citekey>
+    <bcf:citekey order="22">fulcher2014highly</bcf:citekey>
+    <bcf:citekey order="23">makridakis1982accuracy</bcf:citekey>
+    <bcf:citekey order="24">makridakis2000m3</bcf:citekey>
+    <bcf:citekey order="25">makridakis2019m4</bcf:citekey>
+    <bcf:citekey order="26">rice1976</bcf:citekey>
+    <bcf:citekey order="27">smith2009cross</bcf:citekey>
+    <bcf:citekey order="28">smith2009cross</bcf:citekey>
+    <bcf:citekey order="29">collopy1992rule</bcf:citekey>
+    <bcf:citekey order="30">collopy1992rule</bcf:citekey>
+    <bcf:citekey order="31">armstrong2001s</bcf:citekey>
+    <bcf:citekey order="32">armstrong2001s</bcf:citekey>
+    <bcf:citekey order="33">shah1997model</bcf:citekey>
+    <bcf:citekey order="34">shah1997model</bcf:citekey>
+    <bcf:citekey order="35">makridakis1982accuracy</bcf:citekey>
+    <bcf:citekey order="36">shah1997model</bcf:citekey>
+    <bcf:citekey order="37">shah1997model</bcf:citekey>
+    <bcf:citekey order="38">prudencio2004meta</bcf:citekey>
+    <bcf:citekey order="39">prudencio2004meta</bcf:citekey>
+    <bcf:citekey order="40">makridakis2000m3</bcf:citekey>
+    <bcf:citekey order="41">kalousis1999noemon</bcf:citekey>
+    <bcf:citekey order="42">lemke2010meta</bcf:citekey>
+    <bcf:citekey order="43">lemke2010meta</bcf:citekey>
+    <bcf:citekey order="44">wang2009rule</bcf:citekey>
+    <bcf:citekey order="45">wang2009rule</bcf:citekey>
+    <bcf:citekey order="46">wang2009rule</bcf:citekey>
+    <bcf:citekey order="47">wang2009rule</bcf:citekey>
+    <bcf:citekey order="48">widodomodel</bcf:citekey>
+    <bcf:citekey order="49">widodomodel</bcf:citekey>
+    <bcf:citekey order="50">kuck2016meta</bcf:citekey>
+    <bcf:citekey order="51">kuck2016meta</bcf:citekey>
+    <bcf:citekey order="52">forecast</bcf:citekey>
+    <bcf:citekey order="53">M4compguide</bcf:citekey>
+    <bcf:citekey order="54">M4compguide</bcf:citekey>
+    <bcf:citekey order="55">liaw2002randomforest</bcf:citekey>
+    <bcf:citekey order="56">rfpkg</bcf:citekey>
+    <bcf:citekey order="57">breiman2004random</bcf:citekey>
+    <bcf:citekey order="58">breiman2004random</bcf:citekey>
+    <bcf:citekey order="59">breiman2001random</bcf:citekey>
+    <bcf:citekey order="60">chen2004using</bcf:citekey>
+    <bcf:citekey order="61">chen2004using</bcf:citekey>
+    <bcf:citekey order="62">liaw2002randomforest</bcf:citekey>
+    <bcf:citekey order="63">rfpkg</bcf:citekey>
+    <bcf:citekey order="64">makridakis1982accuracy</bcf:citekey>
+    <bcf:citekey order="65">makridakis2000m3</bcf:citekey>
+    <bcf:citekey order="66">makridakis2019m4</bcf:citekey>
+    <bcf:citekey order="67">wickham2015visualizing</bcf:citekey>
+    <bcf:citekey order="68">ggplot</bcf:citekey>
+    <bcf:citekey order="69">xie2017dynamic</bcf:citekey>
+    <bcf:citekey order="70">Guerrero1993</bcf:citekey>
+    <bcf:citekey order="71">cleveland1990stl</bcf:citekey>
+    <bcf:citekey order="72">supsmu</bcf:citekey>
+    <bcf:citekey order="73">wang2009rule</bcf:citekey>
+    <bcf:citekey order="74">hyndman2015large</bcf:citekey>
+    <bcf:citekey order="75">hyndman2015large</bcf:citekey>
+    <bcf:citekey order="76">hyndman2015large</bcf:citekey>
+    <bcf:citekey order="77">hyndman2015large</bcf:citekey>
+    <bcf:citekey order="78">hyndman2015large</bcf:citekey>
+    <bcf:citekey order="79">hyndman2015large</bcf:citekey>
+    <bcf:citekey order="80">goerg2013forecastable</bcf:citekey>
+    <bcf:citekey order="81">goerg2013forecastable</bcf:citekey>
+    <bcf:citekey order="82">nuttall1982spectral</bcf:citekey>
+    <bcf:citekey order="83">nuttall1982spectral</bcf:citekey>
+    <bcf:citekey order="84">Foreca</bcf:citekey>
+    <bcf:citekey order="85">haslett1989space</bcf:citekey>
+    <bcf:citekey order="86">fracdiff</bcf:citekey>
+    <bcf:citekey order="87">wang2009rule</bcf:citekey>
+    <bcf:citekey order="88">wang2009rule</bcf:citekey>
+    <bcf:citekey order="89">nonlintest</bcf:citekey>
+    <bcf:citekey order="90">wang2009rule</bcf:citekey>
+    <bcf:citekey order="91">wang2009rule</bcf:citekey>
+    <bcf:citekey order="92">expsmooth08</bcf:citekey>
+    <bcf:citekey order="93">expsmooth08</bcf:citekey>
+    <bcf:citekey order="94">Pfaff2008</bcf:citekey>
+    <bcf:citekey order="95">pfaff2016package</bcf:citekey>
+    <bcf:citekey order="96">Pfaff2008</bcf:citekey>
+    <bcf:citekey order="97">pfaff2016package</bcf:citekey>
+  </bcf:section>
+  <!-- SORTING TEMPLATES -->
+  <bcf:sortingtemplate name="nyt">
+    <bcf:sort order="1">
+      <bcf:sortitem order="1">presort</bcf:sortitem>
+    </bcf:sort>
+    <bcf:sort order="2" final="1">
+      <bcf:sortitem order="1">sortkey</bcf:sortitem>
+    </bcf:sort>
+    <bcf:sort order="3">
+      <bcf:sortitem order="1">sortname</bcf:sortitem>
+      <bcf:sortitem order="2">author</bcf:sortitem>
+      <bcf:sortitem order="3">editor</bcf:sortitem>
+      <bcf:sortitem order="4">translator</bcf:sortitem>
+      <bcf:sortitem order="5">sorttitle</bcf:sortitem>
+      <bcf:sortitem order="6">title</bcf:sortitem>
+    </bcf:sort>
+    <bcf:sort order="4">
+      <bcf:sortitem order="1">sortyear</bcf:sortitem>
+      <bcf:sortitem order="2">year</bcf:sortitem>
+    </bcf:sort>
+    <bcf:sort order="5">
+      <bcf:sortitem order="1">sorttitle</bcf:sortitem>
+      <bcf:sortitem order="2">title</bcf:sortitem>
+    </bcf:sort>
+    <bcf:sort order="6">
+      <bcf:sortitem order="1">volume</bcf:sortitem>
+      <bcf:sortitem literal="1" order="2">0</bcf:sortitem>
+    </bcf:sort>
+  </bcf:sortingtemplate>
+  <!-- DATALISTS -->
+  <bcf:datalist section="0"
+                name="nyt/global//global/global"
+                type="entry"
+                sortingtemplatename="nyt"
+                sortingnamekeytemplatename="global"
+                labelprefix=""
+                uniquenametemplatename="global"
+                labelalphanametemplatename="global">
+  </bcf:datalist>
+</bcf:controlfile>
