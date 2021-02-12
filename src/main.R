@@ -571,7 +571,8 @@ plot_pdp_monthlyN <- ggplot(data = NgridM_long, aes_string(x = NgridM_long$"T", 
   stat_summary(fun.y = mean, geom = "line", col = "#d95f02", size = 1) +
   stat_summary(fun.data = mean_cl_normal,fill="#d95f02", geom = "ribbon", fun.args = list(mult = 1), alpha = 0.3)+ 
   theme(axis.text.x = element_text(angle = 90), text = element_text(size=18), axis.title = element_text(size = 16))+
-  facet_wrap(. ~ class, ncol=9)+theme(strip.text.x = element_text(size = 10))+xlab("length of time series (T)")+ylab("probability of selecting forecast-models")
+  facet_wrap(. ~ class, ncol=9)+theme(strip.text.x = element_text(size = 10))+xlab("length of time series (T)")+
+  ylab("probability of selecting forecast-models") + xlim(c(0, 500))
 plot_pdp_monthlyN
 
 ## ---- pdpmonthlyhourlyStability

@@ -406,7 +406,21 @@ The main question we have now is: 'Can we trust the FFORMS framework if we do no
 
 ## Visualization of FFORMS's understanding of the similarity and dissimilarity between forecast models{#oobviz}
 
-\autoref{fig:yearlyoob} shows the distribution of voting probabilities for each class by classlabels. For example, the 'wn' panel in the top left corner of the yearly series shows the distribution of voting probabilities for white noise class by class labels for all yearly series. As expected, we see the distribution of the series that are labelled as 'wn' dominates the top, and the associated outliers of the box plots indicates some series are correctly classified with very high probability. Furthermore, the series that are labelled as ARMA also have a high probability of classified into the 'wn' class. Similarly, within ETS_T panel, in addition to the series that are labelled as ETS_T, the series that are labels as ETS_DT and ARIMA also have a high voting probabilities for ETS_T class while the series labelled as WN, ARMA, ETS_NTNS have very low probabilities. Within ARMA class label panel disparities between stationary and non-stationary models are immediately visible. In general, \autoref{fig:yearlyoob} indicates three primary patterns: i) the distributions of correctly classified classes dominate, indicating a good classification of the meta-learner; ii) the FFORMS framework successfully learned the similarities and dissimilarities between the different classes; and iii) irrespective of the class labels, the random walk with drift has a high chance of being selected for all yearly series. It is important to note that for hourly series within 'nn' panel all distributions are located away from zero, which indicates all hourly series have been assigned a non-zero probability of being selected to neural network class.
+We generated several initial plots to visualise the votematrix calculated based on OOB observations to get a better understanding of the patterns learned by the random forest. Out of different plots we generated "heatmap" seems to be the most useful in visualising vote matrix probabilities. In this figure, 
+
+Visualising the data in this manner helps us to identify several important characteristics of the understanding of the ranomforest algorithm. Some of which are only clear when zooming in and out of the visualisation. Link data visualisations...
+
+1. Yearly series
+
+ In general, \autoref{fig:yearlyoob} indicates three primary patterns: i) the distributions of correctly classified classes dominate, indicating a good classification of the meta-learner; ii) the FFORMS framework successfully learned the similarities and dissimilarities between the different classes; and iii) irrespective of the class labels, the random walk with drift has a high chance of being selected for all yearly series. It is important to note that for hourly series within 'nn' panel all distributions are located away from zero, which indicates all hourly series have been assigned a non-zero probability of being selected to neural network class.
+ 
+2. Monthly series
+
+
+3. Hourly series
+
+ 
+ Some more intricate insights also emerged when zooming in on particular sections of the figures. 
 
 
 \newpage
@@ -449,7 +463,7 @@ knitr::include_graphics("images/votehourly2.png")
 
 \clearpage
 
-```{r pca, comment=NA, fig.height=8}
+```{r pca, comment=NA, fig.height=8, dev=c('png')}
 
 ```
 
