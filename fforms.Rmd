@@ -449,6 +449,13 @@ knitr::include_graphics("images/votehourly2.png")
 
 \clearpage
 
+```{r pca, comment=NA, fig.height=8}
+
+```
+
+
+
+
 ## Which features are the most important and where are they important?
 
 ```{r viplot, fig.height=18, fig.width=20, fig.pos="h", dev='pdf', fig.cap="Visualisation  of top five features across frequency categories and classes. The X-axis denotes the features and Y-axis denotes the forecast model classes. The cell colours denote the frequency group in which the fetures ranked among top five. Strength of trend, linearity and strength of seasonality have been selected among top five features across many classes."}

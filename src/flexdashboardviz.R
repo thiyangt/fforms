@@ -94,10 +94,20 @@ df$class <- yearly_m4_clus$cluster
 #  geom_point(aes(colour=col))
 #ggplotly(pcy)
 
-plot_ly(df, x=~PC1, y=~PC2, z=~PC3, type="scatter3d", 
-        mode="markers", color=df$class, opacity=0.7, size=18,
-        colors    = ~c("#1b9e77","#d95f02",
-                       "#7570b3", "#e7298a", "#66a61e"))
+py1 <- ggplot(data=df, aes(x=PC1, y=PC2, col=class)) + geom_point() +
+  scale_colour_manual(values=rev(c("#1b9e77","#d95f02",
+                                 "#7570b3", "#e7298a", "#66a61e"))) + 
+  theme(legend.position = "none") + ggtitle("Yearly")
+py2 <- ggplot(data=df, aes(x=PC1, y=PC3, col=class)) + 
+  geom_point() +
+  scale_colour_manual(values=rev(c("#1b9e77","#d95f02",
+                                 "#7570b3", "#e7298a", "#66a61e"))) + 
+  theme(legend.position = "none") 
+py3 <- ggplot(data=df, aes(x=PC2, y=PC3, col=class)) + 
+  geom_point() + 
+  scale_colour_manual(values=rev(c("#1b9e77","#d95f02",
+                                 "#7570b3", "#e7298a", "#66a61e")))
+py1|py2|py3
 
 ## ---- monthlydb
 monthlym4_votes <-readRDS(here("dashboard_data", "monthly", "monthlym4_votes.rds"))
@@ -167,10 +177,26 @@ pca_ref_calc_m <- calculate_pca(features_M4M)
 dfm <- pca_ref_calc_m$pca_components
 dfm$class <- monthly_m4_clus$cluster 
 
-plot_ly(dfm, x=~PC1, y=~PC2, z=~PC3, type="scatter3d", 
-        mode="markers", color=dfm$class, opacity=0.7, size=18,
-        colors    = ~c("#1b9e77","#d95f02",
-                       "#7570b3", "#e7298a", "#66a61e"))
+
+#plot_ly(dfm, x=~PC1, y=~PC2, z=~PC3, type="scatter3d", 
+#        mode="markers", color=dfm$class, opacity=0.7, size=18,
+#        colors    = ~c("#1b9e77","#d95f02",
+#                       "#7570b3", "#e7298a", "#66a61e"))
+
+pm1 <- ggplot(data=dfm, aes(x=PC1, y=PC2, col=class)) + geom_point() +
+  scale_colour_manual(values=rev(c("#1b9e77","#d95f02",
+                                   "#7570b3", "#e7298a", "#66a61e"))) + 
+  theme(legend.position = "none") + ggtitle("Monthly")
+pm2 <- ggplot(data=dfm, aes(x=PC1, y=PC3, col=class)) + 
+  geom_point() +
+  scale_colour_manual(values=rev(c("#1b9e77","#d95f02",
+                                   "#7570b3", "#e7298a", "#66a61e"))) + 
+  theme(legend.position = "none") 
+pm3 <- ggplot(data=dfm, aes(x=PC2, y=PC3, col=class)) + 
+  geom_point() + 
+  scale_colour_manual(values=rev(c("#1b9e77","#d95f02",
+                                   "#7570b3", "#e7298a", "#66a61e")))
+pm1|pm2|pm3
 
 ## ---- hourlyvotedb
 load(here("dashboard_data", "hourly", "hourlym4_votes.rda"))
@@ -234,3 +260,89 @@ fh <- ggplot(fclush, aes(x=cluster, y=value, fill=cluster)) + geom_violin() +
 hp|fh
 
 
+## ---- pcahourly
+
+## ---- pca
+calculate_pca <- function(feature_dataset){
+  pcaY_cal <- prcomp(feature_dataset, center = TRUE, scale = TRUE)
+  PCAresults <- data.frame(PC1 = pcaY_cal$x[, 1], 
+                           PC2 = pcaY_cal$x[, 2], 
+                           PC3 = pcaY_cal$x[, 3])
+  return(list(prcomp_out =pcaY_cal,pca_components = PCAresults))
+}
+
+pca_projection <- function(prcomp_out, data_to_project){
+  
+  PCA <- scale(data_to_project, prcomp_out$center, prcomp_out$scale) %*% prcomp_out$rotation
+  pca_projected <- data.frame(PC1=PCA[,1], PC2=PCA[,2], PC3=PCA[,3]) 
+  return(pca_projected)
+  
+}
+
+pca_ref_calc <- calculate_pca(features_M4Y)
+df <- pca_ref_calc$pca_components
+df$class <- yearly_m4_clus$cluster 
+
+py1 <- ggplot(data=df, aes(x=PC1, y=PC2, col=class)) + geom_point(alpha=0.5) +
+  scale_colour_manual(values=rev(c("#1b9e77","#d95f02",
+                                   "#7570b3", "#e7298a", "#66a61e"))) + 
+  theme(legend.position = "none") + ggtitle("Yearly")
+py2 <- ggplot(data=df, aes(x=PC1, y=PC3, col=class)) + 
+  geom_point(alpha=0.5) +
+  scale_colour_manual(values=rev(c("#1b9e77","#d95f02",
+                                   "#7570b3", "#e7298a", "#66a61e"))) + 
+  theme(legend.position = "none") 
+py3 <- ggplot(data=df, aes(x=PC2, y=PC3, col=class)) + 
+  geom_point(alpha=0.5) + 
+  scale_colour_manual(values=rev(c("#1b9e77","#d95f02",
+                                   "#7570b3", "#e7298a", "#66a61e")))
+y <- py1|py2|py3
+
+
+pca_ref_calc_m <- calculate_pca(features_M4M)
+dfm <- pca_ref_calc_m$pca_components
+dfm$class <- monthly_m4_clus$cluster 
+
+
+#plot_ly(dfm, x=~PC1, y=~PC2, z=~PC3, type="scatter3d", 
+#        mode="markers", color=dfm$class, opacity=0.7, size=18,
+#        colors    = ~c("#1b9e77","#d95f02",
+#                       "#7570b3", "#e7298a", "#66a61e"))
+
+pm1 <- ggplot(data=dfm, aes(x=PC1, y=PC2, col=class)) + geom_point(alpha=0.5) +
+  scale_colour_manual(values=rev(c("#1b9e77","#d95f02",
+                                   "#7570b3", "#e7298a", "#66a61e"))) + 
+  theme(legend.position = "none") + ggtitle("Monthly")
+pm2 <- ggplot(data=dfm, aes(x=PC1, y=PC3, col=class)) + 
+  geom_point(alpha=0.5) +
+  scale_colour_manual(values=rev(c("#1b9e77","#d95f02",
+                                   "#7570b3", "#e7298a", "#66a61e"))) + 
+  theme(legend.position = "none") 
+pm3 <- ggplot(data=dfm, aes(x=PC2, y=PC3, col=class)) + 
+  geom_point(alpha=0.5) + 
+  scale_colour_manual(values=rev(c("#1b9e77","#d95f02",
+                                   "#7570b3", "#e7298a", "#66a61e")))
+m <- pm1|pm2|pm3 
+
+
+
+pca_ref_calc_h <- calculate_pca(features_M4H)
+dfh <- pca_ref_calc_h$pca_components
+dfh$class <- hourly_m4_clus$cluster 
+
+ph1 <- ggplot(data=dfh, aes(x=PC1, y=PC2, col=class)) + geom_point(alpha=0.5) +
+  scale_colour_manual(values=rev(c("#1b9e77","#d95f02",
+                                   "#7570b3", "#e7298a", "#66a61e"))) + 
+  theme(legend.position = "none") + ggtitle("Hourly")
+ph2 <- ggplot(data=dfh, aes(x=PC1, y=PC3, col=class)) + 
+  geom_point(alpha=0.5) +
+  scale_colour_manual(values=rev(c("#1b9e77","#d95f02",
+                                   "#7570b3", "#e7298a", "#66a61e"))) + 
+  theme(legend.position = "none") 
+ph3 <- ggplot(data=dfh, aes(x=PC2, y=PC3, col=class)) + 
+  geom_point(alpha=0.5) + 
+  scale_colour_manual(values=rev(c("#1b9e77","#d95f02",
+                                   "#7570b3", "#e7298a", "#66a61e")))
+h <- ph1|ph2|ph3 
+
+y/m/h
