@@ -668,29 +668,27 @@ The main question we have now is: `Can we trust the FFORMS framework if we do no
 \hypertarget{oobviz}{%
 \subsection{Visualization of FFORMS's understanding of the similarity and dissimilarity between forecast models}\label{oobviz}}
 
-We generated several initial plots to visualise the votematrix calculated based on OOB observations to get a better understanding of the patterns learned by the random forest. Out of different plots we generated ``heatmap'' seems to be the most useful in visualising vote matrix probabilities. In this figure,
+We generated several initial plots to visualise the vote matrix calculations based on OOB observations to get a better understanding of the relationships learned by the random forest. Out of different plots we generated ``heatmap'' seems to be the most useful in visualising vote matrix probabilities. We use iheatmap function in package in R to visualise interactive The visualizations are shown in
 
-Visualising the data in this manner helps us to identify several important characteristics of the understanding of the ranomforest algorithm. Some of which are only clear when zooming in and out of the visualisation. Link data visualisations\ldots{}
+Visualising the data in this manner helps us to identify several important characteristics learned by the ranom forest algorithm
 
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
+\textbf{Yearly time series},
+
+\begin{itemize}
 \item
-  Yearly series
-\end{enumerate}
-
-In general, \autoref{fig:yearlyoob} indicates three primary patterns: i) the distributions of correctly classified classes dominate, indicating a good classification of the meta-learner; ii) the FFORMS framework successfully learned the similarities and dissimilarities between the different classes; and iii) irrespective of the class labels, the random walk with drift has a high chance of being selected for all yearly series. It is important to note that for hourly series within `nn' panel all distributions are located away from zero, which indicates all hourly series have been assigned a non-zero probability of being selected to neural network class.
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\setcounter{enumi}{1}
+  Irrespective of the true classlable, the random walk with drift has been assigned a non-zero probability by all of the yearly series. This means, for all of the yearly series at least one tree in the random forest voted for random walk with drift. According to the results in \autoref{forecasts} also we can see random walk with drift perform extremely well across all time series.
 \item
-  Monthly series
+  For all yearly series, ETS with damped trend has been assinged a very low vote probability.
 \item
-  Hourly series
-\end{enumerate}
+  There is a matching correspondence between the vote probability matrix and the composition of clusters by true class labels. For example, in cluster 1 and cluster 2 the majority of time series are labelled as random walk with drift (rwd), ARIMA and ETS with trend (ETS-trend). In the vote probability matrix, high probability varules have been assigned to those three classes. Furthermore, in cluster 3 the majority of time series are labelled as rwd, and the series in cluster 3 have selected random walk with drift with high vote probability. In cluster 4, the majority of series are in rwd and ETS-trend and they have been assigned a very high vote probability. In cluster 5, neural network (nn), white noise(wn) and rwd have been assigned a very high probability and the majority of time series in cluster 5 are classified as nn, wn or rwd. This indicates that our meta-learner correctly predicts the classlabels.
+\item
+  Some more intricate insights also emerged when zooming in on particular sections of the vote matrix probabilities. For example in cluster 1, the series that are labelled as ARIMA, have also selected ETS-trend with very high probability.
+  Furthermore, in cluster 5, series that are labeled as ``wn'' have selected ``wn'' as their predicted class label with high vote probability, and they also assigned relatively large probability for ARMA/MA/AR while a very small probability has been assigned to ETS-trend and ARIMA. This indicates our meta-learner correctly ientified the simmilarities and dissimilarities between classes.
+\item
+  According to the feature distribution we can see
+\end{itemize}
 
-Some more intricate insights also emerged when zooming in on particular sections of the figures.
+Correctly identify the similarities and dissaimilarities between the class labels.
 
 \newpage
 
@@ -700,7 +698,7 @@ Some more intricate insights also emerged when zooming in on particular sections
 
 }
 
-\caption{Visualization of vote matrix of yearly series. The X-axis denotes the class labels.}\label{fig:unnamed-chunk-1}
+\caption{Visualization of vote matrix of yearly series. The X-axis denotes the class labels.}\label{fig:heaty}
 \end{figure}
 
 \begin{center}\includegraphics[width=\textwidth]{figure/classdisyearly-1} \end{center}
@@ -713,7 +711,7 @@ Some more intricate insights also emerged when zooming in on particular sections
 
 }
 
-\caption{Visualization of vote matrix of monthly series. The X-axis denotes the class labels.}\label{fig:unnamed-chunk-2}
+\caption{Visualization of vote matrix of monthly series. The X-axis denotes the class labels.}\label{fig:unnamed-chunk-1}
 \end{figure}
 
 \begin{center}\includegraphics[width=\textwidth]{figure/classlabledismonthly-1} \end{center}
@@ -726,7 +724,7 @@ Some more intricate insights also emerged when zooming in on particular sections
 
 }
 
-\caption{Visualization of vote matrix of hourly series. The X-axis denotes the class labels.}\label{fig:unnamed-chunk-3}
+\caption{Visualization of vote matrix of hourly series. The X-axis denotes the class labels.}\label{fig:heathourly}
 \end{figure}
 
 \begin{center}\includegraphics[width=\textwidth]{figure/hourlylabel-1} \end{center}

@@ -1,11 +1,11 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.1.28)  12 FEB 2021 14:12
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.2.19)  25 FEB 2021 07:56
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **fforms.tex
 (./fforms.tex
 LaTeX2e <2020-10-01> patch level 4
-L3 programming layer <2021-01-09> xparse <2020-03-03>
+L3 programming layer <2021-02-06>
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/latex/base/artic
 le.cls
 Document Class: article 2020/04/10 v1.4m Standard LaTeX document class
@@ -218,7 +218,7 @@ File: microtype.cfg 2020/12/07 v2.8 microtype main configuration file (RS)
 ))
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/latex/hyperref/h
 yperref.sty
-Package: hyperref 2020-05-15 v7.00e Hypertext links for LaTeX
+Package: hyperref 2021-02-10 v7.00j Hypertext links for LaTeX
 
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/generic/ltxcmds/
 ltxcmds.sty
@@ -271,9 +271,14 @@ Package: kvoptions 2020-10-07 v3.14 Key value format for package options (HO)
 
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/latex/hyperref/p
 d1enc.def
-File: pd1enc.def 2020-05-15 v7.00e Hyperref: PDFDocEncoding definition (HO)
+File: pd1enc.def 2021-02-10 v7.00j Hyperref: PDFDocEncoding definition (HO)
 Now handling font encoding PD1 ...
 ... no UTF-8 mapping file for font encoding PD1
+)
+(/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/latex/hyperref/h
+yperref-langpatches.def
+File: hyperref-langpatches.def 2021-02-10 v7.00j Hyperref: patches for babel la
+nguages
 )
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/generic/intcalc/
 intcalc.sty
@@ -284,21 +289,21 @@ Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
 Package: etexcmds 2019/12/15 v1.7 Avoid name clashes with e-TeX commands (HO)
 )
 \Hy@SavedSpaceFactor=\count267
-Package hyperref Info: Option `unicode' set `true' on input line 4338.
 
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/latex/hyperref/p
 uenc.def
-File: puenc.def 2020-05-15 v7.00e Hyperref: PDF Unicode definition (HO)
+File: puenc.def 2021-02-10 v7.00j Hyperref: PDF Unicode definition (HO)
 Now handling font encoding PU ...
 ... no UTF-8 mapping file for font encoding PU
 )
-Package hyperref Info: Hyper figures OFF on input line 4464.
-Package hyperref Info: Link nesting OFF on input line 4469.
-Package hyperref Info: Hyper index ON on input line 4472.
-Package hyperref Info: Plain pages OFF on input line 4479.
-Package hyperref Info: Backreferencing OFF on input line 4484.
+Package hyperref Info: Option `unicode' set `true' on input line 4073.
+Package hyperref Info: Hyper figures OFF on input line 4192.
+Package hyperref Info: Link nesting OFF on input line 4197.
+Package hyperref Info: Hyper index ON on input line 4200.
+Package hyperref Info: Plain pages OFF on input line 4207.
+Package hyperref Info: Backreferencing OFF on input line 4212.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
-Package hyperref Info: Bookmarks ON on input line 4717.
+Package hyperref Info: Bookmarks ON on input line 4445.
 \c@Hy@tempcnt=\count268
 
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/latex/url/url.st
@@ -306,7 +311,7 @@ y
 \Urlmuskip=\muskip17
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
-LaTeX Info: Redefining \url on input line 5076.
+LaTeX Info: Redefining \url on input line 4804.
 \XeTeXLinkMargin=\dimen150
 
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/generic/bitset/b
@@ -321,15 +326,15 @@ Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO
 \Fld@menulength=\count269
 \Field@Width=\dimen151
 \Fld@charsize=\dimen152
-Package hyperref Info: Hyper figures OFF on input line 6347.
-Package hyperref Info: Link nesting OFF on input line 6352.
-Package hyperref Info: Hyper index ON on input line 6355.
-Package hyperref Info: backreferencing OFF on input line 6362.
-Package hyperref Info: Link coloring OFF on input line 6367.
-Package hyperref Info: Link coloring with OCG OFF on input line 6372.
-Package hyperref Info: PDF/A mode OFF on input line 6377.
-LaTeX Info: Redefining \ref on input line 6417.
-LaTeX Info: Redefining \pageref on input line 6421.
+Package hyperref Info: Hyper figures OFF on input line 6075.
+Package hyperref Info: Link nesting OFF on input line 6080.
+Package hyperref Info: Hyper index ON on input line 6083.
+Package hyperref Info: backreferencing OFF on input line 6090.
+Package hyperref Info: Link coloring OFF on input line 6095.
+Package hyperref Info: Link coloring with OCG OFF on input line 6100.
+Package hyperref Info: PDF/A mode OFF on input line 6105.
+LaTeX Info: Redefining \ref on input line 6145.
+LaTeX Info: Redefining \pageref on input line 6149.
 
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/latex/base/atbeg
 shi-ltx.sty
@@ -345,7 +350,7 @@ Package hyperref Info: Driver (autodetected): hpdftex.
 
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/latex/hyperref/h
 pdftex.def
-File: hpdftex.def 2020-05-15 v7.00e Hyperref driver for pdfTeX
+File: hpdftex.def 2021-02-10 v7.00j Hyperref driver for pdfTeX
 
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/latex/base/atver
 yend-ltx.sty
@@ -738,8 +743,8 @@ Package: mathpazo 2020/03/25 PSNFSS-v9.3 Palatino w/ Pazo Math (D.Puga, WaS)
 )
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/latex/fancyhdr/f
 ancyhdr.sty
-Package: fancyhdr 2021/01/04 v4.0 Extensive control of page headers and footers
-
+Package: fancyhdr 2021/01/28 v4.0.1 Extensive control of page headers and foote
+rs
 \f@nch@headwidth=\skip80
 \f@nch@O@elh=\skip81
 \f@nch@O@erh=\skip82
@@ -887,22 +892,22 @@ Package: eukdate 2009/03/18 v1.04 UK format date (Hart's Rules) with weekday
 tch.sty
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/latex/l3kernel/e
 xpl3.sty
-Package: expl3 2021-01-09 L3 programming layer (loader) 
+Package: expl3 2021-02-06 L3 programming layer (loader) 
 
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/latex/l3backend/
 l3backend-pdftex.def
-File: l3backend-pdftex.def 2021-01-09 L3 backend support: PDF output (pdfTeX)
-\l__kernel_color_stack_int=\count423
+File: l3backend-pdftex.def 2021-02-06 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count423
 \l__pdf_internal_box=\box55
 ))
 Package: xpatch 2020/03/25 v0.3a Extending etoolbox patching commands
 
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/latex/l3packages
 /xparse/xparse.sty
-Package: xparse 2020-10-27 L3 Experimental document command parser
-
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/latex/l3packages
-/xparse/xparse-generic.tex)))
+/xparse/xparse-2020-10-01.sty
+(/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/latex/l3packages
+/xparse/xparse-generic.tex))))
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/latex/textpos/te
 xtpos.sty
 Package: textpos 2020/09/26 v1.10
@@ -1395,7 +1400,7 @@ Package ctable Warning:  Transparency disabled: incompatible with tikz package
 )
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/latex/multirow/m
 ultirow.sty
-Package: multirow 2021/01/02 v2.6 Span multiple rows of a table
+Package: multirow 2021/01/29 v2.7 Span multiple rows of a table
 \multirow@colwidth=\skip109
 \multirow@cntb=\count458
 \multirow@dima=\skip110
@@ -1453,7 +1458,7 @@ Package hyperref Info: Link coloring ON on input line 324.
 
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/latex/hyperref/n
 ameref.sty
-Package: nameref 2019/09/16 v2.46 Cross-referencing by name of section
+Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
 
 (/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/latex/refcount/r
 efcount.sty
@@ -1518,7 +1523,7 @@ Package biblatex Info: Data encoding 'utf8' specified.
 (biblatex)             No need to reencode data.
 Package biblatex Info: Document encoding is UTF8 ....
 Package biblatex Info: ... and expl3
-(biblatex)             2021-01-09 L3 programming layer (loader) 
+(biblatex)             2021-02-06 L3 programming layer (loader) 
 (biblatex)             is new enough (at least 2020/04/06),
 (biblatex)             setting 'casechanger=expl3'.
 
@@ -1711,205 +1716,207 @@ Overfull \hbox (5.04176pt too wide) in paragraph at lines 578--600
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [15] [16]
+LaTeX Font Info:    Trying to load font information for TS1+ppl on input line 6
+79.
 
-LaTeX Warning: Reference `fig:yearlyoob' on page 17 undefined on input line 682
-.
-
-[17]
-<images/yearlyvote.png, id=353, 2495.3225pt x 1443.3925pt>
+(/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/tex/latex/psnfss/ts1
+ppl.fd
+File: ts1ppl.fd 2001/06/04 font definitions for TS1/ppl.
+) [17] [18]
+<images/yearlyvote.png, id=355, 2495.3225pt x 1443.3925pt>
 File: images/yearlyvote.png Graphic file (type png)
 <use images/yearlyvote.png>
-Package pdftex.def Info: images/yearlyvote.png  used on input line 699.
+Package pdftex.def Info: images/yearlyvote.png  used on input line 697.
 (pdftex.def)             Requested size: 455.24411pt x 263.32333pt.
-<figure/classdisyearly-1.pdf, id=355, 1084.05pt x 867.24pt>
+<figure/classdisyearly-1.pdf, id=357, 1084.05pt x 867.24pt>
 File: figure/classdisyearly-1.pdf Graphic file (type pdf)
 <use figure/classdisyearly-1.pdf>
-Package pdftex.def Info: figure/classdisyearly-1.pdf  used on input line 706.
+Package pdftex.def Info: figure/classdisyearly-1.pdf  used on input line 704.
 (pdftex.def)             Requested size: 455.24411pt x 364.19862pt.
-[18 <./images/yearlyvote.png> <./figure/classdisyearly-1.pdf>]
-<images/monthlyvote.png, id=370, 2346.7675pt x 1381.16pt>
+[19 <./images/yearlyvote.png> <./figure/classdisyearly-1.pdf>]
+<images/monthlyvote.png, id=373, 2346.7675pt x 1381.16pt>
 File: images/monthlyvote.png Graphic file (type png)
 <use images/monthlyvote.png>
-Package pdftex.def Info: images/monthlyvote.png  used on input line 712.
+Package pdftex.def Info: images/monthlyvote.png  used on input line 710.
 (pdftex.def)             Requested size: 455.24411pt x 267.92365pt.
-<figure/classlabledismonthly-1.pdf, id=371, 1084.05pt x 867.24pt>
+<figure/classlabledismonthly-1.pdf, id=374, 1084.05pt x 867.24pt>
 File: figure/classlabledismonthly-1.pdf Graphic file (type pdf)
 <use figure/classlabledismonthly-1.pdf>
 Package pdftex.def Info: figure/classlabledismonthly-1.pdf  used on input line 
-719.
-(pdftex.def)             Requested size: 455.24411pt x 364.19862pt.
-[19
-
- <./images/monthlyvote.png> <./figure/classlabledismonthly-1.pdf>]
-<images/votehourly2.png, id=387, 1606.0pt x 776.9025pt>
-File: images/votehourly2.png Graphic file (type png)
-<use images/votehourly2.png>
-Package pdftex.def Info: images/votehourly2.png  used on input line 725.
-(pdftex.def)             Requested size: 455.24411pt x 220.2222pt.
-<figure/hourlylabel-1.pdf, id=388, 1084.05pt x 867.24pt>
-File: figure/hourlylabel-1.pdf Graphic file (type pdf)
-<use figure/hourlylabel-1.pdf>
-Package pdftex.def Info: figure/hourlylabel-1.pdf  used on input line 732.
+717.
 (pdftex.def)             Requested size: 455.24411pt x 364.19862pt.
 [20
 
+ <./images/monthlyvote.png> <./figure/classlabledismonthly-1.pdf>]
+<images/votehourly2.png, id=389, 1606.0pt x 776.9025pt>
+File: images/votehourly2.png Graphic file (type png)
+<use images/votehourly2.png>
+Package pdftex.def Info: images/votehourly2.png  used on input line 723.
+(pdftex.def)             Requested size: 455.24411pt x 220.2222pt.
+<figure/hourlylabel-1.pdf, id=390, 1084.05pt x 867.24pt>
+File: figure/hourlylabel-1.pdf Graphic file (type pdf)
+<use figure/hourlylabel-1.pdf>
+Package pdftex.def Info: figure/hourlylabel-1.pdf  used on input line 730.
+(pdftex.def)             Requested size: 455.24411pt x 364.19862pt.
+[21
+
  <./images/votehourly2.png> <./figure/hourlylabel-1.pdf>]
-<figure/pca-1.pdf, id=403, 578.16pt x 578.16pt>
+<figure/pca-1.pdf, id=405, 578.16pt x 578.16pt>
 File: figure/pca-1.pdf Graphic file (type pdf)
 <use figure/pca-1.pdf>
-Package pdftex.def Info: figure/pca-1.pdf  used on input line 736.
+Package pdftex.def Info: figure/pca-1.pdf  used on input line 734.
 (pdftex.def)             Requested size: 455.24411pt x 455.24165pt.
-<figure/viplot-1.pdf, id=404, 1445.4pt x 1300.86pt>
+<figure/viplot-1.pdf, id=406, 1445.4pt x 1300.86pt>
 File: figure/viplot-1.pdf Graphic file (type pdf)
 <use figure/viplot-1.pdf>
-Package pdftex.def Info: figure/viplot-1.pdf  used on input line 743.
+Package pdftex.def Info: figure/viplot-1.pdf  used on input line 741.
 (pdftex.def)             Requested size: 455.24411pt x 409.71353pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[21
+[22
 
- <./figure/pca-1.pdf>] [22 <./figure/viplot-1.pdf>]
+ <./figure/pca-1.pdf>] [23 <./figure/viplot-1.pdf>]
 
-LaTeX Warning: Reference `fig:entropyhourly' on page 23 undefined on input line
- 760.
+LaTeX Warning: Reference `fig:entropyhourly' on page 24 undefined on input line
+ 758.
 
 
-LaTeX Warning: Reference `fig:curvaturehourly' on page 23 undefined on input li
-ne 760.
+LaTeX Warning: Reference `fig:curvaturehourly' on page 24 undefined on input li
+ne 758.
 
-[23]
-<figure/pdpyearlyurpp-1.pdf, id=454, 1084.05pt x 325.215pt>
+[24]
+<figure/pdpyearlyurpp-1.pdf, id=456, 1084.05pt x 325.215pt>
 File: figure/pdpyearlyurpp-1.pdf Graphic file (type pdf)
 <use figure/pdpyearlyurpp-1.pdf>
-Package pdftex.def Info: figure/pdpyearlyurpp-1.pdf  used on input line 768.
+Package pdftex.def Info: figure/pdpyearlyurpp-1.pdf  used on input line 766.
 (pdftex.def)             Requested size: 455.24411pt x 136.57448pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<figure/pdpmonthlyseasonality-1.pdf, id=455, 1084.05pt x 433.62pt>
+<figure/pdpmonthlyseasonality-1.pdf, id=457, 1084.05pt x 433.62pt>
 File: figure/pdpmonthlyseasonality-1.pdf Graphic file (type pdf)
 <use figure/pdpmonthlyseasonality-1.pdf>
 Package pdftex.def Info: figure/pdpmonthlyseasonality-1.pdf  used on input line
- 777.
+ 775.
 (pdftex.def)             Requested size: 455.24411pt x 182.0993pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<figure/pdpmonthlyT-1.pdf, id=456, 1084.05pt x 325.215pt>
+<figure/pdpmonthlyT-1.pdf, id=458, 1084.05pt x 325.215pt>
 File: figure/pdpmonthlyT-1.pdf Graphic file (type pdf)
 <use figure/pdpmonthlyT-1.pdf>
-Package pdftex.def Info: figure/pdpmonthlyT-1.pdf  used on input line 786.
+Package pdftex.def Info: figure/pdpmonthlyT-1.pdf  used on input line 784.
 (pdftex.def)             Requested size: 455.24411pt x 136.57448pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<figure/seasonalityhourly-1.pdf, id=457, 1445.4pt x 361.35pt>
+<figure/seasonalityhourly-1.pdf, id=459, 1445.4pt x 361.35pt>
 File: figure/seasonalityhourly-1.pdf Graphic file (type pdf)
 <use figure/seasonalityhourly-1.pdf>
-Package pdftex.def Info: figure/seasonalityhourly-1.pdf  used on input line 795
+Package pdftex.def Info: figure/seasonalityhourly-1.pdf  used on input line 793
 .
 (pdftex.def)             Requested size: 455.24411pt x 113.80931pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<figure/pdpmonthlyhourlyStability-1.pdf, id=458, 1084.05pt x 325.215pt>
+<figure/pdpmonthlyhourlyStability-1.pdf, id=460, 1084.05pt x 325.215pt>
 File: figure/pdpmonthlyhourlyStability-1.pdf Graphic file (type pdf)
 <use figure/pdpmonthlyhourlyStability-1.pdf>
 Package pdftex.def Info: figure/pdpmonthlyhourlyStability-1.pdf  used on input 
-line 804.
+line 802.
 (pdftex.def)             Requested size: 455.24411pt x 136.57448pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<figure/diff1yacf1-1.pdf, id=459, 1084.05pt x 325.215pt>
+<figure/diff1yacf1-1.pdf, id=461, 1084.05pt x 325.215pt>
 File: figure/diff1yacf1-1.pdf Graphic file (type pdf)
 <use figure/diff1yacf1-1.pdf>
-Package pdftex.def Info: figure/diff1yacf1-1.pdf  used on input line 813.
+Package pdftex.def Info: figure/diff1yacf1-1.pdf  used on input line 811.
 (pdftex.def)             Requested size: 455.24411pt x 136.57448pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<figure/ypacf5-1.pdf, id=460, 1084.05pt x 325.215pt>
+<figure/ypacf5-1.pdf, id=462, 1084.05pt x 325.215pt>
 File: figure/ypacf5-1.pdf Graphic file (type pdf)
 <use figure/ypacf5-1.pdf>
-Package pdftex.def Info: figure/ypacf5-1.pdf  used on input line 822.
+Package pdftex.def Info: figure/ypacf5-1.pdf  used on input line 820.
 (pdftex.def)             Requested size: 455.24411pt x 136.57448pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<figure/pdpyearlytrend-1.pdf, id=461, 1084.05pt x 433.62pt>
+<figure/pdpyearlytrend-1.pdf, id=463, 1084.05pt x 433.62pt>
 File: figure/pdpyearlytrend-1.pdf Graphic file (type pdf)
 <use figure/pdpyearlytrend-1.pdf>
-Package pdftex.def Info: figure/pdpyearlytrend-1.pdf  used on input line 831.
+Package pdftex.def Info: figure/pdpyearlytrend-1.pdf  used on input line 829.
 (pdftex.def)             Requested size: 455.24411pt x 182.0993pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<figure/linearity-1.pdf, id=462, 1084.05pt x 578.16pt>
+<figure/linearity-1.pdf, id=464, 1084.05pt x 578.16pt>
 File: figure/linearity-1.pdf Graphic file (type pdf)
 <use figure/linearity-1.pdf>
-Package pdftex.def Info: figure/linearity-1.pdf  used on input line 840.
+Package pdftex.def Info: figure/linearity-1.pdf  used on input line 838.
 (pdftex.def)             Requested size: 455.24411pt x 242.79907pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<figure/y2dpdp-1.pdf, id=463, 1084.05pt x 433.62pt>
+<figure/y2dpdp-1.pdf, id=465, 1084.05pt x 433.62pt>
 File: figure/y2dpdp-1.pdf Graphic file (type pdf)
 <use figure/y2dpdp-1.pdf>
-Package pdftex.def Info: figure/y2dpdp-1.pdf  used on input line 849.
+Package pdftex.def Info: figure/y2dpdp-1.pdf  used on input line 847.
 (pdftex.def)             Requested size: 455.24411pt x 182.0993pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[24]
-<figure/m2dpdp-1.pdf, id=484, 722.7pt x 650.43pt>
+[25]
+<figure/m2dpdp-1.pdf, id=487, 722.7pt x 650.43pt>
 File: figure/m2dpdp-1.pdf Graphic file (type pdf)
 <use figure/m2dpdp-1.pdf>
-Package pdftex.def Info: figure/m2dpdp-1.pdf  used on input line 860.
+Package pdftex.def Info: figure/m2dpdp-1.pdf  used on input line 858.
 (pdftex.def)             Requested size: 455.24411pt x 409.72343pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[25 <./figure/pdpyearlyurpp-1.pdf> <./figure/pdpmonthlyseasonality-1.pdf>] [26 
+[26 <./figure/pdpyearlyurpp-1.pdf> <./figure/pdpmonthlyseasonality-1.pdf>] [27 
 <./figure/pdpmonthlyT-1.pdf> <./figure/seasonalityhourly-1.pdf> <./figure/pdpmo
-nthlyhourlyStability-1.pdf> <./figure/diff1yacf1-1.pdf>] [27 <./figure/ypacf5-1
-.pdf> <./figure/pdpyearlytrend-1.pdf>] [28 <./figure/linearity-1.pdf> <./figure
-/y2dpdp-1.pdf>] [29 <./figure/m2dpdp-1.pdf>]
-<figure/h2dpdp-1.pdf, id=644, 650.43pt x 144.54pt>
+nthlyhourlyStability-1.pdf> <./figure/diff1yacf1-1.pdf>] [28 <./figure/ypacf5-1
+.pdf> <./figure/pdpyearlytrend-1.pdf>] [29 <./figure/linearity-1.pdf> <./figure
+/y2dpdp-1.pdf>] [30 <./figure/m2dpdp-1.pdf>]
+<figure/h2dpdp-1.pdf, id=646, 650.43pt x 144.54pt>
 File: figure/h2dpdp-1.pdf Graphic file (type pdf)
 <use figure/h2dpdp-1.pdf>
-Package pdftex.def Info: figure/h2dpdp-1.pdf  used on input line 871.
+Package pdftex.def Info: figure/h2dpdp-1.pdf  used on input line 869.
 (pdftex.def)             Requested size: 455.24411pt x 101.16847pt.
-<figure/thetapdp-1.pdf, id=645, 1084.05pt x 289.08pt>
+<figure/thetapdp-1.pdf, id=647, 1084.05pt x 289.08pt>
 File: figure/thetapdp-1.pdf Graphic file (type pdf)
 <use figure/thetapdp-1.pdf>
-Package pdftex.def Info: figure/thetapdp-1.pdf  used on input line 880.
+Package pdftex.def Info: figure/thetapdp-1.pdf  used on input line 878.
 (pdftex.def)             Requested size: 455.24411pt x 121.39954pt.
 
-LaTeX Warning: Reference `fig:pcayearly' on page 30 undefined on input line 887
+LaTeX Warning: Reference `fig:pcayearly' on page 31 undefined on input line 885
 .
 
 
-LaTeX Warning: Reference `fig:pcamonthly' on page 30 undefined on input line 88
-7.
+LaTeX Warning: Reference `fig:pcamonthly' on page 31 undefined on input line 88
+5.
 
 
-LaTeX Warning: Reference `fig:pcahourly' on page 30 undefined on input line 887
+LaTeX Warning: Reference `fig:pcahourly' on page 31 undefined on input line 885
 .
 
-[30
+[31
 
- <./figure/h2dpdp-1.pdf> <./figure/thetapdp-1.pdf>] [31]
+ <./figure/h2dpdp-1.pdf> <./figure/thetapdp-1.pdf>] [32]
 
 Package hyperref Warning: Difference (2) between bookmark levels is greater 
-(hyperref)                than one, level fixed on input line 916.
+(hyperref)                than one, level fixed on input line 914.
 
 
 Package hyperref Warning: The anchor of a bookmark and its parent's must not
-(hyperref)                be the same. Added a new anchor on input line 916.
+(hyperref)                be the same. Added a new anchor on input line 914.
 
-[32] [33] [34] [35] [36] [37] [38] (./fforms.aux)
+[33] [34] [35] [36] [37] [38] [39] (./fforms.aux)
 
 LaTeX Warning: There were undefined references.
 
@@ -1924,13 +1931,13 @@ Package logreq Info: Writing requests to 'fforms.run.xml'.
 ### semi simple group (level 1) entered at line 178 (\begingroup)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 35204 strings out of 481265
- 652179 string characters out of 5913755
- 1412971 words of memory out of 5000000
- 50801 multiletter control sequences out of 15000+600000
- 526562 words of font info for 462 fonts, out of 8000000 for 9000
+ 34748 strings out of 481263
+ 648109 string characters out of 5913740
+ 1409354 words of memory out of 5000000
+ 50331 multiletter control sequences out of 15000+600000
+ 526969 words of font info for 467 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 102i,15n,102p,1919b,15697s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 102i,15n,102p,1919b,15704s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/font
 s/enc/dvips/base/8r.enc}</Users/thiyangashaminitalagala/Library/TinyTeX/texmf-d
 ist/fonts/type1/public/amsfonts/cm/cmex10.pfb></Users/thiyangashaminitalagala/L
@@ -1948,10 +1955,10 @@ rary/TinyTeX/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></Users/thiyangasha
 minitalagala/Library/TinyTeX/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></U
 sers/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/fonts/type1/urw/palatin
 o/uplri8a.pfb>
-Output written on fforms.pdf (38 pages, 13548896 bytes).
+Output written on fforms.pdf (39 pages, 13541239 bytes).
 PDF statistics:
- 861 PDF objects out of 1000 (max. 8388607)
- 675 compressed objects within 7 object streams
- 165 named destinations out of 1000 (max. 500000)
- 119237 words of extra memory for PDF output out of 128383 (max. 10000000)
+ 863 PDF objects out of 1000 (max. 8388607)
+ 676 compressed objects within 7 object streams
+ 163 named destinations out of 1000 (max. 500000)
+ 123333 words of extra memory for PDF output out of 128383 (max. 10000000)
 

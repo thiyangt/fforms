@@ -53,7 +53,7 @@ pyclus <- ggplot(yearly_m4_clus,
 
 fclusy <- data.frame(trend = features_M4Y$trend,
                      diff1y_acf1 = features_M4Y$diff1y_acf1,
-                     diff2y_acf1 = features_M4Y$diff2y_acf1,
+                     acf1 = features_M4Y$y_acf1,
                      entropy = features_M4Y$entropy,
                      cluster = yearly_m4_clus$cluster)
 fclusy <- pivot_longer(fclusy, 1:4)
@@ -161,7 +161,7 @@ load(here("dashboard_data", "monthly", "features_M4M.rda"))
 fclusm <- data.frame(trend = features_M4M$trend,
                      seasonality = features_M4M$seasonality,
                      diff1y_acf1 = features_M4M$diff1y_acf1,
-                     sediff_seacf1 = features_M4M$sediff_seacf1,
+                     sediff_seacf1 = features_M4M$entropy,
                      cluster = monthly_m4_clus$cluster)
 fclusm <- pivot_longer(fclusm, 1:4)
 
