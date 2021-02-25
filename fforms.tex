@@ -668,7 +668,7 @@ The main question we have now is: `Can we trust the FFORMS framework if we do no
 \hypertarget{oobviz}{%
 \subsection{Visualization of FFORMS's understanding of the similarity and dissimilarity between forecast models}\label{oobviz}}
 
-We generated several initial plots to visualise the vote matrix calculations based on OOB observations to get a better understanding of the relationships learned by the random forest. Out of different plots we generated ``heatmap'' seems to be the most useful in visualising vote matrix probabilities. We use iheatmap function in package in R to visualise interactive The visualizations are shown in
+We generated several initial plots to visualise the vote matrix calculations based on OOB observations to get a better understanding of the relationships learned by the random forest. Out of different plots we generated ``heatmap'' seems to be the most useful in visualising vote matrix probabilities. We use iheatmapr function in iheatmapr package in R to visualise interactive heatmap with clustering and row and column annotations. The ordering of the rows and columns are based on hierarchical clustering approach. The visualizations are shown in
 
 Visualising the data in this manner helps us to identify several important characteristics learned by the ranom forest algorithm
 
@@ -676,7 +676,7 @@ Visualising the data in this manner helps us to identify several important chara
 
 \begin{itemize}
 \item
-  Irrespective of the true classlable, the random walk with drift has been assigned a non-zero probability by all of the yearly series. This means, for all of the yearly series at least one tree in the random forest voted for random walk with drift. According to the results in \autoref{forecasts} also we can see random walk with drift perform extremely well across all time series.
+  Irrespective of the true classlable, the random walk with drift has been assigned a non-zero probability by all of the yearly series. This means, for all of the yearly series at least one tree in the random forest voted for random walk with drift. According to the results in \autoref{forecasts} also we can see random walk with drift perform extremely well across all time series. Furthermore, the majority of yearly series in M4comp are highly trended.
 \item
   For all yearly series, ETS with damped trend has been assinged a very low vote probability.
 \item
@@ -685,10 +685,97 @@ Visualising the data in this manner helps us to identify several important chara
   Some more intricate insights also emerged when zooming in on particular sections of the vote matrix probabilities. For example in cluster 1, the series that are labelled as ARIMA, have also selected ETS-trend with very high probability.
   Furthermore, in cluster 5, series that are labeled as ``wn'' have selected ``wn'' as their predicted class label with high vote probability, and they also assigned relatively large probability for ARMA/MA/AR while a very small probability has been assigned to ETS-trend and ARIMA. This indicates our meta-learner correctly ientified the simmilarities and dissimilarities between classes.
 \item
-  According to the feature distribution we can see
+  According to the feature distribution we can see the most of the series in clusters 1-3 are not difference stationary while the series in clusters 4-5 are difference stationary. That could be the one reason both ARIMA and ETS-trend have been assigned a very high probability in clusters 4 and 5 compared to other. This indicates our random forest correctly identify the relationship between class labels and features.
+\item
+  Based on the vote probability similarities, the columns of the matrix are classified into four clusters as
+
+  \begin{enumerate}
+  \def\labelenumi{\roman{enumi})}
+  \tightlist
+  \item
+    Cluster 1 : nn, rw, theta
+  \item
+    Cluster 2: ARMA/AR/MA, ETS-notrend, ETS-damped trend, ETS-notrendnoseasonal, wn
+  \item
+    CLuster 3: rwd
+  \item
+    Cluster 4: ARIMA, ETS-trend
+    \textbackslash{}end\{item\}
+  \end{enumerate}
+
+  Cluster 1 models are general models that can be applied to any series, Cluster 2 models are suitable for less trended series, CLuster 3 is random walk with drift on its own, Cluster 4 models are suitable for highly trended series.
 \end{itemize}
 
-Correctly identify the similarities and dissaimilarities between the class labels.
+\textbf{Monthly series}
+
+\begin{itemize}
+\tightlist
+\item
+  The vote matrix columns are divided into four cluster according as
+
+  \begin{enumerate}
+  \def\labelenumi{\roman{enumi})}
+  \tightlist
+  \item
+    Cluster 1: SARIMA, tbats, theta
+  \item
+    Cluster 2: nn, rw, stlar
+  \item
+    Cluster 3: ARIMA, ARMA/AR/MA, ETS-dampedtrend, ETS-notrendnoseasonal, ETS-trend, rw, wn
+  \item
+    Cluster 4: ETS-dampedtrendseasonal, ETS-seasonal, ETS-trendseasonal, snaive
+  \end{enumerate}
+\end{itemize}
+
+Cluster 1 models are suitable to model time series with high seasonality, Cluster 2 models canbe used to model time series with complicated behaviour (series with high entropy), Cluster 3 models are non-seasonal time series modes, Cluster 4 models are ETS models with trend component and snaive. Hence, we can say monthly meta-learner correctly identify the similarities and dissimilaries between the classes.
+
+\begin{itemize}
+\item
+  In general, SARIMA, tbats, theta, nn, rwd and stlr have been assigned a very high vote probability.
+\item
+  For all monthly series, ARMA/MA/AR has a very low probability.
+\item
+  Some series have selected stlar, nn and SARIMA models with very high vote probability.
+\item
+  Row-wise clustering classifies time series into 5 main clusters as follows
+
+  Cluster 1: stlar has been asigned a very high vote probability
+
+  Cluster 2: most of the series in this cluster have selected rwd or stlar as their predicted class label.
+
+  Cluster 3: series in this cluster select nn with high vote probability
+
+  Cluster 4: Some series in this cluster select non-seasonal time series models (AR, MA, ARMA, wn, rw, ETS models with out seasonal component) with high probability. The reason could be, according to the feature distribution, the strength of seasonality of the time series in this cluster are very low.
+
+  Cluster 5: Most of the series select SARIMA or stlar with high probability. According to the feature distribution of strength of seasonality, the series in this cluster are highly seasonal.
+\end{itemize}
+
+Overall, the above findings of clusters consists with the composition of clusters by true class labels shown in Figure : panel A.
+
+According to xx, the vote matrix visualisations of quarterly data depicted a similar pattern to monthly data. For quarterly and monthly data, the same set of features and class labels are used to train the model, Hence, this consistency between the results of the quarterly and the monthly series would provide evidence in support of the validity and trustability of the meta-learning framework.
+
+\textbf{Hourly series}
+
+\begin{itemize}
+\item
+  Compared to yearly and monthly series, in hour series classification the best forecasting model has been selected with very high probability.
+\item
+  A very low vote proabilities have been assigned to rw, rwd, theta and wn.
+\item
+  For most of the series nn has been assigned a non-zero vote probability.
+\item
+  Row-wise clustering classifies time series into 5 main clusters as follows
+\end{itemize}
+
+cluster 1: All time series in cluster 1 have selected nn with very high probability.
+
+Cluster 2: Most of the time series selects stlar with high probability.
+
+Cluster 3: Most of the time series selects mstlarima with very high vote probability.
+
+Cluster 4: Some series in the cluster select snaive while other series select tbats instead. Zooming out the results we can see the series that have selected snaive with hogh probability have assigned a very low probability for tbats. Further, exploration with the interactive dashboard it was clear series with high daily seasonality select snaive while series with high weekly seasonality select tbats approach.
+
+CLuster 5: Most of the series selects mstlets with very high probability. TZooming out the results we can see some of those series also assigned a high probability to mstlarima class as well.
 
 \newpage
 
