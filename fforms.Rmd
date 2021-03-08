@@ -14,7 +14,7 @@ author:
     othernames: George
     address: Department of Econometrics and Business Statistics, \newline Monash University, VIC 3145, Australia.
     email : george.athanasopoulos@monash.edu
-abstract: "Features of time series are useful in identifying suitable models for forecasting. We present a general framework, labelled FFORMS (Feature-based FORecast Model Selection), which selects forecast models based on features calculated from the time series. The FFORMS framework builds a mapping that relates the features of a time series to the “best” forecast model using a random forest. The framework is evaluated using time series from the M-forecasting competitions and is shown to yield accurate forecasts comparable to several benchmarks and other commonly used automated forecasting approaches. Using model-agnostic machine learning interpretability approaches we explore what is happening under the hood. The analysis provides a more refined picture of the relationship between features and the choice of forecast model which is particularly valuable for ongoing research in the field of feature-based time series analysis."
+abstract: "Features of time series are useful in identifying suitable models for forecasting. We present a general framework, labelled FFORMS (Feature-based FORecast Model Selection), which selects forecast models based on features calculated from the time series. The FFORMS framework builds a mapping that relates the features of a time series to the “best” forecast model using a random forest. The framework is evaluated using time series from the M-forecasting competitions and is shown to yield accurate forecasts comparable to several benchmarks and other commonly used automated forecasting approaches. Using model-agnostic machine learning interpretability approaches we explore what is happening under the hood of the FFORMS framework. The analysis provides a more refined picture of the relationship between features and the choice of forecast model which is particularly valuable for ongoing research in the field of feature-based time series analysis."
 keywords: "Algorithm selection problem, Black-box models, Random forest, Machine learning interpretability, Visualization"
 wpnumber: no/yr
 jelcodes: C10,C14,C22
@@ -463,7 +463,7 @@ knitr::include_graphics("images/votehourly2.png")
 ```
 
 
-\newpage
+\clearpage
 
 ```{r pca, comment=NA, fig.height=8, dev=c('png')}
 
