@@ -341,40 +341,14 @@ Selecting the most appropriate model for forecasting a given time series can be 
 
 An alternative approach, which avoids selecting a class of models \emph{a priori}, is to use a simple ``hold-out'' test set; but then there is often insufficient data to draw a reliable conclusion. To overcome this drawback, time series cross-validation can be used \autocites{racine2000consistent}{hyndman2014forecasting}; then models from many different classes may be applied, and the model with the lowest cross-validated MSE selected. However, this increases the computation time involved considerably (at least to order \(n^2\) where \(n\) is the number of series to be forecast).
 
-Clearly, there is a need for a fast and scalable algorithm to automate the process of selecting models with the aim of forecasting. \textcolor{red}{However, for a given time series the selection of an appropriate forecast model from many possibilities is not straightforward. This selection presents a challenge because each method performs best for some but not all tasks. The features of a time series are considered an important factor in identifying suitable forecasting models} \autocites{collopy1992rule}{meade2000evidence}{makridakis2000m3}{wang2009rule}.
+Clearly, there is a need for a fast and scalable algorithm to automate the process of selecting models with the aim of forecasting. We refer to this process as forecast-model selection. We propose a general meta-learning framework using features of the time series to select the class of models, or even the specific model, to be used for forecasting. The forecast-model selection process is carried out using a classification algorithm --- we use the time series features as inputs, and the ``best'' forecasting model as the output. The classifier is built using a large historical collection of time series, in advance of the forecasting task at hand. Hence, this is an ``offline'' procedure.
 
-We refer to this process as forecast model selection. \textcolor{red}{We propose a general meta-learning framework using features of the time series to select the class of models, or even the specific model, to be used for forecasting. The forecast model selection process
-is carried out using a classification algorithm-we use the time series features as inputs, and the "best" 
-forecasting model as the output. The meta-learning model is built using a large historical collection of time series, in advance of the forecasting task at hand.}
+The ``online'' process of generating forecasts only involves calculating the features of a time series and using the pre-trained classifier to identify the best forecasting model. Hence, generating forecasts only involves the estimation of a single forecasting model, with no need to estimate large numbers of models within a class, or to carry out a computationally-intensive cross-validation procedure. We refer to this general framework as FFORMS (\textbf{F}eature-based \textbf{FOR}ecast-\textbf{M}odel \textbf{S}election).
 
-There have been several recent studies on the use of meta-learning approaches to automate forecast model selection based on features computed from the time series \autocites{shah1997model}{prudencio2004meta}{lemke2010meta}{kuck2016meta}. A meta-learning approach provides systematic guidance on model selection based on knowledge acquired from historical data sets. The key idea is that forecast model selection is posed as a supervised learning task. In the era of big data, such an automated model selection process is necessary because the cost of invoking all possible forecast models is prohibitive. However, the existing literature suffers from limited answers to questions such as: How are features related to the property being modelled? How do features interact with each other to identify a suitable forecast model? Which features contribute most to the classification process? Addressing such questions can enhance the understanding of the relations between features and model selection outcomes. To the best of our knowledge, a very limited effort has been made to understand how the meta-learners are making their decisions and what is really happening inside these complex model structures. Providing transparency will result, building trust in the prediction results of the meta-learner.
-
-To fill the gaps in the literature, we make the following contributions:
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\item
-  We propose a general meta-learning framework using features of the time series to select the class of models, or even the specific model, to be used for forecasting. We refer to this general framework as FFORMS (\textbf{F}eature-based \textbf{FOR}ecast-\textbf{M}odel \textbf{S}election). The forecast model selection process is carried out using a classification algorithm --- we use the time series features as inputs, and the ``best'' forecasting model as the output. The classifier is built using a large historical collection of time series, in advance of the forecasting task at hand. Hence, this is an ``offline'' procedure. The ``online'' process of generating forecasts only involves calculating the features of a time series and using the pre-trained classifier to identify the best forecasting model. Hence, generating forecasts only involves the estimation of a single forecasting model, with no need to estimate large numbers of models within a class, or to carry out a computationally-intensive cross-validation procedure. The contribution of this paper differs from previously published work related to meta-learning \autocites{prudencio2004meta}{lemke2010meta}{kuck2016meta} in three ways: i) a more extensive collection of features is used (features to handle multiple seasonality in hourly and daily series), ii) the diversity of forecast models considered class labels, iii) the capability of handling high frequency data and iv) explore the use of random forest algorithm to model the relationship between time series features and the `best' forecast model.
-\item
-  The second contribution of the paper is the exploration of what is happening under the hood of the FFORMS framework, leading to an understanding of the relationship between features of time series and the choice of forecast model selection. We call it `Peeking inside FFORMS'. We try to answer the following questions:
-
-  \begin{enumerate}
-  \def\labelenumii{\roman{enumii})}
-  \tightlist
-  \item
-    \textbf{Which} features are the most important?
-  \item
-    \textbf{Where} (overall classification or only within specific classes) are they important?
-  \item
-    \textbf{How} are they important?
-  \item
-    \textbf{When} and \textbf{how} are features linked to the prediction outcome?
-  \item
-    \textbf{When} and \textbf{how strongly} do features interact with other features?
-  \end{enumerate}
-\item
-  We introduce an R \autocite{Rcore} package, \texttt{seer} \autocite{seer} that implements the proposed framework and related functions. To the best of our knowledge \texttt{seer} is the first R package to implement the meta-learning framework for time series forecasting.
-\end{enumerate}
+There have been several recent studies on the use of meta-learning approaches to automate forecast model selection based on features computed from the time series \autocites{shah1997model}{prudencio2004meta}{lemke2010meta}{kuck2016meta}. However, to the best of our knowledge, a very limited effort has been made to understand how the meta-learners are making their decisions and what is really happening inside these complex model structures. To fill these gaps, this paper makes a first step towards providing a comprehensive analysis of the relationship between time series features and forecast model selection using machine learning interpretability techniques. We try to answer the following questions:
+i) \textbf{What} are the similarities and dissimilarities identified by the meta-learner between class-labels?
+ii) \textbf{Which} features contribute most to the classification processs? iii) \textbf{How} are features related to the property being modelled?
+iv) \textbf{How} do features interact with each other to identify a suitable forecasting model? We believe addressing these questions can enhance the transparency of the model predictions and build trust trust in model's predictions.
 
 The remainder of the paper is structured as follows. We review the related work in \autoref{litreview}. In \autoref{fforms} we explain the detailed components and procedures of our proposed framework for forecast model selection. \autoref{peeking} provides a description of machine learning interpretability techniques. In \autoref{results} we present the results, followed by the conclusions and future work in \autoref{discussion}.
 
@@ -670,9 +644,55 @@ The main question we have now is: `Can we trust the FFORMS framework if we do no
 \hypertarget{oobviz}{%
 \subsection{Visualization of FFORMS's understanding of the similarity and dissimilarity between forecast models}\label{oobviz}}
 
-We generated several initial plots to visualise the vote matrix calculations based on OOB observations to get a better understanding of the relationships learned by the random forest. Out of different plots we generated ``heatmap'' seems to be the most useful in visualising vote matrix probabilities. We use iheatmapr function in iheatmapr package in R to visualise interactive heatmap with clustering and row and column annotations. The ordering of the rows and columns are based on hierarchical clustering approach. The visualizations are shown in
+In FFORMS, the forecast-model selection problem is posed as a supervised learning task. Each time series in the meta-data set is represented as a vector of features and labelled according to the ``best'' forecast model. Then the FFORMS is used to identify the ``best'' forecast model given a vector of features of the time series. For example, suppose for a given time series the forecast error vector for the random walk, random walk with drift and white noise process is {[}1.31, 1.30, 3.40{]}. Then, ideally the vote probability vector we expect from FFORMS is {[}0, 1, 0{]}, .i.e, the best model is given class probability 1 and others 0. However, due to similarities in class-labels and limitations in features we get non-zero vote probabilities for other class-labels as well. This is not a big issue as long as the random forest assign high probability to the forecast models that are very similar to best forecast model and very low probability to models that are very different to the best forecast model. For example, in the afformentioned situation, if relatively high probability is assigned to both random walk with drift and random walk and very low probability for white noise, then it indicates FFORMS algorithm correctly picked up the similarities and dissimilarities between class labels and our features are useful in revealing those similarities and dissimilarities. Hence, by exploring vote-matrix probabilities for all time series we can identify the FFORMS's understanding of the similarities and dissimilarities between forecast models.
 
-Visualising the data in this manner helps us to identify several important characteristics learned by the ranom forest algorithm
+We generated several initial plots to visualise the vote matrix calculations based on OOB observations to get a better understanding of the relationships learned by the random forest. Out of different plots we generated ``heatmap'' seems to be the most useful in visualising vote matrix probabilities. We use \texttt{iheatmapr} function in \texttt{iheatmapr} package in R to visualise interactive heatmap \autocite{iheatmapr}. Furthermore, to improve the visualization we reorder and cluster the rows and columns of the matrix separately by applying hierarchical clustering approach. The results are shown in \autoref{fig:heatyearly}, \autoref{fig:heatmonthly} and \autoref{fig:heathourly}. Visualising the vote matrix probabilities in this manner helps us to identify several important characteristics learned by the random forest algorithm.
+
+\begin{itemize}
+\tightlist
+\item
+  According to \autoref{fig:heatyearly}, \autoref{fig:heatmonthly} and \autoref{fig:heathourly}, in general we can see the columns are clustered accroding to the similarities of the models as summarized in . This indicates our meta-learner correctly ientified the simmilarities and dissimilarities between classes.
+\end{itemize}
+
+\begin{table}[!h]
+\centering\scriptsize\tabcolsep=0.12cm
+\caption{Summary of column clusters displayed in vote matrices of Figure 4- 6 }
+\label{cclusters}
+\begin{tabular}{p{4cm}p{4cm}p{4cm}}
+\hline
+\textbf{Yearly} & \textbf{Monthly} & \textbf{Hourly} \\ \hline
+\textit{Column Cluster 1}&\textit{Column Cluster 1} & \textit{Column Cluster 1} \\
+\textbf{Models flexible for any situation} & \textbf{Models flexible for any situation} & \textbf{Models without seasonal component and Theta method } \\
+Neural network & SARIMA & Random walk\\
+Random walk & tbats & Random walk with drift\\
+Theta & Theta & Theta\\
+&  & White noise process\\
+&  & \\
+\textit{Column Cluster 2}&\textit{Column Cluster 2} & \textit{Column Cluster 2} \\
+\textbf{Models not suitable to handle highly trended series} & \textbf{Models that can handle series with complex patterns} & \textbf{Models that can handle multiple seasonality } \\
+ARMA/AR/MA & Neural networks & matlarima\\
+ETS with damped trend & Random walk with drift & mstlets\\
+ETS without trend and seasonality & STLAR & \\
+White noise process &  & \\
+& & \\
+\textit{Column Cluster 3}&\textit{Column Cluster 3} & \textit{Column Cluster 3} \\
+\textbf{Random walk with drift} & \textbf{Models without seasonal component} & \textbf{Models for time varying seasonality} \\
+Random walk with drift & ARIMA & snaive\\
+ & ARMA/AR/MA & STLAR\\
+ & ETS-damped trend & TBATS\\
+ & ETS without trend and seasonality & \\
+  & ETS with trend  & \\
+  & Random walk  & \\
+  & White noise process & \\
+& & \\
+\textit{Column Cluster 4}&\textit{Column Cluster 4} & \textit{Column Cluster 4} \\
+\textbf{Models that can handle highly trended series} & \textbf{ETS models with seasonal component and snaive} & \textbf{Neural network} \\
+ARIMA & ETS with damped trend and seasonality & Neural network\\
+ETS with trend & ETS with seasonal component & \\
+ & ETS with trend and seasonality & \\
+ & snaive & \\ \hline
+\end{tabular}
+\end{table}
 
 \begin{itemize}
 \item
@@ -680,28 +700,19 @@ Visualising the data in this manner helps us to identify several important chara
 \item
   For all yearly series, ETS with damped trend has been assinged a very low vote probability.
 \item
-  Some more intricate insights also emerged when zooming in on particular sections of the vote matrix probabilities. For example in cluster 1, the series that are labelled as ARIMA, have also selected ETS-trend with very high probability. Furthermore, in cluster 5, series that are labeled as ``wn'' have selected ``wn'' as their predicted class label with high vote probability, and they also assigned relatively large probability for ARMA/MA/AR while a very small probability has been assigned to ETS-trend and ARIMA. This indicates our meta-learner correctly ientified the simmilarities and dissimilarities between classes.
-\item
-  Based on the vote probability similarities, the columns of the matrix are classified into four clusters as: i) Cluster 1 : nn, rw, theta, ii) Cluster 2: ARMA/AR/MA, ETS-notrend, ETS-damped trend, ETS-notrendnoseasonal, wn, iii) CLuster 3: rwd, iv) Cluster 4: ARIMA, ETS-trend.
-  In general, Cluster 1 models are general models that can be applied to any series, Cluster 2 models are suitable for less trended series, Cluster 3 is random walk with drift on its own, Cluster 4 models are suitable for highly trended series.
-\item
   For monthly series in general, SARIMA, tbats, theta, nn, rwd and stlr have been assigned a very high vote probability.
 \item
   For all monthly series, \texttt{ARMA/MA/AR} has a very low probability.
 \item
   Zooming out the results reveal that the monthly series that have assigned high vote probability to SARIMA have also assigned a high vote probability to ETS models with seasonal components. Furthermore, the series have assigned high vote probability to \texttt{ARIMA} models have also assigned a high probability to \texttt{ETS-dampedtrend} and \texttt{ETS-trend}.
 \item
-  The vote matrix columns are divided into four cluster according as: i) Cluster 1: SARIMA, tbats, theta; ii) Cluster 2: nn, rw, stlar; iii) Cluster 3: ARIMA, ARMA/AR/MA, ETS-dampedtrend, ETS-notrendnoseasonal, ETS-trend, rw, wn; iv) Cluster 4: ETS-dampedtrendseasonal, ETS-seasonal, ETS-trendseasonal, snaive. Cluster 1 models are suitable to model time series with high seasonality, Cluster 2 models canbe used to model time series with complicated behaviour (series with high entropy), Cluster 3 models are non-seasonal time series modes, Cluster 4 models are ETS models with trend component and snaive. Hence, we can say monthly meta-learner correctly identify the similarities and dissimilaries between the classes.
-\item
   Compared to yearly and monthly series, in hour series classification the best forecasting model has been selected with very high probability.
 \item
-  A very low vote proabilities have been assigned to rw, rwd, theta and wn.
+  For hourly series very low vote proabilities have been assigned to rw, rwd, theta and wn.
 \item
   For most of the series nn has been assigned a non-zero vote probability.
 \item
-  Row-wise clustering classifies time series into 5 main clusters as follows: i)cluster 1: All time series in cluster 1 have selected nn with very high probability, ii) Cluster 2: Most of the time series selects stlar with high probability; iii) Cluster 3: Most of the time series selects mstlarima with very high vote probability, iv) Cluster 4: Some series in the cluster select snaive while other series select tbats instead. Zooming out the results we can see the series that have selected snaive with hogh probability have assigned a very low probability for tbats. Further, exploration with the interactive dashboard it was clear series with high daily seasonality select snaive while series with high weekly seasonality select tbats approach.
-\item
-  Interactive dashboard visualisation reveals that there is a matching correspondence between the vote probability matrix and the composition of clusters by true class labels. For example, in cluster 1 and cluster 2 the majority of time series are labelled as random walk with drift (rwd), ARIMA and ETS with trend (ETS-trend). In the vote probability matrix, high probability varules have been assigned to those three classes. Furthermore, in cluster 3 the majority of time series are labelled as rwd, and the series in cluster 3 have selected random walk with drift with high vote probability. In cluster 4, the majority of series are in rwd and ETS-trend and they have been assigned a very high vote probability. In cluster 5, neural network (nn), white noise(wn) and rwd have been assigned a very high probability and the majority of time series in cluster 5 are classified as nn, wn or rwd. This indicates that our meta-learner correctly predicts the classlabels.
+  Interactive dashboard visualisation reveals that there is a matching correspondence between the vote probability matrix and the composition of clusters by true class labels. For example, in cluster 1 and cluster 2 the majority of time series are labelled as random walk with drift (rwd), ARIMA and ETS with trend (ETS-trend). In the vote probability matrix, high probability valuess have been assigned to those three classes. Furthermore, in cluster 3 the majority of time series are labelled as rwd, and the series in cluster 3 have selected random walk with drift with high vote probability. In cluster 4, the majority of series are in rwd and ETS-trend and they have been assigned a very high vote probability. In cluster 5, neural network (nn), white noise(wn) and rwd have been assigned a very high probability and the majority of time series in cluster 5 are classified as nn, wn or rwd. This indicates that our meta-learner correctly predicts the classlabels.
 \item
   Furthermore, the dashboard visualisation shows that the vote matrix visualisations of quarterly data depicted a similar pattern to monthly data. For quarterly and monthly data, the same set of features and class labels are used to train the model, Hence, this consistency between the results of the quarterly and the monthly series would provide evidence in support of the validity and trustability of the meta-learning framework.
 \end{itemize}
@@ -712,7 +723,7 @@ Visualising the data in this manner helps us to identify several important chara
 
 }
 
-\caption{Visualization of vote matrix of yearly series. The X-axis denotes the class labels.}\label{fig:heaty}
+\caption{Visualization of vote matrix of yearly series. The X-axis denotes the class labels.}\label{fig:heatyearly}
 \end{figure}
 
 \begin{figure}[h]
@@ -721,7 +732,7 @@ Visualising the data in this manner helps us to identify several important chara
 
 }
 
-\caption{Visualization of vote matrix of monthly series. The X-axis denotes the class labels.}\label{fig:unnamed-chunk-1}
+\caption{Visualization of vote matrix of monthly series. The X-axis denotes the class labels.}\label{fig:heatmonthly}
 \end{figure}
 
 \begin{figure}[h]
@@ -759,8 +770,7 @@ Within each class the displayed relationship is consistent with the theoretical 
 
 For monthly series, the strength of seasonality is the most important features across all classes. According to \autoref{fig:pdpmonthlyseasonality}, it is immediately apparent that the probability of selecting a seasonal forecast model increases as the strength of seasonality increases. The length of time series is also assigned a high importance within many classes. Partial dependency curves of \autoref{fig:pdpmonthlyT} reveal longer time series tend to select highly parameterized models or models involving seasonal components such as (ETS\_TS, ETS\_DTS, ETS\_S, SARIMA, tbats), while shorter series tend to select simple models such as random walk, random walk with drift etc.
 
-The partial dependency plots of the strength of seasonalities for hourly series are shown in \autoref{fig:seasonalityhourly}. According to \autoref{fig:seasonalityhourly}, the probability of selecting random walk, random walk with drift, theta and white noise process decreases with a higher value of strength of daily seasonality. On the other hand, the probability of the selecting random walk model increases as the strength of weekly seasonality increases. The partial dependency plots of entropy are shown in \autoref{fig:entropyhourly}. The entropy measures forecastability of time series. We can see that the probability of selecting random walk with drift and tbats decreases as the entropy increases. This is consistent with our theoretical expectations. In other words, if the series has a clear trend or a clear trigonometric pattern, the forecastability of the time series is high and the entropy is low. For highly trended series the random walk with drift model is suitable, while for a series with trigonometric pattern the tbats model is suitable. The curvature of the series is appeared among top-5 within mstlarima, mstlets and theta classes for hourly series. According to the \autoref{fig:curvaturehourly}, probability of selecting these models show a non-monotonic relationship with the curvature.
-
+The partial dependency plots of the strength of seasonalities for hourly series are shown in \autoref{fig:seasonalityhourly}. According to \autoref{fig:seasonalityhourly}, the probability of selecting random walk, random walk with drift, theta and white noise process decreases with a higher value of strength of daily seasonality. On the other hand, the probability of the selecting random walk model increases as the strength of weekly seasonality increases.
 \autoref{fig:pdpmonthlyhourlyStability} show the partial dependency plot of stability. One notable difference between the yearly series and monthly series is that for monthly series, the feature stability is ranked among the top five within many classes. The feature stability does not appear to be ranked among the top 5 within any of the classes for yearly series. The stability is ranked important only within random walk and random walk with drift for hourly series. According to the \autoref{fig:pdpmonthlyhourlyStability} we can see that the probability of selecting white noise models increases as stability increases for monthly series while for hourly series the probability of selecting random walk models and random walk with drift models increases as stability increases. The feature diff1y\_acf1 is useful in determining the difference stationarity of the time series. This feature has been ranked among the top-five within the classes of yearly and monthly series. The associated partial dependency plots are shown in \autoref{fig:diff1yacf1}. It is interesting to observe that difference stationary series are less likely to select ARIMA models. The reason could be difference stationary series are more likely to select random walk models, and ETS models. Furthermore, partial difference curve corresponds to white noise class shows difference stationary series have high chance of selecting white noise models. This unusual pattern could be due to over-differencing of the series or interaction effect between features.
 
 The features, sum of the first five partial autocorrelation coefficients, strength of trend and linearity are the most commonly selected features within many classes across all three frequency category. The partial dependency plot for the sum of the first five partial autocorrelation coefficients are shown in \autoref{fig:ypacf5}. All curves shows a turning point in the relations around 1. It also appears that the pattern of the relationship varies across classes as well as frequency categories. \autoref{fig:pdpyearlytrend} show the partial dependency curves for strength of trend. The probability of selecting an ETS model without trend components: ETS (N,N,N), white noise process and ARMA is extremely low when the strength of trend is extremely high, while the opposite relationship can be observed for other classes. The partial dependency plot for linearity is shown in \autoref{fig:linearity}. According to \autoref{fig:linearity} for yearly series random walk with drift and ARMA classes are highly sensitive to the value of linearity around 0. However, the partial dependency curves of linearity for other combinations are relatively flat throughout the range. This could be due to the interaction effect of linearity with other features.
