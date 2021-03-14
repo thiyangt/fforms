@@ -399,7 +399,7 @@ In FFORMS, the forecast-model selection problem is posed as a supervised learnin
 
 We generated several initial plots to visualise the vote matrix calculations based on OOB observations to get a better understanding of the relationships learned by the random forest. Out of different plots we generated "heatmap" seems to be the most useful in visualising vote matrix probabilities. We use `iheatmapr` function in `iheatmapr` package in R to visualise interactive heatmap [@iheatmapr]. Furthermore, to improve the visualization we reorder and cluster the rows and columns of the matrix separately by applying hierarchical clustering approach. The results are shown in \autoref{fig:heatyearly}, \autoref{fig:heatmonthly} and \autoref{fig:heathourly}. Visualising the vote matrix probabilities in this manner helps us to identify several important characteristics learned by the random forest algorithm. 
 
-- According to \autoref{fig:heatyearly}, \autoref{fig:heatmonthly} and \autoref{fig:heathourly}, in general we can see the columns are clustered accroding to the similarities of the models as summarized in . This indicates our meta-learner correctly ientified the simmilarities and dissimilarities between classes.
+- According to \autoref{fig:heatyearly}, \autoref{fig:heatmonthly} and \autoref{fig:heathourly}, in general we can see the columns are clustered accroding to the similarities of forecast models.  The results are summarized in \autoref{cclusters}. An interpretation for each cluster is given in blod text.  Observing the yearly results we can see The results indicates our meta-learner correctly ientified the similarities and dissimilarities between classes.
 
 \begin{table}[!h]
 \centering\scriptsize\tabcolsep=0.12cm
@@ -476,13 +476,6 @@ knitr::include_graphics("images/monthlyvote.png")
 ```{r heathourly, fig.height=10, fig.width=15, fig.cap="Visualization of vote matrix of hourly series. The X-axis denotes the class labels.", fig.pos="h"}
 # This is a plotly graph converted into static graph. The code to generate the graph is available at src/flexdashboardviz.R under hourlyvotedb
 knitr::include_graphics("images/votehourly2.png")
-```
-
-
-\clearpage
-
-```{r pca, comment=NA, fig.height=8, dev=c('png')}
-
 ```
 
 
