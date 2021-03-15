@@ -399,7 +399,7 @@ In FFORMS, the forecast-model selection problem is posed as a supervised learnin
 
 We generated several initial plots to visualise the vote matrix calculations based on OOB observations to get a better understanding of the relationships learned by the random forest. Out of different plots we generated "heatmap" seems to be the most useful in visualising vote matrix probabilities. We use `iheatmapr` function in `iheatmapr` package in R to visualise interactive heatmap [@iheatmapr]. Furthermore, to improve the visualization we reorder and cluster the rows and columns of the matrix separately by applying hierarchical clustering approach. The results are shown in \autoref{fig:heatyearly}, \autoref{fig:heatmonthly} and \autoref{fig:heathourly}. Visualising the vote matrix probabilities in this manner helps us to identify several important characteristics learned by the random forest algorithm. 
 
-- According to \autoref{fig:heatyearly}, \autoref{fig:heatmonthly} and \autoref{fig:heathourly}, in general we can see the columns are clustered accroding to the similarities of forecast models.  The results are summarized in \autoref{cclusters}. An interpretation for each cluster is given in blod text.  Observing the yearly results we can see The results indicates our meta-learner correctly ientified the similarities and dissimilarities between classes.
+- According to \autoref{fig:heatyearly}, \autoref{fig:heatmonthly} and \autoref{fig:heathourly}, in general we can see the columns are clustered accroding to the similarities of forecast models.  The results are summarized in \autoref{cclusters}. An interpretation for each cluster is given in blod text.  Observing the yearly results we can see class labels are classified as highly trended, models without strong trend and models that can be adapted to any situation. Furthermore, for monthly series class labels are correctly classified according to models with trend and/or seasonal component and models without seasonal components.  Moreover, for hourly series there are vote matrix similarities for models that can handle multiple seasonal component. Hence, this indicates our meta-learner correctly ientified the similarities and dissimilarities between classes.
 
 \begin{table}[!h]
 \centering\scriptsize\tabcolsep=0.12cm
@@ -457,7 +457,6 @@ ETS with trend & ETS with seasonal component & \\
 
 - For most of the series nn has been assigned a non-zero vote probability.
 
-
 - Interactive dashboard visualisation reveals that there is a matching correspondence between the vote probability matrix and the composition of clusters by true class labels. For example, in cluster 1 and cluster 2 the majority of time series are labelled as random walk with drift (rwd), ARIMA and ETS with trend (ETS-trend). In the vote probability matrix, high probability valuess have been assigned to those three classes. Furthermore, in cluster 3 the majority of time series are labelled as rwd, and the series in cluster 3 have selected random walk with drift with high vote probability. In cluster 4, the majority of series are in rwd and ETS-trend and they have been assigned a very high vote probability. In cluster 5, neural network (nn), white noise(wn) and rwd have been assigned a very high probability and the majority of time series in cluster 5 are classified as nn, wn or rwd. This indicates that our meta-learner correctly predicts the classlabels. 
 
 - Furthermore, the dashboard visualisation shows that the vote matrix visualisations of quarterly data depicted a similar pattern to monthly data. For quarterly and monthly data, the same set of features and class labels are used to train the model, Hence, this consistency between the results of the quarterly and the monthly series would provide evidence in support of the validity and trustability of the meta-learning framework.
@@ -506,8 +505,6 @@ The features, sum of the first five partial autocorrelation coefficients, streng
 ```{r pdpyearlyurpp, fig.height=4.5, fig.width=15, fig.pos="h", dev='pdf', fig.cap="Partial dependence plots for Phillips-Perrorn unit root test statistic. The shading shows the 95\\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class. All classes show a turning point in the relationship around zero."}
 ```
 
-
-
 ```{r pdpmonthlyseasonality, fig.height=6, fig.width=15, fig.cap="Partial dependence plots for strength of seasonality for monthly series. The shading shows the 95\\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class. Probability of selecting forecast models with seasonal components increases as seasonality increases.", fig.pos="h"}
 
 ```
@@ -516,10 +513,8 @@ The features, sum of the first five partial autocorrelation coefficients, streng
 
 ```
 
-
 ```{r seasonalityhourly, fig.height=5, fig.width=20, fig.cap="Partial dependence plots for strength of seasonality for hourly series. The shading shows the 95\\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class.", fig.pos="h"}
 ```
-
 
 ```{r pdpmonthlyhourlyStability, fig.height=4.5, fig.width=15, fig.cap="Partial dependence plots for stability for monthly and hourly series. The shading shows the 95\\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class.", fig.pos="h"}
 
@@ -529,19 +524,14 @@ The features, sum of the first five partial autocorrelation coefficients, streng
 
 ```
 
-
-
 ```{r ypacf5, fig.height=4.5, fig.width=15, fig.cap="Partial dependence plots for y\\_pacf5 for yearly monthly and hourly series. The shading shows the 95\\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class. ", fig.pos="h"}
 ```
-
 
 ```{r pdpyearlytrend, fig.height=6, fig.width=15, fig.cap="Partial dependence plots for trend for yearly and monthly series. The shading shows the 95\\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class. Probability of selecting ETS models without a trend component and stationary models (WN and ARMA) decreases for an extremely high value of trend.", fig.pos="h"}
 ```
 
-
 ```{r linearity, fig.height=8, fig.width=15, fig.cap="Partial dependence plots for linearity for yearly monthly and hourly series. The shading shows the 95\\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class. ", fig.pos="h"}
 ```
-
 
 ```{r y2dpdp,  fig.height=6, fig.width=15,fig.cap="Two-way partial dependence plots for linearity for yearly series. Dark regions show the high probability of belonging to the corresponding class shown in the plot title.", fig.pos="h", dev="pdf"}
 ```

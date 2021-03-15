@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.3.14)  14 MAR 2021 09:06
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.3.14)  15 MAR 2021 06:48
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1763,6 +1763,9 @@ File: figure/pdpyearlyurpp-1.pdf Graphic file (type pdf)
 <use figure/pdpyearlyurpp-1.pdf>
 Package pdftex.def Info: figure/pdpyearlyurpp-1.pdf  used on input line 776.
 (pdftex.def)             Requested size: 455.24411pt x 136.57448pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
 <figure/pdpmonthlyseasonality-1.pdf, id=403, 1084.05pt x 433.62pt>
 File: figure/pdpmonthlyseasonality-1.pdf Graphic file (type pdf)
 <use figure/pdpmonthlyseasonality-1.pdf>
@@ -1838,9 +1841,8 @@ Package pdftex.def Info: figure/y2dpdp-1.pdf  used on input line 857.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[22 <./figure/pdpyearlyurpp-1.pdf>] [23 <./figure/pdpmonthlyseasonality-1.pdf> 
-<./figure/pdpmonthlyT-1.pdf>]
-<figure/m2dpdp-1.pdf, id=462, 722.7pt x 650.43pt>
+[22]
+<figure/m2dpdp-1.pdf, id=432, 722.7pt x 650.43pt>
 File: figure/m2dpdp-1.pdf Graphic file (type pdf)
 <use figure/m2dpdp-1.pdf>
 Package pdftex.def Info: figure/m2dpdp-1.pdf  used on input line 868.
@@ -1848,10 +1850,11 @@ Package pdftex.def Info: figure/m2dpdp-1.pdf  used on input line 868.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[24 <./figure/seasonalityhourly-1.pdf> <./figure/pdpmonthlyhourlyStability-1.pd
-f>] [25 <./figure/diff1yacf1-1.pdf> <./figure/ypacf5-1.pdf> <./figure/pdpyearly
-trend-1.pdf>] [26 <./figure/linearity-1.pdf> <./figure/y2dpdp-1.pdf>] [27 <./fi
-gure/m2dpdp-1.pdf>]
+[23 <./figure/pdpyearlyurpp-1.pdf> <./figure/pdpmonthlyseasonality-1.pdf>] [24 
+<./figure/pdpmonthlyT-1.pdf> <./figure/seasonalityhourly-1.pdf> <./figure/pdpmo
+nthlyhourlyStability-1.pdf> <./figure/diff1yacf1-1.pdf>] [25 <./figure/ypacf5-1
+.pdf> <./figure/pdpyearlytrend-1.pdf>] [26 <./figure/linearity-1.pdf> <./figure
+/y2dpdp-1.pdf>] [27 <./figure/m2dpdp-1.pdf>]
 <figure/h2dpdp-1.pdf, id=592, 650.43pt x 144.54pt>
 File: figure/h2dpdp-1.pdf Graphic file (type pdf)
 <use figure/h2dpdp-1.pdf>
@@ -1906,7 +1909,7 @@ Package logreq Info: Writing requests to 'fforms.run.xml'.
 Here is how much of TeX's memory you used:
  34589 strings out of 480983
  645287 string characters out of 5905875
- 1418549 words of memory out of 5000000
+ 1418548 words of memory out of 5000000
  50446 multiletter control sequences out of 15000+600000
  528737 words of font info for 481 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
@@ -1928,7 +1931,7 @@ rary/TinyTeX/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></Users/thiyangasha
 minitalagala/Library/TinyTeX/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></U
 sers/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/fonts/type1/urw/palatin
 o/uplri8a.pfb>
-Output written on fforms.pdf (36 pages, 836896 bytes).
+Output written on fforms.pdf (36 pages, 837060 bytes).
 PDF statistics:
  805 PDF objects out of 1000 (max. 8388607)
  629 compressed objects within 7 object streams
