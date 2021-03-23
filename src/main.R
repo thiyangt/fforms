@@ -560,9 +560,9 @@ NgridM_long <- NgridM_long %>%
                         "rwd"="rwd", "SARIMA"="SARIMA","theta"="theta"))
 
 NgridM_long$class <- factor(NgridM_long$class,
-                            levels = c("rw", "rwd", "ETS_NTNS", "ETS_T", "ETS_DTS",
+                            levels = c("ARIMA","rw", "rwd", "ETS_NTNS", "ETS_T", "ETS_DTS",
                                         "ETS_S","SARIMA",
-                                       "ARIMA", "wn", "theta"))
+                                        "wn", "theta"))
 NgridM_long <- NgridM_long %>% rename("T"="N")
 
 plot_pdp_monthlyN <- ggplot(data = NgridM_long, aes_string(x = NgridM_long$"T", y = "probability")) +
@@ -718,6 +718,36 @@ plot_pdp_hourly_curvature <- ggplot(data = curvaturehourly1_long, aes_string(x =
   facet_grid(. ~ class)+theme(strip.text.x = element_text(size = 16))+xlab("curvature")+ylab("probability of selecting forecast-models")
 plot_pdp_hourly_curvature
 
+## ----diff1yacf1y
+load("data/yearly/diff1y_acf1grid.rda")
+keep.modelnames <- c("ARIMA", "ARMA.AR.MA", "ETS.dampedtrend", "ETS.notrendnoseasonal",
+                     "ETS.trend", "nn", "rw", "rwd", "theta", "wn")
+keepdiff1yacf1 <- c(keep.modelnames, "diff1y_acf1")
+diff1yacf1grid <- diff1y_acf1grid[, names(diff1y_acf1grid) %in% keepdiff1yacf1]
+diff1yacf1grid_long <- gather(diff1yacf1grid, class, probability, "ARIMA":"wn", factor_key = TRUE)
+diff1yacf1grid_long <- diff1yacf1grid_long %>%
+  mutate(class = recode(class, nn="nn",
+                        theta = "theta",
+                        wn = "wn",
+                        "ARMA.AR.MA" = "ARMA",
+                        ARIMA = "ARIMA",
+                        "ETS.notrendnoseasonal" = "ETS_NTNS",
+                        "ETS.dampedtrend" = "ETS_DT",
+                        "ETS.trend" = "ETS_T",
+                        "rwd" = "rwd",
+                        "rw" = "rw" ))
+
+diff1yacf1grid_long$class <- factor(diff1yacf1grid_long$class,
+                                    levels = c("wn", "ARMA", "ETS_DT", "ETS_NTNS", "ETS_T", "ARIMA",   "nn" , "theta", "rw", "rwd"))
+
+
+
+plot_pdp_yearly <- ggplot(data = diff1yacf1grid_long, aes_string(x = diff1yacf1grid_long$diff1y_acf1, y = "probability")) +
+  stat_summary(fun.y = mean, geom = "line", col = "#7570b3", size = 1) +
+  stat_summary(fun.data = mean_cl_normal,fill="#7570b3", geom = "ribbon", fun.args = list(mult = 1), alpha = 0.3, se=TRUE)+ 
+  theme(axis.text.x = element_text(angle = 90), text = element_text(size=18), axis.title = element_text(size = 16))+
+  facet_grid(. ~ class)+theme(strip.text.x = element_text(size = 10))+xlab("diffy_acf1")+ylab("probability of selecting forecast-models")
+plot_pdp_yearly
 
 ## ----diff1yacf1
 load("data/yearly/diff1y_acf1grid.rda")
