@@ -503,9 +503,7 @@ ur_ppgrid_long <- ur_ppgrid_long %>%
                         "rwd" = "rwd",
                         "rw" = "rw" ))
 ur_ppgrid_long$class <- factor(ur_ppgrid_long$class,
-                               levels = c("rw", "rwd", "ETS_T", "ETS_DT", "ETS_NTNS",
-                                          "ARIMA", "ARMA", "wn", "theta", "nn" ))
-
+                               levels = c("wn", "ARMA", "ETS_DT", "ETS_NTNS", "ETS_T", "ARIMA",   "nn" , "theta", "rw", "rwd"))
 plot_pdp_yearly <- ggplot(data = ur_ppgrid_long, aes_string(x = ur_ppgrid_long$ur_pp, y = "probability")) +
   stat_summary(fun.y = mean, geom = "line", col = "#7570b3", size = 1) +
   stat_summary(fun.data = mean_cl_normal,fill="#7570b3", geom = "ribbon", fun.args = list(mult = 1), alpha = 0.3, se=TRUE)+ 
@@ -534,9 +532,9 @@ seasonalitygridM_long <- seasonalitygridM_long %>%
 seasonalitygridM_long <- seasonalitygridM_long %>% rename("seasonality_M"="seasonality")
 
 seasonalitygridM_long$class <- factor(seasonalitygridM_long$class,
-                                      levels = c("snaive","rw", "rwd", "ETS_NTNS","ETS_DT", "ETS_T", "ETS_DTS",
-                                                 "ETS_TS", "ETS_S","tbats","stlar", "SARIMA",
-                                                 "ARIMA", "ARMA", "wn", "theta", "nn" ))
+                                      levels = c("ARMA", "wn", "ARIMA", "rw", "ETS_NTNS", "ETS_DT", "ETS_T", "ETS_DTS",
+                                                 "ETS_TS", "ETS_S", "snaive", "tbats", "theta", "SARIMA", "stlar", "rwd", "nn"))
+
 
 plot_pdp_monthly_seasonal <- ggplot(data = seasonalitygridM_long, aes_string(x = seasonalitygridM_long$"seasonality_M", y = "probability")) +
   stat_summary(fun.y = mean, geom = "line", col = "#d95f02", size = 1) +
