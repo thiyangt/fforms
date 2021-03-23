@@ -35,45 +35,7 @@ output:
     citation_package: biblatex
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE, cache=TRUE, messages=FALSE, warning=FALSE)
-library(knitr)
-opts_chunk$set(
-  warning = FALSE,
-  message = FALSE,
-  echo = FALSE,
-  fig.path = "figure/",
-  cache.path = "cache/",
-  fig.align = "center",
-  fig.show = "hold",
-  cache = TRUE,
-  external = TRUE,
-  dev = "pdf",
-  fig.height = 5,
-  fig.width = 8,
-  out.width = "\\textwidth"
-)
-read_chunk("src/main.R")
-read_chunk("src/flexdashboardviz.R")
-library(Mcomp)
-library(ggplot2)
-library(grid)
-library(gridExtra)
-library(ggrepel)
-library(png)
-library(tsfeatures)
-library(tidyverse)
-library(ggpubr)
-library(reshape2)
-#devtools::install_github("thomasp85/patchwork")
-library(patchwork)
-library(Hmisc)
-library(seer)
-library(iheatmapr)
-#install.packages("webshot") # to convert plotly to png
-library(webshot)
-#webshot::install_phantomjs()
-```
+
 
 
 # Introduction
@@ -108,36 +70,14 @@ Rather than work with the time series directly at the level of individual observ
 The choice of the most appropriate set of features depends on both the nature of the time series being analysed, and the purpose of the analysis. In \autoref{results}, we study the time series from the M1, M3 and M4 competitions [@makridakis1982accuracy; @makridakis2000m3; @makridakis2019m4], and we select features for the purpose of forecast model selection. The M1, M3 and M4 competitions involve time series of differing length, scale and other properties. We include length as one of our features, but the remaining features are independent of scale and asymptotically independent of the length of the time series (i.e., they are ergodic). As our main focus is forecasting, we select features which have discriminatory power in selecting a good model for forecasting.
 
 
-```{r fig1, fig.cap="Time-domain representation of time series (left) and feature-based representation of time series (right).", fig.width=10, fig.height=5}
-# Extract required series
-library(patchwork)
-series_id <- c("N0001", "N0633", "N0625", "N0645","N1912", "N2012")
-six_series <- lapply(M3[series_id], function(u){u$x})
-p <- lapply(six_series,
-  function(u) {autoplot(u) + xlab("") + ylab("")}
-)
-for (i in seq_along(six_series))
-  p[[i]] <- p[[i]] + ggtitle(series_id[i])
-#p1 <- grid.arrange(grobs = p, ncol = 2, nrow = 3)
-p1 <- (p[[1]]|p[[2]])/((p[[3]]|p[[4]]))/(p[[5]]|p[[6]])
-df <- tsfeatures(six_series, c("stl_features")) %>%
-  select(trend, seasonal_strength) %>%
-  rename(seasonality = seasonal_strength) %>%
-  replace_na(list(seasonality = 0))
-df$id <- names(six_series)
-p2 <- ggplot(df, aes(x = trend, y = seasonality)) +
-  geom_point() +
-  xlim(0, 1) + ylim(0, 1) +
-  coord_fixed() +
-  geom_text_repel(
-    aes(label = id),
-    colour = "black",
-    size = 3,
-    box.padding = unit(0.5, "lines")
-  ) +
-  theme(legend.position = "none")
-p1|p2
-```
+\begin{figure}
+
+{\centering \includegraphics[width=\textwidth]{figure/fig1-1} 
+
+}
+
+\caption{Time-domain representation of time series (left) and feature-based representation of time series (right).}(\#fig:fig1)
+\end{figure}
 
 
 ## Meta-learning for algorithm selection
@@ -145,9 +85,14 @@ p1|p2
 John Rice was an early and strong proponent of the idea of meta-learning, which he called the algorithm selection problem (ASP) [@rice1976]. The term *meta-learning* started to appear with the emergence of the machine-learning literature.
 
 
-```{r rice, fig.cap="Rice's framework for the Algorithm Selection Problem.", out.width="60%"}
-knitr::include_graphics("images/RiceFramework.png")
-```
+\begin{figure}
+
+{\centering \includegraphics[width=0.6\linewidth]{images/RiceFramework} 
+
+}
+
+\caption{Rice's framework for the Algorithm Selection Problem.}(\#fig:rice)
+\end{figure}
 
 Rice's framework for algorithm selection is shown in \autoref{fig:rice} and comprises four main components. The problem space, $P$, represents the data sets used in the study. The feature space, $F$, is the range of measures that characterize the problem space $P$. The algorithm space, $A$, is a list of suitable candidate algorithms which can be used to find solutions to the problems in $P$. The performance metric, $Y$, is a measure of algorithm performance such as accuracy, speed, etc. The main challenge in ASP to identify the selection mapping $S$ from the feature space to the algorithm space $A$. A formal definition of the algorithm selection problem is given by @smith2009cross, and repeated below.
 
@@ -182,9 +127,14 @@ More recently, @kuck2016meta proposed a meta-learning framework based on neural 
 Our proposed FFORMS framework, presented in \autoref{fig:framework}, builds on this preceding research. The offline and online phases are shown in blue and red respectively. A classification algorithm (the meta-learner) is trained during the offline phase and is then used to select an appropriate forecast model for a new time series in the online phase. We use machine learning interpretability tools to gain insights into what is happening under the hood of the FFORMS framework. We refer to this process as "peeking inside FFORMS".
 
 
-```{r framework, fig.cap="FFORMS (Feature-based FORecast-Model Selection) framework. The offline phase is shown in blue, the online phase is in red.", out.width='110%'}
-knitr::include_graphics("images/framework.png")
-```
+\begin{figure}
+
+{\centering \includegraphics[width=1.1\linewidth]{images/framework} 
+
+}
+
+\caption{FFORMS (Feature-based FORecast-Model Selection) framework. The offline phase is shown in blue, the online phase is in red.}(\#fig:framework)
+\end{figure}
 
 In order to train our classification algorithm, we need a large collection of time series which are similar to those we will be forecasting. We assume that we have an essentially infinite population of time series, and we take a sample of them in order to train the classification algorithm denoted as the "observed sample". The new time series we wish to forecast can be thought of as additional draws from the same population.  Hence, any conclusions made from the classification framework refer only to the population from which the sample has been selected. We may call this the "target population" of time series. It is important to have a well-defined target population to avoid misapplying the classification rules. In practice, we may wish to augment the set of observed time series by simulating new time series similar to those in the assumed population (we provide details and discussion in Section \ref{simulatingseries} that follows). We denote the total collection of time series used for training the classifier as the "reference set".
 Each time series within the reference set is split into a training period and a test period. From each training period we compute a range of time series features, and fit a selection of candidate models. The calculated features form the input vector to the classification algorithm. Using the fitted models, we generate forecasts and identify the "best" model for each time series based on a forecast error measure (e.g., MASE) calculated over the test period. The models deemed "best" form the output labels for the classification algorithm. The pseudo code for our proposed framework is presented in Algorithm \ref{alg:algo-lab} below. In the following sections, we briefly discuss aspects of the offline phase.
@@ -464,28 +414,46 @@ ETS with trend & ETS with seasonal component & \\
 - Furthermore, the dashboard visualisation shows that the vote matrix visualisations of quarterly data depicted a similar pattern to monthly data. For quarterly and monthly data, the same set of features and class labels are used to train the model, Hence, this consistency between the results of the quarterly and the monthly series would provide evidence in support of the validity and trustability of the meta-learning framework.
 
 
-```{r heatyearly, fig.height=10, fig.width=20, fig.cap="Visualization of vote matrix of yearly series. The X-axis denotes the class labels.", fig.pos="h"}
-# This is a plotly graph converted into static graph. The code to generate the graph is available at src/flexdashboardviz.R under yearlydb
-knitr::include_graphics("images/yearlyvote.png")
-```
+\begin{figure}[h]
 
-```{r heatmonthly, fig.height=10, fig.width=20, fig.cap="Visualization of vote matrix of monthly series. The X-axis denotes the class labels.", fig.pos="h"}
-# This is a plotly graph converted into static graph. The code to generate the graph is available at src/flexdashboardviz.R under monthlydb
-knitr::include_graphics("images/monthlyvote.png")
-```
+{\centering \includegraphics[width=\textwidth]{images/yearlyvote} 
 
-```{r heathourly, fig.height=10, fig.width=15, fig.cap="Visualization of vote matrix of hourly series. The X-axis denotes the class labels.", fig.pos="h"}
-# This is a plotly graph converted into static graph. The code to generate the graph is available at src/flexdashboardviz.R under hourlyvotedb
-knitr::include_graphics("images/votehourly2.png")
-```
+}
+
+\caption{Visualization of vote matrix of yearly series. The X-axis denotes the class labels.}(\#fig:heatyearly)
+\end{figure}
+
+\begin{figure}[h]
+
+{\centering \includegraphics[width=\textwidth]{images/monthlyvote} 
+
+}
+
+\caption{Visualization of vote matrix of monthly series. The X-axis denotes the class labels.}(\#fig:heatmonthly)
+\end{figure}
+
+\begin{figure}[h]
+
+{\centering \includegraphics[width=\textwidth]{images/votehourly2} 
+
+}
+
+\caption{Visualization of vote matrix of hourly series. The X-axis denotes the class labels.}(\#fig:heathourly)
+\end{figure}
 
 
 
 
 ## Which features are the most important and where are they important?
 
-```{r viplot, fig.height=18, fig.width=20, fig.pos="h", dev='pdf', fig.cap="Visualisation  of top five features across frequency categories and classes. The X-axis denotes the features and Y-axis denotes the forecast model classes. The cell colours denote the frequency group in which the fetures ranked among top five. Strength of trend, linearity and strength of seasonality have been selected among top five features across many classes."}
-```
+\begin{figure}[h]
+
+{\centering \includegraphics[width=\textwidth]{figure/viplot-1} 
+
+}
+
+\caption{Visualisation  of top five features across frequency categories and classes. The X-axis denotes the features and Y-axis denotes the forecast model classes. The cell colours denote the frequency group in which the fetures ranked among top five. Strength of trend, linearity and strength of seasonality have been selected among top five features across many classes.}(\#fig:viplot)
+\end{figure}
 
 \autoref{fig:viplot} shows top-5 most important features the within each class across yearly, monthly and daily series. The main point here is strength of trend, sum of first five partial autocorrelation coefficients, stability,  the first ACF value of the differenced series and linearity are the most important features across many classes and frequency categories. The information about the strength of trend in the series, linearity and  sum of first five partial autocorrelation are very important when selecting white noise process among all frequency categories. For yearly data, the test statistic based on the Phillips-Perron unit root test has been ranked among top-5 within all classes. In addition to linearity, the other features related to different types of trend (damped trend, measured by beta, and exponential trend, measured by curvature) are assigned a very high importance within ETS_T, ETS_DT and ETS_NTNS, which handle different versions of trend within the ETS family. The length of time series (T) and stability are assigned a very high importance within monthly series. For seasonal time series strength of seasonality has been selected among top-5 features across all classes. For hourly data, the strength of daily seasonality (measured by seasonal_d) appears to be more important than the strength of weekly seasonality (measured by seasonal_w). In addition to the strength of seasonality, the other features such as ACF, PACF-based features related to seasonal lag and seasonally differenced series are also ranked among top five within some classes. 
 
@@ -504,54 +472,128 @@ The partial dependency plots of the strength of seasonalities for hourly series 
 The features, sum of the first five partial autocorrelation coefficients, strength of trend and linearity are the most commonly selected features within many classes across all three frequency category. The partial dependency plot for the sum of the first five partial autocorrelation  coefficients are shown in \autoref{fig:ypacf5}. All curves shows a turning point in the relations around 1. It also appears that the pattern of the relationship varies across classes as well as frequency categories.  \autoref{fig:pdpyearlytrend} show the partial dependency curves for strength of trend. The probability of selecting an ETS model without trend components: ETS (N,N,N), white noise process and ARMA is extremely low when the strength of trend is extremely high, while the opposite relationship can be observed for other classes. The partial dependency plot for linearity is shown in \autoref{fig:linearity}. According to \autoref{fig:linearity} for yearly series random walk with drift and ARMA classes are highly sensitive to the value of linearity around 0. However, the partial dependency curves of linearity for other combinations are relatively flat throughout the range. This could be due to the interaction effect of linearity with other features.
 
 
-```{r pdpyearlyurpp, fig.height=4.5, fig.width=15, fig.pos="h", dev='pdf', fig.cap="Partial dependence plots for Phillips-Perrorn unit root test statistic. The shading shows the 95\\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class. All classes show a turning point in the relationship around zero."}
-```
+\begin{figure}[h]
 
-```{r pdpmonthlyseasonality, fig.height=6, fig.width=15, fig.cap="Partial dependence plots for strength of seasonality for monthly series. The shading shows the 95\\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class. Probability of selecting forecast models with seasonal components increases as seasonality increases.", fig.pos="h"}
+{\centering \includegraphics[width=\textwidth]{figure/pdpyearlyurpp-1} 
 
-```
+}
 
-```{r pdpmonthlyT, fig.height=4.5, fig.width=15, fig.pos="h", dev='pdf', fig.cap="Partial dependence plots for length of time series (T). The shading shows the 95\\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class. Probability of selecting rw and rwd decreases as the length > 500.", fig.pos="h", cache=FALSE}
+\caption{Partial dependence plots for Phillips-Perrorn unit root test statistic. The shading shows the 95\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class. All classes show a turning point in the relationship around zero.}(\#fig:pdpyearlyurpp)
+\end{figure}
 
-```
+\begin{figure}[h]
 
-```{r seasonalityhourly, fig.height=5, fig.width=20, fig.cap="Partial dependence plots for strength of seasonality for hourly series. The shading shows the 95\\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class.", fig.pos="h"}
-```
+{\centering \includegraphics[width=\textwidth]{figure/pdpmonthlyseasonality-1} 
 
-```{r pdpmonthlyhourlyStability, fig.height=4.5, fig.width=15, fig.cap="Partial dependence plots for stability for monthly and hourly series. The shading shows the 95\\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class.", fig.pos="h"}
+}
 
-```
+\caption{Partial dependence plots for strength of seasonality for monthly series. The shading shows the 95\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class. Probability of selecting forecast models with seasonal components increases as seasonality increases.}(\#fig:pdpmonthlyseasonality)
+\end{figure}
 
-```{r diff1yacf1, fig.height=4.5, fig.width=15, fig.cap="Partial dependence plots for diff1y\\_acf1 for yearly and monthly series. The shading shows the 95\\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class.", fig.pos="h"}
+\begin{figure}[h]
 
-```
+{\centering \includegraphics[width=\textwidth]{figure/pdpmonthlyT-1} 
 
-```{r ypacf5, fig.height=4.5, fig.width=15, fig.cap="Partial dependence plots for y\\_pacf5 for yearly monthly and hourly series. The shading shows the 95\\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class. ", fig.pos="h"}
-```
+}
 
-```{r pdpyearlytrend, fig.height=6, fig.width=15, fig.cap="Partial dependence plots for trend for yearly and monthly series. The shading shows the 95\\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class. Probability of selecting ETS models without a trend component and stationary models (WN and ARMA) decreases for an extremely high value of trend.", fig.pos="h"}
-```
+\caption{Partial dependence plots for length of time series (T). The shading shows the 95\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class. Probability of selecting rw and rwd decreases as the length > 500.}(\#fig:pdpmonthlyT)
+\end{figure}
 
-```{r linearity, fig.height=8, fig.width=15, fig.cap="Partial dependence plots for linearity for yearly monthly and hourly series. The shading shows the 95\\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class. ", fig.pos="h"}
-```
+\begin{figure}[h]
 
-```{r y2dpdp,  fig.height=6, fig.width=15,fig.cap="Two-way partial dependence plots for linearity for yearly series. Dark regions show the high probability of belonging to the corresponding class shown in the plot title.", fig.pos="h", dev="pdf"}
-```
+{\centering \includegraphics[width=\textwidth]{figure/seasonalityhourly-1} 
+
+}
+
+\caption{Partial dependence plots for strength of seasonality for hourly series. The shading shows the 95\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class.}(\#fig:seasonalityhourly)
+\end{figure}
+
+\begin{figure}[h]
+
+{\centering \includegraphics[width=\textwidth]{figure/pdpmonthlyhourlyStability-1} 
+
+}
+
+\caption{Partial dependence plots for stability for monthly and hourly series. The shading shows the 95\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class.}(\#fig:pdpmonthlyhourlyStability)
+\end{figure}
+
+\begin{figure}[h]
+
+{\centering \includegraphics[width=\textwidth]{figure/diff1yacf1-1} 
+
+}
+
+\caption{Partial dependence plots for diff1y\_acf1 for yearly and monthly series. The shading shows the 95\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class.}(\#fig:diff1yacf1)
+\end{figure}
+
+\begin{figure}[h]
+
+{\centering \includegraphics[width=\textwidth]{figure/ypacf5-1} 
+
+}
+
+\caption{Partial dependence plots for y\_pacf5 for yearly monthly and hourly series. The shading shows the 95\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class. }(\#fig:ypacf5)
+\end{figure}
+
+\begin{figure}[h]
+
+{\centering \includegraphics[width=\textwidth]{figure/pdpyearlytrend-1} 
+
+}
+
+\caption{Partial dependence plots for trend for yearly and monthly series. The shading shows the 95\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class. Probability of selecting ETS models without a trend component and stationary models (WN and ARMA) decreases for an extremely high value of trend.}(\#fig:pdpyearlytrend)
+\end{figure}
+
+\begin{figure}[h]
+
+{\centering \includegraphics[width=\textwidth]{figure/linearity-1} 
+
+}
+
+\caption{Partial dependence plots for linearity for yearly monthly and hourly series. The shading shows the 95\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class. }(\#fig:linearity)
+\end{figure}
+
+\begin{figure}[h]
+
+{\centering \includegraphics[width=\textwidth]{figure/y2dpdp-1} 
+
+}
+
+\caption{Two-way partial dependence plots for linearity for yearly series. Dark regions show the high probability of belonging to the corresponding class shown in the plot title.}(\#fig:y2dpdp)
+\end{figure}
 
 The two-way partial dependency plots of linearity are explored to see how linearity behave in the presence of other top-5 features. The associated two-way partial dependency plots are shown in \autoref{fig:y2dpdp}, \autoref{fig:m2dpdp} and \autoref{fig:h2dpdp} for yearly, monthly and hourly series respectively. According to the \autoref{fig:y2dpdp} within wn, random walk, theta and nn classes linearity shows a pattern of interactivity with lmres_acf1 and diff1y_acf1. Within both ARIMA and ARMA classes main effect of linearity dominates. This is consistent with partial dependency curves we observed in \autoref{fig:linearity}. For monthly series, linearity shows interactivity with acf value at the first seasonal lag of seasonally-differenced series, stability, first ACF value at the remainder series and a parameter estimate of ETS(A, A, A) model.  According to \autoref{fig:m2dpdp}, we can see there is a unique pattern of interactivity existing within each class. The two-way partial dependency plot for hourly series between the ACF value at the first seasonal lag of seasonally-differenced series and linearity are shown in \autoref{fig:h2dpdp}. The inconsistent level of colour intensity throughout the panels in tbats, nn and stlar indicate probability of selecting the corresponding forecast models changes according to the changes in both the features. Within rw and mstlarima we can see a separation between the lower half and the upper half due to the main effect of sediff_seacf1.  The partial dependency curves of theta for stability is relatively flat. \autoref{fig:thetapdp} shows how trend, length, first autocorrelation coefficient of the differenced series interact with stability within different ranges. For example, \autoref{fig:thetapdp} as length of time series decreases, a pattern of interaction is visible with stability. 
 
 
-```{r m2dpdp,  fig.height=9, fig.width=10,fig.cap="Two-way partial dependence plots for linearity for monthly series. Dark regions show the high probability of belonging to the corresponding class shown in the plot title.", fig.pos="h", dev="pdf"}
-```
+\begin{figure}[h]
+
+{\centering \includegraphics[width=\textwidth]{figure/m2dpdp-1} 
+
+}
+
+\caption{Two-way partial dependence plots for linearity for monthly series. Dark regions show the high probability of belonging to the corresponding class shown in the plot title.}(\#fig:m2dpdp)
+\end{figure}
 
 \clearpage
 
-```{r h2dpdp,  fig.height=2, fig.width=9,fig.cap="Two-way partial dependence plots for linearity for hourly series. Dark regions show the high probability of belonging to the corresponding class shown in the plot title.", fig.pos="h", dev="pdf"}
-```
+\begin{figure}[h]
+
+{\centering \includegraphics[width=\textwidth]{figure/h2dpdp-1} 
+
+}
+
+\caption{Two-way partial dependence plots for linearity for hourly series. Dark regions show the high probability of belonging to the corresponding class shown in the plot title.}(\#fig:h2dpdp)
+\end{figure}
 
 
-```{r thetapdp,  fig.height=4, fig.width=15, fig.cap="Two-way partial dependence plots for linearity for monthly series within theta class. Dark regions show the high probability of belonging to the corresponding class shown in the plot title.", fig.pos="h", dev="pdf"}
-```
+\begin{figure}[h]
+
+{\centering \includegraphics[width=\textwidth]{figure/thetapdp-1} 
+
+}
+
+\caption{Two-way partial dependence plots for linearity for monthly series within theta class. Dark regions show the high probability of belonging to the corresponding class shown in the plot title.}(\#fig:thetapdp)
+\end{figure}
 
 
 FFORMS framework classified some series with very high probability (greater than 0.6), which indicates for a given series, majority of the trees voted for the same class. Hence, these instances can be considered as series that are easy to classify. We next try to visualize the distribution of these instances in the feature space. This is achieved by projecting the training dataset into a meaningful low-dimensional feature space and then visualize locations of the series that are classified with very high probabilities. This approach is a visualisation of model in the data space [@wickham2015visualizing]. We use principal component analysis (PCA) to map each time series as a point in a two-dimensional instance space given by features. The corresponding results for yearly, monthly and hourly are shown in \autoref{fig:pcayearly}, \autoref{fig:pcamonthly} and \autoref{fig:pcahourly}. Most of the yearly series that are classified with very high probability belong to either ARIMA class or random walk with drift class. Distribution of the trend in the feature space shows they are highly trended. Furthermore, these ARIMA series and random walk with drift are even visually distinguishable based on the features beta and diff1y_acf5. Furthermore, the monthly series classified into SARIMA and stlar class with high probability take very low value for entropy, which means the series are easily forecastable. On the other hand the series that are classified in to neural network class with high probability are less forecastable, less trended (low values for beta) and less seasonal (low value for sediff_acf5). For hourly series, the series that are classified with very high probability are very high in length. Lengthy time series means more information, hence easy to recognise clear patterns and therefore easy to classify. 
