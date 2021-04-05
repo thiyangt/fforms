@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.3.21)  5 APR 2021 10:49
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.3.21)  5 APR 2021 11:09
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1903,7 +1903,7 @@ Here is how much of TeX's memory you used:
  50561 multiletter control sequences out of 15000+600000
  528217 words of font info for 475 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 102i,15n,102p,2206b,15693s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 102i,15n,102p,2207b,15693s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/font
 s/enc/dvips/base/8r.enc}</Users/thiyangashaminitalagala/Library/TinyTeX/texmf-d
 ist/fonts/type1/public/amsfonts/cm/cmex10.pfb></Users/thiyangashaminitalagala/L
@@ -1921,7 +1921,7 @@ rary/TinyTeX/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></Users/thiyangasha
 minitalagala/Library/TinyTeX/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></U
 sers/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/fonts/type1/urw/palatin
 o/uplri8a.pfb>
-Output written on fforms.pdf (35 pages, 837720 bytes).
+Output written on fforms.pdf (35 pages, 837746 bytes).
 PDF statistics:
  812 PDF objects out of 1000 (max. 8388607)
  637 compressed objects within 7 object streams
