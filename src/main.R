@@ -532,8 +532,8 @@ seasonalitygridM_long <- seasonalitygridM_long %>%
 seasonalitygridM_long <- seasonalitygridM_long %>% rename("seasonality_M"="seasonality")
 
 seasonalitygridM_long$class <- factor(seasonalitygridM_long$class,
-                                      levels = c("ARMA", "wn", "ARIMA", "rw", "ETS_NTNS", "ETS_DT", "ETS_T", "ETS_DTS",
-                                                 "ETS_TS", "ETS_S", "snaive", "tbats", "theta", "SARIMA", "stlar", "rwd", "nn"))
+                                      levels = c("ARMA", "wn", "ARIMA", "rw", "rwd", "nn", "ETS_NTNS", "ETS_DT", "ETS_T", "ETS_DTS",
+                                                 "ETS_TS", "ETS_S", "snaive", "tbats", "theta",  "stlar", "SARIMA"))
 
 
 plot_pdp_monthly_seasonal <- ggplot(data = seasonalitygridM_long, aes_string(x = seasonalitygridM_long$"seasonality_M", y = "probability")) +
@@ -589,10 +589,9 @@ stabilitygridM_long <- stabilitygridM_long %>%
                         "rwd"="rwd", "rw"="rw","nn"="nn", "theta"="theta", "stlar"="stlar", "snaive"="snaive"))
 
 stabilitygridM_long$class <- factor(stabilitygridM_long$class,
-                            levels = c("ARMA", "wn",
-                                       "rwd", "rw",
-                                       "nn", "theta",
-                                       "ETS_S", "stlar","snaive"))
+                            levels = c("rw", "rwd", "theta",  "stlar", "ETS_S", "ARMA","snaive","nn", "wn"))
+
+
 
 load("data/HPCfiles/stabilitygridH.rda")
 keep.modelnamesH <- c("rwd", "rw")
@@ -669,8 +668,8 @@ seasonal2_long_mean <- seasonal2_long %>%
 seasonal_DW <- dplyr::bind_rows(seasonal1_long_mean, seasonal2_long_mean)
 seasonal_DW$feature <- c(rep("seasonal_d", 200), rep("seasonal_w", 200))
 seasonal_DW$class <- factor(seasonal_DW$class,
-                            levels = c("snaive", "rw", "rwd", "mstlarima", "mstlets", "tbats","stlar",
-                                       "theta","nn","wn"))
+                            levels = c("stlar","wn","theta", "rw", "rwd", "mstlarima", "mstlets", "snaive",  "tbats",
+                                       "nn"))
 
 plot_pdp_hourly_seasonal <- ggplot(seasonal_DW, aes(x=seasonal, y=mean, color=feature))+
   geom_line(aes(x=seasonal, y=mean, color=feature), size = 1)+
@@ -738,7 +737,7 @@ diff1yacf1grid_long <- diff1yacf1grid_long %>%
                         "rw" = "rw" ))
 
 diff1yacf1grid_long$class <- factor(diff1yacf1grid_long$class,
-                                    levels = c("wn", "ARMA", "ETS_DT", "ETS_NTNS", "ETS_T", "ARIMA",   "nn" , "theta", "rw", "rwd"))
+                                    levels = c("wn", "ARMA", "ETS_DT", "ETS_NTNS", "ETS_T",   "nn" , "theta", "rw", "ARIMA", "rwd"))
 
 
 
