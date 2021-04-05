@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.3.21)  5 APR 2021 11:09
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.3.21)  5 APR 2021 11:27
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1897,11 +1897,11 @@ Package logreq Info: Writing requests to 'fforms.run.xml'.
 ### semi simple group (level 1) entered at line 178 (\begingroup)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 34692 strings out of 480983
- 646778 string characters out of 5905875
- 1420693 words of memory out of 5000000
- 50561 multiletter control sequences out of 15000+600000
- 528217 words of font info for 475 fonts, out of 8000000 for 9000
+ 34696 strings out of 480983
+ 646814 string characters out of 5905875
+ 1420698 words of memory out of 5000000
+ 50562 multiletter control sequences out of 15000+600000
+ 528302 words of font info for 477 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  102i,15n,102p,2207b,15693s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/font
@@ -1921,10 +1921,10 @@ rary/TinyTeX/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></Users/thiyangasha
 minitalagala/Library/TinyTeX/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></U
 sers/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/fonts/type1/urw/palatin
 o/uplri8a.pfb>
-Output written on fforms.pdf (35 pages, 837746 bytes).
+Output written on fforms.pdf (35 pages, 837852 bytes).
 PDF statistics:
- 812 PDF objects out of 1000 (max. 8388607)
- 637 compressed objects within 7 object streams
+ 813 PDF objects out of 1000 (max. 8388607)
+ 638 compressed objects within 7 object streams
  155 named destinations out of 1000 (max. 500000)
  123313 words of extra memory for PDF output out of 128383 (max. 10000000)
 

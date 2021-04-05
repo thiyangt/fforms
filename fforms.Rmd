@@ -92,7 +92,7 @@ The "online" process of generating forecasts only involves calculating the featu
 
 There have been several recent studies on the use of meta-learning approaches to automate forecast model selection based on features computed from the time series [@shah1997model; @prudencio2004meta; @lemke2010meta; @kuck2016meta]. However, to the best of our knowledge, a very limited effort has been made to understand how the meta-learners are making their decisions and what is really happening inside these complex model structures.  To fill these gaps, this paper makes a first step towards providing a comprehensive analysis of the relationship between time series features and forecast model selection using machine learning interpretability techniques. We try to answer the following questions:
   i) **What** are the similarities and dissimilarities identified by the meta-learner between class-labels?
-  ii) **Which** features contribute most to the classification processs?   iii) **How** are features related to the property being modelled? 
+  ii) **Which** features contribute most to the classification process?   iii) **How** are features related to the property being modelled? 
   iv) **How** do features interact with each other to identify a suitable forecasting model? We believe addressing these questions can enhance the transparency of the model predictions and build trust trust in model's predictions.
 
 The remainder of the paper is structured as follows. We review the related work in \autoref{litreview}. In  \autoref{fforms} we explain the detailed components and procedures of our proposed framework for forecast model selection. \autoref{peeking}  provides a description of machine learning interpretability techniques.  In \autoref{results} we present the results, followed by the conclusions and future work in \autoref{discussion}.
@@ -567,7 +567,7 @@ time series, etc. Hence, it is important to expand the frameworks to other datas
 
 # Supplemental Materials {-}
 
-**Reproducibility:** All the code and data used in this paper is available at https://github.com/thiyangt/fforms. The R packages ggplot2 [@ggplot] and  provides the basis for graphics. The document is written in knitr [@xie2017dynamic].
+**Reproducibility:** All the code and data used in this paper is available at https://github.com/thiyangt/fforms. The R packages `ggplot2` [@ggplot] and `iheatmapr` [@iheatmapr] provides the basis for graphics. The document is written in knitr [@xie2017dynamic].
 
 **Software:** R-package `seer` consists of the implementation of FFORMS algorithm is available on CRAN (https://cran.r-project.org/web/packages/seer/index.html). 
 
