@@ -587,7 +587,7 @@ Features such as strength of trend, strength of seasonality, linearity, informat
 
 Although we have illustrated the method using the M1, M3 and M4 competition data, the framework is general and can be applied to any large collection of time series. However, the proposed frameworks with the same set of features and forecast
 models might not be the right choice for forecasting stock return data, intermittent time series or irregular
-time series, etc. Hence, it is important to expand the frameworks to other datasets that come from different application domains. When adapting the frameworks to other applications the feature space should be revised with appropriate features that measure characteristics of interest. The algorithm space should also be revised with suitable forecast models. A suitable forecast error metric should also be considered to evaluate the performance of different forecast models. 
+time series, etc. In such situations,
 
 # Supplemental Materials {-}
 
