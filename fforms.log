@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.3.21)  15 APR 2021 15:45
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.3.21)  16 APR 2021 20:45
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1868,11 +1868,11 @@ lity-1.pdf>] [25 <./figure/ypacf5-1.pdf> <./figure/pdpyearlytrend-1.pdf>] [26 <
 [28 <./figure/h2dpdp-1.pdf> <./figure/thetapdp-1.pdf>]
 
 Package hyperref Warning: Difference (2) between bookmark levels is greater 
-(hyperref)                than one, level fixed on input line 924.
+(hyperref)                than one, level fixed on input line 922.
 
 
 Package hyperref Warning: The anchor of a bookmark and its parent's must not
-(hyperref)                be the same. Added a new anchor on input line 924.
+(hyperref)                be the same. Added a new anchor on input line 922.
 
 [29] [30] [31] [32] [33] [34] [35] (./fforms.aux)
 Package rerunfilecheck Info: File `fforms.out' has not changed.
@@ -1886,11 +1886,11 @@ Package logreq Info: Writing requests to 'fforms.run.xml'.
 ### semi simple group (level 1) entered at line 178 (\begingroup)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 34700 strings out of 480983
- 646810 string characters out of 5905875
+ 34709 strings out of 480983
+ 646885 string characters out of 5905875
  1421501 words of memory out of 5000000
  50560 multiletter control sequences out of 15000+600000
- 528460 words of font info for 480 fonts, out of 8000000 for 9000
+ 528715 words of font info for 486 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  102i,15n,102p,2124b,15693s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/Users/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/font
@@ -1910,7 +1910,7 @@ rary/TinyTeX/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></Users/thiyangasha
 minitalagala/Library/TinyTeX/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></U
 sers/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/fonts/type1/urw/palatin
 o/uplri8a.pfb>
-Output written on fforms.pdf (35 pages, 839336 bytes).
+Output written on fforms.pdf (35 pages, 839890 bytes).
 PDF statistics:
  818 PDF objects out of 1000 (max. 8388607)
  643 compressed objects within 7 object streams
