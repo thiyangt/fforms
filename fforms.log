@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.3.21)  20 APR 2021 19:00
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.3.21)  21 APR 2021 06:48
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1882,7 +1882,7 @@ Package logreq Info: Writing requests to 'fforms.run.xml'.
 Here is how much of TeX's memory you used:
  34725 strings out of 480983
  647330 string characters out of 5905875
- 1421742 words of memory out of 5000000
+ 1421741 words of memory out of 5000000
  50572 multiletter control sequences out of 15000+600000
  528715 words of font info for 486 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
@@ -1904,7 +1904,7 @@ rary/TinyTeX/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></Users/thiyangasha
 minitalagala/Library/TinyTeX/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></U
 sers/thiyangashaminitalagala/Library/TinyTeX/texmf-dist/fonts/type1/urw/palatin
 o/uplri8a.pfb>
-Output written on fforms.pdf (36 pages, 843660 bytes).
+Output written on fforms.pdf (36 pages, 843776 bytes).
 PDF statistics:
  833 PDF objects out of 1000 (max. 8388607)
  657 compressed objects within 7 object streams
