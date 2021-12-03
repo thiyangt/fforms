@@ -3,6 +3,8 @@ library(Mcomp)
 library(tidyverse)
 library(magrittr)
 library(ggbump)
+library(reshape2)
+library(patchwork)
 
 ## ---- yearlyoob
 load("data/yearly/yearly_training.rda") # random forest training set 
