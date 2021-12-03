@@ -12,3 +12,5 @@ data/rfu_m4monthly.rda
 data/rfu_m4weekly.rda
 data/rfu_m4daily.rda
 data/rfu_m4hourly.rda
+*.log
+fforms.tex
