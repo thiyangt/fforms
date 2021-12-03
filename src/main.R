@@ -1133,7 +1133,7 @@ y1 <- lmres_acf1.linearityrmout.y.long %>%
                        limits=c(0,0.45))+
   theme(strip.text.x = element_text(size = 10))+ylim(-1,1)
 
-load("~/PhD_journey/fforms/data/HPCfiles/diff1y_acf1.linearityrmout.y.rda")
+load("data/HPCfiles/diff1y_acf1.linearityrmout.y.rda")
 colNamesls <- colnames(diff1y_acf1.linearityrmout.y)[27:36]
 
 keep.modelnames <- c("ARIMA", "ARMA.AR.MA", "ETS.dampedtrend", "ETS.notrendnoseasonal",
