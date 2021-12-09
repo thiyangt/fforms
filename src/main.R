@@ -507,7 +507,7 @@ ur_ppgrid_long <- ur_ppgrid_long %>%
 ur_ppgrid_long$class <- factor(ur_ppgrid_long$class,
                                levels = c("wn", "ARMA", "ETS_DT", "ETS_NTNS", "ETS_T", "ARIMA",   "nn" , "theta", "rw", "rwd"))
 plot_pdp_yearly <- ggplot(data = ur_ppgrid_long, aes_string(x = ur_ppgrid_long$ur_pp, y = "probability")) +
-  stat_summary(fun.y = mean, geom = "line", col = "#7570b3", size = 1) +
+  stat_summary(fun = mean, geom = "line", col = "#7570b3", size = 1) +
   stat_summary(fun.data = mean_cl_normal,fill="#7570b3", geom = "ribbon", fun.args = list(mult = 1), alpha = 0.3, se=TRUE)+ 
   theme(axis.text.x = element_text(angle = 90), text = element_text(size=18), axis.title = element_text(size = 16))+
   facet_grid(. ~ class)+theme(strip.text.x = element_text(size = 10))+xlab("test statistic based on Phillips-Perron unit root test (ur_pp)")+ylab("probability of selecting forecast-models")
@@ -539,7 +539,7 @@ seasonalitygridM_long$class <- factor(seasonalitygridM_long$class,
 
 
 plot_pdp_monthly_seasonal <- ggplot(data = seasonalitygridM_long, aes_string(x = seasonalitygridM_long$"seasonality_M", y = "probability")) +
-  stat_summary(fun.y = mean, geom = "line", col = "#d95f02", size = 1) +
+  stat_summary(fun = mean, geom = "line", col = "#d95f02", size = 1) +
   stat_summary(fun.data = mean_cl_normal,fill="#d95f02", geom = "ribbon", fun.args = list(mult = 1), alpha = 0.3, se=TRUE)+ 
   theme(axis.text.x = element_text(angle = 90), text = element_text(size=18), axis.title = element_text(size = 16))+
   facet_wrap(. ~ class, ncol=9)+theme(strip.text.x = element_text(size = 10))+xlab("strength of seasonality")+ylab("probability of selecting forecast-models")
@@ -568,7 +568,7 @@ NgridM_long$class <- factor(NgridM_long$class,
 NgridM_long <- NgridM_long %>% rename("T"="N")
 
 plot_pdp_monthlyN <- ggplot(data = NgridM_long, aes_string(x = NgridM_long$"T", y = "probability")) +
-  stat_summary(fun.y = mean, geom = "line", col = "#d95f02", size = 1) +
+  stat_summary(fun = mean, geom = "line", col = "#d95f02", size = 1) +
   stat_summary(fun.data = mean_cl_normal,fill="#d95f02", geom = "ribbon", fun.args = list(mult = 1), alpha = 0.3)+ 
   theme(axis.text.x = element_text(angle = 90), text = element_text(size=18), axis.title = element_text(size = 16))+
   facet_wrap(. ~ class, ncol=9)+theme(strip.text.x = element_text(size = 10))+xlab("length of time series (T)")+
@@ -696,7 +696,7 @@ entropy1_long$class <- factor(entropy1_long$class,
                               levels = c("snaive", "rwd","tbats","stlar","nn","wn"))
 
 plot_pdp_hourly_entropy <- ggplot(data = entropy1_long, aes_string(x = entropy1_long$entropy, y = "probability")) +
-  stat_summary(fun.y = mean, geom = "line", col = "#1b9e77", size = 1) +
+  stat_summary(fun = mean, geom = "line", col = "#1b9e77", size = 1) +
   stat_summary(fun.data = mean_cl_normal,fill="#1b9e77", geom = "ribbon", fun.args = list(mult = 1), alpha = 0.3)+ 
   theme(axis.text.x = element_text(angle = 90), text = element_text(size=16), axis.title = element_text(size = 16))+
   facet_grid(. ~ class)+theme(strip.text.x = element_text(size = 16))+xlab("entropy")+ylab("probability of selecting forecast-models")
@@ -713,7 +713,7 @@ curvaturehourly1_long$class <- factor(curvaturehourly1_long$class,
                                       levels = c("mstlarima", "mstlets","theta"))
 
 plot_pdp_hourly_curvature <- ggplot(data = curvaturehourly1_long, aes_string(x = curvaturehourly1_long$curvature, y = "probability")) +
-  stat_summary(fun.y = mean, geom = "line", col = "#1b9e77", size = 1) +
+  stat_summary(fun = mean, geom = "line", col = "#1b9e77", size = 1) +
   stat_summary(fun.data = mean_cl_normal,fill="#1b9e77", geom = "ribbon", fun.args = list(mult = 1), alpha = 0.3)+ 
   theme(axis.text.x = element_text(angle = 90), text = element_text(size=16), axis.title = element_text(size = 16))+
   facet_grid(. ~ class)+theme(strip.text.x = element_text(size = 16))+xlab("curvature")+ylab("probability of selecting forecast-models")
@@ -744,7 +744,7 @@ diff1yacf1grid_long$class <- factor(diff1yacf1grid_long$class,
 
 
 plot_pdp_yearly <- ggplot(data = diff1yacf1grid_long, aes_string(x = diff1yacf1grid_long$diff1y_acf1, y = "probability")) +
-  stat_summary(fun.y = mean, geom = "line", col = "#7570b3", size = 1) +
+  stat_summary(fun = mean, geom = "line", col = "#7570b3", size = 1) +
   stat_summary(fun.data = mean_cl_normal,fill="#7570b3", geom = "ribbon", fun.args = list(mult = 1), alpha = 0.3, se=TRUE)+ 
   theme(axis.text.x = element_text(angle = 90), text = element_text(size=18), axis.title = element_text(size = 16))+
   facet_grid(. ~ class)+theme(strip.text.x = element_text(size = 10))+xlab("diffy_acf1")+ylab("probability of selecting forecast-models")

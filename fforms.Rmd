@@ -36,7 +36,6 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE, cache = TRUE, messages = FALSE, warning = FALSE)
 library(knitr)
 opts_chunk$set(
   warning = FALSE,
@@ -85,7 +84,7 @@ Clearly, there is a need for a fast and scalable algorithm to automate the proce
 The "online" process of generating forecasts only involves calculating the features of a time series and using the pre-trained classifier to identify the best forecasting model. Hence, generating forecasts only involves the estimation of a single forecasting model, with no need to estimate large numbers of models within a class, or to carry out a computationally-intensive cross-validation procedure. We refer to this general framework as FFORMS (**F**eature-based **FOR**ecast-**M**odel **S**election).
 
 There have been several recent studies on the use of meta-learning approaches to automate forecast model selection based on features computed from the time series [@shah1997model; @prudencio2004meta; @lemke2010meta; @kuck2016meta]. However, to the best of our knowledge, a very limited effort has been made to understand how the meta-learners make their decisions and what is really happening inside these complex model structures. To fill these gaps, this paper makes a first step towards providing a comprehensive analysis of the relationship between time series features and forecast model selection using machine learning interpretability techniques. We try to answer the following questions:
-i) **What** are the similarities and dissimilarities identified by the meta-learner between class-labels?
+i) **What** are the similarities identified by the meta-learner between model classes?
 ii) **Which** features contribute most to the classification process?
 iii) **How** are features related to the property being modelled?
 iv) **How** do features interact with each other to identify a suitable forecasting model? We believe addressing these questions can enhance the transparency of the model predictions and build trust trust in model's predictions.
@@ -143,7 +142,7 @@ p1 | p2
 
 John Rice was an early and strong proponent of the idea of meta-learning, which he called the algorithm selection problem (ASP) [@rice1976]. The term *meta-learning* started to appear with the emergence of the machine-learning literature.
 
-```{r rice, fig.cap="Rice's framework for the Algorithm Selection Problem.", out.width="80%"}
+```{r rice, fig.cap="Rice's framework for the Algorithm Selection Problem.", out.width="70%"}
 knitr::include_graphics("images/RiceFramework.png")
 ```
 
@@ -240,7 +239,7 @@ There are several options that could be used to produce simulated series that ar
 
 ## Input: features
 
-Although the FFORMS framework could use any time series features, our current implementation uses the features shown in \autoref{feature}. An attribute of the proposed FFORMS framework is that its online phase is fast compared to the time required for implementing a typical model selection or cross-validation procedure. Therefore, we consider only features that can be computed rapidly, as this computation must be done during the online phase. Furthermore, all our features are easily interpretable.
+Although the FFORMS framework could use any time series features, our current implementation uses the features shown in \autoref{feature}; these are defined in the Appendix. An attribute of the proposed FFORMS framework is that its online phase is fast compared to the time required for implementing a typical model selection or cross-validation procedure. Therefore, we consider only features that can be computed rapidly, as this computation must be done during the online phase. Furthermore, all our features are easily interpretable.
 
 \begin{table}[!htp]
 \centering\footnotesize\tabcolsep=0.12cm
@@ -304,7 +303,9 @@ For each series in the reference set and each forecasting model, we compute the 
 \caption{Description of class labels used in FFORMS}
 \label{classlabels}
 \begin{tabular}{lp{11,11cm}rrrr}
-Class label & Description & Y & Q/M & W & D/H \\ \hline
+\toprule
+Class label & Description & Y & Q/M & W & D/H \\
+\midrule
 wn & white noise process & \checkmark & \checkmark & \checkmark & \checkmark \\
 ARMA & AR, MA, ARMA processes & \checkmark & \checkmark & \checkmark & -\\
 ARIMA & ARIMA process & \checkmark & \checkmark & \checkmark & - \\
@@ -323,7 +324,8 @@ snaive & seasonal naive method & - & \checkmark & \checkmark & \checkmark \\
 tbats & TBATS forecasting & - & \checkmark & \checkmark & \checkmark \\
 nn & neural network time series forecasts & \checkmark & \checkmark & \checkmark & \checkmark \\
 mstlets & multiple seasonal decomposition with ETS modelling of the seasonally adjusted series & - & - & \checkmark & \checkmark \\
-mstlarima & multiple seasonal decomposition with ARIMA modelling of the seasonally adjusted series & - & - & - & \checkmark \\\hline
+mstlarima & multiple seasonal decomposition with ARIMA modelling of the seasonally adjusted series & - & - & - & \checkmark \\
+\bottomrule
 \end{tabular}
 \end{table}
 
@@ -350,10 +352,12 @@ We build separate FFORMS meta-learners for yearly, quarterly, monthly, daily, an
 \begin{threeparttable}
 \caption{The performance of FFORMS on the M4 competition data based on point forecasts (based on MASE) and prediction intervals (based on MSIS)}
 \label{forecasts}
-\begin{tabular}{l|rrrrrr}
-\hline
-\multicolumn{7}{c}{Point Forecasts (Mean Absolute Scaled Error (MASE))} \\\hline
- & Yearly & Quarterly & Monthly & Weekly & Daily & Hourly \\\hline
+\begin{tabular}{lrrrrrr}
+\toprule
+\multicolumn{7}{c}{Point Forecasts (Mean Absolute Scaled Error (MASE))} \\
+\midrule
+ & Yearly & Quarterly & Monthly & Weekly & Daily & Hourly \\
+\midrule
 \bf{FFORMS-individual} & 3.17 &  1.20 &  0.98&  2.31& 3.57 &  0.84\\
 \bf{FFORMS-combination} & 3.23 &  1.16 &  0.94&  2.55& 3.42 &  0.81\\
 auto.arima & 3.40 &1.17  &0.93  & 2.55 &  -& - \\
@@ -368,16 +372,20 @@ tbats & - & 1.19 &  1.05& 2.49 & 3.27 &  1.30\\
 wn & 13.42 &  6.50&  4.11&  49.91& 38.07 & 11.68 \\
 mstlarima & - & - &  - & - & 3.84 &  1.12\\
 mstlets & - &  - &  - &  - & 3.73 &  1.23\\
-combination (mean) & 4.09 & 1.58 &  1.16&6.96  & 7.94 & 3.93 \\\hline
+combination (mean) & 4.09 & 1.58 &  1.16&6.96  & 7.94 & 3.93 \\
+\midrule
 M4-1st & \bf{2.98} & 1.12 &  \bf{0.88}& 2.36 & 3.45 & 0.89\\
 M4-2nd & 3.06 & \bf{1.11} &  0.89& \bf{2.11} & 3.34 & \bf{0.81}\\
-M4-3rd & 3.13 & 1.12 &  0.91& 2.16 & \bf{2.64} & 0.87\\\hline
-\multicolumn{7}{c}{Prediction Intervals (Mean Scaled Interval Score (MSIS))} \\\hline
+M4-3rd & 3.13 & 1.12 &  0.91& 2.16 & \bf{2.64} & 0.87\\
+\midrule
+\multicolumn{7}{c}{Prediction Intervals (Mean Scaled Interval Score (MSIS))} \\
+\midrule
 \bf{FFORMS} & 39.79 &  11.24 &  9.82&  \bf{20.84}& 36.36 & 8.0 \\
 M4-1st & \bf{23.89} & \bf{8.55} &  \bf{7.20} & 22.03 & \bf{26.28} & \bf{7.92}\\
 M4-2nd & 27.47 & 9.38 &  8.65& 21.53 & 34.37 & 18.50\\
 M4-3rd & \multicolumn{6}{c}{not submitted}\\
-naive & 56.55 & 14.07 &  12.30 & 26.35 & 32.55 & 71.24\\\hline
+naive & 56.55 & 14.07 &  12.30 & 26.35 & 32.55 & 71.24\\
+\bottomrule
 \end{tabular}
   \begin{tablenotes}
       \scriptsize
@@ -390,10 +398,12 @@ naive & 56.55 & 14.07 &  12.30 & 26.35 & 32.55 & 71.24\\\hline
 	\centering\scriptsize\tabcolsep=0.12cm
 	\caption{Computational time for producing forecasts based on 100 randomly selected series from each frequency category of the M4 data set.}
 	\label{forecasttime}
-	\begin{tabular}{l|rrrrrr}
-		\hline
-		\multicolumn{7}{c}{Computational time for producing forecasts in seconds (IQR)}                                 \\\hline
-		                  & Yearly      & Quarterly     & Monthly       & Weekly        & Daily         & Hourly        \\\hline
+	\begin{tabular}{lrrrrrr}
+		\toprule
+		\multicolumn{7}{c}{Computational time for producing forecasts in seconds (IQR)}                                 \\
+    \midrule
+		                  & Yearly      & Quarterly     & Monthly       & Weekly        & Daily         & Hourly        \\
+    \midrule
 		FFORMS-individual & 3.38 (0.18) & 20.98 (8.23)  & 100.13 (7.13) & 128.41 (5.17) & 77.20 (5.67)  & 34.53 (5.16)  \\
 		auto.arima        & 5.91 (0.05) & 42.11 (2.15)  & 448.41 (1.95) & 584.98 (2.35) & -             & -             \\
 		ets               & 1.14 (0.02) & 16.92 (0.09)  & 115.50 (0.17) & -             & -             & -             \\
@@ -406,7 +416,8 @@ naive & 56.55 & 14.07 &  12.30 & 26.35 & 32.55 & 71.24\\\hline
 		tbats             & -           & 20.16 (6.98)  & 38.12 (2.44)  & 40.16 (3.36)  & 68.73 (0.65)  & 49.52 (2.98)  \\
 		wn                & 0.19 (2.65) & 0.20 (4.30)   & 0.23 (0.08)   & 0.19 (4.51)   & 0.26 (1.00)   & 0. 22 (0.05)  \\
 		mstlarima         & -           & -             & -             & -             & 86.92 (0.52)  & 30.60 (0.17)  \\
-		mstlets           & -           & -             & -             & -             & 19.79 (0.09)  & 10.13 (0.48)  \\\hline
+		mstlets           & -           & -             & -             & -             & 19.79 (0.09)  & 10.13 (0.48)  \\
+    \bottomrule
 	\end{tabular}
 \end{table}
 
@@ -425,54 +436,50 @@ and FFORMS is much faster than any of the competitor methods shown in \autoref{f
 
 Apart from providing a fast forecasting method that has relatively good performance, we also wish to better understand what methods work best for different types of time series.
 
-To address this problem, we present the results for yearly series (representing non-seasonal time series), monthly series (representing time series with a single seasonal component), and hourly series (representing series with multiple seasonal components). The results for quarterly and weekly data were very similar to the corresponding results of monthly data, while the results of daily data were very similar to the results for hourly data. Hence, these are omitted to save space.
+To address this problem, we present the results for yearly series (representing non-seasonal time series), monthly series (representing time series with a single seasonal component), and hourly series (representing series with multiple seasonal components). The results for quarterly and weekly data were very similar to the corresponding results of monthly data, while the results of daily data were very similar to the results for hourly data. Hence, these are omitted.
 
-## Visualization of FFORMS's understanding of the similarity and dissimilarity between forecast models{#oobviz}
+## Visualization of the similarity between forecast models{#oobviz}
 
-```{r heatyearly, fig.height=10, fig.width=20, fig.cap="Visualization of vote matrix of yearly series. The X-axis denotes the class labels (candidate forecast-models) and Y-axis denotes the time series. Each cell in the plot tells the number of votes received by the time series in that row over the candidate forecast-model in that column.", fig.pos="h"}
-# This is a plotly graph converted into static graph. The code to generate the graph is available at src/flexdashboardviz.R under yearlydb
-knitr::include_graphics("images/yearlyvote.png")
-```
+\begin{figure}[p]
+%These are plotly graphs converted into static graphs. The code to generate them is available at src/flexdashboardviz.R under yearlydb, monthlydb and hourlyvotedb.
 
-```{r heatmonthly, fig.height=10, fig.width=20, fig.cap="Visualization of vote matrix of monthly series. The X-axis denotes the class labels (candidate forecast-models) and Y-axis denotes the time series. Each cell in the plot tells the number of votes received by the time series in that row over the candidate forecast-model in that column.", fig.pos="h"}
-# This is a plotly graph converted into static graph. The code to generate the graph is available at src/flexdashboardviz.R under monthlydb
-knitr::include_graphics("images/monthlyvote.png")
-```
+\textbf{(a) Yearly series}\par
+\centerline{\includegraphics[width=0.9\textwidth]{images/yearlyvote.png}}
 
-```{r heathourly, fig.height=10, fig.width=15, fig.cap="Visualization of vote matrix of hourly series. The X-axis denotes the class labels (candidate forecast-models) and Y-axis denotes the time series. Each cell in the plot tells the number of votes received by the time series in that row over the candidate forecast-model in that column.", fig.pos="h"}
-# This is a plotly graph converted into static graph. The code to generate the graph is available at src/flexdashboardviz.R under hourlyvotedb
-knitr::include_graphics("images/votehourly2.png")
-```
+\textbf{(b) Monthly series}\par
+\centerline{\includegraphics[width=0.9\textwidth]{images/monthlyvote.png}}
 
-In FFORMS, the forecast-model selection problem is posed as a supervised learning task. Each time series in the meta-data set is represented as a vector of features and we compute the probability of each model being the "best" forecast model. Sometimes it is clear that one model is better than the others, and it takes probability close to one. But for other series, there might be two almost equally good models, and these would then take similar probabilities. Because we are interested only in obtaining good forecast accuracy, and not in identifying the "best" model, this is of no concern. These probabilities are obtained from the vote matrix which contains one row for each time series and one column for each model (or class label). Each cell contains the fraction of trees in the forest that classified each time series to each class. We use a vote matrix calculated based on out-of-bag observations. We can study these vote-matrix probabilities for all time series in order to explore FFORMS's understanding of the similarities and dissimilarities between forecast models.
+\textbf{(c) Hourly series}\par
+\centerline{\includegraphics[width=0.6\textwidth]{images/votehourly2.png}}
 
-We generated several initial plots to visualise the vote matrix calculations based on OOB observations to get a better understanding of the relationships learned by the random forest. Out of different plots we created "heatmap" seems to be the most useful in visualising vote matrix probabilities. We use `iheatmapr` function in `iheatmapr` package in R to visualise interactive heatmap [@iheatmapr]. Furthermore, to improve the visualization we reorder and cluster the rows and columns of the matrix separately by applying hierarchical clustering approach. The results are shown in \autoref{fig:heatyearly}, \autoref{fig:heatmonthly} and \autoref{fig:heathourly}. Each cell in the plots tells the number of votes received by the time series in that row over the candidate forecast-model in that column. Visualising the vote matrix probabilities in this manner helps us to identify several important characteristics learned by the random forest algorithm.
+\caption{Heatmaps of the vote matrices for yearly, monthly and hourly series. Each cell shows the number of votes received by the time series in that row for the forecast model in that column.}\label{fig:heatmaps}
+\end{figure}
 
-According to \autoref{fig:heatyearly}, \autoref{fig:heatmonthly} and \autoref{fig:heathourly}, in general we can see the columns are clustered according to the similarities of forecast models. The results are summarized in \autoref{cclusters}. An interpretation for each cluster is given in bold text. Observing the yearly results in \autoref{cclusters} we can see class labels are classified according to their capability in handling trend, for example white noise process, ARMA, ETS model without trend and ETS model with damped trend into one cluster and ARIMA and ETS with trend into a separate cluster. For monthly series vote matrix columns are classified according to the similarities in both trend and seasonal components. In hourly series, vote matrix probabilities show similarities between models that can handle multiple seasonal component. Hence, this indicates our meta-learner correctly identified the similarities and dissimilarities between classes. Some more intricate insights also
-emerged through this visualisation: i) Irrespective of the true class label, the random walk with drift has a non-zero vote probability for all yearly series. This means that for each yearly series at least one tree in the random forest voted for random walk with drift. According to the results in \autoref{forecasts} also we can see random walk with drift perform extremely well across all time series. ii) For monthly series in general, SARIMA, tbats, theta, nn, rwd and stlar have been assigned a very high vote probability. iii) Zooming out the results revealed the monthly series with high vote probability for SARIMA also have a high vote probability for ETS models with seasonal components. Furthermore, the series that have high vote probability for `ARIMA` models also have a high probability for `ETS-dampedtrend` and `ETS-trend`. iv) Compared to yearly and monthly series, in hourly series the best forecasting model has been selected with very high probability. v) In hourly series, low vote probabilities have been assigned to random walk, random walk with drift, theta and white noise while neural network has been assigned a non-zero vote probability by all hourly series.
+In FFORMS, the forecast-model selection problem is posed as a supervised learning task. Each time series in the meta-data set is represented as a vector of features and we compute the probability of each model being the "best" forecast model. Sometimes it is clear that one model is better than the others, and it takes probability close to one. But for other series, there might be two almost equally good models, and these would then take similar probabilities. Because we are interested only in obtaining good forecast accuracy, and not in identifying the "best" model, this is of no concern. These probabilities are obtained from the vote matrix which contains one row for each time series and one column for each model (or class label). Each cell contains the fraction of trees in the forest that classified each time series to each class. We use a vote matrix calculated based on out-of-bag observations. We can study these vote-matrix probabilities for all time series in order to explore FFORMS's understanding of the similarities  between forecast models.
 
-\begin{table}[!h]
+\begin{table}[t]
 \centering\scriptsize\tabcolsep=0.12cm
-\caption{Summary of column clusters displayed in vote matrices of Figure 4- 6 }
+\caption{Summary of column clusters displayed in vote matrices of Figure \ref{fig:heatmaps}.}
 \label{cclusters}
 \begin{tabular}{p{5cm}p{5cm}p{5cm}}
-\hline
-\textbf{Yearly} & \textbf{Monthly} & \textbf{Hourly} \\ \hline
-\textit{Column Cluster 1}&\textit{Column Cluster 1} & \textit{Column Cluster 1} \\
+\toprule
+\textbf{Yearly} & \textbf{Monthly} & \textbf{Hourly} \\
+\midrule
+\textit{Cluster 1}&\textit{Cluster 1} & \textit{Cluster 1} \\
 \textbf{Models flexible for any situation} & \textbf{Models flexible for any situation} & \textbf{Models without seasonal component and Theta method } \\
 Neural network & SARIMA & Random walk\\
 Random walk & tbats & Random walk with drift\\
 Theta & Theta & Theta\\
 &  & White noise process\\
-&  & \\
-\textit{Column Cluster 2}&\textit{Column Cluster 2} & \textit{Column Cluster 2} \\
+\midrule
+\textit{Cluster 2}&\textit{Cluster 2} & \textit{Cluster 2} \\
 \textbf{Models not suitable to handle highly trended series} & \textbf{Models that can handle series with complex patterns} & \textbf{Models that can handle multiple seasonality } \\
 ARMA/AR/MA & Neural networks & mstlarima\\
 ETS with damped trend & Random walk with drift & mstlets\\
 ETS without trend and seasonality & STLAR & \\
 White noise process &  & \\
-& & \\
-\textit{Column Cluster 3}&\textit{Column Cluster 3} & \textit{Column Cluster 3} \\
+\midrule
+\textit{Cluster 3}&\textit{Cluster 3} & \textit{Cluster 3} \\
 \textbf{Random walk with drift} & \textbf{Models without seasonal component} & \textbf{Models for time varying seasonality} \\
 Random walk with drift & ARIMA & snaive\\
  & ARMA/AR/MA & STLAR\\
@@ -481,66 +488,91 @@ Random walk with drift & ARIMA & snaive\\
   & ETS with trend  & \\
   & Random walk  & \\
   & White noise process & \\
-& & \\
-\textit{Column Cluster 4}&\textit{Column Cluster 4} & \textit{Column Cluster 4} \\
+\midrule
+\textit{Cluster 4}&\textit{Cluster 4} & \textit{Cluster 4} \\
 \textbf{Models that can handle highly trended series} & \textbf{ETS models with seasonal component and snaive} & \textbf{Neural network} \\
 ARIMA & ETS with damped trend and seasonality & Neural network\\
 ETS with trend & ETS with seasonal component & \\
  & ETS with trend and seasonality & \\
- & snaive & \\ \hline
+ & snaive & \\
+\bottomrule
 \end{tabular}
 \end{table}
 
-We also created an interactive dashboard by adding an interactive layer to the vote matrix and visualizing other related plots of the vote matrix clusters such as: i) distribution of true classlabels by row clusters of the vote matrix, ii) feature distribution by clusters and iii) distribution of the clusters in the feature space (principal component analysis is used to map each time series as a point in a two-dimensional instance space given by features). The interactive dashboard showcasing our results is available online at https://thiyangt.github.io/fformsviz/fforms.html. Interactive dashboard visualisation reveals that there is a matching correspondence between the vote probabilities and composition of the clusters by true class labels. For example, in cluster 1 and cluster 2 the majority of time series are labelled as random walk with drift (rwd), ARIMA and ETS with trend (ETS-trend). In the vote probability matrix, high probability values have been assigned to those three classes. Furthermore, in cluster 3 the majority of time series are labelled as rwd, and the series in cluster 3 have selected random walk with drift with high vote probability. In cluster 4, the majority of series are in rwd and ETS-trend and they have been assigned a very high vote probability. In cluster 5, neural network (nn), white noise (wn) and random walk with drift (rwd) have been assigned a very high probability and the majority of time series in cluster 5 are classified as nn, wn or rwd. This indicates that our meta-learner correctly predicts the classlabels. Furthermore, the dashboard visualisation shows that the vote matrix visualisations of quarterly data depicted a similar pattern to monthly data. For quarterly and monthly data, the same set of features and class labels are used to train the model, Hence, this consistency between the results of the quarterly and the monthly series would provide evidence in support of the validity of the meta-learning framework.
+Figure \ref{fig:heatmaps} shows heatmaps [@iheatmapr] of the vote matrices, with rows and columns reordered and clustered using a hierarchical clustering approach. Each cell in the plots displays the number of votes received by the time series in that row over the candidate forecast-model in that column. We can see the columns are clustered according to the similarities of the forecasting models. The results are summarized in \autoref{cclusters}, with an interpretation of each cluster given in bold text. For the yearly results, the models are clustered according to their ability to handle trends. For monthly and hourly series, the models are clustered according to the types of seasonal and trend components they can handle. This suggests that our meta-learner has correctly identified some similarities between model classes.
+
+Some more subtle insights also emerge:
+
+  1. Regardless of the true class label (corresponding to the model that gives the best forecasts on the test set), the random walk with drift has a non-zero vote probability for all yearly data. That is, for each yearly series, at least one tree in the random forest voted for random walk with drift.
+  2. For monthly data, SARIMA, tbats, theta, nn, rwd and stlar have all been assigned a very high vote probability for at least some series.
+  3. Those monthly series with a high vote probability for SARIMA also have a high vote probability for ETS models with seasonal components. Similarly, those series have a high vote probability for (non-seasonal) ARIMA models also have a high probability for non-seasonal ETS models.
+  4. Compared to yearly and monthly series, with hourly series the best forecasting model has been selected with very high probability.
+  5. For hourly series, low vote probabilities have been assigned to random walk, random walk with drift, theta and white noise, while neural networks have been assigned a non-zero vote probability by all hourly series.
+
+We also created an interactive dashboard^[`https://thiyangt.github.io/fformsviz/fforms.html`] allowing additional visualizations such as: i) the distribution of true classlabels by row clusters of the vote matrix; ii) the feature distribution by clusters; and iii) the distribution of the clusters in the feature space (a principal component analysis is used to map each time series as a point in a two-dimensional instance space given by features).
 
 ## Which features are the most important and where are they important?
 
-```{r viplot, fig.height=18, fig.width=20, fig.pos="h", dev='pdf', fig.cap="Visualisation of top five features across three frequency categories and their class labels. The X-axis denotes the features and Y-axis denotes the forecast model classes. The cell colours denote the frequency group in which the fetures ranked among top five. Strength of trend, linearity and strength of seasonality have been selected among top five features across many classes."}
+```{r viplot, fig.height=18, fig.width=20, fig.cap="The top five features for each frequency categories and model. The cell colours denote the frequency group (hourly, monthly, yearly), while features are on rows and forecast methods in columns. For many models, the top five features are trend, linearity and strength of seasonality."}
 ```
 
-To identify class-specific most important features we rank features in three different ways: i) permutation-based variable importance, ii) partial-dependency plots (PDP) based variable score introduced by @Greenwell2018 and iii) individual conditional expectation (ICE) curves based score. ICE curves show effect of change in values of a single feature on the response variable for a single instance. PDPs show average effect of change in values of a single feature on the response variable. The partial dependency plot is simply the average of all the ICE curves. We refer interested reader to @friedman2008predictive and @goldstein2015peeking for more details about PDP and ICE curves. PDP-based score measures the ‘flatness’ of partial dependence curves for each feature. A feature with a flat PDP curve can either does not have much influence on the response variable or the feature interacts with other features. The flatness of the curve is measured using the standard deviation of the predicted response values for different values of the feature. ICE-based score is similar to the PDP-based variable importance scores above, but is based on measuring the ‘flatness’ of the individual conditional expectation curves. We calculate standard deviations of predicted response values of each ICE curve. We then compute an ICE-based variable importance score, which is simply the average of all the standard deviations. A higher value indicates a higher degree of interactivity with other features. The partial-dependence curves, along with their confidence intervals calculated based on ICE curves, are used to visualise the relationship between top features and the choice of forecast model selection (see section \autoref{peeking}). For each feature a mean rank is calculated based on the rankings of the three measures.
+The importance of a feature can be measured using individual conditional expectation (ICE) scores [@friedman2008predictive; @goldstein2015peeking] which measure the effect of a change in value of a single feature of a single time series on the output of the algorithm. When averaged across series, these give "partial dependencies". The partial dependencies are often plotted against the feature values to give partial dependency curves [@Greenwell2018].
 
-\autoref{fig:viplot} shows the top-5 most important features within each class across yearly, monthly and daily series. The main point here is strength of trend, sum of first five partial autocorrelation coefficients, stability, the first ACF value of the differenced series and linearity are the most important features across many classes and frequency categories. The information about the strength of trend in the series, linearity and sum of first five partial autocorrelation are very important when selecting white noise process among all frequency categories. For yearly data, the test statistic based on the Phillips-Perron unit root test has been ranked among top-5 within all classes. In addition to linearity, the other features related to different types of trend (damped trend, measured by beta, and exponential trend, measured by curvature) are assigned a very high importance within ETS_T, ETS_DT and ETS_NTNS, which handle different versions of trend within the ETS family. The length of time series (T) and stability are assigned a very high importance within monthly series. For seasonal time series strength of seasonality has been selected among top-5 features across all classes. For hourly data, the strength of daily seasonality (measured by seasonal_d) appears to be more important than the strength of weekly seasonality (measured by seasonal_w). In addition to the strength of seasonality, the other features such as ACF, PACF-based features related to seasonal lag and seasonally differenced series are also ranked among top five within some classes.
+The partial-dependency score measures the "flatness" of the partial dependence curve for each feature. The flatness of the curve is measured using the standard deviation of the partial dependencies for different values of the feature. A feature with a low partial-dependency score either has little influence on the response variable or the feature interacts with other features.
+
+An ICE score is similar, but is based on measuring the "flatness" of the ICE curves rather than the average ICE curve. The ICE score is the average of the standard deviations of the individual ICE curves. A higher value indicates a higher degree of interactivity with other features.
+
+For each feature, an overall rank is calculated based on the mean ranking of three measures of variable importance: i) permutation-based variable importance; ii) the partial-dependency score; and iii) the individual conditional expectation scores.
+
+\autoref{fig:viplot} shows the top five most important features for each model class across yearly, monthly and hourly series. Overall, the most important features are: strength of trend, sum of the first five partial autocorrelation coefficients, stability, the first ACF value of the differenced series and linearity.
+
+For yearly data, the test Phillips-Perron unit root test statistic is also important. Features related to different types of trend (beta and curvature) are important in selecting between ETS models.
+
+For monthly data, the length of the time series (T) and stability are assigned a high importance. For all seasonal time series (both monthly and hourly), the strength of seasonality has been selected among the top features across all classes.
+
+For hourly data, the strength of daily seasonality (measured by seasonal_d) appears to be more important than the strength of weekly seasonality (measured by seasonal_w). ACF and PACF features related to seasonal lags and seasonal differencing also rank among the top five for some model classes.
 
 ## When and how are features linked to the prediction outcome?
 
-```{r pdpyearlyurpp, fig.height=4.5, fig.width=15, fig.pos="h", dev='pdf', fig.cap="Partial dependence plots for Phillips-Perrorn unit root test statistic. The shading shows the 95\\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class. All classes show a turning point in the relationship around zero."}
+The partial-dependence curves, along with their confidence intervals calculated based on ICE curves, are used to visualise the relationship between top features and the choice of forecast model selection (see section \autoref{peeking}).
+
+```{r pdpyearlyurpp, fig.height=4.5, fig.width=15, fig.cap="Partial dependence plots for Phillips-Perron unit root test statistic. The shading shows the 95\\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class. All classes show a turning point in the relationship around zero."}
 ```
 
-```{r diff1yacf1y, fig.height=4.5, fig.width=15, fig.cap="Partial dependence plots for diff1y\\_acf1 for yearly series. The shading shows the 95\\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class.", fig.pos="h"}
+```{r diff1yacf1y, fig.height=4.5, fig.width=15, fig.cap="Partial dependence plots for diff1y\\_acf1 for yearly series. The shading shows the 95\\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class."}
 ```
 
-```{r pdpmonthlyseasonality, fig.height=6, fig.width=15, fig.cap="Partial dependence plots for strength of seasonality for monthly series. The shading shows the 95\\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class. Probability of selecting forecast models with seasonal components increases as seasonality increases.", fig.pos="h"}
+```{r pdpmonthlyseasonality, fig.height=6, fig.width=15, fig.cap="Partial dependence plots for strength of seasonality for monthly series. The shading shows the 95\\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class. Probability of selecting forecast models with seasonal components increases as seasonality increases."}
 ```
 
-```{r pdpmonthlyT, fig.height=4.5, fig.width=15, fig.pos="h", dev='pdf', fig.cap="Partial dependence plots for length of time series (T). The shading shows the 95\\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class. Probability of selecting rw and rwd decreases as the length > 500.", fig.pos="h", cache=FALSE}
+```{r pdpmonthlyT, fig.height=4.5, fig.width=15, fig.cap="Partial dependence plots for length of time series (T). The shading shows the 95\\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class. Probability of selecting rw and rwd decreases as the length > 500."}
 ```
 
-```{r seasonalityhourly, fig.height=5, fig.width=20, fig.cap="Partial dependence plots for strength of seasonality for hourly series. The shading shows the 95\\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class.", fig.pos="h"}
+```{r seasonalityhourly, fig.height=5, fig.width=20, fig.cap="Partial dependence plots for strength of seasonality for hourly series. The shading shows the 95\\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class."}
 ```
 
-```{r pdpmonthlyhourlyStability, fig.height=4.5, fig.width=15, fig.cap="Partial dependence plots for stability for monthly and hourly series. The shading shows the 95\\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class.", fig.pos="h"}
+```{r pdpmonthlyhourlyStability, fig.height=4.5, fig.width=15, fig.cap="Partial dependence plots for stability for monthly and hourly series. The shading shows the 95\\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class."}
 ```
 
-```{r ypacf5, fig.height=4.5, fig.width=15, fig.cap="Partial dependence plots for y\\_pacf5 for yearly monthly and hourly series. The shading shows the 95\\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class. ", fig.pos="h"}
+```{r ypacf5, fig.height=4.5, fig.width=15, fig.cap="Partial dependence plots for y\\_pacf5 for yearly monthly and hourly series. The shading shows the 95\\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class."}
 ```
 
-```{r pdpyearlytrend, fig.height=6, fig.width=15, fig.cap="Partial dependence plots for trend for yearly and monthly series. The shading shows the 95\\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class. Probability of selecting ETS models without a trend component and stationary models (WN and ARMA) decreases for an extremely high value of trend.", fig.pos="h"}
+```{r pdpyearlytrend, fig.height=6, fig.width=15, fig.cap="Partial dependence plots for trend for yearly and monthly series. The shading shows the 95\\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class. Probability of selecting ETS models without a trend component and stationary models (WN and ARMA) decreases for an extremely high value of trend."}
 ```
 
-```{r linearity, fig.height=8, fig.width=15, fig.cap="Partial dependence plots for linearity for yearly monthly and hourly series. The shading shows the 95\\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class. ", fig.pos="h"}
+```{r linearity, fig.height=8, fig.width=15, fig.cap="Partial dependence plots for linearity for yearly monthly and hourly series. The shading shows the 95\\% confidence intervals. Y-axis denotes the probability of belonging to the corresponding class."}
 ```
 
-```{r y2dpdp, fig.height=6, fig.width=15,fig.cap="Two-way partial dependence plots for linearity for yearly series. Dark regions show the high probability of belonging to the corresponding class shown in the plot title.", fig.pos="h", dev="pdf"}
+```{r y2dpdp, fig.height=6, fig.width=15,fig.cap="Two-way partial dependence plots for linearity for yearly series. Dark regions show the high probability of belonging to the corresponding class shown in the plot title."}
 ```
 
-```{r m2dpdp, fig.height=9, fig.width=10,fig.cap="Two-way partial dependence plots for linearity for monthly series. Dark regions show the high probability of belonging to the corresponding class shown in the plot title.", fig.pos="h", dev="pdf"}
+```{r m2dpdp, fig.height=9, fig.width=10,fig.cap="Two-way partial dependence plots for linearity for monthly series. Dark regions show the high probability of belonging to the corresponding class shown in the plot title."}
 ```
 
-```{r h2dpdp, fig.height=2, fig.width=9,fig.cap="Two-way partial dependence plots for linearity for hourly series. Dark regions show the high probability of belonging to the corresponding class shown in the plot title.", fig.pos="h", dev="pdf"}
+```{r h2dpdp, fig.height=2, fig.width=9,fig.cap="Two-way partial dependence plots for linearity for hourly series. Dark regions show the high probability of belonging to the corresponding class shown in the plot title."}
 ```
 
-```{r thetapdp, fig.height=4, fig.width=15, fig.cap="Two-way partial dependence plots for linearity for monthly series within theta class. Dark regions show the high probability of belonging to the corresponding class shown in the plot title.", fig.pos="h", dev="pdf"}
+```{r thetapdp, fig.height=4, fig.width=15, fig.cap="Two-way partial dependence plots for linearity for monthly series within theta class. Dark regions show the high probability of belonging to the corresponding class shown in the plot title."}
 ```
 
 To gain further insights into the role of features we use partial dependency plots. The PDPs can be used to graphically examine how each feature is related to the model-prediction while accounting for the average effect of other features in the model.
@@ -552,15 +584,15 @@ For monthly series, the strength of seasonality is the most important features a
 The partial dependency plots of the strength of seasonalities for hourly series are shown in \autoref{fig:seasonalityhourly}. According to \autoref{fig:seasonalityhourly}, the probability of selecting random walk, random walk with drift, theta and white noise process decreases as the strength of daily seasonality increases. On the other hand, the probability of the selecting random walk model increases as the strength of weekly seasonality increases.
 \autoref{fig:pdpmonthlyhourlyStability} shows the partial dependency plot of stability. One notable difference between the yearly series and monthly series is that for monthly series, the feature stability is ranked among the top five within many classes. The feature stability does not appear to be ranked among the top 5 within any of the classes for yearly series. Furthermore, the feature stability is ranked important only within random walk and random walk with drift for hourly series. According to the \autoref{fig:pdpmonthlyhourlyStability} we can see that the probability of selecting white noise models increases as stability increases for monthly series while for hourly series the probability of selecting random walk models and random walk with drift models shows a nonmonotonic structure.
 
-The features, sum of the first five partial autocorrelation coefficients, strength of trend and linearity are the most commonly selected features within many classes across all three frequency categories. The partial dependency plot for the sum of the first five partial autocorrelation coefficients are shown in \autoref{fig:ypacf5}. It also appears that the pattern of the relationship varies across classes as well as frequency categories. \autoref{fig:pdpyearlytrend} show the partial dependency curves for strength of trend. The probability of selecting an ETS model without trend components: ETS (N,N,N), white noise process and ARMA decreases as the strength of trend increases, while the opposite relationship can be observed for other classes. The partial dependency plot for linearity is shown in \autoref{fig:linearity}. According to \autoref{fig:linearity} for yearly series random walk with drift and ARMA classes are highly sensitive to the value of linearity around 0. However, the partial dependency curves of linearity for other classes are relatively flat throughout the range. This could be due to the interaction effect of linearity with other features.
+The features, sum of the first five partial autocorrelation coefficients, strength of trend and linearity are the most commonly selected features within many classes across all three frequency categories. The partial dependency plot for the sum of the first five partial autocorrelation coefficients are shown in \autoref{fig:ypacf5}. It also appears that the pattern of the relationship varies across classes as well as frequency categories. \autoref{fig:pdpyearlytrend} show the partial dependency curves for strength of trend. The probability of selecting an ETS model without trend components: ETS (N,N,N), white noise process and ARMA decreases as the strength of trend increases, while the opposite relationship can be observed for other classes. The partial dependency plot for linearity in \autoref{fig:linearity} shows that for yearly series, the random walk with drift and ARMA classes are highly sensitive to the value of linearity around 0. However, the partial dependency curves of linearity for other classes are relatively flat throughout the range. This could be due to the interaction effect of linearity with other features.
 
-The two-way partial dependency plots of linearity are explored to see how linearity behave in the presence of other top-5 features. The associated two-way partial dependency plots are shown in \autoref{fig:y2dpdp}, \autoref{fig:m2dpdp} and \autoref{fig:h2dpdp} for yearly, monthly and hourly series respectively. According to the \autoref{fig:y2dpdp} within wn, random walk, theta and nn classes linearity shows a pattern of interactivity with lmres_acf1 and diff1y_acf1. Within both ARIMA and ARMA classes main effect of linearity dominates. This is consistent with partial dependency curves we observed in \autoref{fig:linearity}. For monthly series, linearity shows interactivity with ACF value at the first seasonal lag of seasonally-differenced series, stability, the first ACF value at the remainder series and a parameter estimate of ETS(A, A, A) model. According to \autoref{fig:m2dpdp}, we can see there is a unique pattern of interactivity existing within each class. The two-way partial dependency plot for hourly series between the ACF value at the first seasonal lag of seasonally-differenced series and linearity are shown in \autoref{fig:h2dpdp}. The inconsistent level of colour intensity throughout the panels in tbats, nn and stlar indicate probability of selecting the corresponding forecast models changes according to the changes in both the features. Within rw and mstlarima we can see a separation between the lower half and the upper half due to the main effect of sediff_seacf1. \autoref{fig:thetapdp} shows how trend, length, first autocorrelation coefficient of the differenced series interact with stability within different ranges. Eventhough the partial dependency curve of stability for the class theta is relatively flat (\autoref{fig:pdpmonthlyhourlyStability}), \autoref{fig:thetapdp} shows patterns of interactivity of stability with the associated features. For example, according to \autoref{fig:thetapdp} as the length of time series decreases, a pattern of interaction is visible with the feature stability.
+The two-way partial dependency plots of linearity are explored to see how linearity behave in the presence of other top-5 features. The associated two-way partial dependency plots are shown in Figures \ref{fig:y2dpdp}--\ref{fig:h2dpdp} for yearly, monthly and hourly series respectively. According to the \autoref{fig:y2dpdp} within wn, random walk, theta and nn classes linearity shows a pattern of interactivity with lmres_acf1 and diff1y_acf1. Within both ARIMA and ARMA classes main effect of linearity dominates. This is consistent with partial dependency curves we observed in \autoref{fig:linearity}. For monthly series, linearity shows interactivity with ACF value at the first seasonal lag of seasonally-differenced series, stability, the first ACF value at the remainder series and a parameter estimate of ETS(A, A, A) model. According to \autoref{fig:m2dpdp}, we can see there is a unique pattern of interactivity existing within each class. The two-way partial dependency plot for hourly series between the ACF value at the first seasonal lag of seasonally-differenced series and linearity are shown in \autoref{fig:h2dpdp}. The inconsistent level of colour intensity throughout the panels in tbats, nn and stlar indicate probability of selecting the corresponding forecast models changes according to the changes in both the features. Within rw and mstlarima we can see a separation between the lower half and the upper half due to the main effect of sediff_seacf1. \autoref{fig:thetapdp} shows how trend, length, first autocorrelation coefficient of the differenced series interact with stability within different ranges. Eventhough the partial dependency curve of stability for the class theta is relatively flat (\autoref{fig:pdpmonthlyhourlyStability}), \autoref{fig:thetapdp} shows patterns of interactivity of stability with the associated features. For example, according to \autoref{fig:thetapdp} as the length of time series decreases, a pattern of interaction is visible with the feature stability.
 
 # Discussion and conclusions {#discussion}
 
 In this paper we have proposed a novel framework for forecast-model selection using meta-learning based on time series features. Our proposed FFORMS algorithm uses the knowledge of the past performance of candidate forecast models on a collection of time series in order to identify suitable forecast models for a new series. A key advantage of FFORMS is the idea of outsourcing most of the heavy computational work to the offline phase. Therefore, unlike traditional model selection strategies or cross-validation processes, our proposed framework can be used to accurately forecast very large collections of time series requiring almost instant forecasts. For real-time forecasting, our framework involves only the calculation of features, the selection of a forecast method based on FFORMS random forest classifier, and the calculation of the forecasts from the chosen model. None of these steps involve substantial computation, and they can be easily parallelized when forecasting for a large number of new time series. In doing so, the FFORMS framework fills an important gap in contemporary forecasting practice, with many available models to choose from and with predictions being required extremely fast.
 
-This paper makes a first step towards providing a comprehensive analysis of the relationship between time series features and forecast model selection using machine learning interpretability techniques. We explore the role of features in forecast model selection under the hood of FFORMS framework. First we explore the dissimilarities and similarities learned by the random forest. Next, we explore **which** features are the most important for the choice of FFORMS framework and where they are most important (which features within classes and frequency category)? Features such as strength of trend, strength of seasonality, linearity, information related to partial-autocorrelation structure, features related to difference stationary, length and entropy are the most important features. Finally, partial dependency plots are used to visualise **when** and **how** these features link with the prediction outcome of the FFORMS framework. This improves our understanding of the data and the relationship learned by the random forest algorithm. This is an important aspect in encouraging people to trust and use the proposed framework effectively. Further, the results of this study are useful in identifying new ways to improve forecasting accuracy by capturing different features of time series. This study shows how a model can be used to guide future research and application.
+This paper makes a first step towards providing a comprehensive analysis of the relationship between time series features and forecast model selection using machine learning interpretability techniques. We explore the role of features in forecast model selection under the hood of FFORMS framework. First we explore the similarities learned by the random forest. Next, we explore **which** features are the most important for the choice of FFORMS framework and where they are most important (which features within classes and frequency category)? Features such as strength of trend, strength of seasonality, linearity, information related to partial-autocorrelation structure, features related to difference stationary, length and entropy are the most important features. Finally, partial dependency plots are used to visualise **when** and **how** these features link with the prediction outcome of the FFORMS framework. This improves our understanding of the data and the relationship learned by the random forest algorithm. This is an important aspect in encouraging people to trust and use the proposed framework effectively. Further, the results of this study are useful in identifying new ways to improve forecasting accuracy by capturing different features of time series. This study shows how a model can be used to guide future research and application.
 
 Future research in this area could consider how local interpretable model-agnostic explanations can be used to zoom local regions of data to identify which features contribute most to the classification of a specific instance.
 
