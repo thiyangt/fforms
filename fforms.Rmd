@@ -143,7 +143,7 @@ p1 | p2
 
 John Rice was an early and strong proponent of the idea of meta-learning, which he called the algorithm selection problem (ASP) [@rice1976]. The term *meta-learning* started to appear with the emergence of the machine-learning literature.
 
-```{r rice, fig.cap="Rice's framework for the Algorithm Selection Problem.", out.width="60%"}
+```{r rice, fig.cap="Rice's framework for the Algorithm Selection Problem.", out.width="80%"}
 knitr::include_graphics("images/RiceFramework.png")
 ```
 
@@ -177,9 +177,9 @@ More recently, @kuck2016meta proposed a meta-learning framework based on neural 
 
 ## FFORMS framework
 
-Our proposed FFORMS framework, presented in \autoref{fig:framework}, builds on this preceding research. The offline and online phases are shown in blue and red respectively. A classification algorithm (the meta-learner) is trained during the offline phase and is then used to select an appropriate forecast model for a new time series in the online phase. We use machine learning interpretability tools to gain insights into what is happening under the hood of the FFORMS framework. We refer to this process as "peeking inside FFORMS".
+Our proposed FFORMS framework, presented in \autoref{fig:framework}, builds on this preceding research. The offline and online phases are shown in blue and red respectively. A classification algorithm (the meta-learner) is trained during the offline phase and is then used to select an appropriate forecast model for a new time series in the online phase. We use machine learning interpretability tools to gain insights into what is happening under the hood of the FFORMS framework.
 
-```{r framework, fig.cap="FFORMS (Feature-based FORecast-Model Selection) framework. The offline phase is shown in blue, the online phase is in red.", out.width='110%'}
+```{r framework, fig.cap="FFORMS (Feature-based FORecast-Model Selection) framework. The offline phase is shown in blue, the online phase is in red.", out.width='100%'}
 knitr::include_graphics("images/framework.png")
 ```
 
@@ -423,7 +423,7 @@ and FFORMS is much faster than any of the competitor methods shown in \autoref{f
 
 # Peeking inside FFORMS{#peeking}
 
-Apart from providing a relatively fast forecasting method that has good performance, we also wish to use this method to better understand what methods work best for different types of time series.
+Apart from providing a fast forecasting method that has relatively good performance, we also wish to better understand what methods work best for different types of time series.
 
 To address this problem, we present the results for yearly series (representing non-seasonal time series), monthly series (representing time series with a single seasonal component), and hourly series (representing series with multiple seasonal components). The results for quarterly and weekly data were very similar to the corresponding results of monthly data, while the results of daily data were very similar to the results for hourly data. Hence, these are omitted to save space.
 
