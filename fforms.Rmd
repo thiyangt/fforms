@@ -601,11 +601,13 @@ The associated two-way partial dependency plots for linearity are shown in Figur
 
 # Discussion and conclusions {#discussion}
 
-In this paper we have proposed a novel framework for forecast-model selection using meta-learning based on time series features. Our proposed FFORMS algorithm uses the knowledge of the past performance of candidate forecast models on a collection of time series in order to identify suitable forecast models for a new series. A key advantage of FFORMS is the idea of outsourcing most of the heavy computational work to the offline phase. Therefore, unlike traditional model selection strategies or cross-validation processes, our proposed framework can be used to accurately forecast very large collections of time series requiring almost instant forecasts. For real-time forecasting, our framework involves only the calculation of features, the selection of a forecast method based on FFORMS random forest classifier, and the calculation of the forecasts from the chosen model. None of these steps involve substantial computation, and they can be easily parallelized when forecasting for a large number of new time series. In doing so, the FFORMS framework fills an important gap in contemporary forecasting practice, with many available models to choose from and with predictions being required extremely fast.
+We have proposed a novel framework for forecast-model selection using meta-learning based on time series features. Our proposed FFORMS algorithm uses the knowledge of the past performance of candidate forecast models on a collection of time series in order to identify suitable forecast models for a new series. A key advantage of FFORMS is the idea of outsourcing most of the heavy computational work to the offline phase. Therefore, unlike traditional model selection strategies or cross-validation processes, our proposed framework can be used to provide relatively accurate and fast forecasts for very large collections of time series. For real-time forecasting, our framework involves only the calculation of features, the selection of a forecast method based on FFORMS random forest classifier, and the calculation of the forecasts from the chosen model. None of these steps involve substantial computation, and they can be easily parallelized when forecasting for a large number of new time series. In doing so, the FFORMS framework fills an important gap in contemporary forecasting practice, with many available models to choose from and with predictions being required in a short time. We are well aware that the FFORMS forecasts will not usually be the best possible forecasts given unlimited computation time; rather, they are almost as good but available in a much shorter time period.
 
-This paper makes a first step towards providing a comprehensive analysis of the relationship between time series features and forecast model selection using machine learning interpretability techniques. We explore the role of features in forecast model selection under the hood of FFORMS framework. First we explore the similarities learned by the random forest. Next, we explore **which** features are the most important for the choice of FFORMS framework and where they are most important (which features within classes and frequency category)? Features such as strength of trend, strength of seasonality, linearity, information related to partial-autocorrelation structure, features related to difference stationary, length and entropy are the most important features. Finally, partial dependency plots are used to visualise **when** and **how** these features link with the prediction outcome of the FFORMS framework. This improves our understanding of the data and the relationship learned by the random forest algorithm. This is an important aspect in encouraging people to trust and use the proposed framework effectively. Further, the results of this study are useful in identifying new ways to improve forecasting accuracy by capturing different features of time series. This study shows how a model can be used to guide future research and application.
+This paper has made a first step towards providing a comprehensive analysis of the relationship between time series features and forecast model selection using machine learning interpretability techniques. We have explored the role of features in forecast model selection in the FFORMS framework. First we explored the similarities between series learned by the random forest. Next, we explored **which** features are the most important for model selection in the FFORMS framework, and where they are most important. Features such as strength of trend, strength of seasonality, linearity, information related to partial-autocorrelation structure, features related to difference stationary, length and entropy are the most important features. Finally, partial dependency plots were used to visualise **when** and **how** these features link with the prediction outcome of the FFORMS framework. This improves our understanding of the data and the relationship learned by the random forest algorithm, and increases trust in the results obtained from the proposed framework.
 
-Future research in this area could consider how local interpretable model-agnostic explanations can be used to zoom local regions of data to identify which features contribute most to the classification of a specific instance.
+Future research in this area could consider how local interpretable model-agnostic explanations can be used to identify regions of data where features contribute most to the classification of a specific instance.
+
+The features and models we have used in our analyses may be varied for other applications. Features can be added or removed as required, and new models can be introduced that are appropriate to the application and types of time series being forecast. While some features will probably be useful across a broad range of problems, it is likely that some features will only be useful for some specific types of data or applications.
 
 # Supplementary Materials {-}
 
@@ -625,7 +627,7 @@ The appropriate forecast method for a time series depends on how many observatio
 
 ### Features based on an STL-decomposition {-}
 
-The strength of trend, strength of seasonality, linearity, curvature, spikiness and first autocorrelation coefficient of the remainder series, are calculated based on a decomposition of the time series. Suppose we denote our time series as $y_1, y_2, \dots,y_T$. First, an automated Box-Cox transformation [@Guerrero1993] is applied to the time series in order to stabilize the variance and to make the seasonal effect additive. The transformed series is denoted by $y_{t}^*$. For quarterly and monthly data, this is decomposed using STL [@cleveland1990stl] to give $y_t^*=T_t+S_t+R_t$, where $T_t$ denotes the trend, $S_t$ denotes the seasonal component, and $R_t$ is the remainder component. For non-seasonal data, Friedman's super smoother [@supsmu] is used to decompose $y_t^*=T_t+R_t$, and $S_t=0$ for all $t$. The de-trended series is $y_t^*-T_t=S_t+R_t$, the deseasonalized series is $y_t^*-S_t = T_t+R_t$..
+The strength of trend, strength of seasonality, linearity, curvature, spikiness and first autocorrelation coefficient of the remainder series, are calculated based on a decomposition of the time series. Suppose we denote our time series as $y_1, y_2, \dots,y_T$. First, an automated Box-Cox transformation [@Guerrero1993] is applied to the time series in order to stabilize the variance and to make the seasonal effect additive. The transformed series is denoted by $y_{t}^*$. For quarterly and monthly data, this is decomposed using MSTL [@bandara2021mstl] to give $y_t^*=T_t+S_t+R_t$, where $T_t$ denotes the trend, $S_t$ denotes one or more seasonal components, and $R_t$ is the remainder component. For non-seasonal data, Friedman's super smoother [@supsmu] is used to decompose $y_t^*=T_t+R_t$, and $S_t=0$ for all $t$. The de-trended series is $y_t^*-T_t=S_t+R_t$, the deseasonalized series is $y_t^*-S_t = T_t+R_t$.
 
 The strength of trend is measured by comparing the variance of the deseasonalized series and the remainder series [@wang2009rule]:
 $$
@@ -638,11 +640,11 @@ Similarly, the strength of seasonality is computed as
 
 The linearity and curvature features are based on the coefficients of an orthogonal quadratic regression
 \[
-	T_t=\beta_0+\beta_1 \phi_1(t) + \beta_2\phi_2(t) + \varepsilon_t,
+	T_t + R_t =\beta_0+\beta_1 \phi_1(t) + \beta_2\phi_2(t) + \varepsilon_t,
 \]
 where $t=1, 2, \dots,T$, and $\phi_1$ and $\phi_2$ are orthogonal polynomials of orders 1 and 2. The estimated value of $\beta_1$ is used as a measure of linearity while the estimated value of $\beta_2$ is considered as a measure of curvature. These features were used by @hyndman2015large. The linearity and curvature depend on the the scale of the time series. Therefore, the time series are scaled to mean zero and variance one before these two features are computed.
 
-The spikiness feature is useful when a time series is affected by occasional outliers. @hyndman2015large introduced an index to measure spikiness, computed as the variance of the leave-one-out variances of $r_t$. We compute the first autocorrelation coefficient of the remainder series, $r_t$.
+The spikiness feature is useful when a time series is affected by occasional outliers. @hyndman2015large introduced an index to measure spikiness, computed as the variance of the leave-one-out variances of $R_t$. We compute the first autocorrelation coefficient of the remainder series, $R_t$.
 
 ### Stability and lumpiness {-}
 
@@ -652,17 +654,17 @@ The features "stability" and "lumpiness" are calculated based on tiled windows (
 
 Spectral entropy is based on information theory, and can be used as a measure of the forecastability of a time series. Series that are easy to forecast should have a small spectral entropy value, while very noisy series will have a large spectral entropy. We use the measure introduced by @goerg2013forecastable to estimate the spectral entropy. It estimates the Shannon entropy of the spectral density of the normalized spectral density, given by
 \[
-	H_{s}(y_t):=-\int_{-\pi}^{\pi}\hat f_y(\lambda)\log \hat f_y({\lambda})d\lambda,
+	H_{s}(y_t) =-\int_{-\pi}^{\pi}\hat f_y(\lambda)\log \hat f_y({\lambda})d\lambda,
 \]
 where $\hat{f}_y$ denotes the estimate of the spectral density introduced by @nuttall1982spectral. The R package ForeCA [@Foreca] was used to compute this measure.
 
 ### Hurst exponent {-}
 
-The Hurst exponent measures the long-term memory of a time series. The Hurst exponent is given by $H=d+0.5$, where $d$ is the fractal dimension obtained by estimating a ARFIMA($0, d, 0$) model. We compute this using the maximum likelihood method [@haslett1989space] as implemented in the fracdiff package [@fracdiff]. This measure was also used in @wang2009rule.
+The Hurst exponent measures the long-term memory of a time series. The Hurst exponent is given by $H=d+0.5$, where $d$ is the fractal dimension obtained by estimating an ARFIMA($0, d, 0$) model. We compute this using the maximum likelihood method [@haslett1989space] as implemented in the fracdiff package [@fracdiff]. This measure was also used in @wang2009rule.
 
 ### Nonlinearity {-}
 
-To measure the degree of nonlinearity of the time series, we use statistic computed in Terasvirta's neural network test for nonlinearity [@nonlintest], also used in @wang2009rule. This takes large values when the series is nonlinear, and values around 0 when the series is linear.
+To measure the degree of nonlinearity of the time series, we use the statistic computed in Terasvirta's neural network test for nonlinearity [@nonlintest], also used in @wang2009rule. This takes large values when the series is nonlinear, and values around 0 when the series is linear.
 
 ### Parameter estimates of an ETS model {-}
 
