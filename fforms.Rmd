@@ -83,11 +83,13 @@ Clearly, there is a need for a fast and scalable algorithm to automate the proce
 
 The "online" process of generating forecasts only involves calculating the features of a time series and using the pre-trained classifier to identify the best forecasting model. Hence, generating forecasts only involves the estimation of a single forecasting model, with no need to estimate large numbers of models within a class, or to carry out a computationally-intensive cross-validation procedure. We refer to this general framework as FFORMS (**F**eature-based **FOR**ecast-**M**odel **S**election).
 
+Currently, there are two methods motivated and using the FFORMS framework as their backbone. @MonManEtAl2020 proposed FFORMA (Feature-based FORecast Model Averaging) which includes, a gradient boosting algorithm with a custom objective function to train the meta-learner to obtain weights for forecast combinations. FFORMA was ranked as the second most accurate method in the M4-competition. @TalEtAl2022 proposed FFORMPP (Feature-based FORecast Model Performance Prediction) which  includes efficient Bayesian multivariate surface regression to model forecast error as a function of features. FFORMPP allows rankings of models according to their relative forecasting performance. Both these approaches are considerably slower (and arguably prohibitively slower in an operational sense) than FFORMS. However, the proposed methods show that if we are willing to sacrifice some speed, greater accuracy can be achieved using the FFORMS framework. As we will see in what follows the FFORMS algorithm provides a method that achieves reasonably accurate forecasts within a limited timeline setting.  
+
 There have been several recent studies on the use of meta-learning approaches to automate forecast model selection based on features computed from the time series [@shah1997model; @prudencio2004meta; @lemke2010meta; @kuck2016meta]. However, to the best of our knowledge, a very limited effort has been made to understand how the meta-learners make their decisions and what is really happening inside these complex model structures. To fill these gaps, this paper makes a first step towards providing a comprehensive analysis of the relationship between time series features and forecast model selection using machine learning interpretability techniques. We try to answer the following questions:
 i) **What** are the similarities identified by the meta-learner between model classes?
 ii) **Which** features contribute most to the classification process?
 iii) **How** are features related to the property being modelled?
-iv) **How** do features interact with each other to identify a suitable forecasting model? We believe addressing these questions can enhance the transparency of the model predictions and build trust trust in model's predictions.
+iv) **How** do features interact with each other to identify a suitable forecasting model? We believe addressing these questions can enhance the transparency of the model predictions and build trust in model's predictions.
 
 The remainder of the paper is structured as follows. We review the related work in \autoref{litreview}. In \autoref{fforms} we explain the detailed components and procedures of our proposed framework for forecast model selection. \autoref{results} presents the forecasting results in application to the M4-competition data. \autoref{peeking} presents the results of what is happening under the hood of FFORMS, followed by some conclusions and suggestions for future work in \autoref{discussion}.
 
@@ -203,12 +205,13 @@ Each time series within the reference set is split into a training period and a 
 		\Statex \hspace{1cm}\text{FFORMS classifier}
 		\Statex
 		\Statex \textit{Prepare the reference set}
-		\Statex For $i=1$ to $n$:
+		\State For $i=1$ to $n$:
 		\State Simulate $\textit{nsim}$ time series similar to $x_i$, using either a model or features to determine the data generating process.
 		\State The time series in $O$ and simulated time series from step 1 form the reference set $R=\{x_1, x_2, \dots,x_n, x_{n+1},\dots,x_N\}$ where $N = n + \textit{nsim}$.
+    \State EndFor.
 		\Statex
 		\Statex \textit{Prepare the meta-data}
-		\Statex For $j=1$ to $N$:
+		\State For $j=1$ to $N$:
 		\State Split $x_j$ into a training period and test period.
 		\State Calculate features $F$ based on the training period.
 		\State Fit $L$ models to the training period.
@@ -216,6 +219,7 @@ Each time series within the reference set is split into a training period and a 
 		\State Calculate forecast error measure over the test period for all models in $L$.
 		\State Select the model with the minimum forecast error.
 		\State Meta-data: input features (step 4), output labels (step 8).
+		\State EndFor.
 		\Statex
 		\Statex \textit{Train a random forest classifier}
 		\State Train a random forest classifier based on the meta-data giving an ensemble of trees $\{T_b\}$, $b=1,\dots,B$.
@@ -296,7 +300,7 @@ The task of the classification algorithm is to identify the "best" forecasting m
 
 Each candidate model considered is estimated strictly on the training period of each series in the reference set. Forecasts are then generated for the test period over which the chosen forecast accuracy measure is calculated. The model with the lowest forecast error measure over the test period is deemed "best". This step is the most computationally intensive and time-consuming, as each candidate model has to be applied on each series in the reference set. However, as this task is done during the offline phase of the FFORMS framework, the time involved and computational cost associated are of no real significance and are completely controlled by the user.
 
-For each series in the reference set and each forecasting model, we compute the accuracy measures that were used in the M4 competition [@makridakis2019m4], namely the MASE and the symmetric mean absolute percentage error (sMAPE). Each of these is standardised by the median MASE and median sMAPE, calculated across the forecast models. The model with the lowest average value of the scaled MASE and scaled sMAPE is selected as the output class label.
+For each series in the reference set and each forecasting model, we compute the accuracy measures that were used in the M4-competition [@makridakis2019m4], namely the MASE and the symmetric mean absolute percentage error (sMAPE). Each of these is standardised by the median MASE and median sMAPE, calculated across the forecast models. The model with the lowest average value of the scaled MASE and scaled sMAPE is selected as the output class label.
 
 \begin{table}[!htp]
 \centering\footnotesize\tabcolsep=0.12cm
@@ -331,9 +335,9 @@ mstlarima & multiple seasonal decomposition with ARIMA modelling of the seasonal
 
 ## Train a FFORMS meta-learner
 
-In principle, any classification algorithm could be used to train the meta-learner. Our current implementation uses a random forest algorithm because: i) it can model complex interactions between features; ii) the modelling framework captures linear and non-linear effects of features through the averaging of large number of decision trees; iii) it is robust against over-fitting the training data; iv) it is easy to handle the problem of imbalanced classes; v) it is a fast approach compared to boosting algorithms; and vi) it is fairly easy and straightforward to implement with available software. In this work, we have used the randomForest package [@liaw2002randomforest; @rfpkg] which implements the Fortran code for random forest classification by @breiman2004random. To determine the class label for a new instance, features are calculated and passed down the trees. Then each tree gives a prediction and the majority vote over all individual trees leads to the final decision.
+In principle, any classification algorithm could be used to train the meta-learner. Our current implementation uses a random forest (RF) algorithm because: i) it can model complex interactions between features; ii) the modelling framework captures linear and non-linear effects of features through the averaging of large number of decision trees; iii) it is robust against over-fitting the training data; iv) it is easy to handle the problem of imbalanced classes; v) it is a fast approach compared to boosting algorithms; and vi) it is fairly easy and straightforward to implement with available software. In this work, we have used the randomForest package [@liaw2002randomforest; @rfpkg] which implements the Fortran code for random forest classification by @breiman2004random. To determine the class label for a new instance, features are calculated and passed down the trees. Then each tree gives a prediction and the majority vote over all individual trees leads to the final decision.
 
-The random forest (RF) algorithm is highly sensitive to class imbalance [@breiman2001random], and our reference set is unbalanced: some classes contain significantly more cases than other classes. The degree of class imbalance is reduced to some extent by augmenting the observed sample with the simulated time series. We consider three approaches to address the class imbalance in the data: (1) incorporating class priors into the RF classifier; (2) using the balanced RF algorithm introduced by @chen2004using; and (3) re-balancing the reference set with down-sampling. In down-sampling, the size of the reference set is reduced by down-sampling the larger classes so that they match the smallest class in size; this potentially discards some useful information. Comparing the results, the balanced RF algorithm and RF with down-sampling did not yield satisfactory results. We therefore only report the results obtained by the RF built on unbalanced data (RF-unbalanced) and the RF with class priors (RF-class priors). The RF algorithms are implemented by the randomForest R package [@liaw2002randomforest; @rfpkg]. The class priors are introduced through the option `classwt`. We use the reciprocal of class size as the class priors. The number of trees `ntree` is set to 1000, and the number of randomly selected features `k` is set to be one third of the total number of features available.
+The RF algorithm is highly sensitive to class imbalance [@breiman2001random], and our reference set is unbalanced: some classes contain significantly more cases than other classes. The degree of class imbalance is reduced to some extent by augmenting the observed sample with the simulated time series. We consider three approaches to address the class imbalance in the data: (1) incorporating class priors into the RF classifier; (2) using the balanced RF algorithm introduced by @chen2004using; and (3) re-balancing the reference set with down-sampling. In down-sampling, the size of the reference set is reduced by down-sampling the larger classes so that they match the smallest class in size; this potentially discards some useful information. Comparing the results, the balanced RF algorithm and RF with down-sampling did not yield satisfactory results. We therefore only report the results obtained by the RF built on unbalanced data (RF-unbalanced) and the RF with class priors (RF-class priors). The RF algorithms are implemented by the randomForest R package [@liaw2002randomforest; @rfpkg]. The class priors are introduced through the option `classwt`. We use the reciprocal of class size as the class priors. The number of trees `ntree` is set to 1000, and the number of randomly selected features `k` is set to be one third of the total number of features available.
 
 Our aim is different from most classification problems in that we are not interested in accurately predicting the class, but in finding the best possible forecast model. It is possible that two models produce almost equally accurate forecasts, and therefore it is not important whether the classifier picks one model over the other. Therefore we report the forecast accuracy obtained from the FFORMS framework, rather than the classification accuracy.
 
@@ -341,16 +345,16 @@ Our aim is different from most classification problems in that we are not intere
 
 ## Evaluation choices
 
-To test how well our proposed framework can identify suitable models for forecasting, we use the time series from the M1 [@makridakis1982accuracy], M3 [@makridakis2000m3] and M4 [@makridakis2019m4] competitions. The M-competition data were a sample of time series collected from several domains such as demography, finance, business and economics. In our experiment, we treat the time series from the M1 and M3 competitions as the observed sample. We augment these by adding multiple time series simulated using the training period of each series in the M4 competition to the reference set. For this purpose, we fit models to each series, and simulate new time series from those models. For yearly, yearly, quarterly and monthly data, we use ETS and ARIMA models via the `ets()` and `auto.arima()` functions in the forecast package. For weekly, daily and hourly series, we use a multiple seasonal decomposition (MSTL) [@bandara2021mstl], and forecast the seasonally adjusted series using ETS models. This is implemented in the `stlf()` function from the forecast package.
+To test how well our proposed framework can identify suitable models for forecasting, we use the time series from the M1 [@makridakis1982accuracy], M3 [@makridakis2000m3] and M4 [@makridakis2019m4] competitions. The data from the M-competitions are a sample of time series collected from several domains such as demography, finance, business and economics. In our experiment, we treat the time series from the M1 and M3 competitions as the observed sample. We augment these by adding multiple time series simulated using the training period of each series in the M4-competition to the reference set. For this purpose, we fit models to each series, and simulate new time series from those models. For, yearly, quarterly and monthly data, we use ETS and ARIMA models via the `ets()` and `auto.arima()` functions in the forecast package. For weekly, daily and hourly series, we use a multiple seasonal decomposition (MSTL) [@bandara2021mstl], and forecast the seasonally adjusted series using ETS models. This is implemented in the `stlf()` function from the forecast package.
 
-We build separate FFORMS meta-learners for yearly, quarterly, monthly, daily, and hourly series ,due to their differences in features and classlabels. Then the pre-trained FFORMS meta-learners are used to forecast the test period of the M4 competition time series.
+We build separate FFORMS meta-learners for yearly, quarterly, monthly, daily, and hourly series, due to their differences in features and class labels. Then the pre-trained FFORMS meta-learners are used to forecast the test period of the M4-competition time series.
 
 ## Summary of the main results
 
 \begin{table}[!h]
 \centering\scriptsize\tabcolsep=0.12cm
 \begin{threeparttable}
-\caption{The performance of FFORMS on the M4 competition data based on point forecasts (based on MASE) and prediction intervals (based on MSIS)}
+\caption{The performance of FFORMS on the M4-competition data based on point forecasts (based on MASE) and prediction intervals (based on MSIS)}
 \label{forecasts}
 \begin{tabular}{lrrrrrr}
 \toprule
@@ -358,8 +362,7 @@ We build separate FFORMS meta-learners for yearly, quarterly, monthly, daily, an
 \midrule
  & Yearly & Quarterly & Monthly & Weekly & Daily & Hourly \\
 \midrule
-\bf{FFORMS-individual} & 3.17 &  1.20 &  0.98&  2.31& 3.57 &  0.84\\
-\bf{FFORMS-combination} & 3.23 &  1.16 &  0.94&  2.55& 3.42 &  0.81\\
+\bf{FFORMS} & 3.17 &  1.20 &  0.98&  2.31& 3.57 &  0.84\\
 auto.arima & 3.40 &1.17  &0.93  & 2.55 &  -& - \\
 ets & 3.44 &  1.16& 0.95 &  -&-  &  -\\
 theta & 3.37 &1.24  & 0.97 &2.64  & 3.33 & 1.59 \\
@@ -396,7 +399,7 @@ naive & 56.55 & 14.07 &  12.30 & 26.35 & 32.55 & 71.24\\
 
 \begin{table}[!h]
 	\centering\scriptsize\tabcolsep=0.12cm
-	\caption{Computational time for producing forecasts based on 100 randomly selected series from each frequency category of the M4 data set.}
+	\caption{Computational time for producing forecasts based on 100 randomly selected series from each frequency category of the M4-competition data set.}
 	\label{forecasttime}
 	\begin{tabular}{lrrrrrr}
 		\toprule
@@ -404,7 +407,7 @@ naive & 56.55 & 14.07 &  12.30 & 26.35 & 32.55 & 71.24\\
     \midrule
 		                  & Yearly      & Quarterly     & Monthly       & Weekly        & Daily         & Hourly        \\
     \midrule
-		FFORMS-individual & 3.38 (0.18) & 20.98 (8.23)  & 100.13 (7.13) & 128.41 (5.17) & 77.20 (5.67)  & 34.53 (5.16)  \\
+		FFORMS & 3.38 (0.18) & 20.98 (8.23)  & 100.13 (7.13) & 128.41 (5.17) & 77.20 (5.67)  & 34.53 (5.16)  \\
 		auto.arima        & 5.91 (0.05) & 42.11 (2.15)  & 448.41 (1.95) & 584.98 (2.35) & -             & -             \\
 		ets               & 1.14 (0.02) & 16.92 (0.09)  & 115.50 (0.17) & -             & -             & -             \\
 		theta             & 2.74 (2.48) & 10.15 (11.45) & 29.13 (1.15)  & 96.06 (0.42)  & 83.77 (2.67)  & 54.32 (2.32)  \\
@@ -421,22 +424,23 @@ naive & 56.55 & 14.07 &  12.30 & 26.35 & 32.55 & 71.24\\
 	\end{tabular}
 \end{table}
 
-\autoref{forecasts} shows the performance of the FFORMS approach on the M4 competition data. The point forecasts and prediction intervals are evaluated based on the test period of each series. The point forecasts are evaluated based on the MASE computed for each forecast horizon, and then by averaging the MASE errors across all series corresponding to each frequency category. Similarly, the mean scaled interval score MSIS [@makridakis2019m4] is used to evaluate the prediction intervals. The results are compared against several benchmarks and the top three places of the M4 competition. The top-ranking methods of the M4 competition were based on some kind of combination approach. The first ranking method was based on a hybrid approach that produced forecasts based on both ETS and machine learning approaches. The second and third places were based on a combination of nine and seven different forecast models. The second and third approaches are time-consuming because forecasts from all candidate models must be computed. The FFORMS-individual results are based on forecasts from a single selected model, while FFORMS-combination is based on averaging forecasts from the best four models of each series selected using the FFORMS approach.
+\autoref{forecasts} shows the performance of the FFORMS approach on the M4-competition data. The point forecasts and prediction intervals are evaluated based on the test period of each series. The point forecasts are evaluated based on the MASE computed for each forecast horizon, and then by averaging the MASE errors across all series corresponding to each frequency category. Similarly, the mean scaled interval score MSIS [@makridakis2019m4] is used to evaluate the prediction intervals. The results are compared against several benchmarks and the top three ranked methods of the M4-competition. The top-ranking methods of the M4-competition were based on some type of combination approach. 
+The first ranked method was a hybrid approach that produced forecasts based on both ETS and machine learning approaches. The second and third places were based on a combination of nine and seven different forecast models. Recall that the second ranked approach was FFORMA which is based on FFORMS. All these approaches are time-consuming as forecasts from all candidate models must be computed. The FFORMS results are based on forecasts from a single selected model.
 
-According to the \autoref{forecasts}, we can see the FFORMS yields relatively accurate forecasts comparable to benchmarks and the top-3 of the M4 competition. The purpose of FFORMS framework is not to introduce an algorithm that beats all benchmark approaches but to introduce an algorithm that performs reasonably well across a wide range of time series, and which is relatively fast to implement. There is usually a trade-off when forecasting between accuracy and computation time, and FFORMS is intended to trade off some accuracy for large gains in computational efficiency. It gives results that are relatively similar to the best methods in the M4 competition, while being orders of magnitude faster to apply in the offline phase.
+According to the \autoref{forecasts}, we can see the FFORMS yields relatively accurate forecasts comparable to benchmarks and the top-3 of the M4-competition. The purpose of FFORMS framework is not to introduce an algorithm that beats all benchmark approaches but to introduce an algorithm that performs reasonably well across a wide range of time series, and which is relatively fast to implement. There is usually a trade-off when forecasting between accuracy and computation time, and FFORMS is intended to trade off some accuracy for large gains in computational efficiency. It gives results that are relatively similar to the best methods in the M4-competition, while being orders of magnitude faster to apply in the online phase.
 
 ## Computation times
 
-The running time for fitting models are reported in \autoref{forecasttime}. The reported values are based on 100 randomly selected time series from each frequency category of M4 competition data. The reported results are median time along with IQR based on 100 replicates using 24 core Xeon-E5-2680-v3@2.50GHz servers. The microbenchmark [@microbench] R package was used for calculations.
+The running time for fitting models are reported in \autoref{forecasttime}. The reported values are based on 100 randomly selected time series from each frequency category of M4-competition data. The reported results are median time along with IQR based on 100 replicates using 24 core Xeon-E5-2680-v3@2.50GHz servers. The microbenchmark [@microbench] R package was used for calculations.
 
-The times to produce the forecasts that were in the top few places of the M4 competition are not shown, as these were provided to use in the M4 results. However, the times are reported in @makridakis2019m4, albeit with a different computing archictecture,
+The times to produce the forecasts that were in the top few places of the M4-competition are not shown, as these were provided to use in the M4 results. However, the times are reported in @makridakis2019m4, albeit with a different computing archictecture,
 and FFORMS is much faster than any of the competitor methods shown in \autoref{forecasts}.
 
 # Peeking inside FFORMS{#peeking}
 
 Apart from providing a fast forecasting method that has relatively good performance, we also wish to better understand what methods work best for different types of time series.
 
-To address this problem, we present the results for yearly series (representing non-seasonal time series), monthly series (representing time series with a single seasonal component), and hourly series (representing series with multiple seasonal components). The results for quarterly and weekly data were very similar to the corresponding results of monthly data, while the results of daily data were very similar to the results for hourly data. Hence, these are omitted.
+To address this problem, we present the results for yearly series (representing non-seasonal time series), monthly series (representing time series with a single seasonal component), and hourly series (representing series with multiple seasonal components). The results for quarterly and weekly data were very similar to the corresponding results for monthly data, while the results for daily data were very similar to the results for hourly data. Hence, these are omitted.
 
 ## Visualization of the similarity between forecast models{#oobviz}
 
@@ -505,15 +509,15 @@ Some more subtle insights also emerge:
 
   1. Regardless of the true class label (corresponding to the model that gives the best forecasts on the test set), the random walk with drift has a non-zero vote probability for all yearly data. That is, for each yearly series, at least one tree in the random forest voted for random walk with drift.
   2. For monthly data, SARIMA, tbats, theta, nn, rwd and stlar have all been assigned a very high vote probability for at least some series.
-  3. Those monthly series with a high vote probability for SARIMA also have a high vote probability for ETS models with seasonal components. Similarly, those series have a high vote probability for (non-seasonal) ARIMA models also have a high probability for non-seasonal ETS models.
-  4. Compared to yearly and monthly series, with hourly series the best forecasting model has been selected with very high probability.
-  5. For hourly series, low vote probabilities have been assigned to random walk, random walk with drift, theta and white noise, while neural networks have been assigned a non-zero vote probability by all hourly series.
+  3. Those monthly series with a high vote probability for SARIMA also have a high vote probability for ETS models with seasonal components. Similarly, those series with a high vote probability for (non-seasonal) ARIMA models also have a high probability for non-seasonal ETS models.
+  4. Compared to yearly and monthly series, for hourly series the best forecasting model has been selected with very high probability.
+  5. For hourly series, low vote probabilities have been assigned to random walk, random walk with drift, theta and white noise, while neural networks have been assigned a non-zero vote probability for all hourly series.
 
-We also created an interactive dashboard^[`https://thiyangt.github.io/fformsviz/fforms.html`] allowing additional visualizations such as: i) the distribution of true classlabels by row clusters of the vote matrix; ii) the feature distribution by clusters; and iii) the distribution of the clusters in the feature space (a principal component analysis is used to map each time series as a point in a two-dimensional instance space given by features).
+We also created an interactive dashboard^[`https://thiyangt.github.io/fformsviz/fforms.html`] allowing additional visualizations such as: i) the distribution of true class labels by row clusters of the vote matrix; ii) the feature distribution by clusters; and iii) the distribution of clusters in the feature space (a principal component analysis is used to map each time series as a point in a two-dimensional instance space given by features).
 
 ## Which features are the most important and where are they important?
 
-```{r viplot, fig.height=18, fig.width=20, fig.cap="The top five features for each frequency categories and model. The cell colours denote the frequency group (hourly, monthly, yearly), while features are on rows and forecast methods in columns. For many models, the top five features are trend, linearity and strength of seasonality."}
+```{r viplot, fig.height=18, fig.width=20, fig.cap="The top five features for each frequency category and model. The cell colours denote the frequency group (yearly, monthly, hourly), while features are in rows and forecast methods in columns."}
 ```
 
 The importance of a feature can be measured using individual conditional expectation (ICE) scores [@friedman2008predictive; @goldstein2015peeking] which measure the effect of a change in value of a single feature of a single time series on the output of the algorithm. When averaged across series, these give "partial dependencies". The partial dependencies are often plotted against the feature values to give partial dependency curves [@Greenwell2018].
@@ -524,15 +528,15 @@ An ICE score is similar, but is based on measuring the "flatness" of the ICE cur
 
 For each feature, an overall rank is calculated based on the mean ranking of three measures of variable importance: i) permutation-based variable importance; ii) the partial-dependency score; and iii) the individual conditional expectation scores.
 
-\autoref{fig:viplot} shows the top five most important features for each model class across yearly, monthly and hourly series. Overall, the most important features are: strength of trend, sum of the first five partial autocorrelation coefficients, stability, the first ACF value of the differenced series and linearity.
+\autoref{fig:viplot} shows the five most important features (represented by a coloured cell) for each model class across yearly, monthly and hourly series. \textcolor{red}{THIYANGA CAN YOU PLEASE CHECK IF THIS IS RIGHT AS THERE ARE SOME COLUMNS THAT HAVE MORE THAN 5 COLOURED CELLS. Note that some columns contain more than five coloured cells for each frequency category as mulitple features were equally ranked.} Overall, the most important features are: strength of trend, sum of the first five partial autocorrelation coefficients, stability, the first ACF value of the differenced series and linearity.
 
-For yearly data, the test Phillips-Perron unit root test statistic is also important. Features related to different types of trend (beta and curvature) are important in selecting between ETS models.
+For yearly data, the test Phillips-Perron unit root test statistic is also important. Also, features related to different types of trend (beta and curvature) are important in selecting between ETS models.
 
-For monthly data, the length of the time series (T) and stability are assigned a high importance. For all seasonal time series (both monthly and hourly), the strength of seasonality has been selected among the top features across all classes.
+For monthly data, the length of the time series (T) is assigned a high importance. For all seasonal time series (both monthly and hourly), the strength of seasonality has been selected among the top features across all classes.
 
-For hourly data, the strength of daily seasonality (measured by seasonal_d) appears to be more important than the strength of weekly seasonality (measured by seasonal_w). ACF and PACF features related to seasonal lags and seasonal differencing also rank among the top five for some model classes.
+For hourly data, the strength of daily seasonality (measured by seasonal_d) appears to be more important than the strength of weekly seasonality (measured by seasonal_w). Entropy and the ACF and PACF features related to seasonal lags and seasonal differencing also rank among the top five for some model classes.
 
-## When and how are features linked to the prediction outcome?
+## When and how are features linked to the forecast outcome?
 
 Partial-dependence curves can be used to visualise the relationship between each feature and the choice of forecast model selection (see section \autoref{peeking}). These show the probability of selection each model as a function of the given feature, while accounting for the average effect of other features in the model. We can compute 95% confidence intervals for these partial dependency estimates, using the ICE curves.
 
@@ -544,15 +548,15 @@ Partial-dependence curves can be used to visualise the relationship between each
 
 For yearly series, the Phillips-Perron test statistic is the most important feature across many classes. \autoref{fig:pdpyearlyurpp} shows the partial dependency curves of the Phillips-Perron test statistic. A high negative value of the Phillips-Perron test statistic indicates a relatively stationary series, while a large positive value of the test statistic indicates nonstationarity of the series. As expected, white noise models and stationary ARMA models are chosen for low values of the statistic, while non-stationary ARIMA models and ETS models with trend are selected for high values of the statistic.
 
-The first autocorrelation coefficient of the differenced series (`diff1y_acf1`) is useful in determining the difference stationarity of a time series. This feature has been ranked among the top-five within several classes of yearly series. The associated partial dependency plots are in \autoref{fig:diff1yacf1y}, showing that small absolute values of the statistics increase the probability of selection a random walk with drift models, while larger absolute values increase the probability of ARIMA models.
+The first autocorrelation coefficient of the differenced series (`diff1y_acf1`) is useful in determining the difference stationarity of a time series. This feature has been ranked among the top-five within several classes of yearly series. The associated partial dependency plots are in \autoref{fig:diff1yacf1y}, showing that small absolute values of the feature increases the probability of selection a random walk with drift models, while larger absolute values increase the probability of ARIMA models.
 
 ```{r pdpmonthlyseasonality, fig.height=6, fig.width=15, fig.cap="Partial dependence plots for strength of seasonality for monthly series, along with 95\\% confidence intervals. The probability of selecting forecast models with seasonal components increases as seasonality increases.", fig.pos="!b"}
 ```
 
-```{r pdpmonthlyT, fig.height=4.5, fig.width=15, fig.cap="Partial dependence plots for length of time series ($T$), along with 95\\% confidence intervals. The probability of selecting rw and rwd decreases for series with $T>500$.", fig.pos="!b"}
+```{r pdpmonthlyT, fig.height=4.5, fig.width=15, fig.cap="Partial dependence plots for length of time series ($T$), along with 95\\% confidence intervals. The probability of selecting rw and rwd decreases for series with $T>150$.", fig.pos="!b"}
 ```
 
-For monthly series, the strength of seasonality is the most important features across all classes, and \autoref{fig:pdpmonthlyseasonality} shows that the probability of selecting a seasonal forecast model increases as the strength of seasonality increases, while the converse occurs for non-seasonal models.
+For monthly series, the strength of seasonality is the most important feature across all classes, and \autoref{fig:pdpmonthlyseasonality} shows that the probability of selecting a seasonal forecast model increases as the strength of seasonality increases, while the reverse occurs for non-seasonal models.
 
 The length of time series is also assigned a high importance within many classes of monthly series. \autoref{fig:pdpmonthlyT} reveals that longer time series lead to the selection of highly parameterized models or models involving seasonal components, while shorter series lead to simple models being selected.
 
@@ -595,13 +599,13 @@ The associated two-way partial dependency plots for linearity are shown in Figur
 ```{r thetapdp, fig.height=3, fig.width=10, out.width="95%",fig.cap="Two-way partial dependence plots for linearity for monthly series within the theta class.", fig.pos="!tbp"}
 ```
 
-\autoref{fig:y2dpdp} shows a pattern of interactivity between linearity and both lmres_acf1  and diff1y_acf1, within the wn, random walk, theta and nn model classes. For monthly series (\autoref{fig:m2dpdp}), linearity shows interactiion with the ACF value at the first seasonal lag of seasonally-differenced series, stability, the first ACF value at the remainder series and a parameter estimate of the ETS(A,A,A) model. \autoref{fig:h2dpdp} shows the two-way partial dependency plot for hourly series between linearity and the ACF value at the first seasonal lag of seasonally-differenced series. Within rw and mstlarima we can see a separation between the lower half and the upper half due to the main effect of sediff_seacf1.
+\autoref{fig:y2dpdp} shows a pattern of interactivity between linearity and both lmres_acf1  and diff1y_acf1, within the wn, rw, rwd, theta and nn model classes. For monthly series (\autoref{fig:m2dpdp}), linearity shows interaction with the ACF value at the first seasonal lag of seasonally-differenced series, stability, the first ACF value at the remainder series and a parameter estimate of the ETS(A,A,A) model. \autoref{fig:h2dpdp} shows the two-way partial dependency plot for hourly series between linearity and the ACF value at the first seasonal lag of seasonally-differenced series. Within rw and mstlarima we can see a separation between the lower half and the upper half due to the main effect of sediff_seacf1.
 
 \autoref{fig:thetapdp} shows how stability interacts with trend, length, and first autocorrelation coefficient of the differenced series. Although the partial dependency curve of stability for the class theta is relatively flat (\autoref{fig:pdpmonthlyhourlyStability}), \autoref{fig:thetapdp} shows patterns of interaction between stability and other features.
 
 # Discussion and conclusions {#discussion}
 
-We have proposed a novel framework for forecast-model selection using meta-learning based on time series features. Our proposed FFORMS algorithm uses the knowledge of the past performance of candidate forecast models on a collection of time series in order to identify suitable forecast models for a new series. A key advantage of FFORMS is the idea of outsourcing most of the heavy computational work to the offline phase. Therefore, unlike traditional model selection strategies or cross-validation processes, our proposed framework can be used to provide relatively accurate and fast forecasts for very large collections of time series. For real-time forecasting, our framework involves only the calculation of features, the selection of a forecast method based on FFORMS random forest classifier, and the calculation of the forecasts from the chosen model. None of these steps involve substantial computation, and they can be easily parallelized when forecasting for a large number of new time series. In doing so, the FFORMS framework fills an important gap in contemporary forecasting practice, with many available models to choose from and with predictions being required in a short time. We are well aware that the FFORMS forecasts will not usually be the best possible forecasts given unlimited computation time; rather, they are almost as good but available in a much shorter time period.
+We have proposed a novel framework for forecast-model selection using meta-learning based on time series features. Our proposed FFORMS algorithm uses the knowledge of the past performance of candidate forecast models on a collection of time series in order to identify suitable forecast models for new series. A key advantage of FFORMS is the idea of outsourcing most of the heavy computational work to the offline phase. Therefore, unlike traditional model selection strategies or cross-validation processes, our proposed framework can be used to produce relatively accurate and fast forecasts for very large collections of time series. For real-time forecasting, our framework involves only the calculation of features, the selection of a forecast method based on FFORMS random forest classifier, and the calculation of the forecasts from the chosen model. None of these steps involve substantial computation, and they can be easily parallelized when forecasting for a large number of new time series. In doing so, the FFORMS framework fills an important gap in contemporary forecasting practice, with many available models to choose from and with forecasts being required in a short time. We are well aware that the FFORMS forecasts will not usually be the best possible forecasts given unlimited computation time; rather, they are almost as good but available in a much shorter time period. Trading off computational time for accuracy, @MonManEtAl2020 and @TalEtAl2022 build on FFORMS to introduce FFORMA and FFORMPP.
 
 This paper has made a first step towards providing a comprehensive analysis of the relationship between time series features and forecast model selection using machine learning interpretability techniques. We have explored the role of features in forecast model selection in the FFORMS framework. First we explored the similarities between series learned by the random forest. Next, we explored **which** features are the most important for model selection in the FFORMS framework, and where they are most important. Features such as strength of trend, strength of seasonality, linearity, information related to partial-autocorrelation structure, features related to difference stationary, length and entropy are the most important features. Finally, partial dependency plots were used to visualise **when** and **how** these features link with the prediction outcome of the FFORMS framework. This improves our understanding of the data and the relationship learned by the random forest algorithm, and increases trust in the results obtained from the proposed framework.
 
