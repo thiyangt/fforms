@@ -1,0 +1,21 @@
+---
+title: <center> <h2>AUTHORS' RESPONSES TO REVIEWERS COMMENTS FOR\newline "META-LEARNING HOW TO FORECAST TIME SERIES"</h2> </center>
+subtitle: Manuscript number FOR-21-0572
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+We would like to thank the Editor, Associate Editor and the two anonymous reviewers for
+reviewing our paper. We also thank you for the insightful comments and suggestions. In this
+revision, we have addressed all the comments raised by the reviewers, providing a point-to-point
+response to each comment made by the review team.
+
+**Responses to Reviewer** 
+
+First, we would like to thank the reviewer for the time of reviewing our paper. We have tried
+our best to address all of your comments and suggestions. Below we provide a point-to-point
+response to your comments.
