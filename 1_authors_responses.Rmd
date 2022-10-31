@@ -14,8 +14,40 @@ reviewing our paper. We also thank you for the insightful comments and suggestio
 revision, we have addressed all the comments raised by the reviewers, providing a point-to-point
 response to each comment made by the review team.
 
-**Responses to Reviewer** 
+**Responses to Referee(s)' Comments** 
 
 First, we would like to thank the reviewer for the time of reviewing our paper. We have tried
 our best to address all of your comments and suggestions. Below we provide a point-to-point
 response to your comments.
+
+Reviewing: 1
+
+
+The subject of the work is important, the work is mature, well written, and the experimental part is extensive. To improve further the paper quality, the Authors can take into account the comments below.
+
+Detailed comments:
+
+(1) Page 7/line 5: what do you mean by the test set? Usually the test set (separate from the training and validation sets) cannot be used for training, optimization and selection of the model. Clarify, please.
+
+
+(2) Fig 3. It looks like red “feature calculation” block does the same work as blue “input-features” block. Thus unify the names of these blocks so as not to cause confusion.
+\newline\newline\textcolor{blue}{We thank the reviewer for the suggestion. We changed the wording in Fig 3 - red part  "feature calculation" to "input-features" to unify the names and avoid confusion.}
+
+
+(3) 9/54: Explain how the time series are split into training and test part. How sensitive is the proposed approach to this split?\newline{\newline{}}
+
+(4) 9/55: Fitting the model is related to its training and optimization (selection of hyperparameters). Moreover, the model performance depends on the feature selection/engineering. I suppose that these all tasks are performed by the “fit models” block in Fig. 3. You omit the topic of model optimization including feature selection/engineering, which can be very complex and time consuming process due to huge search space for same models. Describe this topic to make the reader aware of its importance.
+
+
+(5) Algorithm 1: One of the key hyperparameters of random forests, in addition to the number of trees and the number of features to be selected at each node, is the minimum number of leaf node observations or its equivalent. You don't mention this hyperparameter at all. Why?
+
+
+(6) 11/5: “One approach is to fit models to the time series in the reference set, and then use those models as data generating processes to obtain similar time series.” Clarify this issue.
+
+(7) Time series augmentation looks like important component of the proposed framework and should be described in detail.
+
+
+(8) 13/46: “incorporating class priors into the RF classifier”. Could you explain this, please.
+
+
+(9) Many forecasting models, especially machine learning ones such as NNs, have a stochastic nature, which translates into different results for the same input data in different training sessions. This may have a negative impact on the choice of the best model. How does your proposed approach deal with such problem? Explain, please.
