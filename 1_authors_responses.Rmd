@@ -27,14 +27,13 @@ The subject of the work is important, the work is mature, well written, and the 
 
 Detailed comments:
 
-(1) Page 7/line 5: what do you mean by the test set? Usually the test set (separate from the training and validation sets) cannot be used for training, optimization and selection of the model. Clarify, please.
-
+(1) Page 7/line 5: what do you mean by the test set? Usually the test set (separate from the training and validation sets) cannot be used for training, optimization and selection of the model. Clarify, please. \newline\newline\textcolor{blue}{We thank the reviewer for raising this concern. We have clarified this point in the revised manuscript and highlighted it below.}\newline\newline\textcolor{blue}{The training set is used to estimate the parameters of a forecasting model. Based on this fitted model, we generate forecast over the test set and compared against the test set. Since the test data are not used for model fitting, this practice provides a reliable indicator  toevaluate how well the model makes accurate forecasts on new data.}
 
 (2) Fig 3. It looks like red “feature calculation” block does the same work as blue “input-features” block. Thus unify the names of these blocks so as not to cause confusion.
 \newline\newline\textcolor{blue}{We thank the reviewer for the suggestion. We changed the wording in Fig 3 - red part  "feature calculation" to "input-features" to unify the names and avoid confusion.}
 
 
-(3) 9/54: Explain how the time series are split into training and test part. How sensitive is the proposed approach to this split?\newline{\newline{}}
+(3) 9/54: Explain how the time series are split into training and test part. How sensitive is the proposed approach to this split?\newline\newline\textcolor{blue}{Usually, the first 80\% of a time series is used as the training set, and the remaining last 20\% is used as the test set for evaluation.  In our research, since we used the M-competion data, we used the training and test set specified the M4-competion organizers. In the M4-competitions training set length for series varies, however the test length for the time series are fixed under each frequency level. Table *** provides the length of the training and test periods of the M-competitions and similated data used in the different online and offline phase of our framework.}
 
 (4) 9/55: Fitting the model is related to its training and optimization (selection of hyperparameters). Moreover, the model performance depends on the feature selection/engineering. I suppose that these all tasks are performed by the “fit models” block in Fig. 3. You omit the topic of model optimization including feature selection/engineering, which can be very complex and time consuming process due to huge search space for same models. Describe this topic to make the reader aware of its importance.
 
