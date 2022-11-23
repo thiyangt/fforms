@@ -333,6 +333,22 @@ mstlarima & multiple seasonal decomposition with ARIMA modelling of the seasonal
 \end{tabular}
 \end{table}
 
+
+\begin{table}[!h]
+\begin{tabular}{|l|llllllll|ll|}
+\hline
+\multirow{3}{*}{Frequency} & \multicolumn{8}{c|}{Training set}                                                                                                                                                                     & \multicolumn{2}{c|}{Test set}                                      \\ \cline{2-11} 
+                  & \multicolumn{1}{l|}{\multirow{2}{*}{Total series}} & \multicolumn{7}{l|}{Summary statistics of length}  & \multicolumn{1}{l|}{\multirow{2}{*}{Total series}} & \multirow{2}{*}{Length} \\ \cline{3-9}
+             & \multicolumn{1}{l|}{}                  & \multicolumn{1}{l|}{Min} & \multicolumn{1}{l|}{Q1} & \multicolumn{1}{l|}{Median} & \multicolumn{1}{l|}{Mean} & \multicolumn{1}{l|}{Q3} & \multicolumn{1}{l|}{Max} & SD & \multicolumn{1}{l|}{}                  &                   \\ \hline
+   Yearly               & \multicolumn{1}{l|}{}                  & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} &  & \multicolumn{1}{l|}{}                  &                   \\ \hline
+  Quarterly                & \multicolumn{1}{l|}{}                  & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} &  & \multicolumn{1}{l|}{}                  &                   \\ \hline
+  Monthly               & \multicolumn{1}{l|}{}                  & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} &  & \multicolumn{1}{l|}{}                  &                   \\ \hline
+  Weekly              & \multicolumn{1}{l|}{}                  & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} &  & \multicolumn{1}{l|}{}                  &                   \\ \hline
+   Daily              & \multicolumn{1}{l|}{}                  & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} &  & \multicolumn{1}{l|}{}                  &                   \\ \hline
+  Hourly                & \multicolumn{1}{l|}{}                  & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} &  & \multicolumn{1}{l|}{}                  &                   \\ \hline
+\end{tabular}
+\end{table}
+
 ## Train a FFORMS meta-learner
 
 In principle, any classification algorithm could be used to train the meta-learner. Our current implementation uses a random forest (RF) algorithm because: i) it can model complex interactions between features; ii) the modelling framework captures linear and non-linear effects of features through the averaging of large number of decision trees; iii) it is robust against over-fitting the training data; iv) it is easy to handle the problem of imbalanced classes; v) it is a fast approach compared to boosting algorithms; and vi) it is fairly easy and straightforward to implement with available software. In this work, we have used the randomForest package [@liaw2002randomforest; @rfpkg] which implements the Fortran code for random forest classification by @breiman2004random. To determine the class label for a new instance, features are calculated and passed down the trees. Then each tree gives a prediction and the majority vote over all individual trees leads to the final decision.
