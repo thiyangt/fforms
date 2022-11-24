@@ -66,3 +66,6 @@ length_h_train <- hourly_training$N
 summary(length_h_train)
 length(length_h_train)
 sd(length_h_train)
+
+
+## Relationship between accuracy and length
