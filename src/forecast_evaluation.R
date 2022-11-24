@@ -42,7 +42,7 @@ for(i in 1:23000){
 }
 
 mean(MASE_yearly) # 3.231955
-
+save(MASE_yearly, file="data/MASE_and_length/MASE_yearly.rda")
 
 ## Quarterly series
 fcast.combination.m4quarterly <- readRDS("data/HPCfiles/fcast.combination.m4quarterly.rds")
@@ -63,6 +63,8 @@ for(i in 1:24000){
 }
 
 mean(MASE_quarterly) # 1.16
+save(MASE_quarterly, file="data/MASE_and_length/MASE_quarterly.rda")
+
 
 ## Monthly
 M4monthly_0 <- readRDS("~/PhD_journey/fforms/data/monthly/M4monthly_0.rds")
@@ -112,6 +114,8 @@ for(i in 1:48000){
 }
 
 mean(MASE_monthly) # 0.9453575
+save(MASE_monthly, file="data/MASE_and_length/MASE_monthly.rda")
+
 
 ## Weekly
 
@@ -141,11 +145,13 @@ for(i in 1:359){
 }
 
 mean(MASE_weekly, na.rm=TRUE) # 2.55
+save(MASE_weekly, file="data/MASE_and_length/MASE_weekly.rda")
+
 
 ## Daily
 
-fcast.combination.m4weekly.all <- readRDS("data/HPCfiles/fcast.combination.m4daily.all.rds")
-MASE_daily <- rep(NA, 4227)
+fcast.combination.m4daily.all <- readRDS("data/HPCfiles/fcast.combination.m4daily.all.rds")
+
 daily_M4 <- Filter(function(l) l$period == "Daily", M4)
 daily_M4_test <- lapply(daily_M4, function(temp){temp$xx})
 daily_M4_training <- lapply(daily_M4, function(temp){temp$x})
@@ -170,6 +176,7 @@ for(i in 1:4227){
 }
 
 mean(MASE_daily, na.rm=TRUE) # 3.42
+save(MASE_daily, file="data/MASE_and_length/MASE_daily.rda")
 
 
 ## HOURLY
@@ -200,3 +207,4 @@ for(i in 1:414){
 }
 
 mean(MASE_hourly) # 0.81
+save(MASE_hourly, file="data/MASE_and_length/MASE_hourly.rda")

@@ -69,3 +69,71 @@ sd(length_h_train)
 
 
 ## Relationship between accuracy and length
+## MASE calculation code
+## src -> forecast_evaluation.R
+load("data/MASE_and_length/MASE_yearly.rda")
+load("data/MASE_and_length/MASE_quarterly.rda")
+load("data/MASE_and_length/MASE_monthly.rda")
+load("data/MASE_and_length/MASE_weekly.rda")
+load("data/MASE_and_length/MASE_daily.rda")
+load("data/MASE_and_length/MASE_hourly.rda")
+
+length(MASE_yearly) #23000
+length(MASE_quarterly) #24000
+length(MASE_monthly) #48000
+length(MASE_weekly) #359
+length(MASE_daily) #4227
+length(MASE_hourly) #414
+
+category <- c(rep("Yearly", 23000),
+              rep("Quarterly", 24000),
+              rep("Monthly", 48000),
+              rep("Weekly", 359),
+              rep("Daily", 4227),
+              rep("Hourly", 414))
+category <- factor(category, levels = c("Yearly",
+      "Quarterly", "Monthly", "Weekly", "Daily", "Hourly"))
+MASE <- c(MASE_yearly,
+          MASE_quarterly,
+          MASE_monthly,
+          MASE_weekly,
+          MASE_daily,
+          MASE_hourly)
+
+length_y_test <- data.frame(length=sapply(yearly_M4, function(temp){length(temp$x)}))
+length_q_test <- data.frame(length=sapply(quarterly_M4, function(temp){length(temp$x)}))
+length_m_test <- data.frame(length=sapply(monthly_M4, function(temp){length(temp$x)}))
+length_w_test <- data.frame(length=sapply(weekly_M4, function(temp){length(temp$x)}))
+length_d_test <- data.frame(length=sapply(daily_M4, function(temp){length(temp$x)}))
+length_h_test <- sapply(hourly_M4, function(temp){length(temp$x)})
+
+
+length(length_y_test[, 1]) #23000
+length(length_q_test[, 1]) #24000
+length(length_m_test[, 1]) #48000
+length(length_w_test[, 1]) #359
+length(length_d_test[, 1]) #4227
+length(length_h_test)      #414
+
+
+length_test <- c(length_y_test[, 1],
+            length_q_test[, 1],
+            length_m_test[, 1],
+            length_w_test[, 1],
+            length_d_test[, 1],
+            length_h_test)
+length(length_test)
+length(MASE)
+length(category)
+
+accuracy_length_error <- data.frame(
+  length=length_test, MASE=MASE, category=category
+)
+
+save(accuracy_length_error, file="data/accuracy_length_error.rda")
+
+## visualization: The accuracy between the relationship and length
+library(tidyverse)
+ggplot(data=accuracy_length_error,
+       aes(x=length, y=MASE, col=category)) + geom_point(alpha=0.5) + 
+  facet_wrap(vars(category), scales = "free") + xlab("Length-training period")
