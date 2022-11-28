@@ -190,6 +190,20 @@ In order to train our classification algorithm, we need a large collection of ti
 
 Each time series within the reference set is split into a training period and a test period. From each training period we compute a range of time series features, and fit a selection of candidate models. The calculated features form the input vector to the classification algorithm. Using the fitted models, we generate forecasts and identify the "best" model for each time series based on a forecast error measure (e.g., MASE) calculated over the test period. The models deemed "best" form the output labels for the classification algorithm. The pseudo code for our proposed framework is presented in Algorithm \ref{alg:algo-lab} below. In the following sections, we briefly discuss aspects of the offline phase.
 
+```{r length, fig.cap="Distribution of lengths of the series in the reference set and new series collections.", out.width="70%"}
+library(tidyverse)
+library(lvplot)
+library(here)
+load(here("data", "lengthdis.rda"))
+cols <- c("new series" = "red", "reference set" = "blue")
+ggplot(lengthdis, aes(x=collection, y=N)) +
+  geom_violin(aes(fill = collection), trim = FALSE) +
+  #geom_boxplot(width = 0.1) + 
+  facet_wrap(vars(frequency), scales = "free") +
+  scale_fill_manual(values = cols)
+
+```
+
 \begin{algorithm}[!ht]
 	\centering\footnotesize
 	\caption{The FFORMS framework - Forecasting based on meta-learning. }
@@ -336,20 +350,6 @@ mstlarima & multiple seasonal decomposition with ARIMA modelling of the seasonal
 \end{table}
 
 
-\begin{table}[!h]
-\begin{tabular}{|l|llllllll|ll|}
-\hline
-\multirow{3}{*}{Frequency} & \multicolumn{8}{c|}{Training set}                                                                                                                                                                     & \multicolumn{2}{c|}{Test set}                                      \\ \cline{2-11} 
-                  & \multicolumn{1}{l|}{\multirow{2}{*}{Total series}} & \multicolumn{7}{l|}{Summary statistics of length}  & \multicolumn{1}{l|}{\multirow{2}{*}{Total series}} & \multirow{2}{*}{Length} \\ \cline{3-9}
-             & \multicolumn{1}{l|}{}                  & \multicolumn{1}{l|}{Min} & \multicolumn{1}{l|}{Q1} & \multicolumn{1}{l|}{Median} & \multicolumn{1}{l|}{Mean} & \multicolumn{1}{l|}{Q3} & \multicolumn{1}{l|}{Max} & SD & \multicolumn{1}{l|}{}                  &                   \\ \hline
-   Yearly               & \multicolumn{1}{l|}{}                  & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} &  & \multicolumn{1}{l|}{}                  &                   \\ \hline
-  Quarterly                & \multicolumn{1}{l|}{}                  & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} &  & \multicolumn{1}{l|}{}                  &                   \\ \hline
-  Monthly               & \multicolumn{1}{l|}{}                  & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} &  & \multicolumn{1}{l|}{}                  &                   \\ \hline
-  Weekly              & \multicolumn{1}{l|}{}                  & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} &  & \multicolumn{1}{l|}{}                  &                   \\ \hline
-   Daily              & \multicolumn{1}{l|}{}                  & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} &  & \multicolumn{1}{l|}{}                  &                   \\ \hline
-  Hourly                & \multicolumn{1}{l|}{}                  & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} &  & \multicolumn{1}{l|}{}                  &                   \\ \hline
-\end{tabular}
-\end{table}
 
 ## Train a FFORMS meta-learner
 
@@ -625,7 +625,7 @@ The associated two-way partial dependency plots for linearity are shown in Figur
 
 We have proposed a novel framework for forecast-model selection using meta-learning based on time series features. Our proposed FFORMS algorithm uses the knowledge of the past performance of candidate forecast models on a collection of time series in order to identify suitable forecast models for new series. A key advantage of FFORMS is the idea of outsourcing most of the heavy computational work to the offline phase. Therefore, unlike traditional model selection strategies or cross-validation processes, our proposed framework can be used to produce relatively accurate and fast forecasts for very large collections of time series. For real-time forecasting, our framework involves only the calculation of features, the selection of a forecast method based on FFORMS random forest classifier, and the calculation of the forecasts from the chosen model. None of these steps involve substantial computation, and they can be easily parallelized when forecasting for a large number of new time series. In doing so, the FFORMS framework fills an important gap in contemporary forecasting practice, with many available models to choose from and with forecasts being required in a short time. We are well aware that the FFORMS forecasts will not usually be the best possible forecasts given unlimited computation time; rather, they are almost as good but available in a much shorter time period. Trading off computational time for accuracy, @MonManEtAl2020 and @TalEtAl2022 build on FFORMS to introduce FFORMA and FFORMPP.
 
-This paper has made a first step towards providing a comprehensive analysis of the relationship between time series features and forecast model selection using machine learning interpretability techniques. We have explored the role of features in forecast model selection in the FFORMS framework. First we explored the similarities between series learned by the random forest. Next, we explored **which** features are the most important for model selection in the FFORMS framework, and where they are most important. Features such as strength of trend, strength of seasonality, linearity, information related to partial-autocorrelation structure, features related to difference stationary, length and entropy are the most important features. Finally, partial dependency plots were used to visualise **when** and **how** these features link with the prediction outcome of the FFORMS framework. This improves our understanding of the data and the relationship learned by the random forest algorithm, and increases trust in the results obtained from the proposed framework.
+This paper has made a first step towards providing a comprehensive analysis of the relationship between time series features and forecast model selection using machine learning interpretability techniques. We have explored the role of features in forecast model selection in the FFORMS framework. First we explored the similarities between series learned by the random forest. Next, we explored **which** features are the most important for model selection in the FFORMS framework, and where they are most important. Features such as strength of trend, strength of seasonality, linearity, information related to partial-autocorrelation structure, features related to difference stationary, length and entropy are the most important features. Finally, partial dependency plots were used to visualise **when** and **how** these features link with the prediction outcome of the FFORMS framework. This improves our understanding of the data and the relationship learned by the random forest algorithm, and increases trust in the results obtained from the proposed framework. \textcolor{blue}{Our method is sensitive to the training duration of the time series because we employed length as an input feature. We found that whereas longer time series prefer to choose more parameterized models, shorter time series are more likely to choose simple models like random walk, white noise, etc. However, PDP curves of length revealed that there is a threshold beyond which the probability of choosing various models in response to training set length starts to plateau.}
 
 Future research in this area could consider how local interpretable model-agnostic explanations can be used to identify regions of data where features contribute most to the classification of a specific instance.
 
