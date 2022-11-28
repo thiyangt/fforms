@@ -158,6 +158,8 @@ Selecting models for forecasting can be framed according to Rice's ASP framework
 
 >**Forecast-model selection problem**. For a given time series $x \in P$, with features $f(x) \in F$, find the selection mapping $S(f(x))$ into the algorithm space $A$, such that the selected algorithm $\alpha \in A$ minimizes forecast accuracy error metric $y(\alpha(x)) \in Y$ on the test set of the time series.
 
+\textcolor{blue}{The training set is used to estimate the parameters of a forecasting model. Based on this fitted model, we generate forecasts over the test set and compare them against the test set values. Since the test data are not used for model fitting, this practice provides a reliable indicator to evaluate how well the model makes accurate forecasts on new data.}
+
 Existing methods differ with respect to the way they define the problem space ($A$), the features ($F$), the forecasting accuracy measure ($Y$) and the selection mapping ($S$).
 
 @collopy1992rule introduced 99 rules based on 18 features of time series, in order to make forecasts for economic and demographic time series. This work was extended by @armstrong2001s to reduce human intervention.
@@ -181,7 +183,7 @@ More recently, @kuck2016meta proposed a meta-learning framework based on neural 
 Our proposed FFORMS framework, presented in \autoref{fig:framework}, builds on this preceding research. The offline and online phases are shown in blue and red respectively. A classification algorithm (the meta-learner) is trained during the offline phase and is then used to select an appropriate forecast model for a new time series in the online phase. We use machine learning interpretability tools to gain insights into what is happening under the hood of the FFORMS framework.
 
 ```{r framework, fig.cap="FFORMS (Feature-based FORecast-Model Selection) framework. The offline phase is shown in blue, the online phase is in red.", out.width='100%'}
-knitr::include_graphics("images/framework.png")
+knitr::include_graphics("images/framework2.png")
 ```
 
 In order to train our classification algorithm, we need a large collection of time series which are similar to those we will be forecasting. We assume that we have an essentially infinite population of time series, and we take a sample of them in order to train the classification algorithm denoted as the "observed sample". The new time series we wish to forecast can be thought of as additional draws from the same population. Hence, any conclusions made from the classification framework refer only to the population from which the sample has been selected. We may call this the "target population" of time series. It is important to have a well-defined target population to avoid misapplying the classification rules. In practice, we may wish to augment the set of observed time series by simulating new time series similar to those in the assumed population (we provide details and discussion in Section \ref{simulatingseries} that follows). We denote the total collection of time series used for training the classifier as the "reference set".
