@@ -62,12 +62,16 @@ Figure *** provides the distributions of length of the training period of the M-
 
 (4) 9/55: Fitting the model is related to its training and optimization (selection of hyperparameters). Moreover, the model performance depends on the feature selection/engineering. I suppose that these all tasks are performed by the “fit models” block in Fig. 3. You omit the topic of model optimization including feature selection/engineering, which can be very complex and time consuming process due to huge search space for same models. Describe this topic to make the reader aware of its importance.
 
-\textcolor{teal}{We agree with the reviewer. Hyperparameter tuning, feature selection, and engineering all fall under "fit models." I have added this to the discussion and conclusion sections as a future direction.}
+\textcolor{teal}{We agree with the reviewer. Hyperparameter tuning, feature selection, and engineering all fall under "fit models." I have added this to the discussion and conclusion sections as a future direction. The relevant part of the paper now reads as follows:}
 
-\textcolor{blue}{Hyperparameter tuning, feature selection, and feature engineering are essential tasks in machine learning that can have a significant effect on the performance of the machine learning algorithm. However, in this work, hyperparameter tuning, feature selection, and engineering were not performed in order to reduce the cost of the tuning process of the offline phase of the algorithm and keep the algorithm simple. Feature selection and engineering is not performed due to its large and complex search space. Hyperparameter tuning is not performed due to the stochastic nature of the meta-learning algorithm, which makes parameter tuning a challenging issue as each parameter vector needs to be tested multiple times. However, we believe both hyperparameter tuning and feature selection and engineering are promising future directions to pursue.}
+\textcolor{blue}{Hyperparameter tuning, feature selection, and feature engineering are essential tasks in machine learning that can have a significant effect on the performance of the machine learning algorithm. However, in order to keep the algorithm simple and lower the cost of the tuning process for the offline phase of the algorithm, hyperparameter tuning, feature selection, and engineering were not carried out in this study. Due to the large and complex search space, feature selection and engineering are not conducted. The stochastic nature of the meta-learning algorithm makes parameter tuning a challenging issue because each parameter vector must be evaluated numerous times. However, we believe both hyperparameter tuning and feature selection and engineering are intriguing future topics to study.}
 
 
 (5) Algorithm 1: One of the key hyperparameters of random forests, in addition to the number of trees and the number of features to be selected at each node, is the minimum number of leaf node observations or its equivalent. You don't mention this hyperparameter at all. Why?
+
+\textcolor{teal}{We thank the reviewer for pointing this out. Please see Section 3.5. The relevant part of the thesis now reads as follows:}
+
+\textcolor{blue}{We train a random forest with 1000 trees with the default parameter setting of the randomForest package, i.e., the number of features to be selected at each node is the square root of the number of features in the reference set, and the minimum number of leaf node observations is 1. The number of trees is set to 1000 to reduce the time in both the online and offline phases of the algorithm.}
 
 
 (6) 11/5: “One approach is to fit models to the time series in the reference set, and then use those models as data generating processes to obtain similar time series.” Clarify this issue.
@@ -79,3 +83,5 @@ Figure *** provides the distributions of length of the training period of the M-
 
 
 (9) Many forecasting models, especially machine learning ones such as NNs, have a stochastic nature, which translates into different results for the same input data in different training sessions. This may have a negative impact on the choice of the best model. How does your proposed approach deal with such problem? Explain, please.
+
+\textcolor{teal}{We thank the reviewer for pointing out this issue. We have added this as a future direction with the response to comment 4.}
