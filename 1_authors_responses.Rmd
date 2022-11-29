@@ -49,7 +49,7 @@ discriminatory power in selecting a good model for forecasting. This point is me
 observations in the test periods are 6 for yearly, 8 for
 quarterly, 18 for monthly, 13 for weekly, 14 for daily and
 48 for hourly series. Use of this standard test set specified by the M-competitions allows to compare our results with the results of other studies. 
-Figure *** provides the distributions of length of the training period of the M-competitions and simulated data used in the study. }
+Figure 04 provides the distributions of length of the training period of the M-competitions and simulated data used in the study. }
 
 \textcolor{teal}{To show the distribution of length in the reference set and new series collection we added the following figure}
 
@@ -76,7 +76,11 @@ Figure *** provides the distributions of length of the training period of the M-
 
 (6) 11/5: “One approach is to fit models to the time series in the reference set, and then use those models as data generating processes to obtain similar time series.” Clarify this issue.
 
+\textcolor{teal}{We thank the }
+
 (7) Time series augmentation looks like important component of the proposed framework and should be described in detail.
+
+
 
 
 (8) 13/46: “incorporating class priors into the RF classifier”. Could you explain this, please.
@@ -84,4 +88,6 @@ Figure *** provides the distributions of length of the training period of the M-
 
 (9) Many forecasting models, especially machine learning ones such as NNs, have a stochastic nature, which translates into different results for the same input data in different training sessions. This may have a negative impact on the choice of the best model. How does your proposed approach deal with such problem? Explain, please.
 
-\textcolor{teal}{We thank the reviewer for pointing out this issue. We have added this as a future direction with the response to comment 4.}
+\textcolor{teal}{We thank the reviewer for pointing out this issue. Please see the discussions and conclusions section. The relevant part of the paper now reads as follows:}
+
+\textcolor{blue}{One could argue machine learning-based forecasting models such as NNs, have a stochastic nature, which translates into different results for the same input data in different training sessions. This may have a negative impact on the choice of the best model. While this problem is difficult to overcome, one could }
