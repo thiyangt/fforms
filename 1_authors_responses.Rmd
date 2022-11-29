@@ -57,10 +57,14 @@ Figure *** provides the distributions of length of the training period of the M-
 
 \textcolor{teal}{Furthermore, we added following to the conclusions section}
 
-\textcolor{blue}{Our method is sensitive to the training duration of the time series because we employed length as an input feature. We found that whereas longer time series prefer to choose more parameterized models, shorter time series are more likely to choose simple models like random walk, white noise, etc. However, PDP curves of length revealed that there is a threshold beyond which the probability of choosing various models in response to training set length starts to plateau.}
+\textcolor{blue}{Our method is sensitive to the lengths of the time series because we employed length as an input feature. We found that whereas longer time series prefer to choose more parameterized models, shorter time series are more likely to choose simple models like random walk, white noise, etc. However, PDP curves of length revealed that there is a threshold beyond which the probability of choosing various models in response to training set length starts to plateau.}
 
 
 (4) 9/55: Fitting the model is related to its training and optimization (selection of hyperparameters). Moreover, the model performance depends on the feature selection/engineering. I suppose that these all tasks are performed by the “fit models” block in Fig. 3. You omit the topic of model optimization including feature selection/engineering, which can be very complex and time consuming process due to huge search space for same models. Describe this topic to make the reader aware of its importance.
+
+\textcolor{teal}{We agree with the reviewer. Hyperparameter tuning, feature selection, and engineering all fall under "fit models." I have added this to the discussion and conclusion sections as a future direction.}
+
+\textcolor{blue}{Hyperparameter tuning, feature selection, and feature engineering are essential tasks in machine learning that can have a significant effect on the performance of the machine learning algorithm. However, in this work, hyperparameter tuning, feature selection, and engineering were not performed in order to reduce the cost of the tuning process of the offline phase of the algorithm and keep the algorithm simple. Feature selection and engineering is not performed due to its large and complex search space. Hyperparameter tuning is not performed due to the stochastic nature of the meta-learning algorithm, which makes parameter tuning a challenging issue as each parameter vector needs to be tested multiple times. However, we believe both hyperparameter tuning and feature selection and engineering are promising future directions to pursue.}
 
 
 (5) Algorithm 1: One of the key hyperparameters of random forests, in addition to the number of trees and the number of features to be selected at each node, is the minimum number of leaf node observations or its equivalent. You don't mention this hyperparameter at all. Why?
