@@ -27,18 +27,18 @@ The subject of the work is important, the work is mature, well written, and the 
 
 Detailed comments:
 
-(1) Page 7/line 5: what do you mean by the test set? Usually the test set (separate from the training and validation sets) cannot be used for training, optimization and selection of the model. Clarify, please. 
+**(1) Page 7/line 5: what do you mean by the test set? Usually the test set (separate from the training and validation sets) cannot be used for training, optimization and selection of the model. Clarify, please.**
 
 \textcolor{teal}{We thank the reviewer for raising this concern.Unfortunately, we were unable to find the place that corresponds to this comment. However, we have clarified this point in the revised manuscript in Section 2.3 and highlighted it below.}
 
 \textcolor{blue}{The training set is used to estimate the parameters of a forecasting model. Based on this fitted model, we generate forecasts over the test set and compare them against the test set values. Since the test data are not used for model fitting, this practice provides a reliable indicator to evaluate how well the model makes accurate forecasts on new data.}
 
-(2) Fig 3. It looks like red “feature calculation” block does the same work as blue “input-features” block. Thus unify the names of these blocks so as not to cause confusion.
+**(2) Fig 3. It looks like red “feature calculation” block does the same work as blue “input-features” block. Thus unify the names of these blocks so as not to cause confusion.**
 
 \textcolor{teal}{We thank the reviewer for the suggestion. We changed the wording in Fig 3 - red part  "feature calculation" to "input-features" to unify the names and avoid confusion.}
 
 
-(3) 9/54: Explain how the time series are split into training and test part. How sensitive is the proposed approach to this split?
+**(3) 9/54: Explain how the time series are split into training and test part. How sensitive is the proposed approach to this split?**
 
 \textcolor{teal}{Thank you for the comment. We include length as one of our features, but the remaining features are
 asymptotically independent of the length of the time series (i.e., they are ergodic), and they
@@ -60,34 +60,43 @@ Figure 04 provides the distributions of length of the training period of the M-c
 \textcolor{blue}{Our method is sensitive to the lengths of the time series because we employed length as an input feature. We found that whereas longer time series prefer to choose more parameterized models, shorter time series are more likely to choose simple models like random walk, white noise, etc. However, PDP curves of length revealed that there is a threshold beyond which the probability of choosing various models in response to training set length starts to plateau.}
 
 
-(4) 9/55: Fitting the model is related to its training and optimization (selection of hyperparameters). Moreover, the model performance depends on the feature selection/engineering. I suppose that these all tasks are performed by the “fit models” block in Fig. 3. You omit the topic of model optimization including feature selection/engineering, which can be very complex and time consuming process due to huge search space for same models. Describe this topic to make the reader aware of its importance.
+**(4) 9/55: Fitting the model is related to its training and optimization (selection of hyperparameters). Moreover, the model performance depends on the feature selection/engineering. I suppose that these all tasks are performed by the “fit models” block in Fig. 3. You omit the topic of model optimization including feature selection/engineering, which can be very complex and time consuming process due to huge search space for same models. Describe this topic to make the reader aware of its importance.**
 
 \textcolor{teal}{We agree with the reviewer. Hyperparameter tuning, feature selection, and engineering all fall under "fit models." I have added this to the discussion and conclusion sections as a future direction. The relevant part of the paper now reads as follows:}
 
 \textcolor{blue}{Hyperparameter tuning, feature selection, and feature engineering are essential tasks in machine learning that can have a significant effect on the performance of the machine learning algorithm. However, in order to keep the algorithm simple and lower the cost of the tuning process for the offline phase of the algorithm, hyperparameter tuning, feature selection, and engineering were not carried out in this study. Due to the large and complex search space, feature selection and engineering are not conducted. The stochastic nature of the meta-learning algorithm makes parameter tuning a challenging issue because each parameter vector must be evaluated numerous times. However, we believe both hyperparameter tuning and feature selection and engineering are intriguing future topics to study.}
 
 
-(5) Algorithm 1: One of the key hyperparameters of random forests, in addition to the number of trees and the number of features to be selected at each node, is the minimum number of leaf node observations or its equivalent. You don't mention this hyperparameter at all. Why?
+**(5) Algorithm 1: One of the key hyperparameters of random forests, in addition to the number of trees and the number of features to be selected at each node, is the minimum number of leaf node observations or its equivalent. You don't mention this hyperparameter at all. Why?**
 
-\textcolor{teal}{We thank the reviewer for pointing this out. Please see Section 3.5. The relevant part of the thesis now reads as follows:}
+\textcolor{teal}{We thank the reviewer for pointing this out. We have mentioned about these parameters in Section 3.5. The new additions we made are highlighted in blue. The relevant part of the thesis now reads as follows:}
 
-\textcolor{blue}{We train a random forest with 1000 trees with the default parameter setting of the randomForest package, i.e., the number of features to be selected at each node is the square root of the number of features in the reference set, and the minimum number of leaf node observations is 1. The number of trees is set to 1000 to reduce the time in both the online and offline phases of the algorithm.}
-
-
-(6) 11/5: “One approach is to fit models to the time series in the reference set, and then use those models as data generating processes to obtain similar time series.” Clarify this issue.
-
-\textcolor{teal}{We thank the }
-
-(7) Time series augmentation looks like important component of the proposed framework and should be described in detail.
+The number of trees ntree is set to 1000, and the number of randomly selected featuresk is set to be one third of the total number of features available \textcolor{blue}{and the minimum number of leaf node observations is 1. The number of trees is set to 1000 to reduce the time in both the online and offline phases of the algorithm.}
 
 
 
+**(6) 11/5: “One approach is to fit models to the time series in the reference set, and then use those models as data generating processes to obtain similar time series.” Clarify this issue.**
 
-(8) 13/46: “incorporating class priors into the RF classifier”. Could you explain this, please.
+\textcolor{teal}{We thank the reviewer for pointing out this is issue. Please see section 3.2. The relevant part of the thesis now reads as follows:}
+
+One approach is to fit models to the time series in the \textcolor{blue}{observed sample}, and then use those models as data generating processes to obtain similar time series. This could be done, for example, using exponential smoothing models, ARIMA models or other modelling functions in the forecast package in R  (Hyndman et al. 2021). \textcolor{blue}{More specifically, suppose the for the first time in the observed sample the ARIMA model selected from the automated ARIMA (auto.arima) in the forecast package is} $y_t = 5 + 0.52\epsilon_{t-1}$. \textcolor{blue}{Then, from this fitted model, we can simulate multiple time series. Similarly, we can fit models for all the time series in the observed sample to find models to simulate time series.}
+
+**(7) Time series augmentation looks like important component of the proposed framework and should be described in detail.**
+
+\textcolor{teal}{We thank the reviewer for the comment. We futher added following to the section 3.2}
 
 
-(9) Many forecasting models, especially machine learning ones such as NNs, have a stochastic nature, which translates into different results for the same input data in different training sessions. This may have a negative impact on the choice of the best model. How does your proposed approach deal with such problem? Explain, please.
+
+
+**(8) 13/46: “incorporating class priors into the RF classifier”. Could you explain this, please.**
+
+\textcolor{teal}{We thank the reviewer for the comment. This is already mentioned in our paper under Section 3.5. We added a new sentence to clarify this point. The relevant part of the thesis now reads as follows:}
+
+\textcolor{blue}{ The likelihood that a given class will appear in the bootstrap samples is represented by the class priors.}The class priors are introduced through the option `classwt`. We use the reciprocal of class size as the class priors.
+
+
+**(9) Many forecasting models, especially machine learning ones such as NNs, have a stochastic nature, which translates into different results for the same input data in different training sessions. This may have a negative impact on the choice of the best model. How does your proposed approach deal with such problem? Explain, please.**
 
 \textcolor{teal}{We thank the reviewer for pointing out this issue. Please see the discussions and conclusions section. The relevant part of the paper now reads as follows:}
 
-\textcolor{blue}{One could argue machine learning-based forecasting models such as NNs, have a stochastic nature, which translates into different results for the same input data in different training sessions. This may have a negative impact on the choice of the best model. While this problem is difficult to overcome, one could }
+\textcolor{blue}{One could argue machine learning-based forecasting models such as NNs, have a stochastic nature, which translates into different results for the same input data in different training sessions. This may have a negative impact on the choice of the best model. While this problem is difficult to overcome, one could fit such models multiple times with different random seeds and use the average of the forecast error measure to select best forecast model when labelling time series.}
