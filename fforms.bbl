@@ -727,7 +727,7 @@
       \field{pages}{567\bibrangedash 570}
       \range{pages}{4}
     \endentry
-    \entry{hyndman2014forecasting}{book}{}
+    \entry{fpp3}{book}{}
       \name{author}{2}{}{%
         {{hash=2f709db8a046ae1d056e75c1f3aad31c}{%
            family={Hyndman},
@@ -758,14 +758,14 @@
       \field{labeldatesource}{year}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{edition}{2nd ed.}
+      \field{edition}{3rd ed.}
       \field{title}{Forecasting: principles and practice}
-      \field{year}{2018}
+      \field{year}{2021}
       \verb{urlraw}
-      \verb https://OTexts.org/fpp2/
+      \verb https://OTexts.org/fpp3/
       \endverb
       \verb{url}
-      \verb https://OTexts.org/fpp2/
+      \verb https://OTexts.org/fpp3/
       \endverb
     \endentry
     \entry{Hyndman2008}{article}{}
@@ -1005,6 +1005,44 @@
       \field{year}{2020}
       \field{pages}{354\bibrangedash 376}
       \range{pages}{23}
+    \endentry
+    \entry{kang2017visualising}{article}{}
+      \name{author}{3}{}{%
+        {{hash=19cdef69ea6e417b04dbe89b2bca786b}{%
+           family={Kang},
+           familyi={K\bibinitperiod},
+           given={Yanfei},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=2f709db8a046ae1d056e75c1f3aad31c}{%
+           family={Hyndman},
+           familyi={H\bibinitperiod},
+           given={Rob\bibnamedelima J},
+           giveni={R\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{hash=e600c1c37474d42bf9bbd1414d413c62}{%
+           family={Smith-Miles},
+           familyi={S\bibinithyphendelim M\bibinitperiod},
+           given={Kate},
+           giveni={K\bibinitperiod}}}%
+      }
+      \strng{namehash}{5b791a1426448f64a730633692797d93}
+      \strng{fullhash}{5b791a1426448f64a730633692797d93}
+      \strng{bibnamehash}{5b791a1426448f64a730633692797d93}
+      \strng{authorbibnamehash}{5b791a1426448f64a730633692797d93}
+      \strng{authornamehash}{5b791a1426448f64a730633692797d93}
+      \strng{authorfullhash}{5b791a1426448f64a730633692797d93}
+      \field{sortinit}{K}
+      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{International Journal of Forecasting}
+      \field{number}{2}
+      \field{title}{Visualising forecasting algorithm performance using time series instance spaces}
+      \field{volume}{33}
+      \field{year}{2017}
+      \field{pages}{345\bibrangedash 358}
+      \range{pages}{14}
     \endentry
     \entry{Rgratis}{manual}{}
       \name{author}{5}{}{%
@@ -1261,7 +1299,7 @@
       \field{labeldatesource}{year}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{journaltitle}{Journal of forecasting}
+      \field{journaltitle}{Journal of Forecasting}
       \field{number}{2}
       \field{title}{The accuracy of extrapolation (time series) methods: results of a forecasting competition}
       \field{volume}{1}
@@ -1336,8 +1374,12 @@
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{International Journal of Forecasting}
+      \field{number}{1}
       \field{title}{The M4 Competition: 100,000 time series and 61 forecasting methods}
-      \field{year}{2019}
+      \field{volume}{36}
+      \field{year}{2020}
+      \field{pages}{54\bibrangedash 74}
+      \range{pages}{21}
     \endentry
     \entry{microbench}{manual}{}
       \name{author}{1}{}{%
@@ -1586,7 +1628,7 @@
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{R: A Language and Environment for Statistical Computing}
-      \field{year}{2018}
+      \field{year}{2022}
       \verb{urlraw}
       \verb https://www.R-project.org/
       \endverb
@@ -1794,9 +1836,6 @@
            given={Yanfei},
            giveni={Y\bibinitperiod}}}%
       }
-      \list{publisher}{1}{%
-        {Elsevier B.V.}%
-      }
       \strng{namehash}{b59c89e0aaa9b7727e4536bce3f8bb24}
       \strng{fullhash}{b59c89e0aaa9b7727e4536bce3f8bb24}
       \strng{bibnamehash}{b59c89e0aaa9b7727e4536bce3f8bb24}
@@ -1809,11 +1848,13 @@
       \field{labeldatesource}{year}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{issn}{01692070}
       \field{journaltitle}{International Journal of Forecasting}
-      \field{number}{forthcoming}
+      \field{number}{3}
       \field{title}{{FFORMPP: Feature-based forecast model performance prediction}}
+      \field{volume}{38}
       \field{year}{2022}
+      \field{pages}{920\bibrangedash 943}
+      \range{pages}{24}
       \verb{urlraw}
       \verb https://doi.org/10.1016/j.ijforecast.2021.07.002
       \endverb
