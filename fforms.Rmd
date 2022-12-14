@@ -264,7 +264,7 @@ There are several options that could be used to produce simulated series that ar
 
 ## Input: features
 
-Although the FFORMS framework could use any time series features, our current implementation uses the features shown in \autoref{feature}; these are defined in the Appendix. \textcolor{blue}{These features were chosen based on their demonstrated utility in @kang2017visualising and @MonManEtAl2020.}
+Although the FFORMS framework could use any time series features, our current implementation uses the features shown in \autoref{feature}; these are defined in the Appendix. \textcolor{blue}{These features were chosen based on their demonstrated utility in} @kang2017visualising \textcolor{blue}{and} @MonManEtAl2020.
 
 An attribute of the proposed FFORMS framework is that its online phase is fast compared to the time required for implementing a typical model selection or cross-validation procedure. Therefore, we consider only features that can be computed rapidly, as this computation must be done during the online phase. Furthermore, all our features are easily interpretable.
 
@@ -652,6 +652,10 @@ The features and models we have used in our analyses may be varied for other app
 **Software:** The R package `seer` implements the FFORMS algorithm and is available on CRAN (`https://cran.r-project.org/web/packages/seer/index.html`).
 
 **Interactive dashboard visualisation:** A shiny app demonstrating the vote matrices is available online at `https://thiyangt.github.io/fformsviz/fforms.html`
+
+**Data availability statement:**
+The data that support the findings of this study are available in  M4comp2018 Git Repository at https://github.com/carlanetto/M4comp2018. These data were derived from the following resources available in the public domain: 
+- M4 Competition, https://mofc.unic.ac.cy/m4/
 
 \clearpage
 

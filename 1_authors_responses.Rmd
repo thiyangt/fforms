@@ -41,9 +41,10 @@ knitr::opts_chunk$set(echo = TRUE)
 
 \textcolor{teal}{Our feature set was based on prior studies, and we did not introduce any new features, or undertake any feature selection, as part of our algorithm. We have now clarified this in Section 3.3, as follows, with additions in blue:}
 
-Although the FFORMS framework could use any time series features, our current implementation uses the features shown in \autoref{feature}; these are defined in the Appendix. \textcolor{blue}{These features were chosen based on their demonstrated utility in @kang2017visualising and @MonManEtAl2020.}
+Although the FFORMS framework could use any time series features, our current implementation uses the features shown in \autoref{feature}; these are defined in the Appendix. \textcolor{blue}{These features were chosen based on their demonstrated utility in Kang, Hyndman \& Smith-Miles (2017) and
+Montero-Manso et al. (2020).} 
 
-\textcolor{teal}{We have also added some further information about this topic in the discussion and conclusion sections.
+\textcolor{teal}{We have also added some further information about this topic in the discussion and conclusion sections.}
 
 \textcolor{blue}{Hyperparameter tuning, feature selection, and feature engineering are essential tasks in machine learning that can have a significant effect on the performance of the machine learning algorithm. In this study, we have selected features that are known to have been helpful in other studies, and we have used default settings for the various hyperparameters. It is expected that further improvements in the algorithm could be achieved by carefully engineering new features, by removing some of the features we have included, and by tuning the hyperparameters of the random forest classifier.}
 
