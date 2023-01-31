@@ -4,6 +4,8 @@ This repo contains all materials required to reproduce the paper "Meta-Learning 
 
 **Meta-learning how to forecast time series** 
 
+The reproducible RMarkdown is available at: fforms.Rmd
+
 # Data visualization dashboard
 
 
@@ -12,6 +14,7 @@ gitrepo: https://github.com/thiyangt/fformsviz
 # Associated R package
 
 Talagala T, Hyndman R, Athanasopoulos G (2022). seer: Feature-Based Forecast Model Selection. R package version 1.1.8, <https://CRAN.R-project.org/package=seer>.
+
 
 Github repo: https://github.com/thiyangt/seer
 
